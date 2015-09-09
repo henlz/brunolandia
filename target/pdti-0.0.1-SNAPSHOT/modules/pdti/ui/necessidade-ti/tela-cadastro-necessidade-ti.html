@@ -1,0 +1,33 @@
+<md-dialog aria-label="Tela cadastro necessidade TI">
+    <md-dialog-content>
+
+        <form name="necessidadeForm" novalidate="true">
+        <eits-paper-sheet id="myPaperSheet{{$index}}" on-close="onCloseEventHandler()" on-open="onOpenEventHandler()">
+            <content-closed>
+               <h2> <span>Criar nova Necessidade de TI</span> </h2>
+            </content-closed>
+
+            <content-opened height="150">
+                <h3>Necessidade</h3>
+                <span>Cum sociis natoque penatibus.</span>
+            </content-opened>
+
+            <content-opened height="150">
+                <h3>Organização Militar</h3>
+                <span>Cum sociis natoque penatibus.</span>
+            </content-opened>
+        </eits-paper-sheet>
+
+         <div class="md-actions" layout="row">
+            <md-button ng-click="cancelar()">
+                Cancelar
+            </md-button>
+            <md-button ng-click="salvar()"  class="md-primary">
+                Salvar
+            </md-button>
+          </div>
+        </form>
+
+    </md-dialog-content>
+
+</md-dialog>

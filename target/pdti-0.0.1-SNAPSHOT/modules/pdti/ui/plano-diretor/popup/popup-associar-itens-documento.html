@@ -1,0 +1,74 @@
+<md-dialog aria-label="Pop-up Associar Itens de Documento à Seção">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Associar Itens de Documento à Seção</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-content>
+            <eits-table id="table" ng-if="model.tipoSecao == 'PRINCIPIO_DIRETRIZ' || model.tipoSecao == 'ESTRATEGIA'" content="model.content" multi-selection="true"
+                        on-selection-change="selectionUpdate(selectedItens)" on-item-click="itemClicked(item)">
+                <columns>
+                    <table-column header="Descrição" field="descricao" sortable="true" width="30%"/>
+                    <table-column header="Fonte" sortable="true" 20%>
+                        <column-template>
+                            {{:: row.documentoReferencia.sigla == "" ? row.documentoReferencia.titulo :
+                            row.documentoReferencia.sigla }}
+                        </column-template>
+                    </table-column>
+                    <table-column header="Código" sortable="true" width="200">
+                        <column-template>
+                            <input type="text" ng-show="selectedItens.indexOf(row) != -1" ng-model="row.codigo"/>
+                        </column-template>
+                    </table-column>
+                </columns>
+            </eits-table>
+
+            <eits-table id="tableSwot" ng-if="model.tipoSecao == 'ANALISE_SWOT'" content="model.content" multi-selection="true"
+                        on-selection-change="selectionUpdate(selectedItens)" on-item-click="itemClicked(item)">
+                <columns>
+                    <table-column header="Descrição" field="descricao" sortable="true" width="100%"/>
+                    <table-column header="Tipo" sortable="true" width="10%">
+                        <column-template>
+                            <span ng-show="row.tipoItemSwot == 'FORCA'">Força</span>
+                            <span ng-show="row.tipoItemSwot == 'FRAQUEZA'">Fraqueza</span>
+                            <span ng-show="row.tipoItemSwot == 'AMEACA'">Ameaça</span>
+                            <span ng-show="row.tipoItemSwot == 'OPORTUNIDADE'">Oportunidade</span>
+                        </column-template>
+                    </table-column>
+                    <table-column header="Código" sortable="true" width="200">
+                        <column-template>
+                            <input type="text" ng-show="selectedItens.indexOf(row) != -1" ng-model="row.codigo"/>
+                        </column-template>
+                    </table-column>
+                </columns>
+                </columns>
+            </eits-table>
+
+            <eits-table id="tableDocumentosReferencia" ng-if="model.tipoSecao == 'DOCUMENTO_REFERENCIA'" content="model.content" multi-selection="true"
+                        on-selection-change="selectionUpdate(selectedItens)" on-item-click="itemClicked(item)">
+                <columns>
+                    <table-column header="Sigla" field="sigla" sortable="true" width="10%"/>
+                    <table-column header="Título" field="titulo" sortable="true" width="20%"/>
+                    <table-column header="Código" sortable="true" width="200">
+                        <column-template>
+                            <input type="text" ng-show="selectedItens.indexOf(row) != -1" ng-model="row.codigo"/>
+                        </column-template>
+                    </table-column>
+                </columns>
+            </eits-table>
+
+            <eits-table id="tableTermoAbreviacao" ng-if="model.tipoSecao == 'TERMO_ABREVIACAO'" content="model.content" multi-selection="true"
+                        on-selection-change="selectionUpdate(selectedItens)" on-item-click="itemClicked(item)">
+                <columns>
+                    <table-column header="Abreviação" field="abreviacao" sortable="true"/>
+                    <table-column header="Termo" field="termo" sortable="true" width="60%"/>
+                </columns>
+            </eits-table>
+        </md-content>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">Cancelar</md-button>
+        <md-button ng-click="salvar()" class="md-primary">Salvar</md-button>
+    </div>
+</md-dialog>

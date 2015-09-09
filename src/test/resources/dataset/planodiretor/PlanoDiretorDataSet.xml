@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+	<plano_diretor
+	id="100"
+	ano_inicio="2015-01-10 00:00:00"
+	ano_termino="2017-01-10 00:00:00"
+	descricao="PDTI de 2015 à 2017"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"	
+	status_documento="1"
+	ultima_versao="false"
+	/>
+	
+	<plano_diretor
+	id="101"
+	ano_inicio="2015-01-10 00:00:00"
+	ano_termino="2017-01-10 00:00:00"
+	descricao="PDTI de 2015 à 2017"
+	created="2015-01-10 00:00:01"
+	updated="2015-01-15 00:00:00"
+	versao_original_id="100"
+	status_documento="1"
+	ultima_versao="false"
+	/>
+	
+	<plano_diretor
+	id="102"
+	ano_inicio="2015-01-10 00:00:00"
+	ano_termino="2017-01-10 00:00:00"
+	descricao="PDTI de 2015 à 2017"
+	created="2014-01-10 00:00:02"
+	updated="2015-01-15 00:00:00"
+	versao_original_id="100"
+	status_documento="0"
+	ultima_versao="true"
+	/>
+	
+	<plano_diretor
+	id="103"
+	ano_inicio="2018-01-10 00:00:00"
+	ano_termino="2020-01-10 00:00:00"
+	descricao="PDTI de 2018 à 2020"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+		
+	status_documento="0"
+	ultima_versao="true"
+	/>
+	
+	<plano_diretor
+	id="104"
+	ano_inicio="2021-01-10 00:00:00"
+	ano_termino="2023-01-10 00:00:00"
+	descricao="PDTI de 2021 à 2023 v1.0"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+		
+	status_documento="0"
+	ultima_versao="false"
+	/>
+	
+	<plano_diretor
+	id="105"
+	ano_inicio="2021-01-10 00:00:00"
+	ano_termino="2023-01-10 00:00:00"
+	descricao="PDTI de 2021 à 2023 v1.1"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	versao_original_id="104"	
+	status_documento="0"
+	ultima_versao="false"
+	/>
+	
+	<plano_diretor
+	id="106"
+	ano_inicio="2021-01-10 00:00:00"
+	ano_termino="2023-01-10 00:00:00"
+	descricao="PDTI de 2021 à 2023 v1.2"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	versao_original_id="104"	
+	status_documento="0"
+	ultima_versao="true"
+	/>
+	
+	<secao
+	id="100"
+	conteudo="Lista dos documentos de referências"
+	posicao="1"
+	plano_diretor_id="100"
+	titulo="Documentos de Referência"
+	tipo_secao="8"	
+	created="2015-01-26 00:00:00"
+	updated="2015-01-25 00:00:00"
+	/>
+	
+	<secao
+	id="101"
+	conteudo="Princípios e Diretrizes"
+	posicao="1"
+	plano_diretor_id="100"
+	titulo="Princíio Diretriz"
+	tipo_secao="5"	
+	created="2015-01-26 00:00:00"
+	updated="2015-01-25 00:00:00"
+	/>
+	
+	<secao
+	id="102"	
+	conteudo="Lista dos documentos de referências"
+	posicao="1"
+	plano_diretor_id="101"
+	titulo="Documentos de Referência"
+	tipo_secao="8"	
+	created="2015-01-26 00:00:00"
+	updated="2015-01-25 00:00:00"
+	/>	
+	
+	
+	<secao
+	id="103"	
+	conteudo="Princípios e Diretrizes"
+	posicao="1"
+	plano_diretor_id="101"
+	titulo="Princíio Diretriz"
+	tipo_secao="4"	
+	created="2015-01-26 00:00:00"
+	updated="2015-01-25 00:00:00"
+	/>		
+	
+</dataset>

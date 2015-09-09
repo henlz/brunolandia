@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.mil.mar.dabm.pdti.test.domain.service.PlanoAcoesServiceTests
+-------------------------------------------------------------------------------
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.552 sec - in br.mil.mar.dabm.pdti.test.domain.service.PlanoAcoesServiceTests

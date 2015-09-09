@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<item_analise_swot
+	id="100"
+	codigo="F01"
+	secao_tabular_id="100"
+	item_swot_id="200"
+	created="2015-01-26 00:00:00"
+	updated="2015-01-25 00:00:00"
+	/>
+</dataset>

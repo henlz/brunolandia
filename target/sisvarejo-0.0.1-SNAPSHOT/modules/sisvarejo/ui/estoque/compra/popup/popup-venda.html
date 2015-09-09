@@ -1,0 +1,58 @@
+<md-dialog aria-label="Mango (Fruit)" ng-init="carregarListaFormasPagamento()">
+    <md-dialog-content layot="row">
+
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Parcela</h2>
+
+        <form name="parcelaForm" novalidate="true">
+            <md-input-container>
+                <label>Número da Parcela</label>
+                <input name="numeroDaParcela" ng-model="entidade.numeroDaParcela" type="text" disabled>
+
+                <!--<div ng-messages="parcelaForm.numeroDaParcela.$error">-->
+                    <!--<div ng-message="required">-->
+                        <!--Campo obrigatório.-->
+                    <!--</div>-->
+                <!--</div>-->
+            </md-input-container>
+
+            <md-input-container>
+                <label>Dias</label>
+                <input name="dias" ng-model="entidade.dias" required type="text">
+
+                <div ng-messages="parcelaForm.dias.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Percentual</label>
+                <input name="percentual" ng-model="entidade.percentual" required type="text">
+
+                <div ng-messages="parcelaForm.percentual.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-select ng-model="entidade.formaPagamento" placeholder="Forma de Pagamento">
+                <md-option ng-repeat="formaPagamento in formasPagamento" ng-value="formaPagamento"
+                           ng-selected="formaPagamento.id == entidade.formaPagamento.id">{{formaPagamento.tipo}}
+                </md-option>
+            </md-select>
+
+            <br>
+
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancelar()">
+                    Cancelar
+                </md-button>
+                <md-button ng-click="salvar()" class="md-primary">
+                    {{:: modoAlteracao ? 'Alterar' : 'Adicionar' }}
+                </md-button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

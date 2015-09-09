@@ -1,0 +1,38 @@
+<md-dialog aria-label="Pop-up publicar versão">
+    <md-dialog-content>
+        <h2>Confirmação de publicação de versão</h2>
+        <p>Tem certeza que deseja publicar uma nova versão deste plano?</p>
+                    <md-content class="md-padding">
+                        <form name="publicarVersaoPopUpModel.versaoForm" novalidate="true">
+                            <eits-hbox gap="30">
+                                <md-input-container flex>
+                                    <label>Versão</label>
+                                    <input name="versao" type="text" ng-model="publicarVersaoPopUpModel.novaVersao" maxlength="150" required></input>
+                                    
+                                    <div ng-messages="versaoForm.versao.$error">
+                                        <div ng-message="required" ng-show="!publicarVersaoPopUpModel.versaoForm.versao.$valid">
+                                            Campo obrigatório.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </eits-hbox>
+                            <eits-hbox>
+                                <md-input-container flex >
+                                    <label>Descrição</label>
+                                    <textarea name="descricao" ng-model="publicarVersaoPopUpModel.novaDescricao" columns="1" md-maxlength="150" maxlength="150" required></textarea>
+                                    
+                                    <div ng-messages="versaoForm.descricao.$error">
+                                        <div ng-message="required" ng-show="!publicarVersaoPopUpModel.versaoForm.descricao.$valid">
+                                            Campo obrigatório.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </eits-hbox>
+                        </form>
+                    </md-content>
+        <div class="md-actions" layout="row">
+            <md-button ng-click="cancelar()">NÃO</md-button>
+            <md-button ng-click="publicarVersao()" class="md-primary">SIM</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

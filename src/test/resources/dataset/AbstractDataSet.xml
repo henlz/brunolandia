@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+	<organizacao_militar></organizacao_militar>
+	<documento_referencia></documento_referencia>
+	<estrategia></estrategia>
+	<principio_diretriz></principio_diretriz>
+	<item_swot></item_swot>
+	<termo_abreviacao></termo_abreviacao>
+	<criterio_priorizacao></criterio_priorizacao>
+	<item_principio_diretriz></item_principio_diretriz>
+	<item_estrategia></item_estrategia>
+	<item_analise_swot></item_analise_swot>
+	<item_documento_referencia></item_documento_referencia>
+	<necessidade></necessidade>
+	<necessidade_organizacao_militar></necessidade_organizacao_militar>
+	<meta></meta>
+	<atividade></atividade>
+	<secao></secao>
+	<plano_diretor></plano_diretor>
+	
+</dataset>

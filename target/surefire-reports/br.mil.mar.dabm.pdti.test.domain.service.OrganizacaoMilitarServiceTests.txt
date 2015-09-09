@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.mil.mar.dabm.pdti.test.domain.service.OrganizacaoMilitarServiceTests
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.901 sec - in br.mil.mar.dabm.pdti.test.domain.service.OrganizacaoMilitarServiceTests

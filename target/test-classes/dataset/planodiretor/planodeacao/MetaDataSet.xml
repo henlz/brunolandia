@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<meta
+	id="100"
+	codigo="N1.1"
+	descricao="Promover alegria"
+	indicador="Percentual recurso alocado"
+	valor_indicador="100%"
+	prazo="2015-12-31 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="100"
+	/>
+	
+	<meta
+	id="101"
+	codigo="N1.2"
+	descricao="Implantar o modelo de sustentação"
+	indicador="Percentual recurso alocado"
+	valor_indicador="20%"
+	prazo="2016-12-31 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="100"
+	/>
+	
+	<meta
+	id="102"
+	codigo="N1.3"
+	descricao="Implantar o modelo de sustentação"
+	indicador="Percentual recurso alocado"
+	valor_indicador="40%"
+	prazo="2017-12-31 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="100"
+	/>
+	
+	<meta
+	id="103"
+	codigo="N2.1"
+	descricao="Melhoria Year Over Year do Nível de Satisfação dos Usuários do Singra"
+	indicador="Percentual recurso alocado"
+	valor_indicador="20%"
+	prazo="2015-12-31 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="101"
+	/>
+	
+	<meta
+	id="104"
+	codigo="N2.2"
+	descricao="Melhoria Year Over Year do Nível de Satisfação dos Usuários do Singra"
+	indicador="Percentual recurso alocado"
+	valor_indicador="100%"
+	prazo="2016-06-30 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="101"
+	/>
+	
+	<meta
+	id="105"
+	codigo="N3.1"
+	descricao="Melhoria Year Over Year do Nível de Satisfação dos Usuários do Singra"
+	indicador="Percentual recurso alocado"
+	valor_indicador="100%"
+	prazo="2015-12-31 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	necessidade_id="103"
+	/>
+</dataset>

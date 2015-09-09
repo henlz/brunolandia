@@ -1,0 +1,70 @@
+<head>
+	<style>
+		md-dialog md-dialog-content {
+			width: 600px;
+		}
+	</style>
+</head>
+
+<md-dialog aria-label="Pop-up documento">
+    <md-dialog-content>
+
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Documento de Referência</h2>
+
+        <form name="documentoForm" novalidate="true">
+
+            <div layout="column">
+                <div layout="row">
+                    <md-input-container style="width: 50%;">
+                        <label>Sigla</label>
+                        <input name="sigla" ng-model="entidade.sigla" maxlength=14 required>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container style="width: 100%;">
+                        <label>Título</label>
+                        <input name="titulo" ng-model="entidade.titulo" required maxlength=144>
+						<span class="input-error-message" ng-show="documentoForm.titulo.$invalid && documentoForm.titulo.$dirty">
+							Campo obrigatório.
+						</span>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container>
+                        <label>Data de Início</label>
+                        <input type="date" name="dataInicio" ng-model="entidade.dataInicio"
+                               ng-required="entidade.dataFim != null">
+                    </md-input-container>
+
+                    <md-input-container style="margin-left: 50px;">
+                        <label>Data de Fim</label>
+                        <input type="date" name="dataFim" ng-model="entidade.dataFim">
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <div layout="column">
+                        <div layout="row">
+                            <label>Anexo</label>
+                            <a class="md-icon-lg md-icon-file-download" ng-show="downloadIconFlag" ng-href="{{entidade.anexo}}" style="margin-left: 12px;"></a>
+                        </div>
+                        <br>
+                        <input type="file" onchange="angular.element(this).scope().vinculaArquivo(this)"/>
+                    </div>
+                </div>
+
+                <div class="md-actions" layout="row">
+                    <md-button ng-click="cancelar()">
+                        Cancelar
+                    </md-button>
+                    <md-button ng-click="salvar()" class="md-primary">
+                        Salvar
+                    </md-button>
+                </div>
+            </div>
+        </form>
+
+    </md-dialog-content>
+</md-dialog>

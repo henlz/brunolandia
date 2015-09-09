@@ -1,0 +1,66 @@
+<md-dialog aria-label="Pop-up termos e abreviações">
+    <md-dialog-content>
+        <h2>Novo Plano Diretor de TI</h2>
+        <md-content class="md-padding">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="informações">
+                    <md-content class="md-padding">
+                        <form>
+                            <eits-hbox gap="30">
+                                <md-input-container flex>
+                                    <label>Ano de Início</label>
+                                    <input type="date" ng-model="entidade.anoInicio"></input>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Ano de Término</label>
+                                    <input type="date" ng-model="entidade.anoTermino"></input>
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Versão</label>
+                                    <input type="text" ng-model="entidade.versao" maxlength="150"></input>
+                                </md-input-container>
+                            </eits-hbox>
+                            <eits-hbox>
+                                <md-input-container flex >
+                                    <label>Descrição</label>
+                                    <textarea ng-model="entidade.descricao" columns="1" md-maxlength="150" maxlength="150"></textarea>
+                                </md-input-container>
+                            </eits-hbox>
+                        </form>
+                    </md-content>
+                </md-tab>
+                <md-tab label="gerenciamento de colaboradores">
+                    <md-content class="md-padding">
+                        <eits-hbox gap="195" >
+                            <h4>
+                                <span>Colaboradores</span>
+                            </h4>
+                                <md-button class="md-raised" ng-click="abrirPopupAssociarColaborador($event)">Associar colaboradores</md-button>
+                        </eits-hbox>
+                                                
+                        <eits-table id="table" content="organizacoesAssociadas" on-selection-change="selectionUpdate(selectedItens)" on-item-click="itemClicked(item)">
+                            <columns>
+                                <table-column header="Nome" sortable="false">
+                                    <column-template>{{::row.elaborador.usuario}}</column-template>
+                                </table-column>
+                                <table-column header="Cargo" sortable="false">
+                                    <column-template>{{::row.elaborador.cargo}}</column-template>
+                                </table-column>
+                                <table-column header="Ação" sortable="false" width="15%">
+                                    <column-template>
+                                        <button ng-click="removerColaborador(row)">Remover</button>
+                                    </column-template>
+                                </table-column>
+                            </columns>
+                        </eits-table>
+                        
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <div class="md-actions" layout="row">
+            <md-button ng-click="cancelar()">Cancelar</md-button>
+            <md-button ng-click="salvar()" class="md-primary">Salvar</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.mil.mar.dabm.pdti.test.domain.repository.MetaFileRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.974 sec - in br.mil.mar.dabm.pdti.test.domain.repository.MetaFileRepositoryTest

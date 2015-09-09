@@ -1,0 +1,26 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-dialog-content layot="row">
+
+		<md-input-container>
+			<label>Buscar por nome</label>
+			<input type="text" ng-model="model.nameFilter">
+		</md-input-container>
+		<md-divider/>
+        <md-data-table-container>
+	        <table md-data-table md-row-select="model.selected">
+	            <thead md-order="model.query.order" md-trim-column-names>
+	            <tr>
+	                <th order-by="id">Código</th>
+	                <th order-by="nome">Nome</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr ng-repeat="pais in model.content | orderBy: model.query.order" ng-click="itemClicked($event, pais)">
+	                <td>{{::pais.id}}</td>
+	                <td>{{::pais.nome}}</td>
+	            </tr>
+	            </tbody>
+	        </table>
+    	</md-data-table-container>
+    </md-dialog-content>
+</md-dialog>

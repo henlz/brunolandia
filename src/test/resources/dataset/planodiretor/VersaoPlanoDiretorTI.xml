@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<versao_plano_diretor_ti
+	id="100"
+	dataPublicacao="2015-05-13 00:00:00"
+	descricao="Descrição da versão do PDTI"
+	versao="1.0"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	/>
+
+	<plano_diretor_ti
+	id="100"
+	dataInicio="2015-05-13 00:00:00"
+	dataFim="2015-05-15 00:00:00"
+	created="2015-01-10 00:00:00"
+	updated="2015-01-15 00:00:00"
+	plano_diretor_ti="100"
+	/>
+</dataset>

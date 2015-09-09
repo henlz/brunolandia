@@ -1,0 +1,58 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-dialog-content layot="row" ng-init="listFornecedoresByFilters()">
+
+        <md-content layout="row" layout-align="center center" layout-wrap>
+            <md-input-container flex="50">
+                <label>Razão Social</label>
+                <input type="text" ng-model="model.filtros.razaoSocial">
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Nome Fantasia</label>
+                <input type="text" ng-model="model.filtros.nomeFantasia">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>Telefone</label>
+                <input type="text" ng-model="model.filtros.telefone">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>CNPJ</label>
+                <input type="text" ng-model="model.filtros.cnpj">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>Representate</label>
+                <input type="text" ng-model="model.filtros.representate">
+            </md-input-container>
+        </md-content>
+        <md-button ng-click="listFornecedoresByFilters()" class="md-icon-button">
+            <i class="md-icon md-icon-search"></i>
+        </md-button>
+        <md-divider/>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-order="model.query.order" md-trim-column-names>
+                <tr>
+                    <th order-by="id">Código</th>
+                    <th order-by="razaoSocial">Razão Social</th>
+                    <th order-by="nomeFantasia">Nome Fantasia</th>
+                    <th order-by="cnpj">CNPJ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="fornecedor in model.content | orderBy: model.query.order">
+                    <td>{{::fornecedor.id}}</td>
+                    <td>{{::fornecedor.razaoSocial}}</td>
+                    <td>{{::fornecedor.nomeFantasia}}</td>
+                    <td>{{::fornecedor.cnpj}}</td>
+                    <td>
+                        <md-button ng-click="escolherFornecedor(fornecedor)" class="md-primary">
+                            Escolher
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <md-button ng-click="cancelar()">Cancelar</md-button>
+
+    </md-dialog-content>
+</md-dialog>

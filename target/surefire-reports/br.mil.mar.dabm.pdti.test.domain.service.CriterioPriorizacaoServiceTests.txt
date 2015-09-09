@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.mil.mar.dabm.pdti.test.domain.service.CriterioPriorizacaoServiceTests
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.411 sec - in br.mil.mar.dabm.pdti.test.domain.service.CriterioPriorizacaoServiceTests

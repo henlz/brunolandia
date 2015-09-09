@@ -1,0 +1,37 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-dialog-content layot="row">
+
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Cidade</h2>
+
+        <form name="cidadeForm" novalidate="true">
+            <md-input-container>
+                <label>Nome</label>
+                <input name="nome" ng-model="entidade.nome" required maxlength=255>
+
+                <div class="errors" ng-messages="cidadeForm.nome.$error" ng-if="cidadeForm.$dirty">
+                    <div ng-message="required">
+                        Campo obrigatório
+                    </div>
+                </div>
+            </md-input-container>
+            
+            <md-select name="estado" placeholder="Estado" ng-model="entidade.estado" required>
+                <md-option ng-value="estado" ng-repeat="estado in estados" ng-selected="estado.id == entidade.estado.id">{{::estado.nome}}</md-option>
+            </md-select>
+<!--            <div class="errors" ng-messages="estadoForm.pais.$error" ng-if="estadoForm.$dirty">
+                <div ng-message="required">Campo obrigatório</div>
+            </div>-->
+            
+            <br>
+
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancelar()">
+                    Cancelar
+                </md-button>
+                <md-button ng-click="salvar()" class="md-primary">
+                    Salvar
+                </md-button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

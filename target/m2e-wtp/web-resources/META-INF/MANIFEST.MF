@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: sisvarejo
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: henriquelobatozago
+Implementation-Vendor-Id: br.com.brunolandia
+Build-Jdk: 1.8.0_60
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: br.com.brunolandia.Application
+

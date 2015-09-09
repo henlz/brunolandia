@@ -1,0 +1,46 @@
+<head>
+	<style>
+		md-dialog md-dialog-content {
+			width: 600px;
+		}
+	</style>
+</head>
+
+<md-dialog aria-label="Pop-up termos e abreviações">
+    <md-dialog-content>
+
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Termo e Abreviação</h2>
+
+        <form name="termoAbreviacaoForm" novalidate="true">
+
+            <div layout="column">
+                <div layout="row">
+                    <md-input-container style="width: 50%;">
+                        <label>Abreviação</label>
+                        <input name="abreviacao" ng-model="entidade.abreviacao" maxlength=50>
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container style="width: 100%;">
+                        <label>Termo</label>
+                        <input name="termo" ng-model="entidade.termo" required maxlength=144>
+						<span class="input-error-message" ng-show="termoAbreviacaoForm.termo.$invalid && termoAbreviacaoForm.termo.$dirty">
+							Campo obrigatório.
+						</span>
+                    </md-input-container>
+                </div>
+				
+                <div class="md-actions" layout="row">
+                    <md-button ng-click="cancelar()">
+                        Cancelar
+                    </md-button>
+                    <md-button ng-click="salvar()" class="md-primary">
+                        Salvar
+                    </md-button>
+                </div>
+            </div>
+        </form>
+
+    </md-dialog-content>
+</md-dialog>

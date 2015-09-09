@@ -1,0 +1,94 @@
+<head>
+	<style>
+		md-dialog md-dialog-content {
+			width: 600px;
+		}
+        h5 {
+            text-align: center;
+        }
+
+	</style>
+</head>
+
+<md-dialog aria-label="Pop-up atividade">
+    <md-dialog-content>
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Atividade</h2>        
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Informações">
+                    <md-content class="md-padding"> 
+                        <form name="atividadePopUpModel.atividadeForm" novalidate="true">
+                                <div layout="row">
+                                    <md-input-container style="width: 40%;">
+                                        <label>Código</label>
+                                        <input name="codigo" ng-model="atividadePopUpModel.atividade.codigo" required maxlength=50>
+                						<span class="input-error-message" ng-show="atividadePopUpModel.atividadeForm.codigo.$invalid && atividadePopUpModel.atividadeForm.codigo.$dirty">
+                							Campo obrigatório.
+                						</span>
+                                    </md-input-container>
+                                </div>
+                
+                                <div layout="row">
+                                    <md-input-container style="width: 100%;">
+                                        <label>Descrição</label>
+                                        <input name="descricao" ng-model="atividadePopUpModel.atividade.descricao" required maxlength=144>
+                						<span class="input-error-message" ng-show="atividadePopUpModel.atividadeForm.descricao.$invalid && atividadePopUpModel.atividadeForm.descricao.$dirty">
+                							Campo obrigatório.
+                						</span>
+                                    </md-input-container>
+                                </div>
+                				
+                				<div layout="row">
+                                    <eits-hbox style="border: none;" gap="30" padding-left="'0%'" horizontal-align="center" padding-right="'0%'">
+                                        <md-input-container style="width: 100%;">                        
+                                            <label>Início</label>
+                                            <input name="inicio" type="date" ng-model="atividadePopUpModel.atividade.inicio" required maxlength=144>
+                    						<span class="input-error-message" ng-show="atividadePopUpModel.atividadeForm.inicio.$invalid && atividadePopUpModel.atividadeForm.inicio.$dirty">
+                    							Campo obrigatório.
+                    						</span>
+                                        </md-input-container>
+                                        <md-input-container style="width: 100%;">
+                                            <label>Término</label>
+                                            <input name="termino" type="date" ng-model="atividadePopUpModel.atividade.termino" required maxlength=144>
+                    						<span class="input-error-message" ng-show="atividadePopUpModel.atividadeForm.termino.$invalid && atividadePopUpModel.atividadeForm.termino.$dirty">
+                    							Campo obrigatório.
+                    						</span>
+                                        </md-input-container>
+                                    </eits-hbox>
+                                </div>
+                        </form>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Área">                    
+                </md-tab>
+                <md-tab label="Investimentos e Custeios">
+                    <form name="atividadePopUpModel.atividadeForm" novalidate="true">                        
+                        <eits-hbox gap="30">
+                            <h5 width="20%">Ano</h5>
+                            <h5 width="40%">Investimento</h5>
+                            <h5 width="40%">Custeio</h5>                            
+                        </eits-hbox>                        
+                        <hr/>
+                        <eits-hbox ng-repeat="investimentoCusteio in atividadePopUpModel.investimentosCusteios" gap="30">
+                            <h5 width="20%">{{::investimentoCusteio.ano | date: 'yyyy'}}</h5>
+                            <md-input-container style="width: 40%;">
+                                <label>Investimento</label>
+                                <input name="investimento" ng-model="investimentoCusteio.investimento" required maxlength=144/>                                
+                            </md-input-container>
+                            <md-input-container style="width: 40%;">
+                                <label>Custeio</label>                            
+                                <input name="custeio" ng-model="investimentoCusteio.custeio" required maxlength=144/>
+                            </md-input-container>                            
+                        </eits-hbox>                        
+                    </form>
+                </md-tab>
+            </md-tabs>
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancelarPopUp()">
+                    Cancelar
+                </md-button>
+                <md-button ng-click="salvarAtividade()" class="md-primary">
+                    Salvar
+                 </md-button>
+            </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,54 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-dialog-content layot="row" ng-init="carregarLista()">
+
+        <md-content layout="row" layout-align="center center" layout-wrap>
+            <md-input-container flex="50">
+                <label>Nome</label>
+                <input type="text" ng-model="model.filtros.nome">
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Apelido</label>
+                <input type="text" ng-model="model.filtros.apelido">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>Telefone</label>
+                <input type="text" ng-model="model.filtros.telefone">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>CPF</label>
+                <input type="text" ng-model="model.filtros.cnpj">
+            </md-input-container>
+        </md-content>
+        <md-button ng-click="listClientesByFilters()" class="md-icon-button">
+            <i class="md-icon md-icon-search"></i>
+        </md-button>
+        <md-divider/>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-trim-column-names>
+                <tr>
+                    <th order-by="id">Código</th>
+                    <th order-by="nome">Nome</th>
+                    <th order-by="apelido">Apelido</th>
+                    <th order-by="cpf">CPF</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="cliente in model.content | orderBy: model.query.order">
+                    <td>{{::cliente.id}}</td>
+                    <td>{{::cliente.nome}}</td>
+                    <td>{{::cliente.apelido}}</td>
+                    <td>{{::cliente.cpf}}</td>
+                    <td>
+                        <md-button ng-click="escolherCliente(cliente)" class="md-primary">
+                            Escolher
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <md-button ng-click="cancelar()">Cancelar</md-button>
+
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,29 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-dialog-content layot="row">
+
+        <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Forma de Pagamento</h2>
+
+        <form name="formaPagamentoForm" novalidate="true">
+            <md-input-container>
+                <label>Tipo</label>
+                <input name="tipo" ng-model="entidade.tipo" required maxlength=255>
+
+                <div ng-messages="formaPagamentoForm.tipo.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+            <br>
+
+            <div class="md-actions" layout="row">
+                <md-button ng-click="cancelar()">
+                    Cancelar
+                </md-button>
+                <md-button ng-click="salvar()" class="md-primary">
+                    Salvar
+                </md-button>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>
