@@ -222,12 +222,12 @@
          * @returns {number}
          */
         $scope.getCompraTotal = function(compra) {
-            if (compra.itensCompra == null) {
+            if (compra.itensCompra == null || compra.itensCompra.length == 0) {
                 return 0;
             }
             var total = 0;
             for (var i = 0; compra.itensCompra.length > i; i++){
-                total += compra.itensCompra[i].quantidade * compra.itensCompra[i].produto.precoCompra;
+                total += compra.itensCompra[i].quantidade * compra.itensCompra[i].produto.precoCusto;
             }
             return total;
         }
@@ -257,7 +257,7 @@
         $scope.abrirPopupProduto = function (ev) {
             $mdDialog.show({
                 controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/compra/popup/popup-busca-produto.html',
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
                 targetEvent: ev,
                 hasBackdrop: true
             })
@@ -542,7 +542,7 @@
     /**
      * Controller da popup de Buscar Clientes
      */
-    function BuscaClienteDialogController($scope, $mdDialog, $importService, $mdToast) {
+    function BuscaFornecedorDialogController($scope, $mdDialog, $importService, $mdToast) {
 
         $importService("estoqueService");
 
@@ -559,8 +559,9 @@
         /**
          *
          */
-        $scope.carregarLista = function() {
-            estoqueService.listClientesByFilters($scope.model.filtros.nome, $scope.model.filtros.apelido, $scope.model.filtros.cpf, $scope.model.filtros.rg, {
+        $scope.listFornecedoresByFilters = function() {
+            estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
+                $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.filtros.representante, {
                 callback: function(result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -575,8 +576,8 @@
          *
          * @param cliente
          */
-        $scope.escolherCliente = function(cliente) {
-            $mdDialog.hide(cliente);
+        $scope.escolherFornecedor = function(fornecedor) {
+            $mdDialog.hide(fornecedor);
         }
 
         /**

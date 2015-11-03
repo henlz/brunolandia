@@ -12,28 +12,22 @@
     <section layout-fill>
         <md-content layout-padding layout="column" layout-align="start center" width="90%">
             <md-subheader>
-                <h3>Nova Venda</h3>
+                <h3>Nova Compra</h3>
             </md-subheader>
 
             <md-content layout="row" layout-margin>
                 <div layout="row" layout-align="center center">
 
                     <div layout="column">
-                        <b>Cliente</b>
+                        <b>Fornecedor</b>
                         <div layout="row" layout-align="center center">
-                            <span>{{model.entidade.fornecedor.nome}}</span>
+                            <span>{{model.entidade.fornecedor.nomeFantasia}}</span>
                             <md-button class="md-icon-button" ng-click="abrirPopupFornecedor()" aria-label="Procurar fornecedor">
                                 <i class="md-icon md-icon-search"></i>
                             </md-button>
                         </div>
                     </div>
                 </div>
-
-                <div layout="column">
-                    <b>Condição de pagamento</b>
-                    <span>{{model.entidade.cliente.condicao.descricao}}</span>
-                </div>
-
 
             </md-content>
 
@@ -65,7 +59,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="itemVenda in model.entidade.itensVenda | orderBy: 'codigo'">
+                    <tr ng-repeat="itemVenda in model.entidade.itensCompra | orderBy: 'codigo'">
                         <td>{{:: itemVenda.produto.codigo}}</td>
                         <td>{{:: itemVenda.produto.descricao}}</td>
                         <td>{{:: itemVenda.produto.quantidade}}</td>
@@ -86,7 +80,7 @@
 
         <md-content width="100%" layout="column" layout-align="start center">
             <h3>Sub-total </h3>
-            <p>{{ getVendaTotal(model.entidade) | currency: 'R$ '}}</p>
+            <p>{{ getCompraTotal(model.entidade) | currency: 'R$ '}}</p>
         </md-content>
     </section>
     <md-divider width="100%"></md-divider>
@@ -98,15 +92,15 @@
                 <i class="md-icon md-icon-cancel md-icon-lg"></i>
             </md-button>
             <md-button class="md-primary md-icon-button md-fab" ng-if="currentState == INSERT_STATE"
-                       ng-click="salvarVenda(model.entidade)"
+                       ng-click="salvarCompra(model.entidade)"
                        aria-label="Salvar condição">
                 <i class="md-icon md-icon-save md-icon-lg"></i>
             </md-button>
-            <md-button class="md-primary md-icon-button md-fab" ng-if="currentState == UPDATE_STATE"
-                       ng-click="alterarCondicao(model.entidade)"
-                       aria-label="Alterar condição">
-                <i class="md-icon md-icon-save md-icon-lg"></i>
-            </md-button>
+            <!--<md-button class="md-primary md-icon-button md-fab" ng-if="currentState == UPDATE_STATE"-->
+                       <!--ng-click="salvarCompra(model.entidade)"-->
+                       <!--aria-label="Alterar condição">-->
+                <!--<i class="md-icon md-icon-save md-icon-lg"></i>-->
+            <!--</md-button>-->
         </md-content>
     </section>
 

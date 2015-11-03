@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.Compra;
+import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.ItemCompra;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IFornecedorRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IProdutoRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.compra.ICompraRepository;
@@ -201,6 +202,14 @@ public class EstoqueService
 	 */
 	public Compra insertCompra(final Compra compra )
 	{
+		
+		for (ItemCompra itemCompra: compra.getItensCompra()) 
+		{
+			final Produto produto = itemCompra.getProduto();
+			produto.setQuantidade( produto.getQuantidade() + itemCompra.getQuantidade() );
+			itemCompra.setProduto( this.produtoRepository.save( produto ) );
+		}
+		
 		return this.compraRepository.save( compra );
 	}
 	
