@@ -24,7 +24,7 @@
         <tr>
             <th>Data da compra</th>
             <th>Total</th>
-            <th>Cliente</th>
+            <!--<th>Fornecedor</th>-->
             <th>Ações</th>
         </tr>
         </thead>
@@ -32,7 +32,7 @@
         <tr ng-repeat="compra in model.content | orderBy: model.query.order">
             <td>{{::compra.dataCompra | date: 'HH:mm - dd/MM/yyyy'}}</td>
             <td>{{::getCompraTotal(compra) | currency: 'R$ '}}</td>
-            <td>{{::compra.cliente.nome}}</td>
+            <!--<td>{{::compra.fornecedor.nome}}</td>-->
             <td layout="row">
                 <md-button class="md-icon-button" ui-sref="compra.alterar({id: compra.id})" aria-label="Alterar produto">
                     <i class="md-icon md-icon-edit"></i>

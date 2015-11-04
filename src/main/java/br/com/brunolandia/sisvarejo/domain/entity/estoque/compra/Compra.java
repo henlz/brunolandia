@@ -1,10 +1,13 @@
 package br.com.brunolandia.sisvarejo.domain.entity.estoque.compra;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -115,8 +118,14 @@ public class Compra extends AbstractEntity
 	 * 
 	 */
 	@NotEmpty
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ItemCompra> itensCompra;
+	
+	/**
+	 * 
+	 */
+	@Column(nullable=false)
+	private Date dataCompra;
 
 	/**
 	 * 
@@ -141,7 +150,7 @@ public class Compra extends AbstractEntity
 	 * @param dadosNfe
 	 * @param numeroNfe
 	 */
-	public Compra( BigDecimal baseIcms, BigDecimal baseIcmsSt, BigDecimal valorIcms, BigDecimal valorIcmsSubstituicao, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, BigDecimal valorTotalIpi, String chaveAcesso, String dadosNfe, String numeroNfe, List<ItemCompra> itensCompra )
+	public Compra( BigDecimal baseIcms, BigDecimal baseIcmsSt, BigDecimal valorIcms, BigDecimal valorIcmsSubstituicao, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, BigDecimal valorTotalIpi, String chaveAcesso, String dadosNfe, String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra )
 	{
 		super();
 		this.baseIcms = baseIcms;
@@ -157,6 +166,7 @@ public class Compra extends AbstractEntity
 		this.dadosNfe = dadosNfe;
 		this.numeroNfe = numeroNfe;
 		this.itensCompra = itensCompra;
+		this.dataCompra = dataCompra;
 	}
 
 	public BigDecimal getBaseIcms()
@@ -288,6 +298,16 @@ public class Compra extends AbstractEntity
 	{
 		this.itensCompra = itensCompra;
 	}
+	
+ 	public void setDataCompra(Date dataCompra)
+	{
+		this.dataCompra = dataCompra;
+	}
+ 	
+ 	public Date getDataCompra()
+ 	{
+ 		return this.dataCompra;
+ 	}
 
 	@Override
 	public int hashCode()

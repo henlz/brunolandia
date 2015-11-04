@@ -36,9 +36,9 @@
 
 		<!-- Webjars -->
 		<jquery.version>2.1.4</jquery.version>
-		<angularjs.version>1.4.3-1</angularjs.version>
+		<angularjs.version>1.4.7</angularjs.version>
 		<angular-messages.version>1.4.0</angular-messages.version>
-		<angular-material.version>0.10.1</angular-material.version>
+		<angular-material.version>1.0.0-rc2</angular-material.version>
 		<uirouter.version>0.2.14</uirouter.version>
 		<eits-webjars.version>1.0.3-SNAPSHOT</eits-webjars.version>
 	</properties>

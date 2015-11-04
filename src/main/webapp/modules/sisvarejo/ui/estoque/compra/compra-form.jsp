@@ -12,21 +12,21 @@
     <section layout-fill>
         <md-content layout-padding layout="column" layout-align="start center" width="90%">
             <md-subheader>
-                <h3>Nova Compra</h3>
+                <h3>{{:: currentState == INSERT_STATE ? 'Nova Compra' : 'Alterar Compra' }}</h3>
             </md-subheader>
 
             <md-content layout="row" layout-margin>
                 <div layout="row" layout-align="center center">
 
-                    <div layout="column">
-                        <b>Fornecedor</b>
-                        <div layout="row" layout-align="center center">
-                            <span>{{model.entidade.fornecedor.nomeFantasia}}</span>
-                            <md-button class="md-icon-button" ng-click="abrirPopupFornecedor()" aria-label="Procurar fornecedor">
-                                <i class="md-icon md-icon-search"></i>
-                            </md-button>
-                        </div>
-                    </div>
+                    <%--<div layout="column">--%>
+                        <%--<b>Fornecedor</b>--%>
+                        <%--<div layout="row" layout-align="center center">--%>
+                            <%--<span>{{model.entidade.fornecedor.nomeFantasia}}</span>--%>
+                            <%--<md-button class="md-icon-button" ng-click="abrirPopupFornecedor()" aria-label="Procurar fornecedor">--%>
+                                <%--<i class="md-icon md-icon-search"></i>--%>
+                            <%--</md-button>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </div>
 
             </md-content>
@@ -53,6 +53,9 @@
                         <th>Descrição</th>
                         <th>Quantidade em estoque</th>
                         <th>Quantidade a vender</th>
+                        <th>Unidade</th>
+                        <th style="width: 25px;">CST</th>
+                        <th>NCM</th>
                         <th>Preço unitário</th>
                         <th>Preço total</th>
                         <th>Ações</th>
@@ -63,7 +66,10 @@
                         <td>{{:: itemVenda.produto.codigo}}</td>
                         <td>{{:: itemVenda.produto.descricao}}</td>
                         <td>{{:: itemVenda.produto.quantidade}}</td>
-                        <td><input type="number" ng-model="itemVenda.quantidade" min="0" max="{{itemVenda.produto.quantidade}}"></td>
+                        <td><input type="number" ng-model="itemVenda.quantidade" min="0" max="{{itemVenda.quantidade}}"></td>
+                        <td><input type="text" ng-model="itemVenda.unidade" min="0" max="{{itemVenda.unidade}}"></td>
+                        <td><input type="number" ng-model="itemVenda.cst" min="0" max="{{itemVenda.produto.cst}}"></td>
+                        <td><input type="number" ng-model="itemVenda.ncm" min="0" max="{{itemVenda.produto.ncm}}"></td>
                         <td>{{:: itemVenda.produto.precoVenda | currency: 'R$ '}}</td>
                         <td>{{ itemVenda.produto.precoVenda * itemVenda.quantidade | currency: 'R$ '}}</td>
                         <td layout="row">
@@ -82,13 +88,77 @@
             <h3>Sub-total </h3>
             <p>{{ getCompraTotal(model.entidade) | currency: 'R$ '}}</p>
         </md-content>
+
+        <md-content layout="row" layout-wrap>
+
+            <md-input-container>
+                <label>Base ICMS</label>
+                <input type="text" ng-model="model.entidade.baseIcms" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Base ICMS St</label>
+                <input type="text" ng-model="model.entidade.baseIcmsSt" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Valor ICMS</label>
+                <input type="text" ng-model="model.entidade.valorIcms" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Valor ICMS Substituição</label>
+                <input type="text" ng-model="model.entidade.valorIcmsSubstituicao" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Valor Frete</label>
+                <input type="text" ng-model="model.entidade.valorFrete" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Valor Seguro</label>
+                <input type="text" ng-model="model.entidade.valorSeguro" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Desconto</label>
+                <input type="text" ng-model="model.entidade.desconto" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Outras Despesas</label>
+                <input type="text" ng-model="model.entidade.outrasDespesas" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Valor Total IPI</label>
+                <input type="text" ng-model="model.entidade.valorTotalIpi" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Chave Acesso</label>
+                <input type="text" ng-model="model.entidade.chaveAcesso" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Dados NFE</label>
+                <input type="text" ng-model="model.entidade.dadosNfe" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Número NFE</label>
+                <input type="text" ng-model="model.entidade.numeroNfe" required>
+            </md-input-container>
+
+        </md-content>
     </section>
     <md-divider width="100%"></md-divider>
     <section layout="row" layout-align="start center" layout-fill layout-margin>
         <md-divider></md-divider>
         <md-content width="100%" layout-padding layout="row" layout-align="end end">
 
-            <md-button class="md-icon-button md-fab" ui-sref="venda.listar" aria-label="Cancelar cadastro">
+            <md-button class="md-icon-button md-fab" ui-sref="compra.listar" aria-label="Cancelar cadastro">
                 <i class="md-icon md-icon-cancel md-icon-lg"></i>
             </md-button>
             <md-button class="md-primary md-icon-button md-fab" ng-if="currentState == INSERT_STATE"

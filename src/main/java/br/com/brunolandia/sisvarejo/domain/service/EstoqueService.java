@@ -17,6 +17,7 @@ import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.ItemCompra;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IFornecedorRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IProdutoRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.compra.ICompraRepository;
+import br.com.brunolandia.sisvarejo.domain.repository.estoque.compra.IItemCompraRepository;
 
 /**
  * @author Henrique
@@ -45,6 +46,12 @@ public class EstoqueService
 	 */
 	@Autowired
 	private ICompraRepository compraRepository;
+	
+	/**
+	 * 
+	 */
+	@Autowired
+	private IItemCompraRepository itemCompraRepository;
 
 	/**
 	 * 
@@ -202,12 +209,12 @@ public class EstoqueService
 	 */
 	public Compra insertCompra(final Compra compra )
 	{
-		
 		for (ItemCompra itemCompra: compra.getItensCompra()) 
 		{
 			final Produto produto = itemCompra.getProduto();
 			produto.setQuantidade( produto.getQuantidade() + itemCompra.getQuantidade() );
 			itemCompra.setProduto( this.produtoRepository.save( produto ) );
+			this.itemCompraRepository.save( itemCompra );
 		}
 		
 		return this.compraRepository.save( compra );

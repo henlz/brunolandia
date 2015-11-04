@@ -29,7 +29,7 @@ public interface IProdutoRepository extends JpaRepository<Produto, Long>
 	 * @param pageable
 	 * @return
 	 */
-	@Query("SELECT new Produto (produto.id, produto.descricao, produto.codigo, produto.precoCusto, produto.precoVenda, produto.codigoBarra, produto.quantidade) "
+	@Query("SELECT new Produto (produto.id, produto.descricao, produto.codigo, produto.precoCusto, produto.precoVenda, produto.cor, produto.tamanho, produto.grupo, produto.fornecedor, produto.codigoBarra, produto.quantidade) "
 			+ "FROM Produto produto "
 			+ "WHERE ( FILTER(produto.codigo, :codigo) = TRUE "
 				+ "AND FILTER(produto.descricao, :descricao) = TRUE )")
