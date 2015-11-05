@@ -1,12 +1,14 @@
 <md-dialog aria-label="Mango (Fruit)">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} País</h2>
+        </div>
+    </md-toolbar>
     <md-dialog-content layot="row">
-
-        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} País</h2>
-
         <form name="paisForm" novalidate="true">
             <md-input-container>
                 <label>Nome</label>
-                <input name="nome" ng-model="entidade.nome" required maxlength=255>
+                <input name="nome" ng-model="entidade.nome" required maxlength=255 md-autofocus>
 
                 <div ng-messages="estrategiaForm.descricao.$error">
                     <div ng-message="required">
@@ -15,15 +17,14 @@
                 </div>
             </md-input-container>
             <br>
-
-            <div class="md-actions" layout="row">
-                <md-button ng-click="cancelar()">
-                    Cancelar
-                </md-button>
-                <md-button ng-click="salvar()" class="md-primary">
-                    Salvar
-                </md-button>
-            </div>
         </form>
     </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar()" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
 </md-dialog>

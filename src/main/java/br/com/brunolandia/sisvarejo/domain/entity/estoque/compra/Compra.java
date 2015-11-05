@@ -8,12 +8,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
 import br.com.eits.common.domain.entity.AbstractEntity;
 
 /**
@@ -126,6 +128,13 @@ public class Compra extends AbstractEntity
 	 */
 	@Column(nullable=false)
 	private Date dataCompra;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@ManyToOne
+	private Fornecedor fornecedor;
 
 	/**
 	 * 
@@ -150,7 +159,9 @@ public class Compra extends AbstractEntity
 	 * @param dadosNfe
 	 * @param numeroNfe
 	 */
-	public Compra( BigDecimal baseIcms, BigDecimal baseIcmsSt, BigDecimal valorIcms, BigDecimal valorIcmsSubstituicao, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, BigDecimal valorTotalIpi, String chaveAcesso, String dadosNfe, String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra )
+	public Compra( BigDecimal baseIcms, BigDecimal baseIcmsSt, BigDecimal valorIcms, BigDecimal valorIcmsSubstituicao, BigDecimal valorFrete, 
+			BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, BigDecimal valorTotalIpi, String chaveAcesso, String dadosNfe, 
+			String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra, Fornecedor fornecedor )
 	{
 		super();
 		this.baseIcms = baseIcms;
@@ -167,6 +178,7 @@ public class Compra extends AbstractEntity
 		this.numeroNfe = numeroNfe;
 		this.itensCompra = itensCompra;
 		this.dataCompra = dataCompra;
+		this.fornecedor = fornecedor;
 	}
 
 	public BigDecimal getBaseIcms()
@@ -308,6 +320,22 @@ public class Compra extends AbstractEntity
  	{
  		return this.dataCompra;
  	}
+ 	
+	/**
+	 * @return the fornecedor
+	 */
+	public Fornecedor getFornecedor()
+	{
+		return fornecedor;
+	}
+
+	/**
+	 * @param fornecedor the fornecedor to set
+	 */
+	public void setFornecedor( Fornecedor fornecedor )
+	{
+		this.fornecedor = fornecedor;
+	}
 
 	@Override
 	public int hashCode()

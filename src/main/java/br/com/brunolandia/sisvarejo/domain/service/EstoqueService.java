@@ -244,8 +244,26 @@ public class EstoqueService
 	 * @param id
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public Compra findCompraById(final Long id)
 	{
 		return this.compraRepository.findOne( id );
+	}
+	
+	/**
+	 * 
+	 * @param numeroNfe
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Boolean verificarNfe(String numeroNfe)
+	{
+		List<Compra> compras = this.compraRepository.findByNumeroNfe(numeroNfe);
+		
+		if (compras.size() > 0) {
+			return false;
+		}
+		
+		return true;
 	}
 }

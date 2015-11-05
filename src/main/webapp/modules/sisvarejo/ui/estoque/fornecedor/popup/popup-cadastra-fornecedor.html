@@ -1,0 +1,96 @@
+<md-dialog>
+
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>Fornecedor</h4>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+        <md-content layot="row">
+            <md-input-container width="100%">
+                <label>Razão Social</label>
+                <input name="razaoSocial" type="text" ng-model="model.entidade.razaoSocial" required ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <md-input-container width="100%">
+                <label>Nome Fantasia</label>
+                <input name="nomeFantasia" type="text" ng-model="model.entidade.nomeFantasia" ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <div layout="row" width="100%">
+                <md-input-container flex="70">
+                    <label>Endereço</label>
+                    <input name="endereco" type="text" ng-model="model.entidade.endereco" ng-readonly="model.viewMode == true"/>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Numero</label>
+                    <input name="numero" type="text" ng-model="model.entidade.numero" ng-readonly="model.viewMode == true"/>
+                </md-input-container>
+            </div>
+
+            <div layout="row" width="100%">
+                <md-input-container flex>
+                    <label>Complemento</label>
+                    <input name="complemento" type="text" ng-model="model.entidade.complemento" ng-readonly="model.viewMode == true"/>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Bairro</label>
+                    <input name="bairro" type="text" ng-model="model.entidade.bairro" ng-readonly="model.viewMode == true"/>
+                </md-input-container>
+            </div>
+
+            <md-input-container width="100%">
+                <label>CEP</label>
+                <input name="cep" type="text" ng-model="model.entidade.cep" ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <div layout="row" layout-align="center center">
+
+                <md-input-container>
+                    <label>Cidade</label>
+                    <input type="text" ng-model="model.entidade.cidade.nome" disabled ng-readonly="model.viewMode == true"/>
+                </md-input-container>
+
+                <md-button class="md-icon-button" ng-click="abrirPopupCidade()">
+                    <i class="md-icon md-icon-search"></i>
+                </md-button>
+
+            </div>
+
+            <md-input-container width="100%">
+                <label>Representante</label>
+                <input name="representante" type="text" ng-model="model.entidade.representante" ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <md-input-container width="100%">
+                <label>Telefone</label>
+                <input name="telefone" type="text" ng-model="model.entidade.telefone" ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <md-input-container width="100%">
+                <label>Site</label>
+                <input name="site" type="text" ng-model="model.entidade.site" ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <md-input-container width="100%">
+                <label>Email</label>
+                <input name="email" type="email" ng-model="model.entidade.email" required ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+
+            <md-input-container width="100%">
+                <label>CNPJ</label>
+                <input name="cnpj" type="text" ng-model="model.entidade.cnpj" required ng-readonly="model.viewMode == true"/>
+            </md-input-container>
+        </md-content>
+
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()" ng-if="model.viewMode != true">Cancelar</md-button>
+        <md-button ng-click="cancelar()" ng-if="model.viewMode == true">Voltar</md-button>
+        <md-button class="md-primary md-raised" ng-click="salvarFornecedor(model.entidade)" ng-if="model.viewMode != true">Salvar</md-button>
+    </div>
+</md-dialog>

@@ -1,5 +1,15 @@
-<md-dialog aria-label="Mango (Fruit)">
-    <md-dialog-content layot="row" ng-init="listFornecedoresByFilters()">
+<md-dialog aria-label="Mango (Fruit)" ng-init="listFornecedoresByFilters()">
+
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>Fornecedor</h4>
+        </div>
+        <md-button ng-click="abrirPopupCadastrar()" class="md-icon-button md-raised">
+            <i class="md-icon md-icon-add"></i>
+        </md-button>
+    </md-toolbar>
+
+    <md-dialog-content layot="row">
 
         <md-content layout="row" layout-align="center center" layout-wrap>
             <md-input-container flex="50">
@@ -47,12 +57,17 @@
                         <md-button ng-click="escolherFornecedor(fornecedor)" class="md-primary">
                             Escolher
                         </md-button>
+                        <md-button ng-click="abrirPopupCadastrar(fornecedor)" class="md-primary">
+                            Exibir
+                        </md-button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </md-data-table-container>
-        <md-button ng-click="cancelar()">Cancelar</md-button>
 
     </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()" md-autofocus>Cancelar</md-button>
+    </div>
 </md-dialog>

@@ -1,4 +1,11 @@
 <md-dialog aria-label="Mango (Fruit)">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h4>Produto</h4>
+        </div>
+    </md-toolbar>
+
     <md-dialog-content layot="row" ng-init="listProdutosByFilters()">
 
         <md-content layout="row" layout-align="center center" layout-wrap>
@@ -41,7 +48,8 @@
                 </tbody>
             </table>
         </md-data-table-container>
-        <md-button ng-click="cancelar()">Cancelar</md-button>
-
+        <div class="md-actions" layout="row">
+            <md-button ng-click="cancelar()" md-autofocus>Cancelar</md-button>
+        </div>
     </md-dialog-content>
 </md-dialog>

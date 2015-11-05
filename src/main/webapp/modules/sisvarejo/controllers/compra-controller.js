@@ -236,12 +236,24 @@
          *
          * @param ev
          */
-        $scope.abrirPopupFornecedor = function (ev) {
-            $mdDialog.show({
+        $scope.abrirPopupFornecedor = function (ev, cidade, fornecedor) {
+
+            if (cidade != null) {
+                if ($scope.model.entidade.fornecedor == null) $scope.model.entidade.fornecedor = new Fornecedor();
+                $scope.model.entidade.fornecedor.cidade = cidade;
+            }
+
+            fornecedor = fornecedor != null ? fornecedor : $scope.model.entidade.fornecedor;
+
+            $scope.fornecedorDialog = $mdDialog;
+            $scope.fornecedorDialog.show({
                 controller: BuscaFornecedorDialogController,
                 templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
                 targetEvent: ev,
-                hasBackdrop: true
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope, fornecedor]
+                }
             })
                 .then(function (result) {
                     $scope.model.entidade.fornecedor = result;
@@ -270,6 +282,28 @@
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
+        }
+
+        /**
+         *
+         * @param numero
+         */
+        $scope.verificarNfe = function(numero) {
+
+            $log.log(numero);
+
+            estoqueService.verificarNfe(numero, {
+                callback:function(result) {
+                if (result == false) {
+                    $scope.model.invalidNfe = true;
+                }  else {
+                    $scope.model.invalidNfe = false;
+                }
+
+
+            }, errorHandler: function(message, error){
+                $log.error(message);
+            }});
         }
 
         /**
@@ -542,11 +576,13 @@
     /**
      * Controller da popup de Buscar Clientes
      */
-    function BuscaFornecedorDialogController($scope, $mdDialog, $importService, $mdToast) {
+    function BuscaFornecedorDialogController($scope, $mdDialog, $importService, $mdToast, local) {
 
         $importService("estoqueService");
 
         $scope.model = {
+            entidade: new Fornecedor(),
+            fornecedorDialog: local[0],
             filtros: {
                 nome: "",
                 apelido: "",
@@ -554,12 +590,22 @@
                 rg: ""
             },
             content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+            $scope.model.viewMode = true;
         }
+
+        // Identifica se a popup foi aberta voltando da popup de cidade
+        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
 
         /**
          *
          */
         $scope.listFornecedoresByFilters = function() {
+
             estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
                 $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.filtros.representante, {
                 callback: function(result) {
@@ -568,6 +614,35 @@
                 },
                 errorHandler: function(message, error) {
                     $mdToast.showSimple(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvarFornecedor = function (entidade) {
+            estoqueService.insertFornecedor(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
                 }
             });
         };
@@ -586,6 +661,55 @@
         $scope.cancelar = function() {
             $mdDialog.cancel();
         }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCidade = function (ev) {
+            $scope.model.flag = false;
+            $mdDialog.show({
+                    controller: 'CidadeDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
+
+                }, function () {
+                    $scope.abrirPopupCadastrar($scope.model.entidade, null, false);
+            });
+        };
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
+            $mdDialog.show({
+                    controller: BuscaFornecedorDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.fornecedorDialog, entidade, cidade]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
+                }, function () {
+                    $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
+                });
+        };
 
     }
 
