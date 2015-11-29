@@ -64,14 +64,40 @@
 
             if (state == $scope.ICMS_STATE) {
                 $scope.carregarListaIcms(null, pageRequest);
+            } else if (state == $scope.NCM_STATE) {
+                $scope.carregarListaNCM(null, pageRequest);
+            } else if (state == $scope.CSON_STATE) {
+                $scope.carregarListaCSON(null, pageRequest);
             }
-
-
 
         }
 
         $scope.carregarListaIcms = function (filter, pageRequest) {
             fiscalService.listICMS({
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, exception) {
+                    $log.error(message);
+                }
+            })
+        };
+
+        $scope.carregarListaNCM = function (filter, pageRequest) {
+            fiscalService.listNCM({
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, exception) {
+                    $log.error(message);
+                }
+            })
+        };
+
+        $scope.carregarListaCSON = function (filter, pageRequest) {
+            fiscalService.listCSON({
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -109,20 +135,20 @@
                 });
         }
 
-        $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
+        $scope.abrirPopupAlterarIcms = function (ev, item) {
             $mdDialog.show({
-                controller: 'PaisDialogController',
-                templateUrl: './modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                bindToController: true,
-                locals: {
-                    entidadeExterna: angular.copy(entidade)
-                }
-            })
+                    controller: 'IcmsDialogController',
+                    templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: item
+                    }
+                })
                 .then(function (result) {
-                    var i = $scope.findByIdInArray($scope.model.content, result);
-                    $scope.model.content[i] = result;
+
+                    $scope.carregarListaIcms(null, $scope.pageRequest);
+
                     var toast = $mdToast.simple()
                         .content('Registro salvo com sucesso!')
                         .action('Fechar')
@@ -130,19 +156,26 @@
                         .position('bottom left right');
                     $mdToast.show(toast).then(function () {
                     });
+
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
         }
 
-        /**
-         *
-         * @param entidade
-         */
-        $scope.salvarPrincipioDiretriz = function (entidade) {
-            localizacaoService.insertPrincipioDiretriz(entidade, {
-                callback: function (result) {
+        $scope.abrirPopupNovoNCM = function (ev) {
+            $mdDialog.show({
+                    controller: 'NcmDialogController',
+                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
                     $scope.model.content.push(result);
+
                     var toast = $mdToast.simple()
                         .content('Registro salvo com sucesso!')
                         .action('Fechar')
@@ -150,66 +183,111 @@
                         .position('bottom left right');
                     $mdToast.show(toast).then(function () {
                     });
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    $mdToast.show($mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right'))
-                        .then(function () {
-                        });
-                    $log.error(message);
-                }
-            });
-        };
 
-        /**
-         *
-         * @param entidade
-         */
-        $scope.alterarPrincipioDiretriz = function (entidade) {
-            localizacaoService.updatePrincipioDiretriz(entidade, {
-                callback: function (result) {
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        }
+
+        $scope.abrirPopupAlterarNCM = function (ev, item) {
+            $mdDialog.show({
+                    controller: 'NcmDialogController',
+                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: item
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.carregarListaNCM(null, $scope.pageRequest);
+
                     var toast = $mdToast.simple()
-                        .content('Registro atualizado com sucesso!')
+                        .content('Registro salvo com sucesso!')
                         .action('Fechar')
                         .highlightAction(false)
                         .position('bottom left right');
                     $mdToast.show(toast).then(function () {
                     });
 
-                    var i = $scope.findByIdInArray($scope.model.content, result);
-                    $scope.model.content.splice(i, 1);
-                    $scope.model.content.push(result);
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        }
 
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    $log.error(message);
-                }
-            });
-        };
+        $scope.abrirPopupNovoCSON = function (ev) {
+            $mdDialog.show({
+                    controller: 'CsonDialogController',
+                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.carregarListaCSON(null, $scope.pageRequest);
+
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        }
+
+        $scope.abrirPopupAlterarCSON = function (ev, item) {
+            $mdDialog.show({
+                    controller: 'CsonDialogController',
+                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: item
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.carregarListaCSON(null, $scope.pageRequest);
+
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        }
+
 
         /**
          *
          * @param ev
-         * @param id
+         * @param lista
          */
-        $scope.excluirPaises = function (ev, lista) {
+        $scope.excluirIcms = function (ev, lista) {
             var confirm = $mdDialog.confirm()
-                .title('Exclusão de País')
+                .title('Exclusão de ICMS\'s')
                 .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
-                .ariaLabel('Exclusão de País')
+                .ariaLabel('Exclusão de ICMS\'s')
                 .ok('Sim')
                 .cancel('Cancelar')
                 .targetEvent(ev);
 
-            var listaCopia = angular.copy(lista);
             $mdDialog.show(confirm).then(function () {
-                localizacaoService.removePais(lista, {
-                    callback: function (result) {
+                fiscalService.removeICMS(lista, {
+                    callback: function () {
                         var toast = $mdToast.simple()
                             .content('Registro(s) excluído(s) com sucesso!')
                             .action('Fechar')
@@ -218,13 +296,77 @@
                         $mdToast.show(toast).then(function () {
                         });
 
-                        $scope.limparSelecao();
+                        $scope.carregarListaIcms(null, $scope.pageRequest);
+                    },
+                    errorHandler: function (message, exception) {
+                        $log.error("Erro ao excluir registro(s)", message);
+                    }
+                })
+            }, function () {
+            });
+        }
 
-                        for (var x = 0; x < listaCopia.length; x++) {
-                            var i = $scope.findByIdInArray($scope.model.content, listaCopia[x]);
-                            $scope.model.content.splice(i, 1);
-                        }
-                        $scope.$apply();
+        /**
+         *
+         * @param ev
+         * @param lista
+         */
+        $scope.excluirNcm = function (ev, lista) {
+            var confirm = $mdDialog.confirm()
+                .title('Exclusão de NCM\'s')
+                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
+                .ariaLabel('Exclusão de NCM\'s')
+                .ok('Sim')
+                .cancel('Cancelar')
+                .targetEvent(ev);
+
+            $mdDialog.show(confirm).then(function () {
+                fiscalService.removeNCM(lista, {
+                    callback: function () {
+                        var toast = $mdToast.simple()
+                            .content('Registro(s) excluído(s) com sucesso!')
+                            .action('Fechar')
+                            .highlightAction(false)
+                            .position('bottom left right');
+                        $mdToast.show(toast).then(function () {
+                        });
+
+                        $scope.carregarListaNCM(null, $scope.pageRequest);
+                    },
+                    errorHandler: function (message, exception) {
+                        $log.error("Erro ao excluir registro(s)", message);
+                    }
+                })
+            }, function () {
+            });
+        }
+
+        /**
+         *
+         * @param ev
+         * @param lista
+         */
+        $scope.excluirCson = function (ev, lista) {
+            var confirm = $mdDialog.confirm()
+                .title('Exclusão de CSON\'s')
+                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
+                .ariaLabel('Exclusão de CSON\'s')
+                .ok('Sim')
+                .cancel('Cancelar')
+                .targetEvent(ev);
+
+            $mdDialog.show(confirm).then(function () {
+                fiscalService.removeNCM(lista, {
+                    callback: function () {
+                        var toast = $mdToast.simple()
+                            .content('Registro(s) excluído(s) com sucesso!')
+                            .action('Fechar')
+                            .highlightAction(false)
+                            .position('bottom left right');
+                        $mdToast.show(toast).then(function () {
+                        });
+
+                        $scope.carregarListaCSON(null, $scope.pageRequest);
                     },
                     errorHandler: function (message, exception) {
                         $log.error("Erro ao excluir registro(s)", message);
@@ -272,7 +414,7 @@
     });
 
     /**
-     * Controller da popup de Princípio e Diretriz
+     * Controller da popup de ICMS
      */
     angular.module('sisvarejo').controller('IcmsDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
@@ -326,7 +468,7 @@
             if ($scope.validaForm()) {
 
                 if (!$scope.modoAlteracao) {
-                    fiscalService.insertIcms($scope.entidade, {
+                    fiscalService.insertICMS($scope.entidade, {
                         callback: function (result) {
                             $mdDialog.hide(result);
                             $scope.$apply();
@@ -343,7 +485,192 @@
                         }
                     });
                 } else {
-                    fiscalService.updateIcms($scope.entidade, {
+                    fiscalService.updateICMS($scope.entidade, {
+                        callback: function (result) {
+                            $mdDialog.hide(result);
+                            $scope.$apply();
+                        },
+                        errorHandler: function (message, error) {
+                            $mdToast.show($mdToast.simple()
+                                .content(message)
+                                .action('Fechar')
+                                .highlightAction(false)
+                                .position('bottom left right'))
+                                .then(function () {
+                                });
+                            $log.error(message);
+                        }
+                    });
+                }
+            }
+        };
+    });
+
+    /**
+     * Controller da popup de NCM
+     */
+    angular.module('sisvarejo').controller('NcmDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+
+        $importService("fiscalService");
+
+        /**
+         *
+         */
+        $scope.model = {
+            nameFilter: '',
+            paisesList: [],
+            query: {
+                order: 'nome'
+            }
+        }
+
+        if (entidadeExterna != null) {
+            $scope.entidade = entidadeExterna;
+            $scope.modoAlteracao = true;
+        } else {
+            $scope.entidade = {};
+            $scope.modoAlteracao = false;
+        }
+
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        };
+
+        /**
+         *
+         * @returns {boolean}
+         */
+        $scope.validaForm = function () {
+            if (!$scope.ncmForm.$valid) {
+                $mdToast.show($mdToast.simple()
+                    .content('Preencha todos os campos obrigatórios!')
+                    .action('Fechar')
+                    .highlightAction(false)
+                    .position('top')).then(function () {
+                });
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        /**
+         *
+         */
+        $scope.salvar = function () {
+            if ($scope.validaForm()) {
+
+                if (!$scope.modoAlteracao) {
+                    fiscalService.insertNCM($scope.entidade, {
+                        callback: function (result) {
+                            $mdDialog.hide(result);
+                            $scope.$apply();
+                        },
+                        errorHandler: function (message, error) {
+                            $mdToast.show($mdToast.simple()
+                                .content(message)
+                                .action('Fechar')
+                                .highlightAction(false)
+                                .position('bottom left right'))
+                                .then(function () {
+                                });
+                            $log.error(message);
+                        }
+                    });
+                } else {
+                    fiscalService.updateNCM($scope.entidade, {
+                        callback: function (result) {
+                            $mdDialog.hide(result);
+                            $scope.$apply();
+                        },
+                        errorHandler: function (message, error) {
+                            $mdToast.show($mdToast.simple()
+                                .content(message)
+                                .action('Fechar')
+                                .highlightAction(false)
+                                .position('bottom left right'))
+                                .then(function () {
+                                });
+                            $log.error(message);
+                        }
+                    });
+                }
+            }
+        };
+    });
+
+    /**
+     * Controller da popup de NCM
+     */
+    angular.module('sisvarejo').controller('CsonDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+
+        $importService("fiscalService");
+
+        /**
+         *
+         */
+        $scope.model = {
+            nameFilter: '',
+            paisesList: [],
+            query: {
+                order: 'nome'
+            }
+        }
+
+        if (entidadeExterna != null) {
+            $scope.entidade = entidadeExterna;
+            $scope.modoAlteracao = true;
+        } else {
+            $scope.entidade = {};
+            $scope.modoAlteracao = false;
+        }
+
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        };
+
+        /**
+         *
+         * @returns {boolean}
+         */
+        $scope.validaForm = function () {
+            if (!$scope.csonForm.$valid) {
+                $mdToast.show($mdToast.simple()
+                    .content('Preencha todos os campos obrigatórios!')
+                    .action('Fechar')
+                    .highlightAction(false)
+                    .position('top')).then(function () {
+                });
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        /**
+         *
+         */
+        $scope.salvar = function () {
+            if ($scope.validaForm()) {
+                if (!$scope.modoAlteracao) {
+                    fiscalService.insertCSON($scope.entidade, {
+                        callback: function (result) {
+                            $mdDialog.hide(result);
+                            $scope.$apply();
+                        },
+                        errorHandler: function (message, error) {
+                            $mdToast.show($mdToast.simple()
+                                .content(message)
+                                .action('Fechar')
+                                .highlightAction(false)
+                                .position('bottom left right'))
+                                .then(function () {
+                                });
+                            $log.error(message);
+                        }
+                    });
+                } else {
+                    fiscalService.updateCSON($scope.entidade, {
                         callback: function (result) {
                             $mdDialog.hide(result);
                             $scope.$apply();

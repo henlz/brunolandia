@@ -2,33 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="546aca02-40d5-467f-8467-ec5f72ff8dc5" name="Default" comment="Alterações depois da pré banca">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/popup-icms.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/popup-cson.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/compra/ICompraRepository.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/compra/ICompraRepository.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/CSON.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/CSON.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/ICMS.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/ICMS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/NCM.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/fiscal/NCM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/FiscalService.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/FiscalService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/produto-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/produto-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/sisvarejo-main.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/sisvarejo-main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-form.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/index.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/cidade/popup/popup-cidade.html" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/cidade/popup/popup-cidade.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/config/application.properties" afterPath="$PROJECT_DIR$/../../../target/classes/config/application.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/maven/br.com.brunolandia/sisvarejo/pom.properties" afterPath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/maven/br.com.brunolandia/sisvarejo/pom.properties" />
@@ -53,88 +43,7 @@
     <favorites_list name="webapp" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sisvarejo-main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/sisvarejo-main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="215" column="32" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ncm-view.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="icms-view.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="117" selection-start-line="14" selection-start-column="117" selection-end-line="14" selection-end-column="117" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cson-view.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fiscal-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="popup-icms.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/popup-icms.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="popup-pais.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8076923">
-              <caret line="8" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6993671">
-              <caret line="54" column="44" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -150,8 +59,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/forma-pagamento-controller.js" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/financeiro/condicao/condicao-list.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/fornecedor-list.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/financeiro/condicao/condicao-form.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/financeiro/condicao/popup/popup-condicao.html" />
@@ -194,12 +101,14 @@
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-form.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-list.html" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/sisvarejo-main.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/index.jsp" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/popup-icms.html" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/popup-cson.html" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js" />
       </list>
     </option>
@@ -252,6 +161,160 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fiscal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ncm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fiscal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="icms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fiscal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cson" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -272,15 +335,15 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\controllers" />
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\cson" />
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\icms" />
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\ncm" />
-      <recent name="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/popup" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Desenvolvimento\workspaces\brunolandia\sisvarejo\src\main\webapp\modules\sisvarejo\ui\loja" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\cson" />
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\ncm" />
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\controllers" />
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\icms" />
+      <recent name="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/popup" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.popup-venda.html">
@@ -360,28 +423,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20089285" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1688988" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39542484" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39542484" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -404,20 +467,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/fornecedor-list.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="49" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/fornecedor-view.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/cliente-view.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -713,42 +762,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="50" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="117" selection-start-line="14" selection-start-column="117" selection-end-line="14" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/popup-icms.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -761,10 +778,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4516129">
+          <caret line="33" column="62" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6993671">
-          <caret line="54" column="44" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="21" column="69" selection-start-line="21" selection-start-column="69" selection-end-line="21" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/icms/icms-view.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.23077">
+          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/cson-view.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="28" column="110" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/cson/popup-cson.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3046595">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/fiscal-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54280823">
+          <caret line="115" column="34" selection-start-line="115" selection-start-column="34" selection-end-line="115" selection-end-column="34" />
           <folding />
         </state>
       </provider>

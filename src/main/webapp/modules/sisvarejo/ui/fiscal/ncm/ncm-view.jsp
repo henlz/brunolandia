@@ -12,7 +12,7 @@
             <span>NCM</span>
         </h2>
 
-        <md-button class="md-fab md-primary md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopupNovaEntidade($event)">
+        <md-button class="md-fab md-primary md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopupNovoNCM($event)">
             <i class="md-icon md-icon-add md-icon-lg"></i>
         </md-button>
     </md-toolbar>
@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="ncm in model.content | orderBy: model.query.order" ng-click="itemClicked($event, ncm)">
+            <tr ng-repeat="ncm in model.content | orderBy: model.query.order" ng-click="abrirPopupAlterarNCM($event, ncm)">
                 <td>{{::ncm.codigo}}</td>
                 <td>{{::ncm.descricao}}</td>
                 <td>{{::ncm.possuiIpi == true ? 'SIM' : 'NÃO'}}</td>
@@ -43,7 +43,7 @@
                 <div class="limpar-selecao" ng-click="limparSelecao()">Limpar seleção</div>
             </div>
             <div class="right-content">
-                <md-button class="md-raised" aria-label="Excluir" ng-click="excluirNcms($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
+                <md-button class="md-raised" aria-label="Excluir" ng-click="excluirNcm($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
             </div>
         </div>
     </bottomsheet>

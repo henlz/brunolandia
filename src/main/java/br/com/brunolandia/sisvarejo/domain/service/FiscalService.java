@@ -64,7 +64,7 @@ public class FiscalService
 	 * 
 	 * @param icms
 	 */
-	public void removeICMS(ICMS icms)
+	public void removeICMS(List<ICMS> icms)
 	{
 		this.icmsRepository.delete( icms );
 	}
@@ -80,7 +80,7 @@ public class FiscalService
 	
 	/**
 	 * 
-	 * @param icms
+	 * @param cson
 	 * @return
 	 */
 	public CSON insertCSON(CSON cson)
@@ -90,7 +90,7 @@ public class FiscalService
 	
 	/**
 	 * 
-	 * @param icms
+	 * @param cson
 	 * @return
 	 */
 	public CSON updateCSON(CSON cson)
@@ -100,9 +100,9 @@ public class FiscalService
 	
 	/**
 	 * 
-	 * @param icms
+	 * @param cson
 	 */
-	public void removeCSON(CSON cson)
+	public void removeCSON(List<CSON> cson)
 	{
 		this.csonRepository.delete( cson );
 	}
@@ -118,10 +118,10 @@ public class FiscalService
 	
 	/**
 	 * 
-	 * @param icms
+	 * @param ncm
 	 * @return
 	 */
-	public NCM insertCSON(NCM ncm)
+	public NCM insertNCM(NCM ncm)
 	{
 		return this.ncmRepository.save( ncm );
 	}
@@ -131,7 +131,7 @@ public class FiscalService
 	 * @param icms
 	 * @return
 	 */
-	public NCM updateCSON(NCM ncm)
+	public NCM updateNCM(NCM ncm)
 	{
 		return this.ncmRepository.save( ncm );
 	}
@@ -140,7 +140,7 @@ public class FiscalService
 	 * 
 	 * @param icms
 	 */
-	public void removeCSON(NCM ncm)
+	public void removeNCM(List<NCM> ncm)
 	{
 		this.ncmRepository.delete( ncm );
 	}

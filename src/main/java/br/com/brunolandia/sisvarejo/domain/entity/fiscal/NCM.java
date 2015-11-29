@@ -14,7 +14,7 @@ import br.com.eits.common.domain.entity.AbstractEntity;
  *
  */
 @Entity
-@DataTransferObject(javascript = "ICMS")
+@DataTransferObject(javascript = "NCM")
 public class NCM extends AbstractEntity
 {
 
@@ -80,7 +80,7 @@ public class NCM extends AbstractEntity
 	/**
 	 * @return the possuiIpi
 	 */
-	public Boolean getPorcentagem()
+	public Boolean getPossuiIpi()
 	{
 		return possuiIpi;
 	}
@@ -88,11 +88,19 @@ public class NCM extends AbstractEntity
 	/**
 	 * @param possuiIpi the possuiIpi to set
 	 */
-	public void setPorcentagem( Boolean possuiIpi )
+	public void setPossuiIpi( Boolean possuiIpi )
 	{
 		this.possuiIpi = possuiIpi;
 	}
 
+	/**
+	 * 
+	 */
+	public NCM()
+	{
+		super();
+	}
+	
 	/**
 	 * @param codigo
 	 * @param descricao

@@ -28,7 +28,7 @@ public class ICMS extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@NotEmpty
 	private String codigo;
 

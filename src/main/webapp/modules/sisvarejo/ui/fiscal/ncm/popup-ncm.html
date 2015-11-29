@@ -1,0 +1,55 @@
+<md-dialog aria-label="Cadastrar NCM">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} NCM</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layot="row">
+        <form name="ncmForm" novalidate="true">
+            <md-input-container>
+                <label>Código</label>
+                <input name="nome" ng-model="entidade.codigo" required maxlength=255 md-autofocus>
+
+                <div ng-messages="ncmForm.nome.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descrição</label>
+                <input name="descricao" ng-model="entidade.descricao" required maxlength=255>
+
+                <div ng-messages="ncmForm.descricao.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Possui IPI?</label>
+                <md-select ng-model="entidade.possuiIpi">
+                    <md-option ng-value="true">Sim</md-option>
+                    <md-option ng-value="false">Não</md-option>
+                </md-select>
+
+                <!--<div ng-messages="ncmForm.possuiIpi.$error">-->
+                    <!--<div ng-message="required">-->
+                        <!--Campo obrigatório.-->
+                    <!--</div>-->
+                <!--</div>-->
+            </md-input-container>
+            <br>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar()" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
+</md-dialog>

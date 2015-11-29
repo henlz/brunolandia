@@ -13,7 +13,7 @@ import br.com.eits.common.domain.entity.AbstractEntity;
  *
  */
 @Entity
-@DataTransferObject(javascript = "ICMS")
+@DataTransferObject(javascript = "CSON")
 public class CSON extends AbstractEntity
 {
 
@@ -68,6 +68,14 @@ public class CSON extends AbstractEntity
 		this.descricao = descricao;
 	}
 
+	/**
+	 * 
+	 */
+	public CSON()
+	{
+		super();
+	}
+	
 	/**
 	 * @param codigo
 	 * @param descricao

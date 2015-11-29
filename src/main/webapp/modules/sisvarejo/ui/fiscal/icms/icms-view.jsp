@@ -23,14 +23,14 @@
         <tr>
             <th order-by="id">Código</th>
             <th order-by="nome">Descrição</th>
-            <th order-by="nome">Possui IPI?</th>
+            <th order-by="nome">Porcentagem</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="icms in model.content | orderBy: model.query.order" ng-click="itemClicked($event, icms)">
+        <tr ng-repeat="icms in model.content | orderBy: model.query.order" ng-click="abrirPopupAlterarIcms($event, icms)">
             <td>{{::icms.codigo}}</td>
             <td>{{::icms.descricao}}</td>
-            <td>{{::icms.possuiIpi == true ? 'SIM' : 'NÃO'}}</td>
+            <td>{{::icms.porcentagem }} %</td>
         </tr>
         </tbody>
     </table>
