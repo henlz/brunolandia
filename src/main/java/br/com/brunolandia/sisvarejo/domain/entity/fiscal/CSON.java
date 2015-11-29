@@ -25,14 +25,14 @@ public class CSON extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotEmpty
 	private String codigo;
-	
+
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotEmpty
 	private String descricao;
 
@@ -75,20 +75,21 @@ public class CSON extends AbstractEntity
 	{
 		super();
 	}
-	
+
 	/**
 	 * @param codigo
 	 * @param descricao
 	 * @param possuiIpi
 	 */
-	public CSON( String codigo, String descricao )
+	public CSON( Long id, String codigo, String descricao )
 	{
-		super();
+		super( id );
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -101,7 +102,8 @@ public class CSON extends AbstractEntity
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override

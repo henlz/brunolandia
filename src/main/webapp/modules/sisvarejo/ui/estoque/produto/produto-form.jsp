@@ -33,14 +33,21 @@
                     <input name="descricao" type="text" ng-model="model.entidade.descricao"/>
                 </md-input-container>
 
+                <md-content layout="row">
+                    <md-input-container flex>
+                        <label>Peso líquido</label>
+                        <input name="pesoLiquido" type="number" ng-model="model.entidade.pesoLiquido"/>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label>Peso bruto</label>
+                        <input name="pesoBruto" type="number" ng-model="model.entidade.pesoBruto"/>
+                    </md-input-container>
+                </md-content>
+
                 <md-input-container flex>
                     <label>Preço venda</label>
                     <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda"/>
-                </md-input-container>
-
-                <md-input-container flex>
-                    <label>Quantidade</label>
-                    <input name="quantidade" type="number" ng-model="model.entidade.quantidade" required/>
                 </md-input-container>
 
                 <md-input-container>
@@ -65,26 +72,56 @@
                         </md-option>
                     </md-select>
 
-                    <!--<md-select ng-model="model.entidade.fornecedor" placeholder="Fornecedor">-->
-                        <!--<md-option ng-repeat="fornecedor in model.fornecedores" ng-value="fornecedor"-->
-                                   <!--ng-selected="fornecedor.id == model.entidade.fornecedor.id">{{fornecedor.razaoSocial}}-->
-                        <!--</md-option>-->
-                    <!--</md-select>-->
-
-                    <div layout="row" layout-align="center center">
-
-                        <md-input-container>
-                            <label>Fornecedor</label>
-                            <input type="text" ng-model="model.entidade.fornecedor.razaoSocial" disabled/>
-                        </md-input-container>
-
-                        <md-button class="md-icon-button" ng-click="abrirPopupFornecedor($event)">
-                            <i class="md-icon md-icon-search"></i>
-                        </md-button>
-
-                    </div>
-
                 </div>
+                <md-content layout="row" layout-align="center center">
+                    <md-input-container>
+                        <label>ICMS</label>
+                        <input type="text" ng-model="model.entidade.icms.descricao" disabled/>
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" ng-click="abrirPopupIcms($event)">
+                        <i class="md-icon md-icon-search"></i>
+                    </md-button>
+                </md-content>
+
+                <md-content layout="row" layout-align="center center">
+                    <md-input-container>
+                        <label>NCM</label>
+                        <input type="text" ng-model="model.entidade.ncm.descricao" disabled/>
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" ng-click="abrirPopupNcm($event)">
+                        <i class="md-icon md-icon-search"></i>
+                    </md-button>
+
+                    <md-input-container ng-if="model.entidade.ncm.possuiIpi == true">
+                        <label>IPI</label>
+                        <input type="number" ng-model="model.entidade.IPI" required/>
+                    </md-input-container>
+                </md-content>
+
+
+                <md-content layout="row" layout-align="center center">
+                    <md-input-container>
+                        <label>CSON</label>
+                        <input type="text" ng-model="model.entidade.cson.descricao" disabled/>
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" ng-click="abrirPopupCson($event)">
+                        <i class="md-icon md-icon-search"></i>
+                    </md-button>
+                </md-content>
+
+                <md-content layout="row" layout-align="center center">
+                    <md-input-container>
+                        <label>Fornecedor</label>
+                        <input type="text" ng-model="model.entidade.fornecedor.razaoSocial" disabled/>
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" ng-click="abrirPopupFornecedor($event)">
+                        <i class="md-icon md-icon-search"></i>
+                    </md-button>
+                </md-content>
 
             </md-content>
         </section>

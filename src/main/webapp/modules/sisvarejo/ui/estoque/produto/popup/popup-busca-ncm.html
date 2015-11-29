@@ -1,0 +1,63 @@
+<md-dialog aria-label="Buscar NCM" ng-init="listNcmByFilters()">
+
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>NCM</h4>
+        </div>
+        <md-button ng-click="abrirPopupCadastrar()" class="md-icon-button md-raised">
+            <i class="md-icon md-icon-add"></i>
+        </md-button>
+    </md-toolbar>
+
+    <md-dialog-content layot="row">
+
+        <md-content layout="row" layout-align="center center" layout-wrap>
+            <md-input-container flex="50">
+                <label>Código</label>
+                <input type="text" ng-model="model.filtros.codigo">
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Descrição</label>
+                <input type="text" ng-model="model.filtros.descricao">
+            </md-input-container>
+            <md-input-container flex="33">
+                <label>Porcentagem</label>
+                <input type="text" ng-model="model.filtros.possuiIpi">
+            </md-input-container>
+        </md-content>
+        <md-button ng-click="listNcmByFilters()" class="md-icon-button">
+            <i class="md-icon md-icon-search"></i>
+        </md-button>
+        <md-divider/>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-order="model.query.order" md-trim-column-names>
+                <tr>
+                    <th order-by="codigo">Código</th>
+                    <th order-by="descricao">Descrição</th>
+                    <th order-by="porcentagem">Porcentagem</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ncm in model.content | orderBy: model.query.order">
+                    <td>{{::ncm.codigo}}</td>
+                    <td>{{::ncm.descricao}}</td>
+                    <td>{{::ncm.possuiIpi == true ? 'SIM' : 'NÃO'}}</td>
+                    <td>
+                        <md-button ng-click="escolherNcm(ncm)" class="md-primary">
+                            Escolher
+                        </md-button>
+                        <md-button ng-click="abrirPopupCadastrar(ncm)" class="md-primary">
+                            Exibir
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()" md-autofocus>Cancelar</md-button>
+    </div>
+</md-dialog>

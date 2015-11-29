@@ -292,23 +292,70 @@
             })
         };
 
+        $scope.abrirPopupIcms = function (ev) {
+
+            $scope.fornecedorDialog = $mdDialog;
+            $scope.fornecedorDialog.show({
+                    controller: BuscaIcmsDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-icms.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope]
+                    }
+                })
+                .then(function (result) {
+                    $scope.model.entidade.icms = result;
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
+        
+        $scope.abrirPopupCson = function (ev) {
+
+            $scope.fornecedorDialog = $mdDialog;
+            $scope.fornecedorDialog.show({
+                    controller: BuscaCsonDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-cson.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope]
+                    }
+                })
+                .then(function (result) {
+                    $scope.model.entidade.cson = result;
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
+
+        $scope.abrirPopupNcm = function (ev) {
+
+            $scope.fornecedorDialog = $mdDialog;
+            $scope.fornecedorDialog.show({
+                    controller: BuscaNcmDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-ncm.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope]
+                    }
+                })
+                .then(function (result) {
+                    $scope.model.entidade.ncm = result;
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
+
+        /**
+         *
+         * @param ev
+         * @param cidade
+         * @param fornecedor
+         */
         $scope.abrirPopupFornecedor = function (ev, cidade, fornecedor) {
-            //$mdDialog.show({
-            //    controller: BuscaFornecedorDialogController,
-            //    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
-            //    targetEvent: ev,
-            //    hasBackdrop: true,
-            //    locals: {
-            //        entidadeExterna: null
-            //    }
-            //})
-            //    .then(function (result) {
-            //
-            //        $scope.model.entidade.fornecedor = result;
-            //
-            //    }, function () {
-            //        //tratar o "cancelar" da popup
-            //    });
             if (cidade != null) {
                 if ($scope.model.entidade.fornecedor == null) $scope.model.entidade.fornecedor = new Fornecedor();
                 $scope.model.entidade.fornecedor.cidade = cidade;
@@ -318,14 +365,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                controller: BuscaFornecedorDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    local: [$scope, fornecedor]
-                }
-            })
+                    controller: BuscaFornecedorDialogController,
+                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope, fornecedor]
+                    }
+                })
                 .then(function (result) {
                     $scope.model.entidade.fornecedor = result;
                 }, function () {
@@ -339,14 +386,14 @@
          */
         $scope.abrirPopupNovaEntidade = function (ev) {
             $mdDialog.show({
-                controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: ProdutoDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     $scope.currentPage.push(result);
@@ -366,15 +413,15 @@
 
         $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
             $mdDialog.show({
-                controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                bindToController: true,
-                locals: {
-                    entidadeExterna: angular.copy(entidade)
-                }
-            })
+                    controller: ProdutoDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    bindToController: true,
+                    locals: {
+                        entidadeExterna: angular.copy(entidade)
+                    }
+                })
                 .then(function (result) {
                     var i = $scope.findByIdInArray($scope.currentPage, result);
                     $scope.currentPage[i] = result;
@@ -423,14 +470,14 @@
 
         $scope.abrirPopupBuscarCor = function (ev) {
             $mdDialog.show({
-                controller: CorDialogController,
-                templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-buscar-cor.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: CorDialogController,
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-buscar-cor.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     $scope.model.entidade.cor = result;
@@ -640,20 +687,20 @@
         }
 
         // Identifica se a popup foi aberta voltando da popup de cidade
-        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
+        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade : local[2];
 
         /**
          *
          */
-        $scope.listFornecedoresByFilters = function() {
+        $scope.listFornecedoresByFilters = function () {
 
             estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
                 $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.filtros.representante, {
-                    callback: function(result) {
+                    callback: function (result) {
                         $scope.model.content = result;
                         $scope.$apply();
                     },
-                    errorHandler: function(message, error) {
+                    errorHandler: function (message, error) {
                         $mdToast.showSimple(message);
                     }
                 });
@@ -692,14 +739,14 @@
          *
          * @param cliente
          */
-        $scope.escolherFornecedor = function(fornecedor) {
+        $scope.escolherFornecedor = function (fornecedor) {
             $mdDialog.hide(fornecedor);
         }
 
         /**
          *
          */
-        $scope.cancelar = function() {
+        $scope.cancelar = function () {
             $mdDialog.cancel();
         }
 
@@ -710,16 +757,16 @@
         $scope.abrirPopupCidade = function (ev) {
             $scope.model.flag = false;
             $mdDialog.show({
-                controller: 'CidadeDialogController',
-                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                preserveScope: true,
-                clickOutsideToClose: false,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: 'CidadeDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
@@ -735,20 +782,365 @@
          */
         $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
             $mdDialog.show({
-                controller: BuscaFornecedorDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
-                hasBackdrop: true,
-                preserveScope: true,
-                clickOutsideToClose: false,
-                locals: {
-                    local: [$scope.model.fornecedorDialog, entidade, cidade]
-                }
-            })
+                    controller: BuscaFornecedorDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.fornecedorDialog, entidade, cidade]
+                    }
+                })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
                 }, function () {
                     $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
+                });
+        };
+    }
+
+    /**
+     * Controller da popup de Buscar ICMS
+     */
+    function BuscaIcmsDialogController($scope, $mdDialog, $importService, $mdToast, local) {
+
+        $importService("fiscalService");
+
+        $scope.model = {
+            entidade: new ICMS(),
+            icmsDialog: local[0],
+            filtros: {
+            },
+            content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+        }
+
+        /**
+         *
+         */
+        $scope.listIcmsByFilters = function () {
+            fiscalService.listICMSByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao,
+                $scope.model.filtros.porcentagem, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvar = function (entidade) {
+            fiscalService.insertICMS(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param cliente
+         */
+        $scope.escolherIcms = function (icms) {
+            $mdDialog.hide(icms);
+        }
+
+        /**
+         *
+         */
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCidade = function (ev) {
+            $scope.model.flag = false;
+            $mdDialog.show({
+                    controller: 'CidadeDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
+
+                }, function () {
+                    $scope.abrirPopupCadastrar($scope.model.entidade, null, false);
+                });
+        };
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function () {
+            $mdDialog.show({
+                    controller: BuscaIcmsDialogController,
+                    templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.icmsDialog]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.icmsDialog.abrirPopupIcms(null, null);
+                }, function () {
+                    $scope.model.icmsDialog.abrirPopupIcms(null, null);
+                });
+        };
+    }
+
+    /**
+     * Controller da popup de Buscar CSON
+     */
+    function BuscaCsonDialogController($scope, $mdDialog, $importService, $mdToast, local) {
+
+        $importService("fiscalService");
+
+        $scope.model = {
+            entidade: new CSON(),
+            csonDialog: local[0],
+            filtros: {
+                nome: "",
+                apelido: "",
+                cpf: "",
+                rg: ""
+            },
+            content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+        }
+
+        /**
+         *
+         */
+        $scope.listCsonByFilters = function () {
+            fiscalService.listCSONByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvar = function (entidade) {
+            fiscalService.insertCSON(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param cliente
+         */
+        $scope.escolherCson = function (cson) {
+            $mdDialog.hide(cson);
+        }
+
+        /**
+         *
+         */
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function () {
+            $mdDialog.show({
+                    controller: BuscaCsonDialogController,
+                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.csonDialog]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.csonDialog.abrirPopupCson(null, null);
+                }, function () {
+                    $scope.model.csonDialog.abrirPopupCson(null, null);
+                });
+        };
+    }
+    
+    /**
+     * Controller da popup de Buscar NCM
+     */
+    function BuscaNcmDialogController($scope, $mdDialog, $importService, $mdToast, local) {
+
+        $importService("fiscalService");
+
+        $scope.model = {
+            entidade: new NCM(),
+            ncmDialog: local[0],
+            filtros: {
+                nome: "",
+                apelido: "",
+                cpf: "",
+                rg: ""
+            },
+            content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+        }
+
+        /**
+         *
+         */
+        $scope.listNcmByFilters = function () {
+            fiscalService.listNCMByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao,
+                $scope.model.filtros.possuiIpi, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvar = function (entidade) {
+            fiscalService.insertNCM(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param cliente
+         */
+        $scope.escolherNcm = function (ncm) {
+            $mdDialog.hide(ncm);
+        }
+
+        /**
+         *
+         */
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function () {
+            $mdDialog.show({
+                    controller: BuscaNcmDialogController,
+                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.ncmDialog]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.ncmDialog.abrirPopupNcm(null, null);
+                }, function () {
+                    $scope.model.ncmDialog.abrirPopupNcm(null, null);
                 });
         };
     }

@@ -1,5 +1,6 @@
 package br.com.brunolandia.sisvarejo.domain.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
@@ -80,6 +81,18 @@ public class FiscalService
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @param descricao
+	 * @param porcentagem
+	 * @return
+	 */
+	public List<ICMS> listICMSByFilters(String codigo, String descricao, BigDecimal porcentagem) 
+	{
+		return this.icmsRepository.listByFilters( codigo, descricao, porcentagem );
+	}
+	
+	/**
+	 * 
 	 * @param cson
 	 * @return
 	 */
@@ -118,6 +131,17 @@ public class FiscalService
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @param descricao
+	 * @return
+	 */
+	public List<CSON> listCSONByFilters(String codigo, String descricao)
+	{
+		return this.csonRepository.listByFilters( codigo, descricao );
+	}
+	
+	/**
+	 * 
 	 * @param ncm
 	 * @return
 	 */
@@ -152,6 +176,18 @@ public class FiscalService
 	public List<NCM> listNCM()
 	{
 		return this.ncmRepository.findAll();
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @param descricao
+	 * @param possuiIpi
+	 * @return
+	 */
+	public List<NCM> listNCMByFilters(String codigo, String descricao, Boolean possuiIpi)
+	{
+		return this.ncmRepository.listByFilters( codigo, descricao, possuiIpi );
 	}
 	
 }

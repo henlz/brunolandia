@@ -107,9 +107,9 @@ public class ICMS extends AbstractEntity
 	 * @param descricao
 	 * @param porcentagem
 	 */
-	public ICMS( String codigo, String descricao, BigDecimal porcentagem )
+	public ICMS( Long id, String codigo, String descricao, BigDecimal porcentagem )
 	{
-		super();
+		super( id );
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.porcentagem = porcentagem;

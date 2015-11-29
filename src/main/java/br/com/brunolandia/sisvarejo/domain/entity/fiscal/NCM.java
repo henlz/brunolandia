@@ -18,7 +18,6 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 public class NCM extends AbstractEntity
 {
 
-
 	/**
 	 * 
 	 */
@@ -27,21 +26,21 @@ public class NCM extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotEmpty
 	private String codigo;
-	
+
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotEmpty
 	private String descricao;
-	
+
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@NotNull
 	private Boolean possuiIpi;
 
@@ -100,21 +99,22 @@ public class NCM extends AbstractEntity
 	{
 		super();
 	}
-	
+
 	/**
 	 * @param codigo
 	 * @param descricao
 	 * @param possuiIpi
 	 */
-	public NCM( String codigo, String descricao, Boolean possuiIpi )
+	public NCM( Long id, String codigo, String descricao, Boolean possuiIpi )
 	{
-		super();
+		super( id );
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.possuiIpi = possuiIpi;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -128,7 +128,8 @@ public class NCM extends AbstractEntity
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
