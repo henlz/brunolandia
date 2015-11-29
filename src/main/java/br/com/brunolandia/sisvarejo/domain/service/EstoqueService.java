@@ -1,5 +1,6 @@
 package br.com.brunolandia.sisvarejo.domain.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
@@ -216,7 +217,7 @@ public class EstoqueService
 			itemCompra.setProduto( this.produtoRepository.save( produto ) );
 			this.itemCompraRepository.save( itemCompra );
 		}
-		
+		compra.setDataCompra( new Date() );
 		return this.compraRepository.save( compra );
 	}
 	

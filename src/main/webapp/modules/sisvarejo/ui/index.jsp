@@ -40,6 +40,7 @@
         <script type="text/javascript" src="./modules/sisvarejo/controllers/cliente-controller.js?v=${version}"></script>
 		<script type="text/javascript" src="./modules/sisvarejo/controllers/venda-controller.js?v=${version}"></script>
 		<script type="text/javascript" src="./modules/sisvarejo/controllers/compra-controller.js?v=${version}"></script>
+		<script type="text/javascript" src="./modules/sisvarejo/controllers/fiscal-controller.js?v=${version}"></script>
 
 	</head>
 	
@@ -88,6 +89,22 @@
 	                            <p >Condição de Pagamento</p>
 							</md-list-item>
 						</div>
+                        <md-divider></md-divider>
+                        <div ui-sref="cson">
+                            <md-list-item>
+                                <p >CSON</p>
+                            </md-list-item>
+                        </div>
+                        <div ui-sref="icms">
+                            <md-list-item>
+                                <p >ICMS</p>
+                            </md-list-item>
+                        </div>
+                        <div ui-sref="ncm">
+                            <md-list-item>
+                                <p >NCM</p>
+                            </md-list-item>
+                        </div>
                         <md-divider></md-divider>
                         <div ui-sref="produto.listar">
 	                        <md-list-item >

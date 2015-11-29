@@ -3,6 +3,8 @@
  */
 package br.com.brunolandia.sisvarejo.domain.entity.estoque.compra;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -53,6 +55,13 @@ public class ItemCompra extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private String unidade;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private BigDecimal precoCompra;
 
 	/**
 	 * 
@@ -76,12 +85,13 @@ public class ItemCompra extends AbstractEntity
 	 * @param unidade
 	 * @param produto
 	 */
-	public ItemCompra( Integer quantidade, String ncm, String cst, String unidade, Produto produto )
+	public ItemCompra( Integer quantidade, String ncm, String cst, String unidade, BigDecimal precoCompra, Produto produto )
 	{
 		super();
 		this.quantidade = quantidade;
 		this.ncm = ncm;
 		this.cst = cst;
+		this.precoCompra = precoCompra;
 		this.unidade = unidade;
 		this.produto = produto;
 	}
@@ -136,6 +146,25 @@ public class ItemCompra extends AbstractEntity
 		this.produto = produto;
 	}
 
+	/**
+	 * @return the precoCompra
+	 */
+	public BigDecimal getPrecoCompra()
+	{
+		return precoCompra;
+	}
+
+	/**
+	 * @param precoCompra the precoCompra to set
+	 */
+	public void setPrecoCompra( BigDecimal precoCompra )
+	{
+		this.precoCompra = precoCompra;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -143,12 +172,16 @@ public class ItemCompra extends AbstractEntity
 		int result = super.hashCode();
 		result = prime * result + ( ( cst == null ) ? 0 : cst.hashCode() );
 		result = prime * result + ( ( ncm == null ) ? 0 : ncm.hashCode() );
+		result = prime * result + ( ( precoCompra == null ) ? 0 : precoCompra.hashCode() );
 		result = prime * result + ( ( produto == null ) ? 0 : produto.hashCode() );
 		result = prime * result + ( ( quantidade == null ) ? 0 : quantidade.hashCode() );
 		result = prime * result + ( ( unidade == null ) ? 0 : unidade.hashCode() );
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals( Object obj )
 	{
@@ -166,6 +199,11 @@ public class ItemCompra extends AbstractEntity
 			if ( other.ncm != null ) return false;
 		}
 		else if ( !ncm.equals( other.ncm ) ) return false;
+		if ( precoCompra == null )
+		{
+			if ( other.precoCompra != null ) return false;
+		}
+		else if ( !precoCompra.equals( other.precoCompra ) ) return false;
 		if ( produto == null )
 		{
 			if ( other.produto != null ) return false;
@@ -183,6 +221,5 @@ public class ItemCompra extends AbstractEntity
 		else if ( !unidade.equals( other.unidade ) ) return false;
 		return true;
 	}
-	
 	
 }

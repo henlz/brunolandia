@@ -190,6 +190,33 @@
 			url: '/detalhe/:id'
 		});
 
+		/**
+		 *
+		 */
+		$stateProvider.state('icms',{
+			url : "/icms",
+			controller : 'FiscalController',
+			templateUrl : "./modules/sisvarejo/ui/fiscal/icms/icms-view.jsp"
+		});
+
+		/**
+		 *
+		 */
+		$stateProvider.state('ncm',{
+			url : "/ncm",
+			controller : 'FiscalController',
+			templateUrl : "./modules/sisvarejo/ui/fiscal/ncm/ncm-view.jsp"
+		});
+
+		/**
+		 *
+		 */
+		$stateProvider.state('cson',{
+			url : "/cson",
+			controller : 'FiscalController',
+			templateUrl : "./modules/sisvarejo/ui/fiscal/cson/cson-view.jsp"
+		});
+
 	});
 
 	module.run( function( $rootScope, $window ) {

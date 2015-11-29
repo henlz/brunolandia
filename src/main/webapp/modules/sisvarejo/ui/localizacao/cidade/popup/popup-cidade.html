@@ -1,7 +1,12 @@
 <md-dialog aria-label="Mango (Fruit)">
-    <md-dialog-content layot="row">
 
-        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Cidade</h2>
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Cidade</h4>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layot="row">
 
         <form name="cidadeForm" novalidate="true">
             <md-input-container>
@@ -23,15 +28,14 @@
             </div>-->
             
             <br>
-
-            <div class="md-actions" layout="row">
-                <md-button ng-click="cancelar()">
-                    Cancelar
-                </md-button>
-                <md-button ng-click="salvar()" class="md-primary">
-                    Salvar
-                </md-button>
-            </div>
         </form>
     </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar()" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
 </md-dialog>

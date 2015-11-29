@@ -24,7 +24,6 @@
                 <th order-by="codigo">Código</th>
                 <th order-by="descricao">Descrição</th>
                 <th order-by="grupo">Grupo</th>
-                <th order-by="precoCusto">Preço de Custo</th>
                 <th order-by="precoVenda">Preço de Venda</th>
                 <th>Ações</th>
             </tr>

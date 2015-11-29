@@ -1,8 +1,10 @@
 <md-dialog aria-label="Mango (Fruit)">
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Cor</h4>
+        </div>
+    </md-toolbar>
     <md-dialog-content layot="row">
-
-        <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Cor</h2>
-
         <form name="corForm" novalidate="true">
             <md-input-container>
                 <label>Nome</label>
@@ -14,16 +16,14 @@
                     </div>
                 </div>
             </md-input-container>
-            <br>
-
-            <div class="md-actions" layout="row">
-                <md-button ng-click="cancelar()">
-                    Cancelar
-                </md-button>
-                <md-button ng-click="salvar()" class="md-primary">
-                    Salvar
-                </md-button>
-            </div>
         </form>
     </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar()" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
 </md-dialog>

@@ -14,6 +14,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.brunolandia.sisvarejo.domain.entity.Genero;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Cor;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Tamanho;
+import br.com.brunolandia.sisvarejo.domain.entity.fiscal.CSON;
+import br.com.brunolandia.sisvarejo.domain.entity.fiscal.ICMS;
+import br.com.brunolandia.sisvarejo.domain.entity.fiscal.NCM;
 import br.com.eits.common.domain.entity.AbstractEntity;
 
 /**
@@ -36,64 +39,98 @@ public class Produto extends AbstractEntity
 	@Column
 	@NotEmpty
 	private String descricao;
-	
+
 	/**
 	 * 
 	 */
 	@Column
 	@NotEmpty
 	private String codigo;
-	
+
 	/**
 	 * 
 	 */
 	@Column
 	private String codigoBarra;
-	
-	/**
-	 * 
-	 */
-	@Column
-	@NotNull
-	private BigDecimal precoCusto;
-	
+
 	/**
 	 * 
 	 */
 	@Column
 	@NotNull
 	private BigDecimal precoVenda;
-	
+
 	/**
 	 * 
 	 */
 	@Column
 	@NotNull
 	private Integer quantidade;
-	
+
 	/**
 	 * 
 	 */
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@Column
+	@NotNull
+	private BigDecimal pesoLiquido;
+
+	/**
+	 * 
+	 */
+	@Column
+	@NotNull
+	private BigDecimal pesoBruto;
+
+	/**
+	 * 
+	 */
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Cor cor;
-	
+
 	/**
 	 * 
 	 */
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Tamanho tamanho;
-	
+
 	/**
 	 * 
 	 */
 	@Column
 	private Genero grupo;
-	
+
 	/**
 	 * 
 	 */
-	@ManyToOne(cascade=CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Fornecedor fornecedor;
+
+	/**
+	 * 
+	 */
+	@Column
+	private BigDecimal IPI;
+
+	/**
+	 * 
+	 */
+	@ManyToOne
+	@NotNull
+	private CSON cson;
+
+	/**
+	 * 
+	 */
+	@ManyToOne
+	@NotNull
+	private ICMS icms;
+
+	/**
+	 * 
+	 */
+	@ManyToOne
+	@NotNull
+	private NCM ncm;
 
 	/**
 	 * 
@@ -102,65 +139,51 @@ public class Produto extends AbstractEntity
 	{
 		super();
 	}
-	
+
 	/**
 	 * 
 	 * @param id
 	 */
-	public Produto(Long id)
+	public Produto( Long id )
 	{
-		super(id);
+		super( id );
 	}
-			
+
 	/**
-	 * 
-	 * @param id
 	 * @param descricao
 	 * @param codigo
-	 * @param precoCusto
+	 * @param codigoBarra
 	 * @param precoVenda
+	 * @param quantidade
+	 * @param pesoLiquido
+	 * @param pesoBruto
 	 * @param cor
 	 * @param tamanho
 	 * @param grupo
 	 * @param fornecedor
-	 * @param codigoBarra
+	 * @param iPI
+	 * @param cson
+	 * @param icms
+	 * @param ncm
 	 */
-	public Produto(Long id, String descricao, String codigo, BigDecimal precoCusto,
-			BigDecimal precoVenda, Cor cor, Tamanho tamanho, Genero grupo,
-			Fornecedor fornecedor, String codigoBarra, Integer quantidade)
+	public Produto( Long id, String descricao, String codigo, String codigoBarra, BigDecimal precoVenda, Integer quantidade, BigDecimal pesoLiquido, BigDecimal pesoBruto, Cor cor, Tamanho tamanho, Genero grupo, Fornecedor fornecedor, BigDecimal iPI, CSON cson, ICMS icms, NCM ncm )
 	{
-		super(id);
+		super( id );
 		this.descricao = descricao;
 		this.codigo = codigo;
-		this.precoCusto = precoCusto;
+		this.codigoBarra = codigoBarra;
 		this.precoVenda = precoVenda;
+		this.quantidade = quantidade;
+		this.pesoLiquido = pesoLiquido;
+		this.pesoBruto = pesoBruto;
 		this.cor = cor;
 		this.tamanho = tamanho;
 		this.grupo = grupo;
 		this.fornecedor = fornecedor;
-		this.codigoBarra = codigoBarra;
-		this.quantidade = quantidade;
-	}
-	
-	/**
-	 * 	
-	 * @param id
-	 * @param descricao
-	 * @param codigo
-	 * @param precoCusto
-	 * @param precoVenda
-	 * @param codigoBarra
-	 * @param quantidade
-	 */
-	public Produto( Long id, String descricao, String codigo, BigDecimal precoCusto, BigDecimal precoVenda, String codigoBarra, Integer quantidade )
-	{
-		super(id);
-		this.descricao = descricao;
-		this.codigo = codigo;
-		this.codigoBarra = codigoBarra;
-		this.precoCusto = precoCusto;
-		this.precoVenda = precoVenda;
-		this.quantidade = quantidade;
+		IPI = iPI;
+		this.cson = cson;
+		this.icms = icms;
+		this.ncm = ncm;
 	}
 
 	/**
@@ -176,7 +199,7 @@ public class Produto extends AbstractEntity
 	 * 
 	 * @param descricao
 	 */
-	public void setDescricao(String descricao)
+	public void setDescricao( String descricao )
 	{
 		this.descricao = descricao;
 	}
@@ -186,19 +209,9 @@ public class Produto extends AbstractEntity
 		return codigo;
 	}
 
-	public void setCodigo(String codigo)
+	public void setCodigo( String codigo )
 	{
 		this.codigo = codigo;
-	}
-
-	public BigDecimal getPrecoCusto()
-	{
-		return precoCusto;
-	}
-
-	public void setPrecoCusto(BigDecimal precoCusto)
-	{
-		this.precoCusto = precoCusto;
 	}
 
 	public BigDecimal getPrecoVenda()
@@ -206,7 +219,7 @@ public class Produto extends AbstractEntity
 		return precoVenda;
 	}
 
-	public void setPrecoVenda(BigDecimal precoVenda)
+	public void setPrecoVenda( BigDecimal precoVenda )
 	{
 		this.precoVenda = precoVenda;
 	}
@@ -216,7 +229,7 @@ public class Produto extends AbstractEntity
 		return cor;
 	}
 
-	public void setCor(Cor cor)
+	public void setCor( Cor cor )
 	{
 		this.cor = cor;
 	}
@@ -226,7 +239,7 @@ public class Produto extends AbstractEntity
 		return tamanho;
 	}
 
-	public void setTamanho(Tamanho tamanho)
+	public void setTamanho( Tamanho tamanho )
 	{
 		this.tamanho = tamanho;
 	}
@@ -236,7 +249,7 @@ public class Produto extends AbstractEntity
 		return grupo;
 	}
 
-	public void setGrupo(Genero grupo)
+	public void setGrupo( Genero grupo )
 	{
 		this.grupo = grupo;
 	}
@@ -246,7 +259,7 @@ public class Produto extends AbstractEntity
 		return fornecedor;
 	}
 
-	public void setFornecedor(Fornecedor fornecedor)
+	public void setFornecedor( Fornecedor fornecedor )
 	{
 		this.fornecedor = fornecedor;
 	}
@@ -260,7 +273,7 @@ public class Produto extends AbstractEntity
 	{
 		this.codigoBarra = codigoBarra;
 	}
-	
+
 	public Integer getQuantidade()
 	{
 		return quantidade;
@@ -271,24 +284,131 @@ public class Produto extends AbstractEntity
 		this.quantidade = quantidade;
 	}
 
+	/**
+	 * @return the pesoLiquido
+	 */
+	public BigDecimal getPesoLiquido()
+	{
+		return pesoLiquido;
+	}
+
+	/**
+	 * @param pesoLiquido the pesoLiquido to set
+	 */
+	public void setPesoLiquido( BigDecimal pesoLiquido )
+	{
+		this.pesoLiquido = pesoLiquido;
+	}
+
+	/**
+	 * @return the pesoBruto
+	 */
+	public BigDecimal getPesoBruto()
+	{
+		return pesoBruto;
+	}
+
+	/**
+	 * @param pesoBruto the pesoBruto to set
+	 */
+	public void setPesoBruto( BigDecimal pesoBruto )
+	{
+		this.pesoBruto = pesoBruto;
+	}
+
+	/**
+	 * @return the iPI
+	 */
+	public BigDecimal getIPI()
+	{
+		return IPI;
+	}
+
+	/**
+	 * @param iPI the iPI to set
+	 */
+	public void setIPI( BigDecimal iPI )
+	{
+		IPI = iPI;
+	}
+
+	/**
+	 * @return the cson
+	 */
+	public CSON getCson()
+	{
+		return cson;
+	}
+
+	/**
+	 * @param cson the cson to set
+	 */
+	public void setCson( CSON cson )
+	{
+		this.cson = cson;
+	}
+
+	/**
+	 * @return the icms
+	 */
+	public ICMS getIcms()
+	{
+		return icms;
+	}
+
+	/**
+	 * @param icms the icms to set
+	 */
+	public void setIcms( ICMS icms )
+	{
+		this.icms = icms;
+	}
+
+	/**
+	 * @return the ncm
+	 */
+	public NCM getNcm()
+	{
+		return ncm;
+	}
+
+	/**
+	 * @param ncm the ncm to set
+	 */
+	public void setNcm( NCM ncm )
+	{
+		this.ncm = ncm;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ( ( IPI == null ) ? 0 : IPI.hashCode() );
 		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( codigoBarra == null ) ? 0 : codigoBarra.hashCode() );
 		result = prime * result + ( ( cor == null ) ? 0 : cor.hashCode() );
+		result = prime * result + ( ( cson == null ) ? 0 : cson.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
 		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
 		result = prime * result + ( ( grupo == null ) ? 0 : grupo.hashCode() );
-		result = prime * result + ( ( precoCusto == null ) ? 0 : precoCusto.hashCode() );
+		result = prime * result + ( ( icms == null ) ? 0 : icms.hashCode() );
+		result = prime * result + ( ( ncm == null ) ? 0 : ncm.hashCode() );
+		result = prime * result + ( ( pesoBruto == null ) ? 0 : pesoBruto.hashCode() );
+		result = prime * result + ( ( pesoLiquido == null ) ? 0 : pesoLiquido.hashCode() );
 		result = prime * result + ( ( precoVenda == null ) ? 0 : precoVenda.hashCode() );
-		result = prime * result + ( ( tamanho == null ) ? 0 : tamanho.hashCode() );
 		result = prime * result + ( ( quantidade == null ) ? 0 : quantidade.hashCode() );
+		result = prime * result + ( ( tamanho == null ) ? 0 : tamanho.hashCode() );
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals( Object obj )
 	{
@@ -296,6 +416,11 @@ public class Produto extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Produto other = ( Produto ) obj;
+		if ( IPI == null )
+		{
+			if ( other.IPI != null ) return false;
+		}
+		else if ( !IPI.equals( other.IPI ) ) return false;
 		if ( codigo == null )
 		{
 			if ( other.codigo != null ) return false;
@@ -311,6 +436,11 @@ public class Produto extends AbstractEntity
 			if ( other.cor != null ) return false;
 		}
 		else if ( !cor.equals( other.cor ) ) return false;
+		if ( cson == null )
+		{
+			if ( other.cson != null ) return false;
+		}
+		else if ( !cson.equals( other.cson ) ) return false;
 		if ( descricao == null )
 		{
 			if ( other.descricao != null ) return false;
@@ -322,11 +452,26 @@ public class Produto extends AbstractEntity
 		}
 		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
 		if ( grupo != other.grupo ) return false;
-		if ( precoCusto == null )
+		if ( icms == null )
 		{
-			if ( other.precoCusto != null ) return false;
+			if ( other.icms != null ) return false;
 		}
-		else if ( !precoCusto.equals( other.precoCusto ) ) return false;
+		else if ( !icms.equals( other.icms ) ) return false;
+		if ( ncm == null )
+		{
+			if ( other.ncm != null ) return false;
+		}
+		else if ( !ncm.equals( other.ncm ) ) return false;
+		if ( pesoBruto == null )
+		{
+			if ( other.pesoBruto != null ) return false;
+		}
+		else if ( !pesoBruto.equals( other.pesoBruto ) ) return false;
+		if ( pesoLiquido == null )
+		{
+			if ( other.pesoLiquido != null ) return false;
+		}
+		else if ( !pesoLiquido.equals( other.pesoLiquido ) ) return false;
 		if ( precoVenda == null )
 		{
 			if ( other.precoVenda != null ) return false;
@@ -345,7 +490,5 @@ public class Produto extends AbstractEntity
 		return true;
 	}
 
-	
-	
-	
+
 }

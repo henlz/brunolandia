@@ -227,7 +227,7 @@
             }
             var total = 0;
             for (var i = 0; compra.itensCompra.length > i; i++){
-                total += compra.itensCompra[i].quantidade * compra.itensCompra[i].produto.precoCusto;
+                total += compra.itensCompra[i].quantidade * compra.itensCompra[i].precoCompra;
             }
             return total;
         }
@@ -574,7 +574,7 @@
     }
 
     /**
-     * Controller da popup de Buscar Clientes
+     * Controller da popup de Buscar Fornecedores
      */
     function BuscaFornecedorDialogController($scope, $mdDialog, $importService, $mdToast, local) {
 
@@ -595,7 +595,7 @@
         // Habilita modo de edição se o botão de Exibir for acionado
         if (local[1] != null) {
             $scope.model.entidade = local[1];
-            $scope.model.viewMode = true;
+            //$scope.model.viewMode = true;
         }
 
         // Identifica se a popup foi aberta voltando da popup de cidade
@@ -710,7 +710,6 @@
                     $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
                 });
         };
-
     }
 
     /**

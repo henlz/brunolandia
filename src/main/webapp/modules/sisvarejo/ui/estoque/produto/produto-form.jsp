@@ -33,17 +33,10 @@
                     <input name="descricao" type="text" ng-model="model.entidade.descricao"/>
                 </md-input-container>
 
-                <div layout="row" width="100%">
-                    <md-input-container flex>
-                        <label>Preço custo</label>
-                        <input name="precoCusto" type="number" ng-model="model.entidade.precoCusto" required/>
-                    </md-input-container>
-
-                    <md-input-container flex>
-                        <label>Preço venda</label>
-                        <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda"/>
-                    </md-input-container>
-                </div>
+                <md-input-container flex>
+                    <label>Preço venda</label>
+                    <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda"/>
+                </md-input-container>
 
                 <md-input-container flex>
                     <label>Quantidade</label>

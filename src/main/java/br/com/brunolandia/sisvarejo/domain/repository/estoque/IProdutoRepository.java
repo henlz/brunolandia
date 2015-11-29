@@ -20,8 +20,8 @@ public interface IProdutoRepository extends JpaRepository<Produto, Long>
 	 * @param codigo
 	 * @return
 	 */
-	public Produto findByCodigo(String codigo);
-	
+	public Produto findByCodigo( String codigo );
+
 	/**
 	 * 
 	 * @param codigo
@@ -29,9 +29,10 @@ public interface IProdutoRepository extends JpaRepository<Produto, Long>
 	 * @param pageable
 	 * @return
 	 */
-	@Query("SELECT new Produto (produto.id, produto.descricao, produto.codigo, produto.precoCusto, produto.precoVenda, produto.cor, produto.tamanho, produto.grupo, produto.fornecedor, produto.codigoBarra, produto.quantidade) "
-			+ "FROM Produto produto "
-			+ "WHERE ( FILTER(produto.codigo, :codigo) = TRUE "
-				+ "AND FILTER(produto.descricao, :descricao) = TRUE )")
-	public Page<Produto> listByFilters(@Param("codigo") String codigo, @Param("descricao") String descricao, Pageable pageable);
+	@Query("SELECT new Produto (produto.id, produto.descricao, produto.codigo, produto.codigoBarra, "
+			+ "produto.precoVenda, produto.quantidade, produto.pesoLiquido, produto.pesoBruto, produto.cor, "
+			+ "produto.tamanho, produto.grupo, produto.fornecedor, produto.IPI, produto.cson, produto.icms, produto.ncm) " 
+	 + "FROM Produto produto " 
+	 	+ "WHERE ( FILTER(produto.codigo, :codigo) = TRUE " + "AND FILTER(produto.descricao, :descricao) = TRUE )")
+	public Page<Produto> listByFilters( @Param("codigo" ) String codigo, @Param("descricao") String descricao, Pageable pageable);
 }

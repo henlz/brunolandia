@@ -154,12 +154,10 @@
                             {{:: itemVenda.produto.quantidade}}
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.quantidade" min="1"
-                                   max="{{itemVenda.produto.quantidade}}">
+                            <input style="width: 95px;" type="number" ng-model="itemVenda.quantidade">
                         </td>
                         <td>
-                            <input style="width: 95px;" type="text" ng-model="itemVenda.unidade" min="0"
-                                   max="{{itemVenda.unidade}}">
+                            <input style="width: 95px;" type="text" ng-model="itemVenda.unidade">
                         </td>
                         <td>
                             <input style="width: 95px;" type="number" ng-model="itemVenda.cst">
@@ -168,10 +166,10 @@
                             <input style="width: 95px;" type="number" ng-model="itemVenda.ncm">
                         </td>
                         <td>
-                            {{:: itemVenda.produto.precoCusto | currency: 'R$ '}}
+                            <input style="width: 95px;" type="number" ng-model="itemVenda.precoCompra">
                         </td>
                         <td>
-                            {{ itemVenda.produto.precoCusto * itemVenda.quantidade | currency: 'R$ '}}
+                            {{ itemVenda.precoCompra * itemVenda.quantidade | currency: 'R$ '}}
                         </td>
                         <td layout="row">
                             <md-button class="md-icon-button" ng-click="excluirProduto($event, itemVenda)"

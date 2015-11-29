@@ -1,0 +1,52 @@
+<md-dialog aria-label="Cadastrar ICMS">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} ICMS</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layot="row">
+        <form name="icmsForm" novalidate="true">
+            <md-input-container>
+                <label>Código</label>
+                <input name="nome" ng-model="entidade.codigo" required maxlength=255 md-autofocus>
+
+                <div ng-messages="icmsForm.nome.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Descrição</label>
+                <input name="descricao" ng-model="entidade.descricao" required maxlength=255>
+
+                <div ng-messages="icmsForm.descricao.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Porcentagem</label>
+                <input name="porcentagem" ng-model="entidade.porcentagem" type="number" required maxlength=255>
+
+                <div ng-messages="icmsForm.porcentagem.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+            <br>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar()" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
+</md-dialog>
