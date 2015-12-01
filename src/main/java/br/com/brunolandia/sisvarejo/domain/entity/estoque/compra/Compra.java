@@ -23,7 +23,7 @@ import br.com.eits.common.domain.entity.AbstractEntity;
  *
  */
 @Entity
-@DataTransferObject(javascript="Compra")
+@DataTransferObject(javascript = "Compra")
 public class Compra extends AbstractEntity
 {
 
@@ -31,34 +31,6 @@ public class Compra extends AbstractEntity
 	 * 
 	 */
 	private static final long serialVersionUID = 2315057633448230531L;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal baseIcms;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal baseIcmsSt;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal valorIcms;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal valorIcmsSubstituicao;
 
 	/**
 	 * 
@@ -93,28 +65,21 @@ public class Compra extends AbstractEntity
 	 */
 	@NotNull
 	@Column(nullable = false)
-	private BigDecimal valorTotalIpi;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private String chaveAcesso;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private String dadosNfe;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
 	private String numeroNfe;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private String serie;
+
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private String modelo;
 	
 	/**
 	 * 
@@ -122,13 +87,19 @@ public class Compra extends AbstractEntity
 	@NotEmpty
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ItemCompra> itensCompra;
-	
+
 	/**
 	 * 
 	 */
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Date dataCompra;
-	
+
+	/**
+	 * 
+	 */
+	@Column(nullable = false)
+	private Date dataEmissao;
+
 	/**
 	 * 
 	 */
@@ -145,182 +116,160 @@ public class Compra extends AbstractEntity
 	}
 
 	/**
-	 * 
-	 * @param baseIcms
-	 * @param baseIcmsSt
-	 * @param valorIcms
-	 * @param valorIcmsSubstituicao
 	 * @param valorFrete
 	 * @param valorSeguro
 	 * @param desconto
 	 * @param outrasDespesas
-	 * @param valorTotalIpi
-	 * @param chaveAcesso
-	 * @param dadosNfe
 	 * @param numeroNfe
+	 * @param itensCompra
+	 * @param dataCompra
+	 * @param dataEmissao
+	 * @param fornecedor
 	 */
-	public Compra( BigDecimal baseIcms, BigDecimal baseIcmsSt, BigDecimal valorIcms, BigDecimal valorIcmsSubstituicao, BigDecimal valorFrete, 
-			BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, BigDecimal valorTotalIpi, String chaveAcesso, String dadosNfe, 
-			String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra, Fornecedor fornecedor )
+	public Compra( Long id, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra, Date dataEmissao, Fornecedor fornecedor, String modelo, String serie )
 	{
-		super();
-		this.baseIcms = baseIcms;
-		this.baseIcmsSt = baseIcmsSt;
-		this.valorIcms = valorIcms;
-		this.valorIcmsSubstituicao = valorIcmsSubstituicao;
+		super( id );
 		this.valorFrete = valorFrete;
 		this.valorSeguro = valorSeguro;
 		this.desconto = desconto;
 		this.outrasDespesas = outrasDespesas;
-		this.valorTotalIpi = valorTotalIpi;
-		this.chaveAcesso = chaveAcesso;
-		this.dadosNfe = dadosNfe;
 		this.numeroNfe = numeroNfe;
 		this.itensCompra = itensCompra;
 		this.dataCompra = dataCompra;
+		this.dataEmissao = dataEmissao;
 		this.fornecedor = fornecedor;
+		this.modelo = modelo;
+		this.serie = serie;
 	}
 
-	public BigDecimal getBaseIcms()
-	{
-		return baseIcms;
-	}
-
-	public void setBaseIcms( BigDecimal baseIcms )
-	{
-		this.baseIcms = baseIcms;
-	}
-
-	public BigDecimal getBaseIcmsSt()
-	{
-		return baseIcmsSt;
-	}
-
-	public void setBaseIcmsSt( BigDecimal baseIcmsSt )
-	{
-		this.baseIcmsSt = baseIcmsSt;
-	}
-
-	public BigDecimal getValorIcms()
-	{
-		return valorIcms;
-	}
-
-	public void setValorIcms( BigDecimal valorIcms )
-	{
-		this.valorIcms = valorIcms;
-	}
-
-	public BigDecimal getValorIcmsSubstituicao()
-	{
-		return valorIcmsSubstituicao;
-	}
-
-	public void setValorIcmsSubstituicao( BigDecimal valorIcmsSubstituicao )
-	{
-		this.valorIcmsSubstituicao = valorIcmsSubstituicao;
-	}
-
+	/**
+	 * @return the valorFrete
+	 */
 	public BigDecimal getValorFrete()
 	{
 		return valorFrete;
 	}
 
+	/**
+	 * @param valorFrete the valorFrete to set
+	 */
 	public void setValorFrete( BigDecimal valorFrete )
 	{
 		this.valorFrete = valorFrete;
 	}
 
+	/**
+	 * @return the valorSeguro
+	 */
 	public BigDecimal getValorSeguro()
 	{
 		return valorSeguro;
 	}
 
+	/**
+	 * @param valorSeguro the valorSeguro to set
+	 */
 	public void setValorSeguro( BigDecimal valorSeguro )
 	{
 		this.valorSeguro = valorSeguro;
 	}
 
+	/**
+	 * @return the desconto
+	 */
 	public BigDecimal getDesconto()
 	{
 		return desconto;
 	}
 
+	/**
+	 * @param desconto the desconto to set
+	 */
 	public void setDesconto( BigDecimal desconto )
 	{
 		this.desconto = desconto;
 	}
 
+	/**
+	 * @return the outrasDespesas
+	 */
 	public BigDecimal getOutrasDespesas()
 	{
 		return outrasDespesas;
 	}
 
+	/**
+	 * @param outrasDespesas the outrasDespesas to set
+	 */
 	public void setOutrasDespesas( BigDecimal outrasDespesas )
 	{
 		this.outrasDespesas = outrasDespesas;
 	}
 
-	public BigDecimal getValorTotalIpi()
-	{
-		return valorTotalIpi;
-	}
-
-	public void setValorTotalIpi( BigDecimal valorTotalIpi )
-	{
-		this.valorTotalIpi = valorTotalIpi;
-	}
-
-	public String getChaveAcesso()
-	{
-		return chaveAcesso;
-	}
-
-	public void setChaveAcesso( String chaveAcesso )
-	{
-		this.chaveAcesso = chaveAcesso;
-	}
-
-	public String getDadosNfe()
-	{
-		return dadosNfe;
-	}
-
-	public void setDadosNfe( String dadosNfe )
-	{
-		this.dadosNfe = dadosNfe;
-	}
-
+	/**
+	 * @return the numeroNfe
+	 */
 	public String getNumeroNfe()
 	{
 		return numeroNfe;
 	}
 
+	/**
+	 * @param numeroNfe the numeroNfe to set
+	 */
 	public void setNumeroNfe( String numeroNfe )
 	{
 		this.numeroNfe = numeroNfe;
 	}
 
+	/**
+	 * @return the itensCompra
+	 */
 	public List<ItemCompra> getItensCompra()
 	{
 		return itensCompra;
 	}
 
+	/**
+	 * @param itensCompra the itensCompra to set
+	 */
 	public void setItensCompra( List<ItemCompra> itensCompra )
 	{
 		this.itensCompra = itensCompra;
 	}
-	
- 	public void setDataCompra(Date dataCompra)
+
+	/**
+	 * @return the dataCompra
+	 */
+	public Date getDataCompra()
+	{
+		return dataCompra;
+	}
+
+	/**
+	 * @param dataCompra the dataCompra to set
+	 */
+	public void setDataCompra( Date dataCompra )
 	{
 		this.dataCompra = dataCompra;
 	}
- 	
- 	public Date getDataCompra()
- 	{
- 		return this.dataCompra;
- 	}
- 	
+
+	/**
+	 * @return the dataEmissao
+	 */
+	public Date getDataEmissao()
+	{
+		return dataEmissao;
+	}
+
+	/**
+	 * @param dataEmissao the dataEmissao to set
+	 */
+	public void setDataEmissao( Date dataEmissao )
+	{
+		this.dataEmissao = dataEmissao;
+	}
+
 	/**
 	 * @return the fornecedor
 	 */
@@ -337,27 +286,37 @@ public class Compra extends AbstractEntity
 		this.fornecedor = fornecedor;
 	}
 
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid()
+	{
+		return serialVersionUID;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( baseIcms == null ) ? 0 : baseIcms.hashCode() );
-		result = prime * result + ( ( baseIcmsSt == null ) ? 0 : baseIcmsSt.hashCode() );
-		result = prime * result + ( ( chaveAcesso == null ) ? 0 : chaveAcesso.hashCode() );
-		result = prime * result + ( ( dadosNfe == null ) ? 0 : dadosNfe.hashCode() );
+		result = prime * result + ( ( dataCompra == null ) ? 0 : dataCompra.hashCode() );
+		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
 		result = prime * result + ( ( desconto == null ) ? 0 : desconto.hashCode() );
+		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
 		result = prime * result + ( ( itensCompra == null ) ? 0 : itensCompra.hashCode() );
 		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
 		result = prime * result + ( ( outrasDespesas == null ) ? 0 : outrasDespesas.hashCode() );
 		result = prime * result + ( ( valorFrete == null ) ? 0 : valorFrete.hashCode() );
-		result = prime * result + ( ( valorIcms == null ) ? 0 : valorIcms.hashCode() );
-		result = prime * result + ( ( valorIcmsSubstituicao == null ) ? 0 : valorIcmsSubstituicao.hashCode() );
 		result = prime * result + ( ( valorSeguro == null ) ? 0 : valorSeguro.hashCode() );
-		result = prime * result + ( ( valorTotalIpi == null ) ? 0 : valorTotalIpi.hashCode() );
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals( Object obj )
 	{
@@ -365,31 +324,26 @@ public class Compra extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Compra other = ( Compra ) obj;
-		if ( baseIcms == null )
+		if ( dataCompra == null )
 		{
-			if ( other.baseIcms != null ) return false;
+			if ( other.dataCompra != null ) return false;
 		}
-		else if ( !baseIcms.equals( other.baseIcms ) ) return false;
-		if ( baseIcmsSt == null )
+		else if ( !dataCompra.equals( other.dataCompra ) ) return false;
+		if ( dataEmissao == null )
 		{
-			if ( other.baseIcmsSt != null ) return false;
+			if ( other.dataEmissao != null ) return false;
 		}
-		else if ( !baseIcmsSt.equals( other.baseIcmsSt ) ) return false;
-		if ( chaveAcesso == null )
-		{
-			if ( other.chaveAcesso != null ) return false;
-		}
-		else if ( !chaveAcesso.equals( other.chaveAcesso ) ) return false;
-		if ( dadosNfe == null )
-		{
-			if ( other.dadosNfe != null ) return false;
-		}
-		else if ( !dadosNfe.equals( other.dadosNfe ) ) return false;
+		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
 		if ( desconto == null )
 		{
 			if ( other.desconto != null ) return false;
 		}
 		else if ( !desconto.equals( other.desconto ) ) return false;
+		if ( fornecedor == null )
+		{
+			if ( other.fornecedor != null ) return false;
+		}
+		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
 		if ( itensCompra == null )
 		{
 			if ( other.itensCompra != null ) return false;
@@ -410,27 +364,12 @@ public class Compra extends AbstractEntity
 			if ( other.valorFrete != null ) return false;
 		}
 		else if ( !valorFrete.equals( other.valorFrete ) ) return false;
-		if ( valorIcms == null )
-		{
-			if ( other.valorIcms != null ) return false;
-		}
-		else if ( !valorIcms.equals( other.valorIcms ) ) return false;
-		if ( valorIcmsSubstituicao == null )
-		{
-			if ( other.valorIcmsSubstituicao != null ) return false;
-		}
-		else if ( !valorIcmsSubstituicao.equals( other.valorIcmsSubstituicao ) ) return false;
 		if ( valorSeguro == null )
 		{
 			if ( other.valorSeguro != null ) return false;
 		}
 		else if ( !valorSeguro.equals( other.valorSeguro ) ) return false;
-		if ( valorTotalIpi == null )
-		{
-			if ( other.valorTotalIpi != null ) return false;
-		}
-		else if ( !valorTotalIpi.equals( other.valorTotalIpi ) ) return false;
 		return true;
 	}
-
+	
 }

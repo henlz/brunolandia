@@ -39,26 +39,6 @@ public class ItemCompra extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column
-	private String ncm;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private String cst;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private String unidade;
-	
-	/**
-	 * 
-	 */
 	@NotNull
 	@Column(nullable = false)
 	private BigDecimal precoCompra;
@@ -68,7 +48,7 @@ public class ItemCompra extends AbstractEntity
 	 */
 	@ManyToOne
 	private Produto produto;
-	
+
 	/**
 	 * 
 	 */
@@ -76,7 +56,7 @@ public class ItemCompra extends AbstractEntity
 	{
 		super();
 	}
-	
+
 	/**
 	 * 
 	 * @param quantidade
@@ -85,14 +65,11 @@ public class ItemCompra extends AbstractEntity
 	 * @param unidade
 	 * @param produto
 	 */
-	public ItemCompra( Integer quantidade, String ncm, String cst, String unidade, BigDecimal precoCompra, Produto produto )
+	public ItemCompra( Integer quantidade, BigDecimal precoCompra, Produto produto )
 	{
 		super();
 		this.quantidade = quantidade;
-		this.ncm = ncm;
-		this.cst = cst;
 		this.precoCompra = precoCompra;
-		this.unidade = unidade;
 		this.produto = produto;
 	}
 
@@ -104,36 +81,6 @@ public class ItemCompra extends AbstractEntity
 	public void setQuantidade( Integer quantidade )
 	{
 		this.quantidade = quantidade;
-	}
-
-	public String getNcm()
-	{
-		return ncm;
-	}
-
-	public void setNcm( String ncm )
-	{
-		this.ncm = ncm;
-	}
-
-	public String getCst()
-	{
-		return cst;
-	}
-
-	public void setCst( String cst )
-	{
-		this.cst = cst;
-	}
-
-	public String getUnidade()
-	{
-		return unidade;
-	}
-
-	public void setUnidade( String unidade )
-	{
-		this.unidade = unidade;
 	}
 
 	public Produto getProduto()
@@ -162,7 +109,8 @@ public class ItemCompra extends AbstractEntity
 		this.precoCompra = precoCompra;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -170,16 +118,14 @@ public class ItemCompra extends AbstractEntity
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( cst == null ) ? 0 : cst.hashCode() );
-		result = prime * result + ( ( ncm == null ) ? 0 : ncm.hashCode() );
 		result = prime * result + ( ( precoCompra == null ) ? 0 : precoCompra.hashCode() );
 		result = prime * result + ( ( produto == null ) ? 0 : produto.hashCode() );
 		result = prime * result + ( ( quantidade == null ) ? 0 : quantidade.hashCode() );
-		result = prime * result + ( ( unidade == null ) ? 0 : unidade.hashCode() );
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -189,16 +135,6 @@ public class ItemCompra extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		ItemCompra other = ( ItemCompra ) obj;
-		if ( cst == null )
-		{
-			if ( other.cst != null ) return false;
-		}
-		else if ( !cst.equals( other.cst ) ) return false;
-		if ( ncm == null )
-		{
-			if ( other.ncm != null ) return false;
-		}
-		else if ( !ncm.equals( other.ncm ) ) return false;
 		if ( precoCompra == null )
 		{
 			if ( other.precoCompra != null ) return false;
@@ -214,12 +150,7 @@ public class ItemCompra extends AbstractEntity
 			if ( other.quantidade != null ) return false;
 		}
 		else if ( !quantidade.equals( other.quantidade ) ) return false;
-		if ( unidade == null )
-		{
-			if ( other.unidade != null ) return false;
-		}
-		else if ( !unidade.equals( other.unidade ) ) return false;
 		return true;
 	}
-	
+
 }

@@ -28,14 +28,6 @@
                             </md-button>
                         </div>
                     </div>
-                    <!--<md-input-container>-->
-                        <!--<label>Cliente</label>-->
-                        <!--<span ng-cloak>{{model.entidade.cliente.nome}}</span>-->
-                    <!--</md-input-container>-->
-
-                    <!--<md-button class="md-icon-button" ng-click="abrirPopupCliente()" aria-label="Procurar cliente">-->
-                        <!--<i class="md-icon md-icon-search"></i>-->
-                    <!--</md-button>-->
                 </div>
 
                 <div layout="column">

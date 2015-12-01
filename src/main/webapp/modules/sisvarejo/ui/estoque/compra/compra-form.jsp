@@ -59,28 +59,13 @@
     <md-content layout="row" layout-wrap>
 
         <md-input-container>
-            <label>Dados NFE</label>
-            <input type="text" ng-model="model.entidade.dadosNfe" required>
+            <label>Série</label>
+            <input type="text" ng-model="model.entidade.serie" required>
         </md-input-container>
 
         <md-input-container>
-            <label>Base ICMS</label>
-            <input type="text" ng-model="model.entidade.baseIcms" required>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Base ICMS St</label>
-            <input type="text" ng-model="model.entidade.baseIcmsSt" required>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Valor ICMS</label>
-            <input type="text" ng-model="model.entidade.valorIcms" required>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Valor ICMS Substituição</label>
-            <input type="text" ng-model="model.entidade.valorIcmsSubstituicao" required>
+            <label>Modelo</label>
+            <input type="text" ng-model="model.entidade.modelo" required>
         </md-input-container>
 
         <md-input-container>
@@ -93,24 +78,10 @@
             <input type="text" ng-model="model.entidade.valorSeguro" required>
         </md-input-container>
 
-        <md-input-container>
-            <label>Desconto</label>
-            <input type="text" ng-model="model.entidade.desconto" required>
-        </md-input-container>
 
         <md-input-container>
             <label>Outras Despesas</label>
             <input type="text" ng-model="model.entidade.outrasDespesas" required>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Valor Total IPI</label>
-            <input type="text" ng-model="model.entidade.valorTotalIpi" required>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Chave Acesso</label>
-            <input type="text" ng-model="model.entidade.chaveAcesso" required>
         </md-input-container>
 
     </md-content>
@@ -134,45 +105,49 @@
                         <th>Descrição</th>
                         <th>Em estoque</th>
                         <th>Quantidade a comprar</th>
-                        <th>Unidade</th>
-                        <th style="width: 25px;">CST</th>
-                        <th>NCM</th>
                         <th>Preço unitário (custo)</th>
                         <th>Preço total</th>
+                        <th>Aliq. ICMS</th>
+                        <th>Valor ICMS</th>
+                        <th>Aliq. IPI</th>
+                        <th>Valor IPI</th>
                         <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="itemVenda in model.entidade.itensCompra | orderBy: 'codigo'">
+                    <tr ng-repeat="itemCompra in model.entidade.itensCompra | orderBy: 'codigo'">
                         <td>
-                            {{:: itemVenda.produto.codigo}}
+                            {{:: itemCompra.produto.codigo}}
                         </td>
                         <td>
-                            {{:: itemVenda.produto.descricao}}
+                            {{:: itemCompra.produto.descricao}}
                         </td>
                         <td>
-                            {{:: itemVenda.produto.quantidade}}
+                            {{:: itemCompra.produto.quantidade}}
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.quantidade">
+                            <input style="width: 95px;" type="number" ng-model="itemCompra.quantidade">
                         </td>
                         <td>
-                            <input style="width: 95px;" type="text" ng-model="itemVenda.unidade">
+                            <input style="width: 95px;" type="number" ng-model="itemCompra.precoCompra">
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.cst">
+                            {{ itemCompra.precoCompra * itemCompra.quantidade | currency: 'R$ '}}
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.ncm">
+                            {{ itemCompra.produto.icms.porcentagem }} %
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.precoCompra">
+                            {{ itemCompra.produto.icms.porcentagem * itemCompra.precoCompra / 100 | currency}}
                         </td>
                         <td>
-                            {{ itemVenda.precoCompra * itemVenda.quantidade | currency: 'R$ '}}
+                            {{ itemCompra.produto.IPI }} %
+                        </td>
+                        <td>
+                            {{ itemCompra.produto.IPI * itemCompra.precoCompra / 100 | currency }}
                         </td>
                         <td layout="row">
-                            <md-button class="md-icon-button" ng-click="excluirProduto($event, itemVenda)"
+                            <md-button class="md-icon-button" ng-click="excluirProduto($event, itemCompra)"
                                        aria-label="Excluir produto">
                                 <i class="md-icon md-icon-delete"></i>
                             </md-button>

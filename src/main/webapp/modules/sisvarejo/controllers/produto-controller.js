@@ -349,6 +349,25 @@
                 });
         };
 
+        $scope.abrirPopupGenero = function (ev) {
+
+            $scope.generoDialog = $mdDialog;
+            $scope.generoDialog.show({
+                    controller: BuscaGeneroDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-genero.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope]
+                    }
+                })
+                .then(function (result) {
+                    $scope.model.entidade.genero = result;
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
+
         /**
          *
          * @param ev
@@ -1141,6 +1160,113 @@
                         $scope.model.ncmDialog.abrirPopupNcm(null, null);
                 }, function () {
                     $scope.model.ncmDialog.abrirPopupNcm(null, null);
+                });
+        };
+    }
+
+    /**
+     * Controller da popup de Buscar NCM
+     */
+    function BuscaGeneroDialogController($scope, $mdDialog, $importService, $mdToast, local) {
+
+        $importService("caracteristicaService");
+
+        $scope.model = {
+            entidade: new Genero(),
+            generoDialog: local[0],
+            filtros: {
+                nome: "",
+                apelido: "",
+                cpf: "",
+                rg: ""
+            },
+            content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+        }
+
+        /**
+         *
+         */
+        $scope.listGeneroByFilters = function () {
+            caracteristicaService.listGeneroByFilters($scope.model.filtros.genero, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvar = function (entidade) {
+            caracteristicaService.insertGenero(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param genero
+         */
+        $scope.escolherGenero = function (genero) {
+            $mdDialog.hide(genero);
+        }
+
+        /**
+         *
+         */
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function () {
+            $mdDialog.show({
+                    controller: BuscaGeneroDialogController,
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/genero/popup-genero.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.generoDialog]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.generoDialog.abrirPopupGenero(null, null);
+                }, function () {
+                    $scope.model.generoDialog.abrirPopupGenero(null, null);
                 });
         };
     }

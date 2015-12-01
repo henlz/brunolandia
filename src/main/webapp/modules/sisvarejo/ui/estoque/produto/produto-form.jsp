@@ -45,19 +45,28 @@
                     </md-input-container>
                 </md-content>
 
-                <md-input-container flex>
-                    <label>Preço venda</label>
-                    <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda"/>
-                </md-input-container>
+                <md-content layout="row">
+                    <md-input-container flex>
+                        <label>Preço venda</label>
+                        <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda" required/>
+                    </md-input-container>
 
-                <md-input-container>
-                    <label>Gênero</label>
-                    <md-select ng-model="model.entidade.grupo" width="100%">
-                        <md-option value="MASCULINO">Masculino</md-option>
-                        <md-option value="FEMININO">Feminino</md-option>
-                        <md-option value="INFANTIL">Infantil</md-option>
-                    </md-select>
-                </md-input-container>
+                    <md-input-container flex>
+                        <label>Unidade</label>
+                        <input name="unidade" type="text" ng-model="model.entidade.unidade"/>
+                    </md-input-container>
+                </md-content>
+
+                <md-content layout="row" layout-align="center center">
+                    <md-input-container>
+                        <label>Gênero</label>
+                        <input type="text" ng-model="model.entidade.genero.genero" disabled/>
+                    </md-input-container>
+
+                    <md-button class="md-icon-button" ng-click="abrirPopupGenero($event)">
+                        <i class="md-icon md-icon-search"></i>
+                    </md-button>
+                </md-content>
 
                 <div layout="row">
                     <md-select ng-model="model.entidade.cor" placeholder="Cor">
@@ -129,7 +138,8 @@
             <md-button class="md-icon-button md-fab" ui-sref="produto.listar" aria-label="Cancelar cadastro">
                 <i class="md-icon md-icon-cancel md-icon-lg"></i>
             </md-button>
-            <md-button class="md-primary md-icon-button md-fab" ng-click="salvarProduto(model.entidade)" aria-label="Salvar produto">
+            <md-button class="md-primary md-icon-button md-fab" ng-click="salvarProduto(model.entidade)"
+                       aria-label="Salvar produto">
                 <i class="md-icon md-icon-save md-icon-lg"></i>
             </md-button>
         </section>

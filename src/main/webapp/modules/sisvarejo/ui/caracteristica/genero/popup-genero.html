@@ -1,0 +1,29 @@
+<md-dialog aria-label="Cadastrar gênero">
+    <md-toolbar layout="row" layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h4>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Gênero</h4>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layot="row">
+        <form name="generoForm" novalidate="true">
+            <md-input-container>
+                <label>Gênero</label>
+                <input name="genero" ng-model="entidade.genero" required maxlength=255>
+
+                <div ng-messages="generoForm.genero.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancelar()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="salvar(entidade)" class="md-primary">
+            Salvar
+        </md-button>
+    </div>
+</md-dialog>

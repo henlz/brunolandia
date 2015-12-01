@@ -33,11 +33,8 @@
                 <td>{{::produto.codigo}}</td>
                 <td>{{::produto.descricao}}</td>
                 <td>
-                    <span ng-show="produto.grupo == 'MASCULINO'">Masculino</span>
-                    <span ng-show="produto.grupo == 'FEMININO'">Feminino</span>
-                    <span ng-show="produto.grupo == 'INFANTIL'">Infantil</span>
+                    {{:: produto.genero.genero}}
                 </td>
-                <td>{{:: produto.precoCusto | currency: "R$ "}}</td>
                 <td>{{:: produto.precoVenda | currency: "R$ "}}</td>
                 <td layout="row">
                     <md-button class="md-icon-button" ui-sref="produto.alterar({id: produto.id})" aria-label="Alterar produto">

@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Cor;
+import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Genero;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Tamanho;
 import br.com.brunolandia.sisvarejo.domain.repository.caracteristicas.ICorRepository;
+import br.com.brunolandia.sisvarejo.domain.repository.caracteristicas.IGeneroRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.caracteristicas.ITamanhoRepository;
 
 @Service
@@ -30,6 +32,12 @@ public class CaracteristicaService
 	 */
 	@Autowired
 	private ITamanhoRepository tamanhoRepository;
+	
+	/**
+	 * 
+	 */
+	@Autowired
+	private IGeneroRepository generoRepository;	
 
 	/**
 	 * 
@@ -133,4 +141,42 @@ public class CaracteristicaService
 		return tamanho;
 	}
 	
+	/**
+	 * 
+	 * @param genero
+	 * @return
+	 */
+	public Genero insertGenero(Genero genero)
+	{
+		return this.generoRepository.save( genero );
+	}
+	
+	/**
+	 * 
+	 * @param genero
+	 * @return
+	 */
+	public Genero updateGenero(Genero genero)
+	{
+		return this.generoRepository.save( genero );
+	}
+	
+	/**
+	 * 
+	 * @param genero
+	 */
+	public void removeGenero(Genero genero)
+	{
+		this.generoRepository.delete( genero );
+	}
+	
+	/**
+	 * 
+	 * @param genero
+	 * @return
+	 */
+	public List<Genero> listGeneroByFilters(String genero)
+	{
+		return this.generoRepository.listByFilters( genero );
+	}
 }

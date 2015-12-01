@@ -47,7 +47,7 @@ public class EstoqueService
 	 */
 	@Autowired
 	private ICompraRepository compraRepository;
-	
+
 	/**
 	 * 
 	 */
@@ -101,6 +101,7 @@ public class EstoqueService
 	 */
 	public Produto insertProduto( final Produto produto )
 	{
+		produto.setQuantidade( 0 );
 		return this.produtoRepository.save( produto );
 	}
 
@@ -178,7 +179,7 @@ public class EstoqueService
 	 * @param fornecedor
 	 * @return
 	 */
-	public void removeFornecedor(final Fornecedor fornecedor )
+	public void removeFornecedor( final Fornecedor fornecedor )
 	{
 		this.fornecedorRepository.delete( fornecedor );
 	}
@@ -189,7 +190,7 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Fornecedor findFornecedorById(final Long id )
+	public Fornecedor findFornecedorById( final Long id )
 	{
 		return this.fornecedorRepository.findOne( id );
 	}
@@ -208,11 +209,15 @@ public class EstoqueService
 	 * @param compra
 	 * @return
 	 */
-	public Compra insertCompra(final Compra compra )
+	public Compra insertCompra( final Compra compra )
 	{
-		for (ItemCompra itemCompra: compra.getItensCompra()) 
+		for ( ItemCompra itemCompra : compra.getItensCompra() )
 		{
 			final Produto produto = itemCompra.getProduto();
+			if ( produto.getQuantidade() == null )
+			{
+				produto.setQuantidade( 0 );
+			}
 			produto.setQuantidade( produto.getQuantidade() + itemCompra.getQuantidade() );
 			itemCompra.setProduto( this.produtoRepository.save( produto ) );
 			this.itemCompraRepository.save( itemCompra );
@@ -220,51 +225,52 @@ public class EstoqueService
 		compra.setDataCompra( new Date() );
 		return this.compraRepository.save( compra );
 	}
-	
+
 	/**
 	 * 
 	 * @param compra
 	 * @return
 	 */
-	public Compra updateCompra(final Compra compra)
+	public Compra updateCompra( final Compra compra )
 	{
 		return this.compraRepository.save( compra );
 	}
-	
+
 	/**
 	 * 
 	 * @param compra
 	 */
-	public void removeCompra(final Compra compra)
+	public void removeCompra( final Compra compra )
 	{
 		this.compraRepository.delete( compra );
 	}
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Compra findCompraById(final Long id)
+	public Compra findCompraById( final Long id )
 	{
 		return this.compraRepository.findOne( id );
 	}
-	
+
 	/**
 	 * 
 	 * @param numeroNfe
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Boolean verificarNfe(String numeroNfe)
+	public Boolean verificarNfe( String numeroNfe )
 	{
-		List<Compra> compras = this.compraRepository.findByNumeroNfe(numeroNfe);
-		
-		if (compras.size() > 0) {
+		List<Compra> compras = this.compraRepository.findByNumeroNfe( numeroNfe );
+
+		if ( compras.size() > 0 )
+		{
 			return false;
 		}
-		
+
 		return true;
 	}
 }

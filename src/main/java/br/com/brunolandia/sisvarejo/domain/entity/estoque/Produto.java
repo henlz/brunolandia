@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.brunolandia.sisvarejo.domain.entity.Genero;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Cor;
+import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Genero;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Tamanho;
 import br.com.brunolandia.sisvarejo.domain.entity.fiscal.CSON;
 import br.com.brunolandia.sisvarejo.domain.entity.fiscal.ICMS;
@@ -43,7 +43,7 @@ public class Produto extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column
+	@Column(nullable = false)
 	@NotEmpty
 	private String codigo;
 
@@ -56,7 +56,7 @@ public class Produto extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column
+	@Column(nullable = false)
 	@NotNull
 	private BigDecimal precoVenda;
 
@@ -64,40 +64,42 @@ public class Produto extends AbstractEntity
 	 * 
 	 */
 	@Column
-	@NotNull
 	private Integer quantidade;
 
 	/**
 	 * 
 	 */
-	@Column
+	@Column(nullable = false)
 	@NotNull
 	private BigDecimal pesoLiquido;
 
 	/**
 	 * 
 	 */
-	@Column
+	@Column(nullable = false)
 	@NotNull
 	private BigDecimal pesoBruto;
 
 	/**
 	 * 
 	 */
+	@NotNull
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private Cor cor;
 
 	/**
 	 * 
 	 */
+	@NotNull
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private Tamanho tamanho;
 
 	/**
 	 * 
 	 */
-	@Column
-	private Genero grupo;
+	@NotNull
+	@ManyToOne(cascade = CascadeType.DETACH)
+	private Genero genero;
 
 	/**
 	 * 
@@ -114,23 +116,29 @@ public class Produto extends AbstractEntity
 	/**
 	 * 
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@NotNull
 	private CSON cson;
 
 	/**
 	 * 
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@NotNull
 	private ICMS icms;
 
 	/**
 	 * 
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@NotNull
 	private NCM ncm;
+
+	/**
+	 * 
+	 */
+	@Column
+	private String unidade;
 
 	/**
 	 * 
@@ -166,7 +174,7 @@ public class Produto extends AbstractEntity
 	 * @param icms
 	 * @param ncm
 	 */
-	public Produto( Long id, String descricao, String codigo, String codigoBarra, BigDecimal precoVenda, Integer quantidade, BigDecimal pesoLiquido, BigDecimal pesoBruto, Cor cor, Tamanho tamanho, Genero grupo, Fornecedor fornecedor, BigDecimal iPI, CSON cson, ICMS icms, NCM ncm )
+	public Produto( Long id, String descricao, String codigo, String codigoBarra, BigDecimal precoVenda, Integer quantidade, BigDecimal pesoLiquido, BigDecimal pesoBruto, Cor cor, Tamanho tamanho, Genero grupo, Fornecedor fornecedor, BigDecimal IPI, CSON cson, ICMS icms, NCM ncm, String unidade )
 	{
 		super( id );
 		this.descricao = descricao;
@@ -178,12 +186,13 @@ public class Produto extends AbstractEntity
 		this.pesoBruto = pesoBruto;
 		this.cor = cor;
 		this.tamanho = tamanho;
-		this.grupo = grupo;
+		this.genero = grupo;
 		this.fornecedor = fornecedor;
-		IPI = iPI;
+		this.IPI = IPI;
 		this.cson = cson;
 		this.icms = icms;
 		this.ncm = ncm;
+		this.unidade = unidade;
 	}
 
 	/**
@@ -242,16 +251,6 @@ public class Produto extends AbstractEntity
 	public void setTamanho( Tamanho tamanho )
 	{
 		this.tamanho = tamanho;
-	}
-
-	public Genero getGrupo()
-	{
-		return grupo;
-	}
-
-	public void setGrupo( Genero grupo )
-	{
-		this.grupo = grupo;
 	}
 
 	public Fornecedor getFornecedor()
@@ -380,6 +379,38 @@ public class Produto extends AbstractEntity
 		this.ncm = ncm;
 	}
 
+	/**
+	 * @return the genero
+	 */
+	public Genero getGenero()
+	{
+		return genero;
+	}
+
+	/**
+	 * @param genero the genero to set
+	 */
+	public void setGenero( Genero genero )
+	{
+		this.genero = genero;
+	}
+
+	/**
+	 * @return the unidade
+	 */
+	public String getUnidade()
+	{
+		return unidade;
+	}
+
+	/**
+	 * @param unidade the unidade to set
+	 */
+	public void setUnidade( String unidade )
+	{
+		this.unidade = unidade;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -395,7 +426,7 @@ public class Produto extends AbstractEntity
 		result = prime * result + ( ( cson == null ) ? 0 : cson.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
 		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
-		result = prime * result + ( ( grupo == null ) ? 0 : grupo.hashCode() );
+		result = prime * result + ( ( genero == null ) ? 0 : genero.hashCode() );
 		result = prime * result + ( ( icms == null ) ? 0 : icms.hashCode() );
 		result = prime * result + ( ( ncm == null ) ? 0 : ncm.hashCode() );
 		result = prime * result + ( ( pesoBruto == null ) ? 0 : pesoBruto.hashCode() );
@@ -403,6 +434,7 @@ public class Produto extends AbstractEntity
 		result = prime * result + ( ( precoVenda == null ) ? 0 : precoVenda.hashCode() );
 		result = prime * result + ( ( quantidade == null ) ? 0 : quantidade.hashCode() );
 		result = prime * result + ( ( tamanho == null ) ? 0 : tamanho.hashCode() );
+		result = prime * result + ( ( unidade == null ) ? 0 : unidade.hashCode() );
 		return result;
 	}
 
@@ -451,7 +483,11 @@ public class Produto extends AbstractEntity
 			if ( other.fornecedor != null ) return false;
 		}
 		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
-		if ( grupo != other.grupo ) return false;
+		if ( genero == null )
+		{
+			if ( other.genero != null ) return false;
+		}
+		else if ( !genero.equals( other.genero ) ) return false;
 		if ( icms == null )
 		{
 			if ( other.icms != null ) return false;
@@ -487,8 +523,12 @@ public class Produto extends AbstractEntity
 			if ( other.tamanho != null ) return false;
 		}
 		else if ( !tamanho.equals( other.tamanho ) ) return false;
+		if ( unidade == null )
+		{
+			if ( other.unidade != null ) return false;
+		}
+		else if ( !unidade.equals( other.unidade ) ) return false;
 		return true;
 	}
-
 
 }
