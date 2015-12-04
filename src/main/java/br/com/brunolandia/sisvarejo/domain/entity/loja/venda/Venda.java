@@ -27,7 +27,6 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 public class Venda extends AbstractEntity
 {
 
-
 	/**
 	 * 
 	 */
@@ -93,7 +92,7 @@ public class Venda extends AbstractEntity
 	@NotNull
 	@ManyToOne
 	private Cliente cliente;
-	
+
 	/**
 	 * 
 	 */
@@ -279,7 +278,8 @@ public class Venda extends AbstractEntity
 		return serialVersionUID;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -299,7 +299,8 @@ public class Venda extends AbstractEntity
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -356,5 +357,5 @@ public class Venda extends AbstractEntity
 		else if ( !valorSeguro.equals( other.valorSeguro ) ) return false;
 		return true;
 	}
-	
+
 }

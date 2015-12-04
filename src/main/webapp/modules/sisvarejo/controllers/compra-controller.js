@@ -343,56 +343,31 @@
         /**
          *
          * @param entidade
-         * @returns {boolean}
-         */
-        $scope.validarProdutos = function (entidade) {
-            for (var i = 0; entidade.itensCompra.length > i; i++) {
-                if (entidade.itensCompra[i].quantidade >  entidade.itensCompra[i].produto.quantidade){
-                    return false
-                }
-            }
-
-            return true;
-        }
-
-        /**
-         *
-         * @param entidade
          */
         $scope.salvarCompra = function (entidade) {
-            if ($scope.validarProdutos(entidade)) {
-                estoqueService.insertCompra(entidade, {
-                    callback: function (result) {
-                        var toast = $mdToast.simple()
-                            .content('Registro salvo com sucesso!')
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right');
-                        $mdToast.show(toast).then(function () {
+            estoqueService.insertCompra(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $state.go($scope.LIST_STATE);
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
                         });
-                        $state.go($scope.LIST_STATE);
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $mdToast.show($mdToast.simple()
-                            .content(message)
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right'))
-                            .then(function () {
-                            });
-                        $log.error(message);
-                    }
-                });
-            } else {
-                var toast = $mdToast.simple()
-                    .content('O percentual das parcelas devem totalizar em 100%!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
-                });
-            }
+                    $log.error(message);
+                }
+            });
         };
 
         /**

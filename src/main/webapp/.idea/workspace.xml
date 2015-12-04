@@ -2,32 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="546aca02-40d5-467f-8467-ec5f72ff8dc5" name="Default" comment="Alterações depois da pré banca">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/genero/genero-view.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/genero/popup-genero.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/popup/popup-busca-genero.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/Cliente.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/Cliente.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/ItemVenda.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/ItemVenda.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/Venda.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/Venda.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/compra/ICompraRepository.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/estoque/compra/ICompraRepository.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/loja/venda/IVendaRepository.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/repository/loja/venda/IVendaRepository.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/CaracteristicaService.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/CaracteristicaService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/LojaService.class" afterPath="$PROJECT_DIR$/../../../target/classes/br/com/brunolandia/sisvarejo/domain/service/LojaService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../pom.xml" afterPath="$PROJECT_DIR$/../../../pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/Produto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/Compra.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/estoque/compra/ItemCompra.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/ItemVenda.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/ItemVenda.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/Cliente.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/Cliente.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/Venda.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/entity/loja/venda/Venda.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/estoque/IProdutoRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/CaracteristicaService.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/CaracteristicaService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/EstoqueService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/loja/venda/IVendaRepository.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/repository/loja/venda/IVendaRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/LojaService.java" afterPath="$PROJECT_DIR$/../java/br/com/brunolandia/sisvarejo/domain/service/LojaService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/produto-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/produto-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js" afterPath="$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-form.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-form.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp" afterPath="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/classes/config/application.properties" afterPath="$PROJECT_DIR$/../../../target/classes/config/application.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../../../target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" />
@@ -54,11 +51,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="compra-form.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="venda-form.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="133" column="97" selection-start-line="133" selection-start-column="97" selection-end-line="133" selection-end-column="97" />
+              <folding>
+                <element signature="n#style#0;n#md-content#0;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#md-icon#0;n#md-content#0;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#md-button#0;n#md-subheader#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venda-controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="297" column="38" selection-start-line="297" selection-start-column="38" selection-end-line="297" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compra-controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="353" column="45" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup-busca-cliente.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compra-form.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21326165">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
@@ -67,31 +110,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venda-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-list.jsp">
+      <file leaf-file-name="estado-view.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/estado-view.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.1153846">
-              <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venda-form.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp">
+      <file leaf-file-name="estado-controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/estado-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="15.038462">
-              <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="77" column="41" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="produto-list.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp">
+      <file leaf-file-name="popup-estado.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.0">
-              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.1367816">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="popup-pais.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="5" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -113,20 +166,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/cor/popup/popup-busca-cor.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/cor-controller.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/cliente-list.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-view.jsp" />
         <option value="$PROJECT_DIR$/modules/default-scripts.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/condicao-controller.js" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html" />
         <option value="$PROJECT_DIR$/static/js/md-data-table/md-data-table.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-list.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/cliente-controller.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/cliente-form.jsp" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-view.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-venda.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-list.jsp" />
@@ -137,10 +187,8 @@
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/cidade/popup/popup-cidade.html" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html" />
         <option value="$PROJECT_DIR$/static/css/theme.css" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-view.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-form.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/fiscal/ncm/ncm-list.html" />
@@ -162,8 +210,13 @@
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/popup/popup-busca-genero.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-form.jsp" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/produto/produto-list.jsp" />
-        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/popup/popup-busca-cliente.html" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html" />
         <option value="$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp" />
+        <option value="$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html" />
       </list>
     </option>
   </component>
@@ -179,8 +232,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -208,6 +261,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -335,10 +389,43 @@
               <option name="myItemId" value="loja" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="venda" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="popup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sisvarejo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="loja" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -355,16 +442,16 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\caracteristica\genero" />
+      <recent name="D:\Desenvolvimento\workspaces\brunolandia\sisvarejo\src\main\webapp\modules\sisvarejo\ui\loja" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\loja\cliente\popup" />
       <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\caracteristica\genero\popup" />
       <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\caracteristica\genero" />
       <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\estoque\produto\popup" />
       <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\cson" />
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\fiscal\ncm" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Desenvolvimento\workspaces\brunolandia\brunolandia\src\main\webapp\modules\sisvarejo\ui\caracteristica\genero" />
-      <recent name="D:\Desenvolvimento\workspaces\brunolandia\sisvarejo\src\main\webapp\modules\sisvarejo\ui\loja" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.popup-venda.html">
@@ -443,18 +530,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18898809" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1886196" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39542484" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -462,10 +547,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -488,45 +575,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/cliente-form.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="78" selection-start-line="118" selection-start-column="78" selection-end-line="118" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="332" column="56" selection-start-line="332" selection-start-column="53" selection-end-line="332" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/cliente-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.082131">
-          <caret line="665" column="67" selection-start-line="665" selection-start-column="44" selection-end-line="665" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-view.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="86" selection-start-line="20" selection-start-column="86" selection-end-line="20" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="163" column="87" selection-start-line="163" selection-start-column="87" selection-end-line="163" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -642,13 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14629948">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
@@ -677,24 +722,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="238" column="48" selection-start-line="238" selection-start-column="48" selection-end-line="238" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/sisvarejo-main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="215" column="32" selection-start-line="215" selection-start-column="32" selection-end-line="215" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8076923">
-          <caret line="8" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -779,7 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4265233">
           <caret line="14" column="22" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -794,7 +824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4265233">
           <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -802,7 +831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26164874">
           <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5483871">
           <caret line="42" column="44" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -818,7 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03938356">
           <caret line="1247" column="9" selection-start-line="1247" selection-start-column="9" selection-end-line="1247" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -826,7 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.0">
           <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -834,26 +859,94 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.1153846">
           <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/cliente/cliente-form.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="103" column="41" selection-start-line="103" selection-start-column="41" selection-end-line="103" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/venda-form.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="15.038462">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="97" selection-start-line="133" selection-start-column="97" selection-end-line="133" selection-end-column="97" />
+          <folding>
+            <element signature="n#style#0;n#md-content#0;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#md-icon#0;n#md-content#0;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#md-button#0;n#md-subheader#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/venda-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="297" column="38" selection-start-line="297" selection-start-column="38" selection-end-line="297" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/compra-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="353" column="45" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/estoque/compra/compra-form.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21326165">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#md-data-table-container#0;n#md-content#0;n#section#1;n#md-content#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/estado-view.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/controllers/estado-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="41" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1367816">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

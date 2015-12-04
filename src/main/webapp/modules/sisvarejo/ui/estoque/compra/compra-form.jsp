@@ -32,7 +32,6 @@
                 </div>
 
             </md-content>
-
         </md-content>
     </section>
 
@@ -44,6 +43,11 @@
             <label>Número NFE</label>
             <input type="text" ng-model="model.entidade.numeroNfe" ng-blur="verificarNfe(model.entidade.numeroNfe)"
                    required>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Data de emissão</label>
+            <input type="date" ng-model="model.entidade.dataEmissao" required>
         </md-input-container>
 
         <md-icon class="md-icon md-icon-error" ng-if="model.invalidNfe == true" style="position: absolute; top: 31px;">

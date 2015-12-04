@@ -1,10 +1,12 @@
 <md-dialog aria-label="Mango (Fruit)">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Estado</h2>
+        </div>
+    </md-toolbar>
+
     <md-dialog-content layot="row">
-
-        <h2>{{:: modoAlteracao ? 'Alterar' : 'Novo' }} Estado</h4>
-            </div>
-            </md-toolbar>
-
         <form name="estadoForm" novalidate="true">
             <md-input-container>
                 <label>Nome</label>
@@ -16,14 +18,16 @@
                     </div>
                 </div>
             </md-input-container>
-            
+
             <md-select name="pais" placeholder="País" ng-model="entidade.pais" required>
-                <md-option ng-value="pais" ng-repeat="pais in paises" ng-selected="pais.id == entidade.pais.id">{{pais.nome}}</md-option>
+                <md-option ng-value="pais" ng-repeat="pais in paises" ng-selected="pais.id == entidade.pais.id">
+                    {{pais.nome}}
+                </md-option>
             </md-select>
-<!--            <div class="errors" ng-messages="estadoForm.pais.$error" ng-if="estadoForm.$dirty">
-                <div ng-message="required">Campo obrigatório</div>
-            </div>-->
-            
+            <!--            <div class="errors" ng-messages="estadoForm.pais.$error" ng-if="estadoForm.$dirty">
+                            <div ng-message="required">Campo obrigatório</div>
+                        </div>-->
+
             <br>
 
             <div class="md-actions" layout="row">

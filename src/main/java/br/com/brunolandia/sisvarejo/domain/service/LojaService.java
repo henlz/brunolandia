@@ -137,18 +137,18 @@ public class LojaService
 		ContaReceber contaReceberDaVenda = new ContaReceber();
 		contaReceberDaVenda.setVenda( venda );
 		financeiroService.insertContaReceber( contaReceberDaVenda );
-		
+
 		/**
 		 * Atualiza a quantidade dos produtos comprados
 		 */
-		for (ItemVenda itemVenda: venda.getItensVenda())
+		for ( ItemVenda itemVenda : venda.getItensVenda() )
 		{
 			Produto produto = this.estoqueService.findProdutoById( itemVenda.getProduto().getId() );
 			produto.setQuantidade( produto.getQuantidade() - itemVenda.getQuantidade() );
 			this.estoqueService.updateProduto( produto );
 		}
-		
-		venda.setDataVenda( new Date());
+
+		venda.setDataVenda( new Date() );
 		return this.vendaRepository.save( venda );
 	}
 
@@ -177,21 +177,36 @@ public class LojaService
 	 * @param venda
 	 * @return
 	 */
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Venda> listVendas( PageRequest pageRequest )
 	{
 		return this.vendaRepository.findAll();
 	}
-	
+
 	/**
 	 * 
 	 * @param vendaId
 	 * @return
 	 */
-	@Transactional(readOnly=true)
-	public Venda findVendaById(final Long vendaId) 
+	@Transactional(readOnly = true)
+	public Venda findVendaById( final Long vendaId )
 	{
 		return this.vendaRepository.findOne( vendaId );
 	}
 
+	/**
+	 * 
+	 * @param numeroNfe
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Boolean verificarNfe( String numeroNfe )
+	{
+		List<Venda> vendas = this.vendaRepository.findByNumeroNfe( numeroNfe );
+		if ( vendas.size() > 0 )
+		{
+			return false;
+		}
+		return true;
+	}
 }

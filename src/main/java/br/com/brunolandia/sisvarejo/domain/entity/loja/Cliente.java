@@ -20,7 +20,7 @@ import br.com.eits.common.domain.entity.AbstractEntity;
  *
  */
 @Entity
-@DataTransferObject
+@DataTransferObject(javascript = "Cliente")
 public class Cliente extends AbstractEntity
 {
 
@@ -41,7 +41,7 @@ public class Cliente extends AbstractEntity
 	 */
 	@Column
 	private String apelido;
-	
+
 	/**
 	 * 
 	 */
@@ -90,7 +90,7 @@ public class Cliente extends AbstractEntity
 	 */
 	@Column
 	private String cpf;
-	
+
 	/**
 	 * 
 	 */
@@ -120,7 +120,7 @@ public class Cliente extends AbstractEntity
 	 */
 	@Column
 	private Boolean ativo;
-	
+
 	/**
 	 * 
 	 */
@@ -173,8 +173,6 @@ public class Cliente extends AbstractEntity
 		this.sexo = sexo;
 		this.condicao = condicao;
 	}
-
-	
 
 	@Override
 	public int hashCode()
@@ -451,5 +449,4 @@ public class Cliente extends AbstractEntity
 		this.condicao = condicao;
 	}
 
-	
 }

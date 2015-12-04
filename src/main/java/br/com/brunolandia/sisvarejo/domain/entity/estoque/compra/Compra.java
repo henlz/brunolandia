@@ -16,6 +16,8 @@ import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.Condicao;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaPagar;
 import br.com.eits.common.domain.entity.AbstractEntity;
 
 /**
@@ -38,26 +40,25 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private BigDecimal valorFrete;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@ManyToOne
+	private Condicao condicaoPagamento;
 
 	/**
 	 * 
 	 */
 	@NotNull
 	@Column(nullable = false)
-	private BigDecimal valorSeguro;
+	private BigDecimal frete;
 
 	/**
 	 * 
 	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal desconto;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
+	@Column
 	private BigDecimal outrasDespesas;
 
 	/**
@@ -92,7 +93,7 @@ public class Compra extends AbstractEntity
 	 * 
 	 */
 	@Column(nullable = false)
-	private Date dataCompra;
+	private Date dataChegada;
 
 	/**
 	 * 
@@ -106,40 +107,52 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@ManyToOne
 	private Fornecedor fornecedor;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@ManyToOne
+	private Fornecedor transportadora;
 
 	/**
 	 * 
 	 */
-	public Compra()
-	{
-		super();
-	}
+	@NotNull
+	@OneToMany
+	private List<ContaPagar> contasAPagar;
 
 	/**
 	 * @param valorFrete
-	 * @param valorSeguro
-	 * @param desconto
+	 * @param condicaoPagamento
+	 * @param frete
 	 * @param outrasDespesas
 	 * @param numeroNfe
+	 * @param serie
+	 * @param modelo
 	 * @param itensCompra
-	 * @param dataCompra
+	 * @param dataChegada
 	 * @param dataEmissao
 	 * @param fornecedor
+	 * @param transportadora
+	 * @param contasAPagar
 	 */
-	public Compra( Long id, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, String numeroNfe, List<ItemCompra> itensCompra, Date dataCompra, Date dataEmissao, Fornecedor fornecedor, String modelo, String serie )
+	public Compra( BigDecimal valorFrete, Condicao condicaoPagamento, BigDecimal frete, BigDecimal outrasDespesas, String numeroNfe, String serie, String modelo, List<ItemCompra> itensCompra, Date dataChegada, Date dataEmissao, Fornecedor fornecedor, Fornecedor transportadora, List<ContaPagar> contasAPagar )
 	{
-		super( id );
+		super();
 		this.valorFrete = valorFrete;
-		this.valorSeguro = valorSeguro;
-		this.desconto = desconto;
+		this.condicaoPagamento = condicaoPagamento;
+		this.frete = frete;
 		this.outrasDespesas = outrasDespesas;
 		this.numeroNfe = numeroNfe;
+		this.serie = serie;
+		this.modelo = modelo;
 		this.itensCompra = itensCompra;
-		this.dataCompra = dataCompra;
+		this.dataChegada = dataChegada;
 		this.dataEmissao = dataEmissao;
 		this.fornecedor = fornecedor;
-		this.modelo = modelo;
-		this.serie = serie;
+		this.transportadora = transportadora;
+		this.contasAPagar = contasAPagar;
 	}
 
 	/**
@@ -159,35 +172,35 @@ public class Compra extends AbstractEntity
 	}
 
 	/**
-	 * @return the valorSeguro
+	 * @return the condicaoPagamento
 	 */
-	public BigDecimal getValorSeguro()
+	public Condicao getCondicaoPagamento()
 	{
-		return valorSeguro;
+		return condicaoPagamento;
 	}
 
 	/**
-	 * @param valorSeguro the valorSeguro to set
+	 * @param condicaoPagamento the condicaoPagamento to set
 	 */
-	public void setValorSeguro( BigDecimal valorSeguro )
+	public void setCondicaoPagamento( Condicao condicaoPagamento )
 	{
-		this.valorSeguro = valorSeguro;
+		this.condicaoPagamento = condicaoPagamento;
 	}
 
 	/**
-	 * @return the desconto
+	 * @return the frete
 	 */
-	public BigDecimal getDesconto()
+	public BigDecimal getFrete()
 	{
-		return desconto;
+		return frete;
 	}
 
 	/**
-	 * @param desconto the desconto to set
+	 * @param frete the frete to set
 	 */
-	public void setDesconto( BigDecimal desconto )
+	public void setFrete( BigDecimal frete )
 	{
-		this.desconto = desconto;
+		this.frete = frete;
 	}
 
 	/**
@@ -223,6 +236,38 @@ public class Compra extends AbstractEntity
 	}
 
 	/**
+	 * @return the serie
+	 */
+	public String getSerie()
+	{
+		return serie;
+	}
+
+	/**
+	 * @param serie the serie to set
+	 */
+	public void setSerie( String serie )
+	{
+		this.serie = serie;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public String getModelo()
+	{
+		return modelo;
+	}
+
+	/**
+	 * @param modelo the modelo to set
+	 */
+	public void setModelo( String modelo )
+	{
+		this.modelo = modelo;
+	}
+
+	/**
 	 * @return the itensCompra
 	 */
 	public List<ItemCompra> getItensCompra()
@@ -239,19 +284,19 @@ public class Compra extends AbstractEntity
 	}
 
 	/**
-	 * @return the dataCompra
+	 * @return the dataChegada
 	 */
-	public Date getDataCompra()
+	public Date getDataChegada()
 	{
-		return dataCompra;
+		return dataChegada;
 	}
 
 	/**
-	 * @param dataCompra the dataCompra to set
+	 * @param dataChegada the dataChegada to set
 	 */
-	public void setDataCompra( Date dataCompra )
+	public void setDataChegada( Date dataChegada )
 	{
-		this.dataCompra = dataCompra;
+		this.dataChegada = dataChegada;
 	}
 
 	/**
@@ -287,6 +332,38 @@ public class Compra extends AbstractEntity
 	}
 
 	/**
+	 * @return the transportadora
+	 */
+	public Fornecedor getTransportadora()
+	{
+		return transportadora;
+	}
+
+	/**
+	 * @param transportadora the transportadora to set
+	 */
+	public void setTransportadora( Fornecedor transportadora )
+	{
+		this.transportadora = transportadora;
+	}
+
+	/**
+	 * @return the contasAPagar
+	 */
+	public List<ContaPagar> getContasAPagar()
+	{
+		return contasAPagar;
+	}
+
+	/**
+	 * @param contasAPagar the contasAPagar to set
+	 */
+	public void setContasAPagar( List<ContaPagar> contasAPagar )
+	{
+		this.contasAPagar = contasAPagar;
+	}
+
+	/**
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid()
@@ -302,15 +379,19 @@ public class Compra extends AbstractEntity
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( dataCompra == null ) ? 0 : dataCompra.hashCode() );
+		result = prime * result + ( ( condicaoPagamento == null ) ? 0 : condicaoPagamento.hashCode() );
+		result = prime * result + ( ( contasAPagar == null ) ? 0 : contasAPagar.hashCode() );
+		result = prime * result + ( ( dataChegada == null ) ? 0 : dataChegada.hashCode() );
 		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
-		result = prime * result + ( ( desconto == null ) ? 0 : desconto.hashCode() );
 		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
+		result = prime * result + ( ( frete == null ) ? 0 : frete.hashCode() );
 		result = prime * result + ( ( itensCompra == null ) ? 0 : itensCompra.hashCode() );
+		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
 		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
 		result = prime * result + ( ( outrasDespesas == null ) ? 0 : outrasDespesas.hashCode() );
+		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
+		result = prime * result + ( ( transportadora == null ) ? 0 : transportadora.hashCode() );
 		result = prime * result + ( ( valorFrete == null ) ? 0 : valorFrete.hashCode() );
-		result = prime * result + ( ( valorSeguro == null ) ? 0 : valorSeguro.hashCode() );
 		return result;
 	}
 
@@ -324,31 +405,46 @@ public class Compra extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Compra other = ( Compra ) obj;
-		if ( dataCompra == null )
+		if ( condicaoPagamento == null )
 		{
-			if ( other.dataCompra != null ) return false;
+			if ( other.condicaoPagamento != null ) return false;
 		}
-		else if ( !dataCompra.equals( other.dataCompra ) ) return false;
+		else if ( !condicaoPagamento.equals( other.condicaoPagamento ) ) return false;
+		if ( contasAPagar == null )
+		{
+			if ( other.contasAPagar != null ) return false;
+		}
+		else if ( !contasAPagar.equals( other.contasAPagar ) ) return false;
+		if ( dataChegada == null )
+		{
+			if ( other.dataChegada != null ) return false;
+		}
+		else if ( !dataChegada.equals( other.dataChegada ) ) return false;
 		if ( dataEmissao == null )
 		{
 			if ( other.dataEmissao != null ) return false;
 		}
 		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
-		if ( desconto == null )
-		{
-			if ( other.desconto != null ) return false;
-		}
-		else if ( !desconto.equals( other.desconto ) ) return false;
 		if ( fornecedor == null )
 		{
 			if ( other.fornecedor != null ) return false;
 		}
 		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
+		if ( frete == null )
+		{
+			if ( other.frete != null ) return false;
+		}
+		else if ( !frete.equals( other.frete ) ) return false;
 		if ( itensCompra == null )
 		{
 			if ( other.itensCompra != null ) return false;
 		}
 		else if ( !itensCompra.equals( other.itensCompra ) ) return false;
+		if ( modelo == null )
+		{
+			if ( other.modelo != null ) return false;
+		}
+		else if ( !modelo.equals( other.modelo ) ) return false;
 		if ( numeroNfe == null )
 		{
 			if ( other.numeroNfe != null ) return false;
@@ -359,17 +455,23 @@ public class Compra extends AbstractEntity
 			if ( other.outrasDespesas != null ) return false;
 		}
 		else if ( !outrasDespesas.equals( other.outrasDespesas ) ) return false;
+		if ( serie == null )
+		{
+			if ( other.serie != null ) return false;
+		}
+		else if ( !serie.equals( other.serie ) ) return false;
+		if ( transportadora == null )
+		{
+			if ( other.transportadora != null ) return false;
+		}
+		else if ( !transportadora.equals( other.transportadora ) ) return false;
 		if ( valorFrete == null )
 		{
 			if ( other.valorFrete != null ) return false;
 		}
 		else if ( !valorFrete.equals( other.valorFrete ) ) return false;
-		if ( valorSeguro == null )
-		{
-			if ( other.valorSeguro != null ) return false;
-		}
-		else if ( !valorSeguro.equals( other.valorSeguro ) ) return false;
 		return true;
 	}
+	
 	
 }

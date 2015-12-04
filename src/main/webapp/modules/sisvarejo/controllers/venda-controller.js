@@ -222,12 +222,12 @@
          * @returns {number}
          */
         $scope.getVendaTotal = function(venda) {
-            if (venda.itensVenda == null) {
+            if (venda.itensVenda == null || venda.itensVenda.length == 0) {
                 return 0;
             }
             var total = 0;
             for (var i = 0; venda.itensVenda.length > i; i++){
-                total += venda.itensVenda[i].quantidade * venda.itensVenda[i].produto.precoVenda;
+                total += venda.itensVenda[i].quantidade * venda.itensVenda[i].precoVenda;
             }
             return total;
         }
@@ -236,13 +236,25 @@
          *
          * @param ev
          */
-        $scope.abrirPopupCliente = function (ev) {
-            $mdDialog.show({
-                controller: BuscaClienteDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
-                targetEvent: ev,
-                hasBackdrop: true
-            })
+        $scope.abrirPopupCliente = function (ev, cidade, cliente) {
+
+            if (cidade != null) {
+                if ($scope.model.entidade.cliente == null) $scope.model.entidade.cliente = new Cliente();
+                $scope.model.entidade.cliente.cidade = cidade;
+            }
+
+            cliente = cliente != null ? cliente : $scope.model.entidade.cliente;
+
+            $scope.clienteDialog = $mdDialog;
+            $scope.clienteDialog.show({
+                    controller: BuscaClienteDialogController,
+                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope, cliente]
+                    }
+                })
                 .then(function (result) {
                     $scope.model.entidade.cliente = result;
                 }, function () {
@@ -256,11 +268,11 @@
          */
         $scope.abrirPopupProduto = function (ev) {
             $mdDialog.show({
-                controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
-                targetEvent: ev,
-                hasBackdrop: true
-            })
+                    controller: ProdutoDialogController,
+                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
+                    targetEvent: ev,
+                    hasBackdrop: true
+                })
                 .then(function (result) {
 
                     var itemVenda = new ItemVenda();
@@ -274,21 +286,43 @@
 
         /**
          *
+         * @param numero
+         */
+        $scope.verificarNfe = function(numero) {
+
+            $log.log(numero);
+
+            lojaService.verificarNfe(numero, {
+                callback:function(result) {
+                    if (result == false) {
+                        $scope.model.invalidNfe = true;
+                    }  else {
+                        $scope.model.invalidNfe = false;
+                    }
+
+
+                }, errorHandler: function(message, error){
+                    $log.error(message);
+                }});
+        }
+
+        /**
+         *
          * @param ev
          * @param entidade
          */
         $scope.abrirPopupAlterarProduto = function (ev, entidade) {
             $mdDialog.show({
-                controller: VendaDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-venda.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                bindToController: true,
-                locals: {
-                    entidadeExterna: angular.copy(entidade),
-                    isEditing: true
-                }
-            })
+                    controller: VendaDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/venda/popup/popup-venda.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    bindToController: true,
+                    locals: {
+                        entidadeExterna: angular.copy(entidade),
+                        isEditing: true
+                    }
+                })
                 .then(function (result) {
 
                 }, function () {
@@ -467,11 +501,11 @@
     });
 
     /**
-     * Controller da popup de Princípio e Diretriz
+     * Controller da popup de Vendas
      */
     function VendaDialogController($scope, $mdDialog, $importService, $mdToast, entidadeExterna, isEditing) {
 
-        $importService("lojaService");
+        $importService("estoqueService");
 
         /**
          *
@@ -491,7 +525,7 @@
          */
         $scope.carregarListaFormasPagamento = function () {
             return null;
-            lojaService.listFormasPagamentoByFilters(null, {
+            estoqueService.listFormasPagamentoByFilters(null, {
                 callback: function (result) {
                     $scope.formasPagamento = result;
                     $scope.$apply();
@@ -540,13 +574,15 @@
     }
 
     /**
-     * Controller da popup de Buscar Clientes
+     * Controller da popup de Buscar Clientees
      */
-    function BuscaClienteDialogController($scope, $mdDialog, $importService, $mdToast) {
+    function BuscaClienteDialogController($scope, $mdDialog, $importService, $mdToast, local) {
 
         $importService("lojaService");
 
         $scope.model = {
+            entidade: new Cliente(),
+            clienteDialog: local[0],
             filtros: {
                 nome: "",
                 apelido: "",
@@ -554,19 +590,59 @@
                 rg: ""
             },
             content: []
+        };
+
+        // Habilita modo de edição se o botão de Exibir for acionado
+        if (local[1] != null) {
+            $scope.model.entidade = local[1];
+            //$scope.model.viewMode = true;
         }
+
+        // Identifica se a popup foi aberta voltando da popup de cidade
+        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
 
         /**
          *
          */
-        $scope.carregarLista = function() {
-            lojaService.listClientesByFilters($scope.model.filtros.nome, $scope.model.filtros.apelido, $scope.model.filtros.cpf, $scope.model.filtros.rg, {
-                callback: function(result) {
-                    $scope.model.content = result;
-                    $scope.$apply();
+        $scope.listClientesByFilters = function() {
+
+            lojaService.listClientesByFilters($scope.model.filtros.nome, $scope.model.filtros.apelido,
+                $scope.model.filtros.telefone, $scope.model.filtros.cpf, {
+                    callback: function(result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function(message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvarCliente = function (entidade) {
+            lojaService.insertCliente(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
                 },
-                errorHandler: function(message, error) {
-                    $mdToast.showSimple(message);
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
                 }
             });
         };
@@ -586,6 +662,54 @@
             $mdDialog.cancel();
         }
 
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCidade = function (ev) {
+            $scope.model.flag = false;
+            $mdDialog.show({
+                    controller: 'CidadeDialogController',
+                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cidade.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
+
+                }, function () {
+                    $scope.abrirPopupCadastrar($scope.model.entidade, null, false);
+                });
+        };
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
+            $mdDialog.show({
+                    controller: BuscaClienteDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/cliente/popup/popup-cadastra-cliente.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        local: [$scope.model.clienteDialog, entidade, cidade]
+                    }
+                })
+                .then(function (result) {
+                    if (result == true)
+                        $scope.model.clienteDialog.abrirPopupCliente(null, null);
+                }, function () {
+                    $scope.model.clienteDialog.abrirPopupCliente(null, null);
+                });
+        };
     }
 
     /**
