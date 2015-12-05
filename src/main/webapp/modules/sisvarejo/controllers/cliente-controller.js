@@ -756,11 +756,7 @@
                 order: 'id'
             },
             filtros: {
-                razaoSocial: null,
-                nomeFantasia: null,
-                telefone: null,
-                cnpj: null,
-                representante: null
+                descricao: null,
             }
         }
 
@@ -775,7 +771,7 @@
          *
          */
         $scope.listCondicoes = function () {
-            financeiroService.listCondicoesByFilters(null, {
+            financeiroService.listCondicoesByFilters($scope.model.filtros.descricao, {
                     callback: function (result) {
                         $scope.model.content = result;
                         $scope.$apply();

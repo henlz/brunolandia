@@ -71,16 +71,6 @@ public class LocalizacaoService
 
 	/**
 	 * 
-	 * @param pais
-	 * @return
-	 */
-	public Pais insertPaisString( String pais )
-	{
-		return this.paisRepository.save( new Pais( null, pais ) );
-	}
-
-	/**
-	 * 
 	 * @param paises
 	 */
 	public void removePais( List<Pais> paises )
@@ -184,14 +174,19 @@ public class LocalizacaoService
 		return this.cidadeRepository.findByEstado( estado );
 	}
 
+	public Cidade findCidadeByCodigo( String codigo )
+	{
+		return this.cidadeRepository.findByCodigo( codigo );
+	}
+
 	/**
 	 * 
 	 * @param filter
 	 * @return
 	 */
-	public List<Cidade> listCidadesByFilters( String nome, Estado estado )
+	public List<Cidade> listCidadesByFilters( String nome, Estado estado, String codigo )
 	{
-		return this.cidadeRepository.listByFilters( nome, estado != null ? estado.getId() : null );
+		return this.cidadeRepository.listByFilters( nome, estado != null ? estado.getId() : null, codigo );
 	}
 
 	/**

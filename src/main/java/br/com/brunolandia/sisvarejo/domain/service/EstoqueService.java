@@ -1,6 +1,5 @@
 package br.com.brunolandia.sisvarejo.domain.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
@@ -126,20 +125,6 @@ public class EstoqueService
 
 	/**
 	 * 
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public List<Fornecedor> listFornecedoresByStatus( Boolean status )
-	{
-		if ( status == null )
-		{
-			return this.fornecedorRepository.findAll();
-		}
-		return this.fornecedorRepository.findByAtivo( status );
-	}
-
-	/**
-	 * 
 	 * @param razaoSocial
 	 * @param nomeFantasia
 	 * @param telefone
@@ -147,9 +132,9 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Fornecedor> listFornecedoresByFilters( String razaoSocial, String nomeFantasia, String telefone, String cnpj, String representante )
+	public List<Fornecedor> listFornecedoresByFilters( String razaoSocial, String nomeFantasia, String telefone, String cnpj )
 	{
-		return this.fornecedorRepository.listByFilters( razaoSocial, nomeFantasia, telefone, cnpj, representante );
+		return this.fornecedorRepository.listByFilters( razaoSocial, nomeFantasia, telefone, cnpj );
 	}
 
 	/**
@@ -160,7 +145,6 @@ public class EstoqueService
 	public Fornecedor insertFornecedor( Fornecedor fornecedor )
 	{
 		Assert.notNull( fornecedor, "O objeto não pode ser nulo!" );
-		fornecedor.setAtivo( true );
 		return this.fornecedorRepository.save( fornecedor );
 	}
 
@@ -222,7 +206,6 @@ public class EstoqueService
 			itemCompra.setProduto( this.produtoRepository.save( produto ) );
 			this.itemCompraRepository.save( itemCompra );
 		}
-		compra.setDataCompra( new Date() );
 		return this.compraRepository.save( compra );
 	}
 

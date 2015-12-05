@@ -12,6 +12,7 @@ import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.brunolandia.sisvarejo.domain.entity.loja.Cliente;
+import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.Venda;
 import br.com.eits.common.domain.entity.AbstractEntity;
 
 /**
@@ -113,6 +114,12 @@ public class ContaReceber extends AbstractEntity
 	private Date dataEmissao;
 
 	/**
+	 * 
+	 */
+	@ManyToOne
+	private Venda venda;
+
+	/**
 	 * @param numeroNota
 	 * @param serie
 	 * @param numeroParcela
@@ -126,8 +133,9 @@ public class ContaReceber extends AbstractEntity
 	 * @param dataPagamento
 	 * @param dataVencimento
 	 * @param dataEmissao
+	 * @param venda
 	 */
-	public ContaReceber( Long id, String numeroNota, String serie, String numeroParcela, BigDecimal valor, String descricao, String observacoes, Date emissao, Date vencimento, Cliente cliente, FormaPagamento formaPagamento, Date dataPagamento, Date dataVencimento, Date dataEmissao )
+	public ContaReceber( Long id, String numeroNota, String serie, String numeroParcela, BigDecimal valor, String descricao, String observacoes, Date emissao, Date vencimento, Cliente cliente, FormaPagamento formaPagamento, Date dataPagamento, Date dataVencimento, Date dataEmissao, Venda venda )
 	{
 		super( id );
 		this.numeroNota = numeroNota;
@@ -143,8 +151,14 @@ public class ContaReceber extends AbstractEntity
 		this.dataPagamento = dataPagamento;
 		this.dataVencimento = dataVencimento;
 		this.dataEmissao = dataEmissao;
+		this.venda = venda;
 	}
 
+	public ContaReceber()
+	{
+		super();
+	}
+	
 	/**
 	 * @return the numeroNota
 	 */
@@ -353,106 +367,20 @@ public class ContaReceber extends AbstractEntity
 		this.dataEmissao = dataEmissao;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * @return the venda
 	 */
-	@Override
-	public int hashCode()
+	public Venda getVenda()
 	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
-		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
-		result = prime * result + ( ( dataPagamento == null ) ? 0 : dataPagamento.hashCode() );
-		result = prime * result + ( ( dataVencimento == null ) ? 0 : dataVencimento.hashCode() );
-		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
-		result = prime * result + ( ( emissao == null ) ? 0 : emissao.hashCode() );
-		result = prime * result + ( ( formaPagamento == null ) ? 0 : formaPagamento.hashCode() );
-		result = prime * result + ( ( numeroNota == null ) ? 0 : numeroNota.hashCode() );
-		result = prime * result + ( ( numeroParcela == null ) ? 0 : numeroParcela.hashCode() );
-		result = prime * result + ( ( observacoes == null ) ? 0 : observacoes.hashCode() );
-		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
-		result = prime * result + ( ( valor == null ) ? 0 : valor.hashCode() );
-		result = prime * result + ( ( vencimento == null ) ? 0 : vencimento.hashCode() );
-		return result;
+		return venda;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * @param venda the venda to set
 	 */
-	@Override
-	public boolean equals( Object obj )
+	public void setVenda( Venda venda )
 	{
-		if ( this == obj ) return true;
-		if ( !super.equals( obj ) ) return false;
-		if ( getClass() != obj.getClass() ) return false;
-		ContaReceber other = ( ContaReceber ) obj;
-		if ( cliente == null )
-		{
-			if ( other.cliente != null ) return false;
-		}
-		else if ( !cliente.equals( other.cliente ) ) return false;
-		if ( dataEmissao == null )
-		{
-			if ( other.dataEmissao != null ) return false;
-		}
-		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
-		if ( dataPagamento == null )
-		{
-			if ( other.dataPagamento != null ) return false;
-		}
-		else if ( !dataPagamento.equals( other.dataPagamento ) ) return false;
-		if ( dataVencimento == null )
-		{
-			if ( other.dataVencimento != null ) return false;
-		}
-		else if ( !dataVencimento.equals( other.dataVencimento ) ) return false;
-		if ( descricao == null )
-		{
-			if ( other.descricao != null ) return false;
-		}
-		else if ( !descricao.equals( other.descricao ) ) return false;
-		if ( emissao == null )
-		{
-			if ( other.emissao != null ) return false;
-		}
-		else if ( !emissao.equals( other.emissao ) ) return false;
-		if ( formaPagamento == null )
-		{
-			if ( other.formaPagamento != null ) return false;
-		}
-		else if ( !formaPagamento.equals( other.formaPagamento ) ) return false;
-		if ( numeroNota == null )
-		{
-			if ( other.numeroNota != null ) return false;
-		}
-		else if ( !numeroNota.equals( other.numeroNota ) ) return false;
-		if ( numeroParcela == null )
-		{
-			if ( other.numeroParcela != null ) return false;
-		}
-		else if ( !numeroParcela.equals( other.numeroParcela ) ) return false;
-		if ( observacoes == null )
-		{
-			if ( other.observacoes != null ) return false;
-		}
-		else if ( !observacoes.equals( other.observacoes ) ) return false;
-		if ( serie == null )
-		{
-			if ( other.serie != null ) return false;
-		}
-		else if ( !serie.equals( other.serie ) ) return false;
-		if ( valor == null )
-		{
-			if ( other.valor != null ) return false;
-		}
-		else if ( !valor.equals( other.valor ) ) return false;
-		if ( vencimento == null )
-		{
-			if ( other.vencimento != null ) return false;
-		}
-		else if ( !vencimento.equals( other.vencimento ) ) return false;
-		return true;
+		this.venda = venda;
 	}
 
 }

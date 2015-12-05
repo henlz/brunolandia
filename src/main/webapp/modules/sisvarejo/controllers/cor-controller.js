@@ -153,10 +153,10 @@
          * @param ev
          * @param id
          */
-        $scope.excluirCores = function (ev, lista) {
+        $scope.excluirCor = function (ev, cor) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Cor')
-                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir a cor "'+ cor.nome +'"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Cor')
                 .ok('Sim')
                 .cancel('Cancelar')

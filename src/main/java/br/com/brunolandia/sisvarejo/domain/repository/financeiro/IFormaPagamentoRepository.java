@@ -16,7 +16,7 @@ public interface IFormaPagamentoRepository extends JpaRepository<FormaPagamento,
 	 * @param filters
 	 * @return
 	 */
-	@Query("SELECT new FormaPagamento(formaPagamento.id, formaPagamento.tipo) "
+	@Query("SELECT new FormaPagamento(formaPagamento.id, formaPagamento.tipo, formaPagamento.codigo) "
 			+ "FROM FormaPagamento formaPagamento "
 			+ "WHERE FILTER(formaPagamento.tipo, :filters) = TRUE")
 	public List<FormaPagamento> listByFilters(@Param("filters") String filters);

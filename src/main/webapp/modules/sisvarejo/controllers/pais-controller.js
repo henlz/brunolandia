@@ -183,16 +183,16 @@
          * @param ev
          * @param id
          */
-        $scope.excluirPaises = function (ev, lista) {
+        $scope.excluirPais = function (ev, pais) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de País')
-                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o país "'+ pais.nome +'"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de País')
                 .ok('Sim')
                 .cancel('Cancelar')
                 .targetEvent(ev);
 
-            var listaCopia = angular.copy(lista);
+            var lista = [pais];
             $mdDialog.show(confirm).then(function () {
                 localizacaoService.removePais(lista, {
                     callback: function (result) {
@@ -204,10 +204,10 @@
                         $mdToast.show(toast).then(function () {
                         });
 
-                        $scope.limparSelecao();
+                        //$scope.limparSelecao();
 
-                        for (var x = 0; x < listaCopia.length; x++) {
-                            var i = $scope.findByIdInArray($scope.model.content, listaCopia[x]);
+                        for (var x = 0; x < lista.length; x++) {
+                            var i = $scope.findByIdInArray($scope.model.content, lista[x]);
                             $scope.model.content.splice(i, 1);
                         }
                         $scope.$apply();

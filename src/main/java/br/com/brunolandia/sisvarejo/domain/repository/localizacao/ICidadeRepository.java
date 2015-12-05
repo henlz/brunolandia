@@ -33,13 +33,21 @@ public interface ICidadeRepository extends JpaRepository<Cidade, Long>
 	
 	/**
 	 * 
+	 * @param nome
+	 * @return
+	 */
+	public Cidade findByCodigo( String codigo );
+	
+	/**
+	 * 
 	 * @param filters
 	 * @return
 	 */
-	@Query("SELECT new Cidade(cidade.id, cidade.nome, cidade.estado) "
+	@Query("SELECT new Cidade(cidade.id, cidade.nome, cidade.estado, cidade.codigo) "
 			+ "FROM Cidade cidade "
 			+ "WHERE FILTER(cidade.nome, :filters) = TRUE "
-			+ "AND FILTER(cidade.estado.id, :estadoId) = TRUE")
-	public List<Cidade> listByFilters( @Param("filters")String filters, @Param("estadoId")Long estadoId );
+			+ "AND FILTER(cidade.estado.id, :estadoId) = TRUE "
+			+ "AND FILTER(cidade.codigo, :codigo) = TRUE ")
+	public List<Cidade> listByFilters( @Param("filters")String filters, @Param("estadoId")Long estadoId, @Param("codigo") String codigo );
 
 }

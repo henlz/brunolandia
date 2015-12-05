@@ -16,6 +16,7 @@
 
 <!-- AngularJS -->
 <script type="text/javascript" src="./webjars/angularjs/<spring:eval expression="@environment.getProperty('angularjs.version')"/>/angular.min.js"></script>
+<script type="text/javascript" src="./webjars/angularjs/<spring:eval expression="@environment.getProperty('angularjs.version')"/>/angular-messages.min.js"></script>
 <script type="text/javascript" src="./webjars/angularjs/<spring:eval expression="@environment.getProperty('angularjs.version')"/>/i18n/angular-locale_pt-br.js"></script>
 <script type="text/javascript" src="./webjars/angular-messages/<spring:eval expression="@environment.getProperty('angular-messages.version')"/>/angular-messages.min.js"></script>
 <script type="text/javascript" src="./webjars/angularjs/<spring:eval expression="@environment.getProperty('angularjs.version')"/>/angular-animate.min.js"></script>

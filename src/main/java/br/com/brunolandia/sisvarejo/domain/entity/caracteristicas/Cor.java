@@ -16,7 +16,15 @@ public class Cor extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2693041616074081510L;
+	private static final long serialVersionUID = 6737759905881523037L;
+
+	/**
+	 * 
+	 */
+	@NotEmpty
+	@Column
+	private String codigo;
+	
 	/**
 	 * 
 	 */
@@ -37,50 +45,13 @@ public class Cor extends AbstractEntity
 	 * @param id
 	 * @param nome
 	 */
-	public Cor(Long id, String nome)
+	public Cor(Long id, String nome, String codigo)
 	{
 		super();
 		this.nome = nome;
+		this.codigo = codigo;
 	}
 
-	/**
-	 * 
-	 * @param nome
-	 */
-	public Cor(String nome)
-	{
-		super();
-		this.nome = nome;
-	}
-
-	
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cor other = (Cor) obj;
-		if (nome == null)
-		{
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		return true;
-	}
 
 	/**
 	 * 
@@ -98,6 +69,58 @@ public class Cor extends AbstractEntity
 	public void setNome(String nome)
 	{
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
+		result = prime * result + ( ( nome == null ) ? 0 : nome.hashCode() );
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals( Object obj )
+	{
+		if ( this == obj ) return true;
+		if ( !super.equals( obj ) ) return false;
+		if ( getClass() != obj.getClass() ) return false;
+		Cor other = ( Cor ) obj;
+		if ( codigo == null )
+		{
+			if ( other.codigo != null ) return false;
+		}
+		else if ( !codigo.equals( other.codigo ) ) return false;
+		if ( nome == null )
+		{
+			if ( other.nome != null ) return false;
+		}
+		else if ( !nome.equals( other.nome ) ) return false;
+		return true;
 	}
 
 }

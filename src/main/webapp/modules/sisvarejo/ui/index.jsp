@@ -10,22 +10,22 @@
 
 	<head>
 		<title>Brunolândia</title>
-		
+
 		<!-- Styles -->
 		<jsp:include page="/modules/default-styles.jsp"/>
 
 		<!-- EITS Bottom Sheet -->
 		<link rel="stylesheet" type="text/css" href="./static/js/eits-bottomsheet/eits-bottomsheet.css">
-		
+
 		<!-- Scripts -->
 		<jsp:include page="/modules/default-scripts.jsp"/>
-		
-		<!-- Main --> 
+
+		<!-- Main -->
 		<script type="text/javascript" src="./modules/sisvarejo/sisvarejo-main.js?v=${version}"/></script>
 
 		<!-- Custom Directive -->
 		<script type="text/javascript" src="./static/js/eits-bottomsheet/eits-bottomsheet.js?v=${version}"></script>
-		
+
 		<!-- Controllers -->
 		<script type="text/javascript" src="./modules/abstract-crud-controller.js?v=${version}"></script>
 		<script type="text/javascript" src="./modules/sisvarejo/controllers/pais-controller.js?v=${version}"></script>
@@ -43,7 +43,7 @@
 		<script type="text/javascript" src="./modules/sisvarejo/controllers/fiscal-controller.js?v=${version}"></script>
 
 	</head>
-	
+
 	<body>
 		<div ng-controller="MainController as mainController">
 		    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
@@ -140,8 +140,8 @@
 					<md-divider/>
 		    	</md-content>
 		    </md-sidenav>
-			
-			
+
+
 			<md-toolbar layout="row" layout-align="start center">
 				<md-button class="md-icon-button" ng-click="mainController.toggleSidenav()" aria-label="Abrir menu">
 		            <i class="md-icon md-icon-menu md-icon-lg"></i>
@@ -150,7 +150,7 @@
 					<span>Sisvarejo</span>
 				</h2>
 			</md-toolbar>
-	
+
 			<ui-view/>
 		</div>
 	</body>

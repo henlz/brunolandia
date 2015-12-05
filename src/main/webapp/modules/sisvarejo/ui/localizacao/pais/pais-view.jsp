@@ -18,17 +18,26 @@
     </md-toolbar>
 
     <md-data-table-container>
-        <table md-data-table md-row-select="model.selected">
+        <table md-data-table>
             <thead md-order="model.query.order" md-trim-column-names>
             <tr>
                 <th order-by="id">Código</th>
-                <th order-by="nome">Nome</th>
+                <th order-by="nome">País</th>
+                <th style="width:20px;">Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="pais in model.content | orderBy: model.query.order" ng-click="itemClicked($event, pais)">
+            <tr ng-repeat="pais in model.content | orderBy: model.query.order">
                 <td>{{::pais.id}}</td>
                 <td>{{::pais.nome}}</td>
+                <td layout="row">
+                    <md-button class="md-icon-button" ng-click="itemClicked($event, pais)">
+                        <i class="md-icon-edit"></i>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="excluirPais($event, pais)">
+                        <i class="md-icon-delete"></i>
+                    </md-button>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -13,10 +13,10 @@ public interface IFornecedorRepository extends JpaRepository<Fornecedor, Long>
 
 	/**
 	 * 
-	 * @param ativo
+	 * @param codigo
 	 * @return
 	 */
-	public List<Fornecedor> findByAtivo( Boolean ativo );
+	public Fornecedor findByCodigo( String codigo );
 
 	/**
 	 * 
@@ -26,14 +26,12 @@ public interface IFornecedorRepository extends JpaRepository<Fornecedor, Long>
 	 * @param cnpj
 	 * @return
 	 */
-	@Query("SELECT new Fornecedor(fornecedor.id, fornecedor.razaoSocial, fornecedor.nomeFantasia, fornecedor.representante, fornecedor.email, fornecedor.telefone, fornecedor.cep, fornecedor.bairro, fornecedor.complemento, fornecedor.cnpj, fornecedor.site, fornecedor.endereco, fornecedor.cidade, fornecedor.ativo, fornecedor.numero) "
+	@Query("SELECT new Fornecedor(fornecedor.id, fornecedor.codigo, fornecedor.razaoSocial, fornecedor.tipoPessoa, fornecedor.nomeFantasia, fornecedor.inscricaoEstadual, fornecedor.email, fornecedor.telefone, fornecedor.fax, fornecedor.cep, fornecedor.bairro, fornecedor.complemento, fornecedor.cnpj, fornecedor.uf, fornecedor.endereco, fornecedor.numero, fornecedor.cidade, fornecedor.transportadora, fornecedor.condicaoPagamento) " 
 			+ "FROM Fornecedor fornecedor "
-			+ "WHERE (FILTER(fornecedor.razaoSocial, :razaoSocial) = TRUE "
-			+ "AND FILTER(fornecedor.nomeFantasia, :nomeFantasia) = TRUE "
-			+ "AND FILTER(fornecedor.representante, :representante) = TRUE "
-			+ "AND FILTER(fornecedor.telefone, :telefone) = TRUE "
-			+ "AND FILTER(fornecedor.cnpj, :cnpj) = TRUE ) ")
-	public List<Fornecedor> listByFilters( @Param("razaoSocial") String razaoSocial, @Param("nomeFantasia") String nomeFantasia, 
-			@Param("telefone") String telefone, @Param("cnpj") String cnpj, @Param("representante") String representante );
+				+ "WHERE FILTER(fornecedor.razaoSocial, :razaoSocial) = TRUE " 
+					+ "AND FILTER(fornecedor.nomeFantasia, :nomeFantasia) = TRUE " 
+					+ "AND FILTER(fornecedor.telefone, :telefone) = TRUE " 
+					+ "AND FILTER(fornecedor.cnpj, :cnpj) = TRUE ")
+	public List<Fornecedor> listByFilters( @Param("razaoSocial" ) String razaoSocial, @Param("nomeFantasia") String nomeFantasia, @Param("telefone") String telefone, @Param("cnpj") String cnpj);
 
 }

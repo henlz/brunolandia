@@ -6,6 +6,7 @@
 
         $importService("estoqueService");
         $importService("caracteristicaService");
+        $importService("financeiroService");
         $importService("localizacaoService");
 
         /**
@@ -69,6 +70,12 @@
             pais: {},
             tamanhos: [],
             entidade: {},
+            filtros: {
+                razaoSocial: null,
+                nomeFantasia: null,
+                telefone: null,
+                cnpj: null
+            },
             query: {
                 order: 'razaoSocial'
             }
@@ -220,21 +227,16 @@
          *
          */
         $scope.carregarLista = function () {
-            estoqueService.listFornecedoresByStatus(null, {
-                callback: function (result) {
-                    $scope.model.content = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
+            estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
+                $scope.model.filtros.telefone, $scope.model.filtros.cnpj, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, exception) {
+                        $mdToast.showSimple(message)
+                    }
+                });
         }
 
         /**
@@ -487,7 +489,7 @@
         $scope.excluirFornecedor = function (ev, fornecedor) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Fornecedor')
-                .content('Tem certeza que deseja excluir o registros? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o fornecedor "'+fornecedor.razaoSocial+'"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Fornecedor')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -581,6 +583,34 @@
                 });
         }
 
+        $scope.buscaCondicaoByCodigo = function() {
+            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+                callback: function(result) {
+                    if (result != null)
+                        $scope.model.entidade.condicaoPagamento = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function() {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        }
+
+        $scope.buscaCidadeByCodigo = function() {
+            localizacaoService.findCidadeByCodigo($scope.model.codigoCidade, {
+                callback: function(result) {
+                    if (result != null)
+                        $scope.model.entidade.cidade = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function() {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        }
+
         /**
          *
          * @param ev
@@ -644,6 +674,29 @@
                     //    .position('bottom left right');
                     //$mdToast.show(toast).then(function () {
                     //});
+
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCondicao = function (ev) {
+            $mdDialog.show({
+                    controller: 'BuscaCondicaoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.model.entidade.condicaoPagamento = result;
 
                 }, function () {
                     //tratar o "cancelar" da popup

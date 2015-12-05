@@ -1,11 +1,25 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="Forma de pagamento">
+    <md-toolbar>
+
+        <div class="md-toolbar-tools">
+            <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Forma de Pagamento</h2>
+        </div>
+
+    </md-toolbar>
     <md-dialog-content layot="row">
-
-        <h2>{{:: modoAlteracao ? 'Alterar' : 'Nova' }} Forma de Pagamento</h2>
-
         <form name="formaPagamentoForm" novalidate="true">
             <md-input-container>
-                <label>Tipo</label>
+                <label>Código</label>
+                <input name="codigo" ng-model="entidade.codigo" required maxlength=255>
+
+                <div ng-messages="formaPagamentoForm.tipo.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Forma de pagamento</label>
                 <input name="tipo" ng-model="entidade.tipo" required maxlength=255>
 
                 <div ng-messages="formaPagamentoForm.tipo.$error">

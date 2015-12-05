@@ -18,19 +18,28 @@
     </md-toolbar>
 
     <md-data-table-container>
-        <table md-data-table md-row-select="model.selected">
+        <table md-data-table>
             <thead md-order="model.query.order" md-trim-column-names>
             <tr>
                 <th order-by="id">Código</th>
-                <th order-by="nome" style="width:30%">Nome</th>
+                <th order-by="nome" style="width:30%">Cidade</th>
                 <th order-by="estado.nome">Estado</th>
+                <th style="width:20px;">Ações</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="cidade in model.content | orderBy: model.query.order" ng-click="itemClicked($event, cidade)" md-auto-select>
+            <tr ng-repeat="cidade in model.content | orderBy: model.query.order">
                 <td>{{::cidade.id}}</td>
                 <td>{{::cidade.nome}}</td>
                 <td>{{::cidade.estado.nome}}</td>
+                <td layout="row">
+                    <md-button class="md-icon-button" ng-click="itemClicked($event, cidade)">
+                        <i class="md-icon-edit"></i>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="excluirCidade($event, cidade)">
+                        <i class="md-icon-delete"></i>
+                    </md-button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -43,7 +52,7 @@
                 <div class="limpar-selecao" ng-click="limparSelecao()">Limpar seleção</div>
             </div>
             <div class="right-content">
-                <md-button class="md-raised" aria-label="Excluir" ng-click="excluirCidades($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
+                <md-button class="md-raised" aria-label="Excluir" ng-click="excluirCidade($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
             </div>
         </div>
     </bottomsheet>

@@ -26,7 +26,14 @@ public class Condicao extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4527902737484061764L;
+	private static final long serialVersionUID = -4405911703875645412L;
+
+	/**
+	 * 
+	 */
+	@Column
+	@NotNull
+	private String codigo;
 
 	/**
 	 * 
@@ -38,7 +45,7 @@ public class Condicao extends AbstractEntity
 	/**
 	 * 
 	 */
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Parcela> parcelas = new ArrayList<Parcela>();
 
 	/**
@@ -63,11 +70,11 @@ public class Condicao extends AbstractEntity
 	 * @param descricao
 	 * @param parcelas
 	 */
-	public Condicao( String descricao, List<Parcela> parcelas )
+	public Condicao( Long id, String descricao, String codigo )
 	{
-		super();
+		super( id );
 		this.descricao = descricao;
-		this.parcelas = parcelas;
+		this.codigo = codigo;
 	}
 
 	public String getDescricao()
@@ -90,16 +97,41 @@ public class Condicao extends AbstractEntity
 		this.parcelas = parcelas;
 	}
 
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
 		result = prime * result + ( ( parcelas == null ) ? 0 : parcelas.hashCode() );
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals( Object obj )
 	{
@@ -107,6 +139,11 @@ public class Condicao extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Condicao other = ( Condicao ) obj;
+		if ( codigo == null )
+		{
+			if ( other.codigo != null ) return false;
+		}
+		else if ( !codigo.equals( other.codigo ) ) return false;
 		if ( descricao == null )
 		{
 			if ( other.descricao != null ) return false;

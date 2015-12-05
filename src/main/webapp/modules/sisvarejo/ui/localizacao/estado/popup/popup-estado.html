@@ -8,11 +8,23 @@
 
     <md-dialog-content layot="row">
         <form name="estadoForm" novalidate="true">
+
             <md-input-container>
-                <label>Nome</label>
+                <label>Código</label>
+                <input name="nome" ng-model="entidade.codigo" required maxlength=255>
+
+                <div class="errors" ng-messages="estadoForm.codigo.$error">
+                    <div ng-message="required">
+                        Campo obrigatório
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Estado</label>
                 <input name="nome" ng-model="entidade.nome" required maxlength=255>
 
-                <div class="errors" ng-messages="estadoForm.nome.$error" ng-if="estadoForm.$dirty">
+                <div class="errors" ng-messages="estadoForm.nome.$error">
                     <div ng-message="required">
                         Campo obrigatório
                     </div>
@@ -24,9 +36,6 @@
                     {{pais.nome}}
                 </md-option>
             </md-select>
-            <!--            <div class="errors" ng-messages="estadoForm.pais.$error" ng-if="estadoForm.$dirty">
-                            <div ng-message="required">Campo obrigatório</div>
-                        </div>-->
 
             <br>
 

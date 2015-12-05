@@ -10,10 +10,21 @@
 
         <form name="cidadeForm" novalidate="true">
             <md-input-container>
-                <label>Nome</label>
+                <label>Código</label>
+                <input name="codigo" ng-model="entidade.codigo" required maxlength=255>
+
+                <div class="errors" ng-messages="cidadeForm.codigo.$error">
+                    <div ng-message="required">
+                        Campo obrigatório
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Cidade</label>
                 <input name="nome" ng-model="entidade.nome" required maxlength=255>
 
-                <div class="errors" ng-messages="cidadeForm.nome.$error" ng-if="cidadeForm.$dirty">
+                <div class="errors" ng-messages="cidadeForm.nome.$error">
                     <div ng-message="required">
                         Campo obrigatório
                     </div>

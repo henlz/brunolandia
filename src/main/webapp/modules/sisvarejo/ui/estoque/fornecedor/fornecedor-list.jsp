@@ -17,40 +17,56 @@
     </md-button>
 </md-toolbar>
 
+<md-content layout="row" layout-align="center center" layout-wrap>
+    <md-input-container>
+        <label>Razão Social</label>
+        <input type="text" ng-model="model.filtros.razaoSocial">
+    </md-input-container>
+    <md-input-container>
+        <label>Nome Fantasia</label>
+        <input type="text" ng-model="model.filtros.nomeFantasia">
+    </md-input-container>
+    <md-input-container>
+        <label>Telefone</label>
+        <input type="text" ng-model="model.filtros.telefone">
+    </md-input-container>
+    <md-input-container>
+        <label>CNPJ</label>
+        <input type="text" ng-model="model.filtros.cnpj">
+    </md-input-container>
+    <md-button ng-click="carregarLista()" class="md-icon-button">
+        <i class="md-icon md-icon-search"></i>
+    </md-button>
+</md-content>
+
 <md-data-table-container>
     <table md-data-table>
         <thead md-order="model.query.order" md-trim-column-names>
         <tr>
-            <th order-by="razaoSocial">Razão Social</th>
-            <th order-by="email">Email</th>
+            <th order-by="razaoSocial">Código</th>
+            <th order-by="razaoSocial">Nome</th>
+            <th order-by="email">Tipo de pessoa</th>
             <th order-by="telefone">Telefone</th>
-            <th order-by="cidade.nome">Cidade</th>
-            <th order-by="ativo">Status</th>
-            <th>Ações</th>
+            <th order-by="cidade.nome">E-mail</th>
+            <th style="width: 20px;">Ações</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="fornecedor in model.content | orderBy: model.query.order">
+            <td>{{::fornecedor.codigo}}</td>
             <td>{{::fornecedor.razaoSocial}}</td>
-            <td>{{::fornecedor.email}}</td>
+            <td>{{::fornecedor.tipoPessoa | capitalize}}</td>
             <td>{{::fornecedor.telefone}}</td>
             <td>{{::fornecedor.cidade.nome}}</td>
-            <td>{{::fornecedor.ativo ? 'Ativo' : 'Inativo'}}</td>
             <td layout="row">
-                <md-button ng-if="fornecedor.ativo != true" class="md-icon-button"
-                           ng-click="mudarStatusFornecedor(fornecedor, true)"><i class="md-icon md-icon-check"></i>
-                </md-button>
-                <md-button ng-if="fornecedor.ativo == true" class="md-icon-button"
-                           ng-click="mudarStatusFornecedor(fornecedor, false)"><i class="md-icon md-icon-clear"></i>
-                </md-button>
                 <md-button class="md-icon-button" ui-sref="fornecedor.alterar({id: fornecedor.id})"
                            aria-label="Alterar fornecedor">
                     <i class="md-icon md-icon-edit"></i>
                 </md-button>
-<!--                 <md-button class="md-icon-button" ng-click="excluirFornecedor($event, fornecedor)" -->
-<!--                            aria-label="Excluir fornecedor"> -->
-<!--                     <i class="md-icon md-icon-delete"></i> -->
-<!--                 </md-button> -->
+                 <md-button class="md-icon-button" ng-click="excluirFornecedor($event, fornecedor)"
+                            aria-label="Excluir fornecedor">
+                     <i class="md-icon md-icon-delete"></i>
+                 </md-button>
             </td>
         </tr>
         </tbody>

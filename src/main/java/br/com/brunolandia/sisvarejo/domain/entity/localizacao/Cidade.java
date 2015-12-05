@@ -18,8 +18,15 @@ public class Cidade extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7397773945411042829L;
+	private static final long serialVersionUID = 24812678148630181L;
 
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column
+	private String codigo;
+	
 	/**
 	 * 
 	 */
@@ -57,28 +64,31 @@ public class Cidade extends AbstractEntity
 	 * @param nome
 	 * @param estado
 	 */
-	public Cidade( Long id, String nome, Estado estado )
+	public Cidade( Long id, String nome, Estado estado, String codigo )
 	{
 		super(id);
 		this.nome = nome;
 		this.estado = estado;
+		this.codigo = codigo;
 	}
 
-	/**
-	 * 
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( nome == null ) ? 0 : nome.hashCode() );
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( estado == null ) ? 0 : estado.hashCode() );
+		result = prime * result + ( ( nome == null ) ? 0 : nome.hashCode() );
 		return result;
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals( Object obj )
@@ -87,16 +97,21 @@ public class Cidade extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Cidade other = ( Cidade ) obj;
-		if ( nome == null )
+		if ( codigo == null )
 		{
-			if ( other.nome != null ) return false;
+			if ( other.codigo != null ) return false;
 		}
-		else if ( !nome.equals( other.nome ) ) return false;
+		else if ( !codigo.equals( other.codigo ) ) return false;
 		if ( estado == null )
 		{
 			if ( other.estado != null ) return false;
 		}
 		else if ( !estado.equals( other.estado ) ) return false;
+		if ( nome == null )
+		{
+			if ( other.nome != null ) return false;
+		}
+		else if ( !nome.equals( other.nome ) ) return false;
 		return true;
 	}
 
@@ -129,6 +144,22 @@ public class Cidade extends AbstractEntity
 	public void setNome( String nome )
 	{
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
 	}
 
 }

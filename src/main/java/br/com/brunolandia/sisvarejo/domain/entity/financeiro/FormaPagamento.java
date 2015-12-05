@@ -12,16 +12,23 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 @DataTransferObject
 public class FormaPagamento extends AbstractEntity
 {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2006593921690000636L;
 	
 	/**
 	 * 
 	 */
-	@Column
+	private static final long serialVersionUID = 6962290461102457605L;
+
+	/**
+	 * 
+	 */
+	@Column(nullable=false)
+	@NotEmpty
+	private String codigo;
+	
+	/**
+	 * 
+	 */
+	@Column(nullable=false)
 	@NotEmpty
 	private String tipo;
 
@@ -38,10 +45,11 @@ public class FormaPagamento extends AbstractEntity
 	 * @param id
 	 * @param tipo
 	 */
-	public FormaPagamento(Long id, String tipo)
+	public FormaPagamento(Long id, String tipo, String codigo)
 	{
 		super(id);
 		this.tipo = tipo;
+		this.codigo = codigo;
 	}
 
 	/**
@@ -61,31 +69,55 @@ public class FormaPagamento extends AbstractEntity
 		this.tipo = tipo;
 	}
 
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
+		result = prime * result + ( ( tipo == null ) ? 0 : tipo.hashCode() );
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals( Object obj )
 	{
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FormaPagamento other = (FormaPagamento) obj;
-		if (tipo == null)
+		if ( this == obj ) return true;
+		if ( !super.equals( obj ) ) return false;
+		if ( getClass() != obj.getClass() ) return false;
+		FormaPagamento other = ( FormaPagamento ) obj;
+		if ( codigo == null )
 		{
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
+			if ( other.codigo != null ) return false;
+		}
+		else if ( !codigo.equals( other.codigo ) ) return false;
+		if ( tipo == null )
+		{
+			if ( other.tipo != null ) return false;
+		}
+		else if ( !tipo.equals( other.tipo ) ) return false;
 		return true;
 	}
 

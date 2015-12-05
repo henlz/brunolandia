@@ -219,7 +219,7 @@
 
 	});
 
-	module.run( function( $rootScope, $window ) {
+	module.run( function( $rootScope, $window, $state ) {
 		
 	});
 	
@@ -229,6 +229,12 @@
 		};
 		this.toggleSidenav = function(){
 			$mdSidenav('left').toggle();
+		}
+	});
+
+	module.filter('capitalize', function() {
+		return function(input) {
+			return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
 		}
 	});
 

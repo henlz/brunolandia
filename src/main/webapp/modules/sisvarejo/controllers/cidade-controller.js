@@ -131,16 +131,16 @@
          * @param ev
          * @param id
          */
-        $scope.excluirCidades = function (ev, lista) {
+        $scope.excluirCidade = function (ev, cidade) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Cidade')
-                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir a cidade "'+ cidade.nome +'"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Cidade')
                 .ok('Sim')
                 .cancel('Cancelar')
                 .targetEvent(ev);
 
-            var listaCopia = angular.copy(lista);
+            var lista = [cidade];
             $mdDialog.show(confirm).then(function () {
                 localizacaoService.removeCidades(lista, {
                     callback: function (result) {
@@ -152,10 +152,8 @@
                         $mdToast.show(toast).then(function () {
                         });
 
-                        $scope.limparSelecao();
-
-                        for (var x = 0; x < listaCopia.length; x++) {
-                            var i = $scope.findByIdInArray($scope.model.content, listaCopia[x]);
+                        for (var x = 0; x < lista.length; x++) {
+                            var i = $scope.findByIdInArray($scope.model.content, lista[x]);
                             $scope.model.content.splice(i, 1);
                         }
                         $scope.$apply();

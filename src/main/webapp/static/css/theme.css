@@ -74,3 +74,8 @@
 	color: #F44336;
 	height: 0px;
 }
+
+.eits-left-vpadding md-list-item .md-no-style.md-button, md-list-item.md-no-proxy.md-button {
+    padding-left: 40px;
+    height: 60px;
+}

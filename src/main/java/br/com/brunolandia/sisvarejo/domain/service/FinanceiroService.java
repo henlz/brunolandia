@@ -31,32 +31,32 @@ public class FinanceiroService
 	 */
 	@Autowired
 	private IFormaPagamentoRepository formaPagamentoRepository;
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
 	private ICondicaoRepository condicaoRepository;
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
 	private IContaReceberRepository contaReceberRepository;
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
 	private IContaPagarRepository contaPagarRepository;
-	
+
 	/**
 	 * 
 	 * @param filters
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<FormaPagamento> listFormasPagamentoByFilters(String filters)
+	public List<FormaPagamento> listFormasPagamentoByFilters( String filters )
 	{
 //		return this.formaPagamentoRepository.listByFilters(filters);
 		return this.formaPagamentoRepository.findAll();
@@ -67,9 +67,9 @@ public class FinanceiroService
 	 * @param formaPagamneto
 	 * @return
 	 */
-	public FormaPagamento insertFormaPagamento(FormaPagamento formaPagamneto)
+	public FormaPagamento insertFormaPagamento( FormaPagamento formaPagamneto )
 	{
-		return this.formaPagamentoRepository.save(formaPagamneto);
+		return this.formaPagamentoRepository.save( formaPagamneto );
 	}
 
 	/**
@@ -77,101 +77,110 @@ public class FinanceiroService
 	 * @param formaPagamneto
 	 * @return
 	 */
-	public FormaPagamento updateFormaPagamento(FormaPagamento formaPagamneto)
+	public FormaPagamento updateFormaPagamento( FormaPagamento formaPagamneto )
 	{
-		return this.formaPagamentoRepository.save(formaPagamneto);
+		return this.formaPagamentoRepository.save( formaPagamneto );
 	}
 
 	/**
 	 * 
 	 * @param formasPagamento
 	 */
-	public void removeFormasPagamento(List<FormaPagamento> formasPagamento)
+	public void removeFormasPagamento( List<FormaPagamento> formasPagamento )
 	{
-		this.formaPagamentoRepository.delete(formasPagamento);
+		this.formaPagamentoRepository.delete( formasPagamento );
 	}
-	
+
 	/**
 	 * 
 	 * @param filters
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Condicao> listCondicoesByFilters(String filters)
+	public List<Condicao> listCondicoesByFilters( String filters )
 	{
-//		return this.condicaoRepository.listByFilters(filters);
-		return this.condicaoRepository.findAll();
+		return this.condicaoRepository.listByFilters( filters );
 	}
-	
+
 	/**
 	 * 
 	 * @param formaPagamneto
 	 * @return
 	 */
-	public Condicao insertCondicao(Condicao formaPagamneto)
+	public Condicao insertCondicao( Condicao formaPagamneto )
 	{
-		return this.condicaoRepository.save(formaPagamneto);
+		return this.condicaoRepository.save( formaPagamneto );
 	}
-	
+
 	/**
 	 * 
 	 * @param formaPagamneto
 	 * @return
 	 */
-	public Condicao updateCondicao(Condicao formaPagamneto)
+	public Condicao updateCondicao( Condicao formaPagamneto )
 	{
-		return this.condicaoRepository.save(formaPagamneto);
+		return this.condicaoRepository.save( formaPagamneto );
 	}
-	
+
 	/**
 	 * 
 	 * @param formaPagamneto
 	 * @return
 	 */
-	public Condicao findCondicaoById(Long id)
+	public Condicao findCondicaoById( Long id )
 	{
-		return this.condicaoRepository.findOne(id);
+		return this.condicaoRepository.findOne( id );
 	}
-	
+
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public Condicao findCondicaoByCodigo( String codigo )
+	{
+		return this.condicaoRepository.findByCodigo( codigo );
+	}
+
 	/**
 	 * 
 	 * @param condicoes
 	 */
-	public void removeCondicoes(List<Condicao> condicoes)
+	public void removeCondicoes( List<Condicao> condicoes )
 	{
-		this.condicaoRepository.delete(condicoes);
+		this.condicaoRepository.delete( condicoes );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaPagar
 	 * @return
 	 */
-	public ContaPagar insertContaPagar(ContaPagar contaPagar)
-	{
-		return this.contaPagarRepository.save( contaPagar );
-	}
-	
-	/**
-	 * 
-	 * @param contaPagar
-	 * @return
-	 */
-	public ContaPagar updateContaPagar(ContaPagar contaPagar)
+	public ContaPagar insertContaPagar( ContaPagar contaPagar )
 	{
 		return this.contaPagarRepository.save( contaPagar );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaPagar
 	 * @return
 	 */
-	public void removeContaPagar(ContaPagar contaPagar)
+	public ContaPagar updateContaPagar( ContaPagar contaPagar )
+	{
+		return this.contaPagarRepository.save( contaPagar );
+	}
+
+	/**
+	 * 
+	 * @param contaPagar
+	 * @return
+	 */
+	public void removeContaPagar( ContaPagar contaPagar )
 	{
 		this.contaPagarRepository.delete( contaPagar );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaPagar
@@ -181,37 +190,37 @@ public class FinanceiroService
 	{
 		return this.contaPagarRepository.findAll();
 	}
-	
+
 	/**
 	 * 
 	 * @param contaReceber
 	 * @return
 	 */
-	public ContaReceber insertContaReceber(ContaReceber contaReceber)
+	public ContaReceber insertContaReceber( ContaReceber contaReceber )
 	{
 		return this.contaReceberRepository.save( contaReceber );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaReceber
 	 * @return
 	 */
-	public ContaReceber updateContaReceber(ContaReceber contaReceber)
+	public ContaReceber updateContaReceber( ContaReceber contaReceber )
 	{
 		return this.contaReceberRepository.save( contaReceber );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaReceber
 	 * @return
 	 */
-	public void removeContaReceber(ContaReceber contaReceber)
+	public void removeContaReceber( ContaReceber contaReceber )
 	{
 		this.contaReceberRepository.delete( contaReceber );
 	}
-	
+
 	/**
 	 * 
 	 * @param contaReceber

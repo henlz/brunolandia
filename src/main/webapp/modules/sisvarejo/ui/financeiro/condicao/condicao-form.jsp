@@ -18,10 +18,21 @@
                 </md-subheader>
 
                 <md-input-container width="100%">
-                    <label>Descrição</label>
+                    <label>Código</label>
+                    <input name="codigo" ng-model="model.entidade.codigo" required type="text">
+
+                    <div ng-messages="condicaoForm.codigo.$error">
+                        <div ng-message="required">
+                            Campo obrigatório.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container width="100%">
+                    <label>Condição</label>
                     <input name="descricao" ng-model="model.entidade.descricao" required type="text">
 
-                    <div ng-messages="condicaoForm.condicao.$error">
+                    <div ng-messages="condicaoForm.descricao.$error">
                         <div ng-message="required">
                             Campo obrigatório.
                         </div>

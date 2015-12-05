@@ -1,12 +1,28 @@
 <md-dialog aria-label="Buscar condições">
-    <md-dialog-content layot="row" ng-init="listCondicoes()">
 
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+                Condição de pagamento
+            </h2>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layot="row" ng-init="listCondicoes()">
+        <md-content layout="row" layout-align="center center">
+            <md-input-container flex="70">
+                <label>Buscar por condição</label>
+                <input type="text" ng-model="model.filtros.descricao">
+            </md-input-container>
+            <md-button class="md-icon-button md-accent" ng-click="listCondicoes()"><i
+                    class="md-icon md-icon-search"></i></md-button>
+        </md-content>
+        <md-divider/>
         <md-data-table-container>
             <table md-data-table>
                 <thead md-trim-column-names>
                 <tr>
-                    <th order-by="id">Descrição</th>
-                    <th order-by="nome">Parcela</th>
+                    <th style="width: 50px;" order-by="id">Condição</th>
                     <th></th>
                 </tr>
                 </thead>
