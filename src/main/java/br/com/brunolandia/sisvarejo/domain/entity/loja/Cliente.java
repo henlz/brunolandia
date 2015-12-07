@@ -1,16 +1,15 @@
 package br.com.brunolandia.sisvarejo.domain.entity.loja;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import br.com.brunolandia.sisvarejo.domain.entity.Genero;
+import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.TipoPessoa;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.Condicao;
 import br.com.brunolandia.sisvarejo.domain.entity.localizacao.Cidade;
 import br.com.eits.common.domain.entity.AbstractEntity;
@@ -27,26 +26,34 @@ public class Cliente extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7805273102952062700L;
+	private static final long serialVersionUID = -3088114456774333186L;
 
 	/**
 	 * 
 	 */
 	@NotEmpty
-	@Column
+	@Column(nullable = false)
+	private String codigo;
+
+	/**
+	 * 
+	 */
+	@NotEmpty
+	@Column(nullable = false)
 	private String nome;
+
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private TipoPessoa tipoPessoa;
 
 	/**
 	 * 
 	 */
 	@Column
 	private String apelido;
-
-	/**
-	 * 
-	 */
-	@Column
-	private Date dataNascimento;
 
 	/**
 	 * 
@@ -60,12 +67,6 @@ public class Cliente extends AbstractEntity
 	 */
 	@Column
 	private String telefone;
-
-	/**
-	 * 
-	 */
-	@Column
-	private String cep;
 
 	/**
 	 * 
@@ -95,12 +96,6 @@ public class Cliente extends AbstractEntity
 	 * 
 	 */
 	@Column
-	private Genero sexo;
-
-	/**
-	 * 
-	 */
-	@Column
 	private String endereco;
 
 	/**
@@ -118,14 +113,8 @@ public class Cliente extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column
-	private Boolean ativo;
-
-	/**
-	 * 
-	 */
 	@ManyToOne
-	private Condicao condicao;
+	private Condicao condicaoPagamento;
 
 	/**
 	 * 
@@ -136,14 +125,11 @@ public class Cliente extends AbstractEntity
 	}
 
 	/**
-	 * 
-	 * @param id
 	 * @param nome
+	 * @param tipoPessoa
 	 * @param apelido
-	 * @param dataNascimento
 	 * @param email
 	 * @param telefone
-	 * @param cep
 	 * @param bairro
 	 * @param complemento
 	 * @param rg
@@ -151,17 +137,17 @@ public class Cliente extends AbstractEntity
 	 * @param endereco
 	 * @param numero
 	 * @param cidade
-	 * @param ativo
+	 * @param condicaoPagamento
 	 */
-	public Cliente( Long id, String nome, String apelido, Date dataNascimento, String email, String telefone, String cep, String bairro, String complemento, String rg, String cpf, String endereco, Integer numero, Cidade cidade, Boolean ativo, Genero sexo, Condicao condicao )
+	public Cliente( Long id, String codigo, String nome, TipoPessoa tipoPessoa, String apelido, String email, String telefone, String bairro, String complemento, String rg, String cpf, String endereco, Integer numero, Cidade cidade, Condicao condicaoPagamento )
 	{
 		super( id );
+		this.codigo = codigo;
 		this.nome = nome;
+		this.tipoPessoa = tipoPessoa;
 		this.apelido = apelido;
-		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.telefone = telefone;
-		this.cep = cep;
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.rg = rg;
@@ -169,35 +155,39 @@ public class Cliente extends AbstractEntity
 		this.endereco = endereco;
 		this.numero = numero;
 		this.cidade = cidade;
-		this.ativo = ativo;
-		this.sexo = sexo;
-		this.condicao = condicao;
+		this.condicaoPagamento = condicaoPagamento;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ( ( apelido == null ) ? 0 : apelido.hashCode() );
-		result = prime * result + ( ( ativo == null ) ? 0 : ativo.hashCode() );
 		result = prime * result + ( ( bairro == null ) ? 0 : bairro.hashCode() );
-		result = prime * result + ( ( cep == null ) ? 0 : cep.hashCode() );
 		result = prime * result + ( ( cidade == null ) ? 0 : cidade.hashCode() );
 		result = prime * result + ( ( complemento == null ) ? 0 : complemento.hashCode() );
-		result = prime * result + ( ( condicao == null ) ? 0 : condicao.hashCode() );
+		result = prime * result + ( ( condicaoPagamento == null ) ? 0 : condicaoPagamento.hashCode() );
 		result = prime * result + ( ( cpf == null ) ? 0 : cpf.hashCode() );
-		result = prime * result + ( ( dataNascimento == null ) ? 0 : dataNascimento.hashCode() );
 		result = prime * result + ( ( email == null ) ? 0 : email.hashCode() );
 		result = prime * result + ( ( endereco == null ) ? 0 : endereco.hashCode() );
 		result = prime * result + ( ( nome == null ) ? 0 : nome.hashCode() );
+		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( numero == null ) ? 0 : numero.hashCode() );
 		result = prime * result + ( ( rg == null ) ? 0 : rg.hashCode() );
-		result = prime * result + ( ( sexo == null ) ? 0 : sexo.hashCode() );
 		result = prime * result + ( ( telefone == null ) ? 0 : telefone.hashCode() );
+		result = prime * result + ( ( tipoPessoa == null ) ? 0 : tipoPessoa.hashCode() );
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals( Object obj )
 	{
@@ -210,21 +200,11 @@ public class Cliente extends AbstractEntity
 			if ( other.apelido != null ) return false;
 		}
 		else if ( !apelido.equals( other.apelido ) ) return false;
-		if ( ativo == null )
-		{
-			if ( other.ativo != null ) return false;
-		}
-		else if ( !ativo.equals( other.ativo ) ) return false;
 		if ( bairro == null )
 		{
 			if ( other.bairro != null ) return false;
 		}
 		else if ( !bairro.equals( other.bairro ) ) return false;
-		if ( cep == null )
-		{
-			if ( other.cep != null ) return false;
-		}
-		else if ( !cep.equals( other.cep ) ) return false;
 		if ( cidade == null )
 		{
 			if ( other.cidade != null ) return false;
@@ -235,21 +215,16 @@ public class Cliente extends AbstractEntity
 			if ( other.complemento != null ) return false;
 		}
 		else if ( !complemento.equals( other.complemento ) ) return false;
-		if ( condicao == null )
+		if ( condicaoPagamento == null )
 		{
-			if ( other.condicao != null ) return false;
+			if ( other.condicaoPagamento != null ) return false;
 		}
-		else if ( !condicao.equals( other.condicao ) ) return false;
+		else if ( !condicaoPagamento.equals( other.condicaoPagamento ) ) return false;
 		if ( cpf == null )
 		{
 			if ( other.cpf != null ) return false;
 		}
 		else if ( !cpf.equals( other.cpf ) ) return false;
-		if ( dataNascimento == null )
-		{
-			if ( other.dataNascimento != null ) return false;
-		}
-		else if ( !dataNascimento.equals( other.dataNascimento ) ) return false;
 		if ( email == null )
 		{
 			if ( other.email != null ) return false;
@@ -265,6 +240,11 @@ public class Cliente extends AbstractEntity
 			if ( other.nome != null ) return false;
 		}
 		else if ( !nome.equals( other.nome ) ) return false;
+		if ( codigo == null )
+		{
+			if ( other.codigo != null ) return false;
+		}
+		else if ( !nome.equals( other.nome ) ) return false;
 		if ( numero == null )
 		{
 			if ( other.numero != null ) return false;
@@ -275,178 +255,237 @@ public class Cliente extends AbstractEntity
 			if ( other.rg != null ) return false;
 		}
 		else if ( !rg.equals( other.rg ) ) return false;
-		if ( sexo != other.sexo ) return false;
 		if ( telefone == null )
 		{
 			if ( other.telefone != null ) return false;
 		}
 		else if ( !telefone.equals( other.telefone ) ) return false;
+		if ( tipoPessoa != other.tipoPessoa ) return false;
 		return true;
 	}
 
+	/**
+	 * @return the nome
+	 */
 	public String getNome()
 	{
 		return nome;
 	}
 
+	/**
+	 * @param nome the nome to set
+	 */
 	public void setNome( String nome )
 	{
 		this.nome = nome;
 	}
 
+	/**
+	 * @return the tipoPessoa
+	 */
+	public TipoPessoa getTipoPessoa()
+	{
+		return tipoPessoa;
+	}
+
+	/**
+	 * @param tipoPessoa the tipoPessoa to set
+	 */
+	public void setTipoPessoa( TipoPessoa tipoPessoa )
+	{
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	/**
+	 * @return the apelido
+	 */
 	public String getApelido()
 	{
 		return apelido;
 	}
 
+	/**
+	 * @param apelido the apelido to set
+	 */
 	public void setApelido( String apelido )
 	{
 		this.apelido = apelido;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail()
 	{
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail( String email )
 	{
 		this.email = email;
 	}
 
+	/**
+	 * @return the telefone
+	 */
 	public String getTelefone()
 	{
 		return telefone;
 	}
 
+	/**
+	 * @param telefone the telefone to set
+	 */
 	public void setTelefone( String telefone )
 	{
 		this.telefone = telefone;
 	}
 
-	public String getCep()
-	{
-		return cep;
-	}
-
-	public void setCep( String cep )
-	{
-		this.cep = cep;
-	}
-
-	public static long getSerialversionuid()
-	{
-		return serialVersionUID;
-	}
-
+	/**
+	 * @return the bairro
+	 */
 	public String getBairro()
 	{
 		return bairro;
 	}
 
+	/**
+	 * @param bairro the bairro to set
+	 */
 	public void setBairro( String bairro )
 	{
 		this.bairro = bairro;
 	}
 
+	/**
+	 * @return the complemento
+	 */
 	public String getComplemento()
 	{
 		return complemento;
 	}
 
+	/**
+	 * @param complemento the complemento to set
+	 */
 	public void setComplemento( String complemento )
 	{
 		this.complemento = complemento;
 	}
 
-	public String getEndereco()
-	{
-		return endereco;
-	}
-
-	public void setEndereco( String endereco )
-	{
-		this.endereco = endereco;
-	}
-
-	public Integer getNumero()
-	{
-		return numero;
-	}
-
-	public void setNumero( Integer numero )
-	{
-		this.numero = numero;
-	}
-
-	public Cidade getCidade()
-	{
-		return cidade;
-	}
-
-	public void setCidade( Cidade cidade )
-	{
-		this.cidade = cidade;
-	}
-
-	public Boolean getAtivo()
-	{
-		return ativo;
-	}
-
-	public void setAtivo( Boolean ativo )
-	{
-		this.ativo = ativo;
-	}
-
+	/**
+	 * @return the rg
+	 */
 	public String getRg()
 	{
 		return rg;
 	}
 
+	/**
+	 * @param rg the rg to set
+	 */
 	public void setRg( String rg )
 	{
 		this.rg = rg;
 	}
 
+	/**
+	 * @return the cpf
+	 */
 	public String getCpf()
 	{
 		return cpf;
 	}
 
+	/**
+	 * @param cpf the cpf to set
+	 */
 	public void setCpf( String cpf )
 	{
 		this.cpf = cpf;
 	}
 
-	public Date getDataNascimento()
+	/**
+	 * @return the endereco
+	 */
+	public String getEndereco()
 	{
-		return dataNascimento;
+		return endereco;
 	}
 
-	public void setDataNascimento( Date dataNascimento )
+	/**
+	 * @param endereco the endereco to set
+	 */
+	public void setEndereco( String endereco )
 	{
-		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
 	}
 
-	public Genero getSexo()
+	/**
+	 * @return the numero
+	 */
+	public Integer getNumero()
 	{
-		return sexo;
+		return numero;
 	}
 
-	public void setSexo( Genero sexo )
+	/**
+	 * @param numero the numero to set
+	 */
+	public void setNumero( Integer numero )
 	{
-		this.sexo = sexo;
+		this.numero = numero;
 	}
 
-	public Condicao getCondicao()
+	/**
+	 * @return the cidade
+	 */
+	public Cidade getCidade()
 	{
-		return condicao;
+		return cidade;
 	}
 
-	public void setCondicao( Condicao condicao )
+	/**
+	 * @param cidade the cidade to set
+	 */
+	public void setCidade( Cidade cidade )
 	{
-		this.condicao = condicao;
+		this.cidade = cidade;
+	}
+
+	/**
+	 * @return the condicaoPagamento
+	 */
+	public Condicao getCondicaoPagamento()
+	{
+		return condicaoPagamento;
+	}
+
+	/**
+	 * @param condicaoPagamento the condicaoPagamento to set
+	 */
+	public void setCondicaoPagamento( Condicao condicaoPagamento )
+	{
+		this.condicaoPagamento = condicaoPagamento;
+	}
+
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
 	}
 
 }

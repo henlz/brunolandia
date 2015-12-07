@@ -17,7 +17,7 @@
     <div ng-switch-when="venda.cadastrar">
         <div ng-include="'modules/sisvarejo/ui/loja/venda/venda-form.jsp'"></div>
     </div>
-    <div ng-switch-when="venda.alterar">
+    <div ng-switch-when="venda.cancelar">
         <div ng-include="'modules/sisvarejo/ui/loja/venda/venda-form.jsp'"></div>
     </div>
     <div ng-switch-default></div>

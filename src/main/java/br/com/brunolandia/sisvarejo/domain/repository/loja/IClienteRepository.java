@@ -17,10 +17,10 @@ public interface IClienteRepository extends JpaRepository<Cliente, Long>
 
 	/**
 	 * 
-	 * @param ativo
+	 * @param codigo
 	 * @return
 	 */
-	public List<Cliente> findByAtivo( Boolean ativo );
+	public Cliente findByCodigo(String codigo);
 	
 	/**
 	 * 
@@ -31,7 +31,7 @@ public interface IClienteRepository extends JpaRepository<Cliente, Long>
 	 * @param rg
 	 * @return
 	 */
-	@Query("SELECT new Cliente(cliente.id, cliente.nome, cliente.apelido, cliente.dataNascimento, cliente.email, cliente.telefone, cliente.cep, cliente.bairro, cliente.complemento, cliente.rg, cliente.cpf, cliente.endereco, cliente.numero, cliente.cidade, cliente.ativo, cliente.sexo, cliente.condicao) "
+	@Query("SELECT new Cliente(cliente.id, cliente. codigo, cliente.nome, cliente.tipoPessoa, cliente.apelido, cliente.email, cliente.telefone, cliente.bairro, cliente.complemento, cliente.rg, cliente.cpf, cliente.endereco, cliente.numero, cliente.cidade, cliente.condicaoPagamento) "
 				+ "FROM Cliente cliente "
 					+ "WHERE (FILTER(cliente.nome, :nome) = TRUE "
 						+ "AND FILTER(cliente.apelido, :apelido) = TRUE "

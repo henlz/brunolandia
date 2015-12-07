@@ -22,24 +22,23 @@
     <table md-data-table>
         <thead md-order="model.query.order" md-trim-column-names>
         <tr>
-            <th>Data da venda</th>
+            <th>Número</th>
             <th>Total</th>
+            <th>Data</th>
             <th>Cliente</th>
-            <th>Ações</th>
+            <th style="width: 20px;">Ações</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="venda in model.content | orderBy: model.query.order">
-            <td>{{::venda.dataVenda | date: 'HH:mm - dd/MM/yyyy'}}</td>
+            <td>{{::venda.numeroNfe}} {{:: venda.cancelada == true ? '(Cancelada)': ''}}</td>
             <td>{{::getVendaTotal(venda) | currency: 'R$ '}}</td>
+            <td>{{::venda.created | date}}</td>
             <td>{{::venda.cliente.nome}}</td>
             <td layout="row">
-                <md-button class="md-icon-button" ui-sref="venda.alterar({id: venda.id})" aria-label="Alterar produto">
-                    <i class="md-icon md-icon-edit"></i>
+                <md-button class="md-icon-button" ui-sref="venda.cancelar({id: venda.id})" aria-label="Cancelar venda" ng-if="venda.cancelada != true">
+                    <i class="md-icon md-icon-cancel"></i>
                 </md-button>
-                <!--<md-button class="md-icon-button" ng-click="excluirVenda($event, venda)" aria-label="Excluir produto">-->
-                    <!--<i class="md-icon md-icon-delete"></i>-->
-                <!--</md-button>-->
             </td>
         </tr>
         </tbody>

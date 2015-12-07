@@ -1,0 +1,53 @@
+<md-dialog>
+
+    <md-toolbar>
+        <div class="md-toolar-tools">
+            <h3>Forma de pagamento</h3>
+        </div>
+        <md-button ng-click="abrirPopupCadastrar()" class="md-icon-button md-raised">
+            <i class="md-icon md-icon-add"></i>
+        </md-button>
+    </md-toolbar>
+
+    <md-dialog-content layot="row">
+        <md-content layout="row" layout-align="center center" layout-wrap ng-init="listFormaPagamentoByFilters()">
+            <md-input-container flex="50">
+                <label>Código</label>
+                <input type="text" ng-model="model.filtros.codigo">
+            </md-input-container>
+            <md-input-container flex="50">
+                <label>Forma de pagamento</label>
+                <input type="text" ng-model="model.filtros.nome">
+            </md-input-container>
+        </md-content>
+        <md-button ng-click="listFormaPagamentoByFilters()" class="md-icon-button">
+            <i class="md-icon md-icon-search"></i>
+        </md-button>
+        <md-divider/>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-trim-column-names>
+                <tr>
+                    <th order-by="id">Código</th>
+                    <th order-by="nome">Forma de pagamento</th>
+                    <th order-by="cpf">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="formaPagamento in model.content | orderBy: model.query.order">
+                    <td>{{::formaPagamento.codigo}}</td>
+                    <td>{{::formaPagamento.tipo}}</td>
+                    <td>
+                        <md-button ng-click="escolherFormaPagamento(formaPagamento)" class="md-primary">
+                            Escolher
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <div class="md-actions" layout="row">
+            <md-button ng-click="cancelar()" md-autofocus>Cancelar</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

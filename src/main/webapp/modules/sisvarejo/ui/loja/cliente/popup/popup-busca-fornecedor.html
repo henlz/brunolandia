@@ -2,7 +2,7 @@
 
     <md-toolbar layout="row" layout-align="center center">
         <div class="md-toolbar-tools">
-            <h4>Fornecedor</h4>
+            <h4>{{:: model.transportadoraFlag == true ? 'Transportadora' : 'Fornecedor' }}</h4>
         </div>
         <md-button ng-click="abrirPopupCadastrar()" class="md-icon-button md-raised">
             <i class="md-icon md-icon-add"></i>
@@ -28,10 +28,6 @@
                 <label>CNPJ</label>
                 <input type="text" ng-model="model.filtros.cnpj">
             </md-input-container>
-            <md-input-container flex="33">
-                <label>Representate</label>
-                <input type="text" ng-model="model.filtros.representate">
-            </md-input-container>
         </md-content>
         <md-button ng-click="listFornecedoresByFilters()" class="md-icon-button">
             <i class="md-icon md-icon-search"></i>
@@ -49,7 +45,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="fornecedor in model.content | orderBy: model.query.order">
-                    <td>{{::fornecedor.id}}</td>
+                    <td>{{::fornecedor.codigo}}</td>
                     <td>{{::fornecedor.razaoSocial}}</td>
                     <td>{{::fornecedor.nomeFantasia}}</td>
                     <td>{{::fornecedor.cnpj}}</td>

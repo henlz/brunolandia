@@ -1,16 +1,19 @@
 package br.com.brunolandia.sisvarejo.domain.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.Condicao;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaPagar;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaReceber;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.FormaPagamento;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.StatusConta;
 import br.com.brunolandia.sisvarejo.domain.repository.financeiro.ICondicaoRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.financeiro.IContaPagarRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.financeiro.IContaReceberRepository;
@@ -56,10 +59,9 @@ public class FinanceiroService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<FormaPagamento> listFormasPagamentoByFilters( String filters )
+	public List<FormaPagamento> listFormasPagamentoByFilters( String codigo, String tipo )
 	{
-//		return this.formaPagamentoRepository.listByFilters(filters);
-		return this.formaPagamentoRepository.findAll();
+		return this.formaPagamentoRepository.listByFilters( codigo, tipo );
 	}
 
 	/**
@@ -89,6 +91,16 @@ public class FinanceiroService
 	public void removeFormasPagamento( List<FormaPagamento> formasPagamento )
 	{
 		this.formaPagamentoRepository.delete( formasPagamento );
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public FormaPagamento findFormaPagamentoByCodigo( String codigo )
+	{
+		return this.formaPagamentoRepository.findByCodigo( codigo );
 	}
 
 	/**
@@ -158,6 +170,15 @@ public class FinanceiroService
 	 */
 	public ContaPagar insertContaPagar( ContaPagar contaPagar )
 	{
+		Assert.notNull( contaPagar, "O objeto não pode ser nulo" );
+		if ( contaPagar.getDataPagamento() != null )
+		{
+			contaPagar.setStatusConta( StatusConta.PAGA );
+		}
+		else
+		{
+			contaPagar.setStatusConta( StatusConta.PENDENTE );
+		}
 		return this.contaPagarRepository.save( contaPagar );
 	}
 
@@ -190,6 +211,50 @@ public class FinanceiroService
 	{
 		return this.contaPagarRepository.findAll();
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public ContaPagar findContaPagarById( final Long id )
+	{
+		return this.contaPagarRepository.findOne( id );
+	}
+
+	/**
+	 * 
+	 * @param contaPagar
+	 * @return
+	 */
+	public ContaPagar pagarContaPagar( ContaPagar contaPagar )
+	{
+		Assert.notNull( contaPagar, "O objeto não pode ser nulo" );
+		Assert.isTrue( contaPagar.getStatusConta() != StatusConta.CANCELADA, "A conta está cancelada" );
+		Assert.isTrue( contaPagar.getStatusConta() != StatusConta.PAGA, "A conta já está paga" );
+		contaPagar.setDataPagamento( new Date() );
+		contaPagar.setStatusConta( StatusConta.PAGA );
+
+		return this.contaPagarRepository.save( contaPagar );
+	}
+
+	/**
+	 * 
+	 * @param contaPagar
+	 * @return
+	 */
+	public ContaPagar cancelarContaPagar( ContaPagar contaPagar )
+	{
+		Assert.notNull( contaPagar, "O objeto não pode ser nulo" );
+		Assert.isNull( contaPagar.getCompra(), "Não é possível cancelar a conta, pois a mesma está associada à uma compra" );
+		Assert.isTrue( contaPagar.getStatusConta() != StatusConta.CANCELADA, "A conta está cancelada" );
+		Assert.isTrue( contaPagar.getStatusConta() != StatusConta.PAGA, "A conta já está paga" );
+
+		contaPagar.setStatusConta( StatusConta.CANCELADA );
+
+		return this.contaPagarRepository.save( contaPagar );
+	}
 
 	/**
 	 * 
@@ -198,6 +263,59 @@ public class FinanceiroService
 	 */
 	public ContaReceber insertContaReceber( ContaReceber contaReceber )
 	{
+		Assert.notNull( contaReceber, "O objeto não pode ser nulo" );
+		if ( contaReceber.getDataPagamento() != null )
+		{
+			contaReceber.setStatusConta( StatusConta.PAGA );
+		}
+		else
+		{
+			contaReceber.setStatusConta( StatusConta.PENDENTE );
+		}
+		return this.contaReceberRepository.save( contaReceber );
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public ContaReceber findContaReceberById( final Long id )
+	{
+		return this.contaReceberRepository.findOne( id );
+	}
+
+	/**
+	 * 
+	 * @param contaReceber
+	 * @return
+	 */
+	public ContaReceber pagarContaReceber( ContaReceber contaReceber )
+	{
+		Assert.notNull( contaReceber, "O objeto não pode ser nulo" );
+		Assert.isTrue( contaReceber.getStatusConta() != StatusConta.CANCELADA, "A conta está cancelada" );
+		Assert.isTrue( contaReceber.getStatusConta() != StatusConta.PAGA, "A conta já está paga" );
+		contaReceber.setDataPagamento( new Date() );
+		contaReceber.setStatusConta( StatusConta.PAGA );
+
+		return this.contaReceberRepository.save( contaReceber );
+	}
+
+	/**
+	 * 
+	 * @param contaReceber
+	 * @return
+	 */
+	public ContaReceber cancelarContaReceber( ContaReceber contaReceber )
+	{
+		Assert.notNull( contaReceber, "O objeto não pode ser nulo" );
+		Assert.isNull( contaReceber.getVenda(), "Não é possível cancelar a conta, pois a mesma está associada à uma venda" );
+		Assert.isTrue( contaReceber.getStatusConta() != StatusConta.CANCELADA, "A conta está cancelada" );
+		Assert.isTrue( contaReceber.getStatusConta() != StatusConta.PAGA, "A conta já está paga" );
+
+		contaReceber.setStatusConta( StatusConta.CANCELADA );
+
 		return this.contaReceberRepository.save( contaReceber );
 	}
 

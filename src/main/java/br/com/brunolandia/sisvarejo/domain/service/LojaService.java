@@ -1,6 +1,5 @@
 package br.com.brunolandia.sisvarejo.domain.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
@@ -12,6 +11,7 @@ import org.springframework.util.Assert;
 
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaReceber;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.StatusConta;
 import br.com.brunolandia.sisvarejo.domain.entity.loja.Cliente;
 import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.ItemVenda;
 import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.Venda;
@@ -43,12 +43,6 @@ public class LojaService
 	 * 
 	 */
 	@Autowired
-	private FinanceiroService financeiroService;
-
-	/**
-	 * 
-	 */
-	@Autowired
 	private EstoqueService estoqueService;
 
 	/**
@@ -56,13 +50,9 @@ public class LojaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Cliente> listClientesByStatus( Boolean status )
+	public List<Cliente> listClientes()
 	{
-		if ( status == null )
-		{
-			return this.clienteRepository.findAll();
-		}
-		return this.clienteRepository.findByAtivo( status );
+		return this.clienteRepository.findAll();
 	}
 
 	/**
@@ -87,7 +77,6 @@ public class LojaService
 	public Cliente insertCliente( Cliente cliente )
 	{
 		Assert.notNull( cliente, "O objeto não pode ser nulo!" );
-		cliente.setAtivo( true );
 		return this.clienteRepository.save( cliente );
 	}
 
@@ -113,6 +102,17 @@ public class LojaService
 
 	/**
 	 * 
+	 * @param codigo
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Cliente findClienteByCodigo( String codigo )
+	{
+		return this.clienteRepository.findByCodigo( codigo );
+	}
+
+	/**
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -132,13 +132,6 @@ public class LojaService
 		Assert.notNull( venda, "Erro! A venda não pode estar nula!" );
 
 		/**
-		 * Cadastra uma conta a receber
-		 */
-		ContaReceber contaReceberDaVenda = new ContaReceber();
-		contaReceberDaVenda.setVenda( venda );
-		financeiroService.insertContaReceber( contaReceberDaVenda );
-
-		/**
 		 * Atualiza a quantidade dos produtos comprados
 		 */
 		for ( ItemVenda itemVenda : venda.getItensVenda() )
@@ -147,8 +140,13 @@ public class LojaService
 			produto.setQuantidade( produto.getQuantidade() - itemVenda.getQuantidade() );
 			this.estoqueService.updateProduto( produto );
 		}
-
-		venda.setDataVenda( new Date() );
+		
+		venda = this.vendaRepository.save( venda );
+		for (ContaReceber contaReceber: venda.getContasAReceber())
+		{
+			contaReceber.setVenda( venda );
+		}
+		
 		return this.vendaRepository.save( venda );
 	}
 
@@ -192,6 +190,36 @@ public class LojaService
 	public Venda findVendaById( final Long vendaId )
 	{
 		return this.vendaRepository.findOne( vendaId );
+	}
+	
+	/**
+	 * 
+	 * @param venda
+	 * @return
+	 */
+	public Venda cancelarVenda(Venda venda)
+	{
+		Venda vendaBanco = this.vendaRepository.findOne( venda.getId() );
+		
+		Assert.notNull( venda.getObservacao(), "A observação não pode estar vazia!" );
+		vendaBanco.setObservacao( venda.getObservacao() );
+		vendaBanco.setCancelada( true );
+		
+		for (ContaReceber contaReceber: venda.getContasAReceber())
+		{
+			Assert.isTrue( contaReceber.getStatusConta() != StatusConta.PAGA, "Não é possível cancelar a venda, pois há um pagamento registrado!" );
+			contaReceber.setStatusConta( StatusConta.CANCELADA );
+		}
+		
+		for (ItemVenda itemVenda: venda.getItensVenda())
+		{
+			Produto produto = itemVenda.getProduto();
+			produto.setQuantidade( produto.getQuantidade() + itemVenda.getQuantidade() );
+			this.estoqueService.updateProduto( produto );
+		}
+		
+		venda = this.vendaRepository.save( vendaBanco );
+		return venda;
 	}
 
 	/**

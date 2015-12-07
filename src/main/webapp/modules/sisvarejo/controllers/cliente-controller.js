@@ -6,6 +6,7 @@
 
         $importService("lojaService");
         $importService("caracteristicaService");
+        $importService("financeiroService");
         $importService("localizacaoService");
 
         /**
@@ -65,6 +66,12 @@
             entidade: {},
             query: {
                 order: 'nome'
+            },
+            filtros: {
+                nome: null,
+                apelido: null,
+                cpf: null,
+                rg: null
             }
         };
 
@@ -205,158 +212,15 @@
          *
          */
         $scope.carregarLista = function () {
-            lojaService.listClientesByStatus(null, {
-                callback: function (result) {
-                    $scope.model.content = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        }
-
-        /**
-         *
-         */
-        $scope.carregarListaPaises = function () {
-            localizacaoService.listPaises({
-                callback: function (result) {
-                    $scope.model.paises = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        }
-
-        /**
-         *
-         * @param pais
-         */
-        $scope.paisChanged = function () {
-            localizacaoService.listEstadosByPais($scope.model.pais, {
-                callback: function (result) {
-                    $scope.model.estados = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        }
-
-        /**
-         *
-         * @param estado
-         */
-        $scope.estadoChanged = function () {
-            localizacaoService.listCidadesByEstado($scope.model.estado, {
-                callback: function (result) {
-                    $scope.model.cidades = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        }
-
-        /**
-         *
-         */
-        $scope.carregarListaCidadesByEstado = function (estado) {
-            localizacaoService.listTamanhos({
-                callback: function (result) {
-                    $scope.model.tamanhos = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        };
-
-        /**
-         *
-         */
-        $scope.carregarListaClientes = function () {
-            caracteristicaService.listCidades({
-                callback: function (result) {
-                    $scope.model.cidades = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        };
-
-        /**
-         *
-         * @param ev
-         */
-        $scope.abrirPopupNovaEntidade = function (ev) {
-            $mdDialog.show({
-                controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-fornecedor.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
-                .then(function (result) {
-
-                    $scope.currentPage.push(result);
-
-                    var toast = $mdToast.simple()
-                        .content('Registro salvo com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-
-                }, function () {
-                    //tratar o "cancelar" da popup
+            lojaService.listClientesByFilters($scope.model.filtros.nome, $scope.model.filtros.apelido,
+                $scope.model.filtros.cpf, $scope.model.filtros.rg, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, exception) {
+                        $mdToast.showSimple(message)
+                    }
                 });
         }
 
@@ -366,63 +230,36 @@
          */
         $scope.abrirPopupBuscaCondicao = function (ev) {
             $mdDialog.show({
-                controller: 'BuscaCondicaoDialogController',
-                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: 'BuscaCondicaoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
-                    $scope.model.entidade.condicao = result;
+                    $scope.model.entidade.condicaoPagamento = result;
 
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
         }
 
-        /**
-         *
-         * @param fornecedor
-         * @param status
-         */
-        $scope.mudarStatusCliente = function (cliente, status) {
-            cliente.ativo = status;
-            $scope.atualizarCliente(cliente);
-        }
+        $scope.buscaCondicaoByCodigo = function () {
+            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+                callback: function (result) {
+                    if (result != null)
+                        $scope.model.entidade.condicaoPagamento = result;
 
-        /**
-         *
-         * @param ev
-         * @param entidade
-         */
-        $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
-            $mdDialog.show({
-                controller: ClienteDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-fornecedor.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                bindToController: true,
-                locals: {
-                    entidadeExterna: angular.copy(entidade)
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
-                .then(function (result) {
-                    var i = $scope.findByIdInArray($scope.currentPage, result);
-                    $scope.currentPage[i] = result;
-                    var toast = $mdToast.simple()
-                        .content('Registro salvo com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }, function () {
-                    //tratar o "cancelar" da popup
-                });
-        }
+        };
 
         /**
          *
@@ -492,17 +329,17 @@
          * @param ev
          * @param id
          */
-        $scope.excluirCliente = function (ev, fornecedor) {
+        $scope.excluirCliente = function (ev, cliente) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Cliente')
-                .content('Tem certeza que deseja excluir o registros? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o cliente "' + cliente.nome + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Cliente')
                 .ok('Sim')
                 .cancel('Cancelar')
                 .targetEvent(ev);
 
             $mdDialog.show(confirm).then(function () {
-                lojaService.removeCliente(fornecedor, {
+                lojaService.removeCliente(cliente, {
                     callback: function () {
                         var toast = $mdToast.simple()
                             .content('Registro excluído com sucesso!')
@@ -512,7 +349,7 @@
                         $mdToast.show(toast).then(function () {
                         });
 
-                        var i = $scope.findByIdInArray($scope.model.content, fornecedor);
+                        var i = $scope.findByIdInArray($scope.model.content, cliente);
                         if (i > -1) {
                             $scope.model.content.splice(i, 1);
                         }
@@ -549,27 +386,18 @@
 
         /**
          *
-         */
-        $scope.limparSelecao = function () {
-            $scope.data.itensExcluir = [];
-            table.clearSelection();
-            $rootScope.$broadcast('showEitsBottomSheetEvent');
-        };
-
-        /**
-         *
          * @param ev
          */
         $scope.abrirPopupNovoPais = function (ev) {
             $mdDialog.show({
-                controller: 'PaisDialogController',
-                templateUrl: './modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: 'PaisDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     $scope.model.paises.push(result);
@@ -595,14 +423,14 @@
          */
         $scope.abrirPopupNovoEstado = function (ev) {
             $mdDialog.show({
-                controller: 'EstadoDialogController',
-                templateUrl: './modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: 'EstadoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     $scope.model.estados.push(result);
@@ -629,14 +457,14 @@
          */
         $scope.abrirPopupCidade = function (ev) {
             $mdDialog.show({
-                controller: 'CidadeDialogController',
-                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    entidadeExterna: null
-                }
-            })
+                    controller: 'CidadeDialogController',
+                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
                 .then(function (result) {
 
                     //$scope.model.cidades.push(result);
@@ -772,14 +600,14 @@
          */
         $scope.listCondicoes = function () {
             financeiroService.listCondicoesByFilters($scope.model.filtros.descricao, {
-                    callback: function (result) {
-                        $scope.model.content = result;
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, exception) {
-                        $mdToast.showSimple(message)
-                    }
-                });
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, exception) {
+                    $mdToast.showSimple(message)
+                }
+            });
         };
 
         /**

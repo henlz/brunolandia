@@ -1,6 +1,6 @@
 package br.com.brunolandia.sisvarejo.domain.entity.loja.venda;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import org.directwebremoting.annotations.DataTransferObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.Condicao;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaReceber;
 import br.com.brunolandia.sisvarejo.domain.entity.loja.Cliente;
 import br.com.eits.common.domain.entity.AbstractEntity;
 
@@ -30,35 +32,7 @@ public class Venda extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8782870129844177610L;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal valorFrete;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal valorSeguro;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal desconto;
-
-	/**
-	 * 
-	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal outrasDespesas;
+	private static final long serialVersionUID = 3024445904392216550L;
 
 	/**
 	 * 
@@ -70,6 +44,26 @@ public class Venda extends AbstractEntity
 	/**
 	 * 
 	 */
+	@NotNull
+	@Column(nullable = false)
+	private String serie;
+
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private String modelo;
+	
+	/**
+	 * 
+	 */
+	@Column
+	private String observacao;
+
+	/**
+	 * 
+	 */
 	@NotEmpty
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ItemVenda> itensVenda;
@@ -77,14 +71,15 @@ public class Venda extends AbstractEntity
 	/**
 	 * 
 	 */
+	@NotNull
 	@Column(nullable = false)
-	private Date dataVenda;
-
+	private Date dataEmissao;
+	
 	/**
 	 * 
 	 */
-	@Column(nullable = false)
-	private Date dataEmissao;
+	@Column
+	private Date dataChegada;
 
 	/**
 	 * 
@@ -96,98 +91,56 @@ public class Venda extends AbstractEntity
 	/**
 	 * 
 	 */
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ContaReceber> contasAReceber = new ArrayList<>();
+
+	/**
+	 * 
+	 */
+	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Condicao condicaoPagamento;
+	
+	/**
+	 * 
+	 */
+	@Column
+	private Boolean cancelada;
+
+	/**
+	 * 
+	 */
 	public Venda()
 	{
 		super();
 	}
 
 	/**
-	 * @param valorFrete
-	 * @param valorSeguro
-	 * @param desconto
-	 * @param outrasDespesas
 	 * @param numeroNfe
+	 * @param serie
+	 * @param modelo
+	 * @param observacao
 	 * @param itensVenda
-	 * @param dataVenda
 	 * @param dataEmissao
 	 * @param cliente
+	 * @param contasAReceber
+	 * @param condicaoPagamento
+	 * @param cancelada
 	 */
-	public Venda( Long id, BigDecimal valorFrete, BigDecimal valorSeguro, BigDecimal desconto, BigDecimal outrasDespesas, String numeroNfe, List<ItemVenda> itensVenda, Date dataVenda, Date dataEmissao, Cliente cliente )
+	public Venda( String numeroNfe, String serie, String modelo, String observacao, List<ItemVenda> itensVenda, Date dataEmissao, Date dataChegada, Cliente cliente, List<ContaReceber> contasAReceber, Condicao condicaoPagamento, Boolean cancelada )
 	{
-		super( id );
-		this.valorFrete = valorFrete;
-		this.valorSeguro = valorSeguro;
-		this.desconto = desconto;
-		this.outrasDespesas = outrasDespesas;
+		super();
 		this.numeroNfe = numeroNfe;
+		this.serie = serie;
+		this.modelo = modelo;
+		this.observacao = observacao;
 		this.itensVenda = itensVenda;
-		this.dataVenda = dataVenda;
 		this.dataEmissao = dataEmissao;
+		this.dataChegada = dataChegada;
 		this.cliente = cliente;
-	}
-
-	/**
-	 * @return the valorFrete
-	 */
-	public BigDecimal getValorFrete()
-	{
-		return valorFrete;
-	}
-
-	/**
-	 * @param valorFrete the valorFrete to set
-	 */
-	public void setValorFrete( BigDecimal valorFrete )
-	{
-		this.valorFrete = valorFrete;
-	}
-
-	/**
-	 * @return the valorSeguro
-	 */
-	public BigDecimal getValorSeguro()
-	{
-		return valorSeguro;
-	}
-
-	/**
-	 * @param valorSeguro the valorSeguro to set
-	 */
-	public void setValorSeguro( BigDecimal valorSeguro )
-	{
-		this.valorSeguro = valorSeguro;
-	}
-
-	/**
-	 * @return the desconto
-	 */
-	public BigDecimal getDesconto()
-	{
-		return desconto;
-	}
-
-	/**
-	 * @param desconto the desconto to set
-	 */
-	public void setDesconto( BigDecimal desconto )
-	{
-		this.desconto = desconto;
-	}
-
-	/**
-	 * @return the outrasDespesas
-	 */
-	public BigDecimal getOutrasDespesas()
-	{
-		return outrasDespesas;
-	}
-
-	/**
-	 * @param outrasDespesas the outrasDespesas to set
-	 */
-	public void setOutrasDespesas( BigDecimal outrasDespesas )
-	{
-		this.outrasDespesas = outrasDespesas;
+		this.contasAReceber = contasAReceber;
+		this.condicaoPagamento = condicaoPagamento;
+		this.cancelada = cancelada;
 	}
 
 	/**
@@ -207,6 +160,54 @@ public class Venda extends AbstractEntity
 	}
 
 	/**
+	 * @return the serie
+	 */
+	public String getSerie()
+	{
+		return serie;
+	}
+
+	/**
+	 * @param serie the serie to set
+	 */
+	public void setSerie( String serie )
+	{
+		this.serie = serie;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public String getModelo()
+	{
+		return modelo;
+	}
+
+	/**
+	 * @param modelo the modelo to set
+	 */
+	public void setModelo( String modelo )
+	{
+		this.modelo = modelo;
+	}
+
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao()
+	{
+		return observacao;
+	}
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao( String observacao )
+	{
+		this.observacao = observacao;
+	}
+
+	/**
 	 * @return the itensVenda
 	 */
 	public List<ItemVenda> getItensVenda()
@@ -220,22 +221,6 @@ public class Venda extends AbstractEntity
 	public void setItensVenda( List<ItemVenda> itensVenda )
 	{
 		this.itensVenda = itensVenda;
-	}
-
-	/**
-	 * @return the dataVenda
-	 */
-	public Date getDataVenda()
-	{
-		return dataVenda;
-	}
-
-	/**
-	 * @param dataVenda the dataVenda to set
-	 */
-	public void setDataVenda( Date dataVenda )
-	{
-		this.dataVenda = dataVenda;
 	}
 
 	/**
@@ -271,6 +256,54 @@ public class Venda extends AbstractEntity
 	}
 
 	/**
+	 * @return the contasAReceber
+	 */
+	public List<ContaReceber> getContasAReceber()
+	{
+		return contasAReceber;
+	}
+
+	/**
+	 * @param contasAReceber the contasAReceber to set
+	 */
+	public void setContasAReceber( List<ContaReceber> contasAReceber )
+	{
+		this.contasAReceber = contasAReceber;
+	}
+
+	/**
+	 * @return the condicaoPagamento
+	 */
+	public Condicao getCondicaoPagamento()
+	{
+		return condicaoPagamento;
+	}
+
+	/**
+	 * @param condicaoPagamento the condicaoPagamento to set
+	 */
+	public void setCondicaoPagamento( Condicao condicaoPagamento )
+	{
+		this.condicaoPagamento = condicaoPagamento;
+	}
+
+	/**
+	 * @return the cancelada
+	 */
+	public Boolean getCancelada()
+	{
+		return cancelada;
+	}
+
+	/**
+	 * @param cancelada the cancelada to set
+	 */
+	public void setCancelada( Boolean cancelada )
+	{
+		this.cancelada = cancelada;
+	}
+
+	/**
 	 * @return the serialversionuid
 	 */
 	public static long getSerialversionuid()
@@ -278,8 +311,23 @@ public class Venda extends AbstractEntity
 		return serialVersionUID;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * @return the dataChegada
+	 */
+	public Date getDataChegada()
+	{
+		return dataChegada;
+	}
+
+	/**
+	 * @param dataChegada the dataChegada to set
+	 */
+	public void setDataChegada( Date dataChegada )
+	{
+		this.dataChegada = dataChegada;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -287,20 +335,21 @@ public class Venda extends AbstractEntity
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( dataVenda == null ) ? 0 : dataVenda.hashCode() );
-		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
-		result = prime * result + ( ( desconto == null ) ? 0 : desconto.hashCode() );
+		result = prime * result + ( ( cancelada == null ) ? 0 : cancelada.hashCode() );
 		result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
+		result = prime * result + ( ( condicaoPagamento == null ) ? 0 : condicaoPagamento.hashCode() );
+		result = prime * result + ( ( contasAReceber == null ) ? 0 : contasAReceber.hashCode() );
+		result = prime * result + ( ( dataChegada == null ) ? 0 : dataChegada.hashCode() );
+		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
 		result = prime * result + ( ( itensVenda == null ) ? 0 : itensVenda.hashCode() );
+		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
 		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
-		result = prime * result + ( ( outrasDespesas == null ) ? 0 : outrasDespesas.hashCode() );
-		result = prime * result + ( ( valorFrete == null ) ? 0 : valorFrete.hashCode() );
-		result = prime * result + ( ( valorSeguro == null ) ? 0 : valorSeguro.hashCode() );
+		result = prime * result + ( ( observacao == null ) ? 0 : observacao.hashCode() );
+		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -310,52 +359,62 @@ public class Venda extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Venda other = ( Venda ) obj;
-		if ( dataVenda == null )
+		if ( cancelada == null )
 		{
-			if ( other.dataVenda != null ) return false;
+			if ( other.cancelada != null ) return false;
 		}
-		else if ( !dataVenda.equals( other.dataVenda ) ) return false;
-		if ( dataEmissao == null )
-		{
-			if ( other.dataEmissao != null ) return false;
-		}
-		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
-		if ( desconto == null )
-		{
-			if ( other.desconto != null ) return false;
-		}
-		else if ( !desconto.equals( other.desconto ) ) return false;
+		else if ( !cancelada.equals( other.cancelada ) ) return false;
 		if ( cliente == null )
 		{
 			if ( other.cliente != null ) return false;
 		}
 		else if ( !cliente.equals( other.cliente ) ) return false;
+		if ( condicaoPagamento == null )
+		{
+			if ( other.condicaoPagamento != null ) return false;
+		}
+		else if ( !condicaoPagamento.equals( other.condicaoPagamento ) ) return false;
+		if ( contasAReceber == null )
+		{
+			if ( other.contasAReceber != null ) return false;
+		}
+		else if ( !contasAReceber.equals( other.contasAReceber ) ) return false;
+		if ( dataChegada == null )
+		{
+			if ( other.dataChegada != null ) return false;
+		}
+		else if ( !dataChegada.equals( other.dataChegada ) ) return false;
+		if ( dataEmissao == null )
+		{
+			if ( other.dataEmissao != null ) return false;
+		}
+		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
 		if ( itensVenda == null )
 		{
 			if ( other.itensVenda != null ) return false;
 		}
 		else if ( !itensVenda.equals( other.itensVenda ) ) return false;
+		if ( modelo == null )
+		{
+			if ( other.modelo != null ) return false;
+		}
+		else if ( !modelo.equals( other.modelo ) ) return false;
 		if ( numeroNfe == null )
 		{
 			if ( other.numeroNfe != null ) return false;
 		}
 		else if ( !numeroNfe.equals( other.numeroNfe ) ) return false;
-		if ( outrasDespesas == null )
+		if ( observacao == null )
 		{
-			if ( other.outrasDespesas != null ) return false;
+			if ( other.observacao != null ) return false;
 		}
-		else if ( !outrasDespesas.equals( other.outrasDespesas ) ) return false;
-		if ( valorFrete == null )
+		else if ( !observacao.equals( other.observacao ) ) return false;
+		if ( serie == null )
 		{
-			if ( other.valorFrete != null ) return false;
+			if ( other.serie != null ) return false;
 		}
-		else if ( !valorFrete.equals( other.valorFrete ) ) return false;
-		if ( valorSeguro == null )
-		{
-			if ( other.valorSeguro != null ) return false;
-		}
-		else if ( !valorSeguro.equals( other.valorSeguro ) ) return false;
+		else if ( !serie.equals( other.serie ) ) return false;
 		return true;
 	}
-
+	
 }

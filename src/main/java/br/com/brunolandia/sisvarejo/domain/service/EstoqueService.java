@@ -14,6 +14,7 @@ import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.Compra;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.ItemCompra;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaPagar;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IFornecedorRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IProdutoRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.compra.ICompraRepository;
@@ -132,9 +133,9 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Fornecedor> listFornecedoresByFilters( String razaoSocial, String nomeFantasia, String telefone, String cnpj )
+	public List<Fornecedor> listFornecedoresByFilters( String razaoSocial, String nomeFantasia, String telefone, String cnpj, Boolean transportadora )
 	{
-		return this.fornecedorRepository.listByFilters( razaoSocial, nomeFantasia, telefone, cnpj );
+		return this.fornecedorRepository.listByFilters( razaoSocial, nomeFantasia, telefone, cnpj, transportadora );
 	}
 
 	/**
@@ -178,6 +179,17 @@ public class EstoqueService
 	{
 		return this.fornecedorRepository.findOne( id );
 	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Fornecedor findFornecedorByCodigo( final String codigo, Boolean transportadora )
+	{
+		return this.fornecedorRepository.findByCodigoTransportadora( codigo, transportadora );
+	}
 
 	/**
 	 * 
@@ -193,7 +205,7 @@ public class EstoqueService
 	 * @param compra
 	 * @return
 	 */
-	public Compra insertCompra( final Compra compra )
+	public Compra insertCompra( Compra compra )
 	{
 		for ( ItemCompra itemCompra : compra.getItensCompra() )
 		{
@@ -206,7 +218,16 @@ public class EstoqueService
 			itemCompra.setProduto( this.produtoRepository.save( produto ) );
 			this.itemCompraRepository.save( itemCompra );
 		}
-		return this.compraRepository.save( compra );
+		
+		compra = this.compraRepository.save( compra );
+		
+		for (ContaPagar contaPagar: compra.getContasAPagar())
+		{
+			contaPagar.setCompra( compra );
+		}
+		
+		compra = this.compraRepository.save( compra );
+		return compra;
 	}
 
 	/**

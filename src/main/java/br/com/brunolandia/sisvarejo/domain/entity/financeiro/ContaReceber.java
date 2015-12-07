@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.brunolandia.sisvarejo.domain.entity.loja.Cliente;
 import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.Venda;
@@ -42,6 +41,13 @@ public class ContaReceber extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private String serie;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private String modelo;
 
 	/**
 	 * 
@@ -53,9 +59,15 @@ public class ContaReceber extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable = false)
-	@NotEmpty
+	@Column(nullable = false, precision=10, scale=2)
+	@NotNull
 	private BigDecimal valor;
+	
+	/**
+	 * 
+	 */
+	@Column(precision=10, scale=2)
+	private BigDecimal percentual;
 
 	/**
 	 * 
@@ -68,18 +80,6 @@ public class ContaReceber extends AbstractEntity
 	 */
 	@Column
 	private String observacoes;
-
-	/**
-	 * 
-	 */
-	@Column
-	private Date emissao;
-
-	/**
-	 * 
-	 */
-	@Column
-	private Date vencimento;
 
 	/**
 	 * 
@@ -112,6 +112,12 @@ public class ContaReceber extends AbstractEntity
 	 */
 	@Column
 	private Date dataEmissao;
+	
+	/**
+	 * 
+	 */
+	@Column
+	private StatusConta statusConta;
 
 	/**
 	 * 
@@ -135,23 +141,24 @@ public class ContaReceber extends AbstractEntity
 	 * @param dataEmissao
 	 * @param venda
 	 */
-	public ContaReceber( Long id, String numeroNota, String serie, String numeroParcela, BigDecimal valor, String descricao, String observacoes, Date emissao, Date vencimento, Cliente cliente, FormaPagamento formaPagamento, Date dataPagamento, Date dataVencimento, Date dataEmissao, Venda venda )
+	public ContaReceber( Long id, String numeroNota, String serie, String modelo, String numeroParcela, BigDecimal valor, BigDecimal percentual, String descricao, String observacoes, Cliente cliente, FormaPagamento formaPagamento, Date dataPagamento, Date dataVencimento, Date dataEmissao, Venda venda, StatusConta statusConta )
 	{
 		super( id );
 		this.numeroNota = numeroNota;
 		this.serie = serie;
+		this.modelo = modelo;
 		this.numeroParcela = numeroParcela;
 		this.valor = valor;
 		this.descricao = descricao;
 		this.observacoes = observacoes;
-		this.emissao = emissao;
-		this.vencimento = vencimento;
 		this.cliente = cliente;
 		this.formaPagamento = formaPagamento;
 		this.dataPagamento = dataPagamento;
 		this.dataVencimento = dataVencimento;
 		this.dataEmissao = dataEmissao;
 		this.venda = venda;
+		this.percentual = percentual;
+		this.statusConta = statusConta;
 	}
 
 	public ContaReceber()
@@ -256,38 +263,6 @@ public class ContaReceber extends AbstractEntity
 	}
 
 	/**
-	 * @return the emissao
-	 */
-	public Date getEmissao()
-	{
-		return emissao;
-	}
-
-	/**
-	 * @param emissao the emissao to set
-	 */
-	public void setEmissao( Date emissao )
-	{
-		this.emissao = emissao;
-	}
-
-	/**
-	 * @return the vencimento
-	 */
-	public Date getVencimento()
-	{
-		return vencimento;
-	}
-
-	/**
-	 * @param vencimento the vencimento to set
-	 */
-	public void setVencimento( Date vencimento )
-	{
-		this.vencimento = vencimento;
-	}
-
-	/**
 	 * @return the cliente
 	 */
 	public Cliente getCliente()
@@ -381,6 +356,164 @@ public class ContaReceber extends AbstractEntity
 	public void setVenda( Venda venda )
 	{
 		this.venda = venda;
+	}
+
+	/**
+	 * @return the percentual
+	 */
+	public BigDecimal getPercentual()
+	{
+		return percentual;
+	}
+
+	/**
+	 * @param percentual the percentual to set
+	 */
+	public void setPercentual( BigDecimal percentual )
+	{
+		this.percentual = percentual;
+	}
+
+	/**
+	 * @return the statusConta
+	 */
+	public StatusConta getStatusConta()
+	{
+		return statusConta;
+	}
+
+	/**
+	 * @param statusConta the statusConta to set
+	 */
+	public void setStatusConta( StatusConta statusConta )
+	{
+		this.statusConta = statusConta;
+	}
+
+	/**
+	 * @return the modelo
+	 */
+	public String getModelo()
+	{
+		return modelo;
+	}
+
+	/**
+	 * @param modelo the modelo to set
+	 */
+	public void setModelo( String modelo )
+	{
+		this.modelo = modelo;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ( ( cliente == null ) ? 0 : cliente.hashCode() );
+		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
+		result = prime * result + ( ( dataPagamento == null ) ? 0 : dataPagamento.hashCode() );
+		result = prime * result + ( ( dataVencimento == null ) ? 0 : dataVencimento.hashCode() );
+		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
+		result = prime * result + ( ( formaPagamento == null ) ? 0 : formaPagamento.hashCode() );
+		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
+		result = prime * result + ( ( numeroNota == null ) ? 0 : numeroNota.hashCode() );
+		result = prime * result + ( ( numeroParcela == null ) ? 0 : numeroParcela.hashCode() );
+		result = prime * result + ( ( observacoes == null ) ? 0 : observacoes.hashCode() );
+		result = prime * result + ( ( percentual == null ) ? 0 : percentual.hashCode() );
+		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
+		result = prime * result + ( ( statusConta == null ) ? 0 : statusConta.hashCode() );
+		result = prime * result + ( ( valor == null ) ? 0 : valor.hashCode() );
+		result = prime * result + ( ( venda == null ) ? 0 : venda.hashCode() );
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals( Object obj )
+	{
+		if ( this == obj ) return true;
+		if ( !super.equals( obj ) ) return false;
+		if ( getClass() != obj.getClass() ) return false;
+		ContaReceber other = ( ContaReceber ) obj;
+		if ( cliente == null )
+		{
+			if ( other.cliente != null ) return false;
+		}
+		else if ( !cliente.equals( other.cliente ) ) return false;
+		if ( dataEmissao == null )
+		{
+			if ( other.dataEmissao != null ) return false;
+		}
+		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
+		if ( dataPagamento == null )
+		{
+			if ( other.dataPagamento != null ) return false;
+		}
+		else if ( !dataPagamento.equals( other.dataPagamento ) ) return false;
+		if ( dataVencimento == null )
+		{
+			if ( other.dataVencimento != null ) return false;
+		}
+		else if ( !dataVencimento.equals( other.dataVencimento ) ) return false;
+		if ( descricao == null )
+		{
+			if ( other.descricao != null ) return false;
+		}
+		else if ( !descricao.equals( other.descricao ) ) return false;
+		if ( formaPagamento == null )
+		{
+			if ( other.formaPagamento != null ) return false;
+		}
+		else if ( !formaPagamento.equals( other.formaPagamento ) ) return false;
+		if ( modelo == null )
+		{
+			if ( other.modelo != null ) return false;
+		}
+		else if ( !modelo.equals( other.modelo ) ) return false;
+		if ( numeroNota == null )
+		{
+			if ( other.numeroNota != null ) return false;
+		}
+		else if ( !numeroNota.equals( other.numeroNota ) ) return false;
+		if ( numeroParcela == null )
+		{
+			if ( other.numeroParcela != null ) return false;
+		}
+		else if ( !numeroParcela.equals( other.numeroParcela ) ) return false;
+		if ( observacoes == null )
+		{
+			if ( other.observacoes != null ) return false;
+		}
+		else if ( !observacoes.equals( other.observacoes ) ) return false;
+		if ( percentual == null )
+		{
+			if ( other.percentual != null ) return false;
+		}
+		else if ( !percentual.equals( other.percentual ) ) return false;
+		if ( serie == null )
+		{
+			if ( other.serie != null ) return false;
+		}
+		else if ( !serie.equals( other.serie ) ) return false;
+		if ( statusConta != other.statusConta ) return false;
+		if ( valor == null )
+		{
+			if ( other.valor != null ) return false;
+		}
+		else if ( !valor.equals( other.valor ) ) return false;
+		if ( venda == null )
+		{
+			if ( other.venda != null ) return false;
+		}
+		else if ( !venda.equals( other.venda ) ) return false;
+		return true;
 	}
 
 }

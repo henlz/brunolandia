@@ -5,6 +5,7 @@
     angular.module('sisvarejo').controller('CompraController', function ($scope, $rootScope, $state, $http, $mdToast, $window, $log, $injector, $importService, $mdDialog, $mdBottomSheet) {
 
         $importService("estoqueService");
+        $importService("financeiroService");
 
         /**
          * Injeta os métodos, atributos e seus estados herdados de AbstractCRUDController.
@@ -65,7 +66,8 @@
             content: [],
             query: {
                 order: 'descricao'
-            }
+            },
+            fiscal: {}
         }
 
         /**
@@ -230,13 +232,48 @@
                 total += compra.itensCompra[i].quantidade * compra.itensCompra[i].precoCompra;
             }
             return total;
-        }
+        };
+
+        $scope.buscaCondicaoByCodigo = function() {
+            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+                callback: function(result) {
+                    if (result != null)
+                        $scope.model.entidade.condicaoPagamento = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function() {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
+
+        $scope.buscaFornecedorByCodigo = function(transportadora) {
+            estoqueService.findFornecedorByCodigo(transportadora == true ? $scope.model.codigoTransportadora : $scope.model.codigoFornecedor, transportadora, {
+                callback: function(result) {
+                    //if (result != null) {
+                        if (transportadora == true) {
+                            $scope.model.entidade.transportadora = result;
+                        } else {
+                            $scope.model.entidade.fornecedor = result;
+                            $scope.model.entidade.condicaoPagamento = result.condicaoPagamento;
+                        }
+                    //}
+
+                    $scope.$apply();
+                },
+                errorHandler: function(message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
 
         /**
          *
          * @param ev
          */
-        $scope.abrirPopupFornecedor = function (ev, cidade, fornecedor) {
+        $scope.abrirPopupFornecedor = function (ev, cidade, fornecedor, transportadora) {
 
             if (cidade != null) {
                 if ($scope.model.entidade.fornecedor == null) $scope.model.entidade.fornecedor = new Fornecedor();
@@ -252,7 +289,7 @@
                 targetEvent: ev,
                 hasBackdrop: true,
                 locals: {
-                    local: [$scope, fornecedor]
+                    local: [$scope, fornecedor, null, transportadora]
                 }
             })
                 .then(function (result) {
@@ -260,7 +297,30 @@
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
-        }
+        };
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCondicao = function (ev) {
+            $mdDialog.show({
+                    controller: 'BuscaCondicaoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        entidadeExterna: null
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.model.entidade.condicaoPagamento = result;
+
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
 
         /**
          *
@@ -279,18 +339,74 @@
                     itemCompra.produto = result;
                     itemCompra.quantidade = 1;
                     $scope.model.entidade.itensCompra.push(itemCompra);
+
+                    $scope.calculaImpostos();
+                    $scope.gerarContasPagar();
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
+        };
+
+        /**
+         *
+         */
+        $scope.calculaImpostos = function() {
+            $scope.model.fiscal.baseCalculo = $scope.getCompraTotal($scope.model.entidade);
+
+            if ($scope.model.entidade.itensCompra == null || $scope.model.entidade.itensCompra.length == 0) {
+                $scope.model.fiscal.baseCalculo = 0;
+                $scope.model.fiscal.totalIcms = 0;
+                $scope.model.fiscal.totalIpi = 0;
+                $scope.model.fiscal.totalProduto = 0;
+                return 0;
+            }
+            var total = 0;
+            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++){
+                total += $scope.model.entidade.itensCompra[i].precoCompra * $scope.model.entidade.itensCompra[i].produto.icms.porcentagem / 100;
+            }
+            $scope.model.fiscal.totalIcms = total;
+
+            var totalIpi = 0;
+            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++){
+                totalIpi += $scope.model.entidade.itensCompra[i].precoCompra * $scope.model.entidade.itensCompra[i].produto.IPI / 100;
+            }
+            $scope.model.fiscal.totalIpi = totalIpi;
+            $scope.model.fiscal.totalProduto = $scope.model.fiscal.baseCalculo - total - totalIpi;
         }
 
         /**
          *
+         */
+         $scope.gerarContasPagar = function() {
+            if ($scope.model.entidade.condicaoPagamento != null && $scope.model.entidade.itensCompra != null && $scope.model.entidade.itensCompra.length > null) {
+
+                $scope.model.entidade.contasAPagar = [];
+
+                for (var i = 0; $scope.model.entidade.condicaoPagamento.parcelas.length > i; i++) {
+
+                    var contaAPagar = new ContaPagar();
+
+                    contaAPagar.numeroParcela = i + 1;
+                    contaAPagar.fornecedor = $scope.model.entidade.fornecedor;
+                    contaAPagar.numeroNota = $scope.model.entidade.numeroNfe;
+                    contaAPagar.serie = $scope.model.entidade.serie;
+                    contaAPagar.modelo = $scope.model.entidade.modelo;
+                    contaAPagar.percentual = $scope.model.entidade.condicaoPagamento.parcelas[i].percentual;
+                    contaAPagar.valor = $scope.getCompraTotal($scope.model.entidade) * $scope.model.entidade.condicaoPagamento.parcelas[i].percentual / 100;
+                    contaAPagar.formaPagamento = $scope.model.entidade.condicaoPagamento.parcelas[i].formaPagamento;
+                    contaAPagar.vencimento = new Date();
+                    contaAPagar.vencimento.setDate($scope.model.entidade.dataEmissao.getDate() + $scope.model.entidade.condicaoPagamento.parcelas[i].dias);
+
+                    $scope.model.entidade.contasAPagar.push(contaAPagar);
+                }
+            }
+        }
+
+         /**
+         *
          * @param numero
          */
         $scope.verificarNfe = function(numero) {
-
-            $log.log(numero);
 
             estoqueService.verificarNfe(numero, {
                 callback:function(result) {
@@ -338,6 +454,7 @@
         $scope.excluirProduto = function (ev, itemCompra) {
             var i = $scope.findByIdInArray($scope.model.entidade.itensCompra, itemCompra);
             $scope.model.entidade.itensCompra.splice(i, 1);
+            $scope.calculaImpostos();
         }
 
         /**
@@ -558,6 +675,7 @@
         $scope.model = {
             entidade: new Fornecedor(),
             fornecedorDialog: local[0],
+            transportadoraFlag: local[3],
             filtros: {
                 nome: "",
                 apelido: "",
@@ -573,6 +691,8 @@
             //$scope.model.viewMode = true;
         }
 
+        if ($scope.model.transportadoraFlag == true) console.log("trnaspo")
+
         // Identifica se a popup foi aberta voltando da popup de cidade
         $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
 
@@ -582,7 +702,7 @@
         $scope.listFornecedoresByFilters = function() {
 
             estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
-                $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.filtros.representante, {
+                $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.transportadoraFlag, {
                 callback: function(result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -675,7 +795,7 @@
                     preserveScope: true,
                     clickOutsideToClose: false,
                     locals: {
-                        local: [$scope.model.fornecedorDialog, entidade, cidade]
+                        local: [$scope.model.fornecedorDialog, entidade, cidade, $scope.model.transportadoraFlag]
                     }
                 })
                 .then(function (result) {

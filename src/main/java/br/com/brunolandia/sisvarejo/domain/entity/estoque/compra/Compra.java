@@ -1,6 +1,7 @@
 package br.com.brunolandia.sisvarejo.domain.entity.estoque.compra;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,12 +48,17 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@ManyToOne
 	private Condicao condicaoPagamento;
+	
+	/**
+	 * 
+	 */
+	@Column
+	private String observacao;
 
 	/**
 	 * 
 	 */
-	@NotNull
-	@Column(nullable = false)
+	@Column
 	private BigDecimal frete;
 
 	/**
@@ -92,7 +98,7 @@ public class Compra extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable = false)
+	@Column
 	private Date dataChegada;
 
 	/**
@@ -111,20 +117,27 @@ public class Compra extends AbstractEntity
 	/**
 	 * 
 	 */
-	@NotNull
 	@ManyToOne
 	private Fornecedor transportadora;
 
 	/**
 	 * 
 	 */
-	@NotNull
-	@OneToMany
-	private List<ContaPagar> contasAPagar;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ContaPagar> contasAPagar = new ArrayList<ContaPagar>();
+	
+	/**
+	 * 
+	 */
+	public Compra()
+	{
+		super();
+	}
 
 	/**
 	 * @param valorFrete
 	 * @param condicaoPagamento
+	 * @param observacao
 	 * @param frete
 	 * @param outrasDespesas
 	 * @param numeroNfe
@@ -137,11 +150,12 @@ public class Compra extends AbstractEntity
 	 * @param transportadora
 	 * @param contasAPagar
 	 */
-	public Compra( BigDecimal valorFrete, Condicao condicaoPagamento, BigDecimal frete, BigDecimal outrasDespesas, String numeroNfe, String serie, String modelo, List<ItemCompra> itensCompra, Date dataChegada, Date dataEmissao, Fornecedor fornecedor, Fornecedor transportadora, List<ContaPagar> contasAPagar )
+	public Compra( BigDecimal valorFrete, Condicao condicaoPagamento, String observacao, BigDecimal frete, BigDecimal outrasDespesas, String numeroNfe, String serie, String modelo, List<ItemCompra> itensCompra, Date dataChegada, Date dataEmissao, Fornecedor fornecedor, Fornecedor transportadora, List<ContaPagar> contasAPagar )
 	{
 		super();
 		this.valorFrete = valorFrete;
 		this.condicaoPagamento = condicaoPagamento;
+		this.observacao = observacao;
 		this.frete = frete;
 		this.outrasDespesas = outrasDespesas;
 		this.numeroNfe = numeroNfe;
@@ -153,6 +167,114 @@ public class Compra extends AbstractEntity
 		this.fornecedor = fornecedor;
 		this.transportadora = transportadora;
 		this.contasAPagar = contasAPagar;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ( ( condicaoPagamento == null ) ? 0 : condicaoPagamento.hashCode() );
+		result = prime * result + ( ( contasAPagar == null ) ? 0 : contasAPagar.hashCode() );
+		result = prime * result + ( ( dataChegada == null ) ? 0 : dataChegada.hashCode() );
+		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
+		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
+		result = prime * result + ( ( frete == null ) ? 0 : frete.hashCode() );
+		result = prime * result + ( ( itensCompra == null ) ? 0 : itensCompra.hashCode() );
+		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
+		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
+		result = prime * result + ( ( observacao == null ) ? 0 : observacao.hashCode() );
+		result = prime * result + ( ( outrasDespesas == null ) ? 0 : outrasDespesas.hashCode() );
+		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
+		result = prime * result + ( ( transportadora == null ) ? 0 : transportadora.hashCode() );
+		result = prime * result + ( ( valorFrete == null ) ? 0 : valorFrete.hashCode() );
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals( Object obj )
+	{
+		if ( this == obj ) return true;
+		if ( !super.equals( obj ) ) return false;
+		if ( getClass() != obj.getClass() ) return false;
+		Compra other = ( Compra ) obj;
+		if ( condicaoPagamento == null )
+		{
+			if ( other.condicaoPagamento != null ) return false;
+		}
+		else if ( !condicaoPagamento.equals( other.condicaoPagamento ) ) return false;
+		if ( contasAPagar == null )
+		{
+			if ( other.contasAPagar != null ) return false;
+		}
+		else if ( !contasAPagar.equals( other.contasAPagar ) ) return false;
+		if ( dataChegada == null )
+		{
+			if ( other.dataChegada != null ) return false;
+		}
+		else if ( !dataChegada.equals( other.dataChegada ) ) return false;
+		if ( dataEmissao == null )
+		{
+			if ( other.dataEmissao != null ) return false;
+		}
+		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
+		if ( fornecedor == null )
+		{
+			if ( other.fornecedor != null ) return false;
+		}
+		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
+		if ( frete == null )
+		{
+			if ( other.frete != null ) return false;
+		}
+		else if ( !frete.equals( other.frete ) ) return false;
+		if ( itensCompra == null )
+		{
+			if ( other.itensCompra != null ) return false;
+		}
+		else if ( !itensCompra.equals( other.itensCompra ) ) return false;
+		if ( modelo == null )
+		{
+			if ( other.modelo != null ) return false;
+		}
+		else if ( !modelo.equals( other.modelo ) ) return false;
+		if ( numeroNfe == null )
+		{
+			if ( other.numeroNfe != null ) return false;
+		}
+		else if ( !numeroNfe.equals( other.numeroNfe ) ) return false;
+		if ( observacao == null )
+		{
+			if ( other.observacao != null ) return false;
+		}
+		else if ( !observacao.equals( other.observacao ) ) return false;
+		if ( outrasDespesas == null )
+		{
+			if ( other.outrasDespesas != null ) return false;
+		}
+		else if ( !outrasDespesas.equals( other.outrasDespesas ) ) return false;
+		if ( serie == null )
+		{
+			if ( other.serie != null ) return false;
+		}
+		else if ( !serie.equals( other.serie ) ) return false;
+		if ( transportadora == null )
+		{
+			if ( other.transportadora != null ) return false;
+		}
+		else if ( !transportadora.equals( other.transportadora ) ) return false;
+		if ( valorFrete == null )
+		{
+			if ( other.valorFrete != null ) return false;
+		}
+		else if ( !valorFrete.equals( other.valorFrete ) ) return false;
+		return true;
 	}
 
 	/**
@@ -185,6 +307,22 @@ public class Compra extends AbstractEntity
 	public void setCondicaoPagamento( Condicao condicaoPagamento )
 	{
 		this.condicaoPagamento = condicaoPagamento;
+	}
+
+	/**
+	 * @return the observacao
+	 */
+	public String getObservacao()
+	{
+		return observacao;
+	}
+
+	/**
+	 * @param observacao the observacao to set
+	 */
+	public void setObservacao( String observacao )
+	{
+		this.observacao = observacao;
 	}
 
 	/**
@@ -370,108 +508,5 @@ public class Compra extends AbstractEntity
 	{
 		return serialVersionUID;
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ( ( condicaoPagamento == null ) ? 0 : condicaoPagamento.hashCode() );
-		result = prime * result + ( ( contasAPagar == null ) ? 0 : contasAPagar.hashCode() );
-		result = prime * result + ( ( dataChegada == null ) ? 0 : dataChegada.hashCode() );
-		result = prime * result + ( ( dataEmissao == null ) ? 0 : dataEmissao.hashCode() );
-		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
-		result = prime * result + ( ( frete == null ) ? 0 : frete.hashCode() );
-		result = prime * result + ( ( itensCompra == null ) ? 0 : itensCompra.hashCode() );
-		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
-		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
-		result = prime * result + ( ( outrasDespesas == null ) ? 0 : outrasDespesas.hashCode() );
-		result = prime * result + ( ( serie == null ) ? 0 : serie.hashCode() );
-		result = prime * result + ( ( transportadora == null ) ? 0 : transportadora.hashCode() );
-		result = prime * result + ( ( valorFrete == null ) ? 0 : valorFrete.hashCode() );
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals( Object obj )
-	{
-		if ( this == obj ) return true;
-		if ( !super.equals( obj ) ) return false;
-		if ( getClass() != obj.getClass() ) return false;
-		Compra other = ( Compra ) obj;
-		if ( condicaoPagamento == null )
-		{
-			if ( other.condicaoPagamento != null ) return false;
-		}
-		else if ( !condicaoPagamento.equals( other.condicaoPagamento ) ) return false;
-		if ( contasAPagar == null )
-		{
-			if ( other.contasAPagar != null ) return false;
-		}
-		else if ( !contasAPagar.equals( other.contasAPagar ) ) return false;
-		if ( dataChegada == null )
-		{
-			if ( other.dataChegada != null ) return false;
-		}
-		else if ( !dataChegada.equals( other.dataChegada ) ) return false;
-		if ( dataEmissao == null )
-		{
-			if ( other.dataEmissao != null ) return false;
-		}
-		else if ( !dataEmissao.equals( other.dataEmissao ) ) return false;
-		if ( fornecedor == null )
-		{
-			if ( other.fornecedor != null ) return false;
-		}
-		else if ( !fornecedor.equals( other.fornecedor ) ) return false;
-		if ( frete == null )
-		{
-			if ( other.frete != null ) return false;
-		}
-		else if ( !frete.equals( other.frete ) ) return false;
-		if ( itensCompra == null )
-		{
-			if ( other.itensCompra != null ) return false;
-		}
-		else if ( !itensCompra.equals( other.itensCompra ) ) return false;
-		if ( modelo == null )
-		{
-			if ( other.modelo != null ) return false;
-		}
-		else if ( !modelo.equals( other.modelo ) ) return false;
-		if ( numeroNfe == null )
-		{
-			if ( other.numeroNfe != null ) return false;
-		}
-		else if ( !numeroNfe.equals( other.numeroNfe ) ) return false;
-		if ( outrasDespesas == null )
-		{
-			if ( other.outrasDespesas != null ) return false;
-		}
-		else if ( !outrasDespesas.equals( other.outrasDespesas ) ) return false;
-		if ( serie == null )
-		{
-			if ( other.serie != null ) return false;
-		}
-		else if ( !serie.equals( other.serie ) ) return false;
-		if ( transportadora == null )
-		{
-			if ( other.transportadora != null ) return false;
-		}
-		else if ( !transportadora.equals( other.transportadora ) ) return false;
-		if ( valorFrete == null )
-		{
-			if ( other.valorFrete != null ) return false;
-		}
-		else if ( !valorFrete.equals( other.valorFrete ) ) return false;
-		return true;
-	}
-	
 	
 }

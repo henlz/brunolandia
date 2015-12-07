@@ -9,8 +9,7 @@
 
 <md-content layout-align="center center" layout="column" layout-margin>
 
-    <md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="center center"
-                   style="  margin-bottom: 5px;" layout-padding>
+    <md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="center center" style="margin-bottom: 5px;" layout-padding>
         <section>
             <form name="fornecedorForm" layout-padding layout="column" layout-align="center center">
                 <md-subheader>
@@ -43,7 +42,7 @@
                         <label>Tipo de Pessoa</label>
                         <md-select name="tipoPessoa" ng-model="model.entidade.tipoPessoa" required>
                             <md-option value="FISICA">Física</md-option>
-                            <md-option value="JURIDICA">Jurísica</md-option>
+                            <md-option value="JURIDICA">Jurídica</md-option>
                         </md-select>
 
                         <div ng-messages="fornecedorForm.tipoPessoa.$error">
@@ -78,7 +77,7 @@
 
                     <md-input-container flex>
                         <label>Numero</label>
-                        <input name="numero" type="text" ng-model="model.entidade.numero" required/>
+                        <input name="numero" type="number" ng-model="model.entidade.numero" required/>
 
                         <div ng-messages="fornecedorForm.numero.$error">
                             <div ng-message="required">

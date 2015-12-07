@@ -5,6 +5,7 @@
     angular.module('sisvarejo').controller('VendaController', function ($scope, $rootScope, $state, $http, $mdToast, $window, $log, $injector, $importService, $mdDialog, $mdBottomSheet) {
 
         $importService("lojaService");
+        $importService("financeiroService");
 
         /**
          * Injeta os métodos, atributos e seus estados herdados de AbstractCRUDController.
@@ -38,10 +39,9 @@
         $scope.INSERT_STATE = "venda.cadastrar";
         /**
          * Variável estática que representa
-         * o estado para a edição de registros.
+         * o estado para o cancelamento de registros.
          */
-        $scope.UPDATE_STATE = "venda.alterar";
-
+        $scope.CANCEL_STATE = "venda.cancelar";
 
         /*-------------------------------------------------------------------
          * 		 				 	ATTRIBUTES
@@ -65,7 +65,8 @@
             content: [],
             query: {
                 order: 'descricao'
-            }
+            },
+            invalidNfe: true
         }
 
         /**
@@ -113,9 +114,9 @@
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
+                case $scope.CANCEL_STATE:
                 {
-                    $scope.changeToUpdate($state.params.id);
+                    $scope.changeToCancel($state.params.id);
                 }
                     break;
                 default:
@@ -169,7 +170,7 @@
          * Para mudar para este estado, deve-se primeiro obter via id
          * o registro pelo serviço de consulta e só então mudar o estado da tela.
          */
-        $scope.changeToUpdate = function (id) {
+        $scope.changeToCancel = function (id) {
 
             $log.info("changeToUpdate", id);
 
@@ -181,10 +182,17 @@
 
             lojaService.findVendaById(id, {
                 callback: function (result) {
+
+                    if (result == null) {
+                        $scope.currentState = $scope.LIST_STATE;
+                        $state.go($scope.LIST_STATE);
+                        return false;
+                    }
+
                     $scope.model.entidade = result;
 
-                    $scope.currentState = $scope.UPDATE_STATE;
-                    $state.go($scope.UPDATE_STATE);
+                    $scope.currentState = $scope.CANCEL_STATE;
+                    $state.go($scope.CANCEL_STATE);
                     $scope.$apply();
                 },
                 errorHandler: function (message, exception) {
@@ -214,7 +222,37 @@
                     $log.error(message);
                 }
             })
-        }
+        };
+
+        $scope.buscaClienteByCodigo = function () {
+            lojaService.findClienteByCodigo($scope.model.codigoCliente, {
+                callback: function (result) {
+                    if (result != null){
+                        $scope.model.entidade.cliente = result;
+                        $scope.model.entidade.condicaoPagamento = result.condicaoPagamento;
+
+                    }
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar o cliente");
+                }
+            })
+        };
+
+        $scope.buscaCondicaoByCodigo = function () {
+            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+                callback: function (result) {
+                    if (result != null)
+                        $scope.model.entidade.condicaoPagamento = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
 
         /**
          *
@@ -227,7 +265,7 @@
             }
             var total = 0;
             for (var i = 0; venda.itensVenda.length > i; i++){
-                total += venda.itensVenda[i].quantidade * venda.itensVenda[i].precoVenda;
+                total += venda.itensVenda[i].quantidade * venda.itensVenda[i].produto.precoVenda - venda.itensVenda[i].desconto;
             }
             return total;
         }
@@ -247,7 +285,7 @@
 
             $scope.clienteDialog = $mdDialog;
             $scope.clienteDialog.show({
-                    controller: BuscaClienteDialogController,
+                    controller: 'BuscaClienteDialogController',
                     templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
                     targetEvent: ev,
                     hasBackdrop: true,
@@ -257,6 +295,7 @@
                 })
                 .then(function (result) {
                     $scope.model.entidade.cliente = result;
+                    $scope.model.condicaoPagamento = result.condicaoPagamento;
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
@@ -279,19 +318,18 @@
                     itemVenda.produto = result;
                     itemVenda.quantidade = 1;
                     $scope.model.entidade.itensVenda.push(itemVenda);
+
+                    $scope.gerarContasAReceber();
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
-        }
+        };
 
         /**
          *
          * @param numero
          */
         $scope.verificarNfe = function(numero) {
-
-            $log.log(numero);
-
             lojaService.verificarNfe(numero, {
                 callback:function(result) {
                     if (result == false) {
@@ -299,7 +337,7 @@
                     }  else {
                         $scope.model.invalidNfe = false;
                     }
-
+                    $scope.$apply();
 
                 }, errorHandler: function(message, error){
                     $log.error(message);
@@ -308,26 +346,29 @@
 
         /**
          *
-         * @param ev
-         * @param entidade
          */
-        $scope.abrirPopupAlterarProduto = function (ev, entidade) {
-            $mdDialog.show({
-                    controller: VendaDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/venda/popup/popup-venda.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    bindToController: true,
-                    locals: {
-                        entidadeExterna: angular.copy(entidade),
-                        isEditing: true
-                    }
-                })
-                .then(function (result) {
+        $scope.gerarContasAReceber = function() {
+            if ($scope.model.entidade.condicaoPagamento != null && $scope.model.entidade.itensVenda != null && $scope.model.entidade.itensVenda.length > null) {
 
-                }, function () {
+                $scope.model.entidade.contasAReceber = [];
 
-                });
+                for (var i = 0; $scope.model.entidade.condicaoPagamento.parcelas.length > i; i++) {
+
+                    var contaAReceber = new ContaReceber();
+
+                    contaAReceber.numeroParcela = i + 1;
+                    contaAReceber.cliente = $scope.model.entidade.cliente;
+                    contaAReceber.numeroNota = $scope.model.entidade.numeroNfe;
+                    contaAReceber.serie = $scope.model.entidade.serie;
+                    contaAReceber.percentual = $scope.model.entidade.condicaoPagamento.parcelas[i].percentual;
+                    contaAReceber.valor = $scope.getVendaTotal($scope.model.entidade) * $scope.model.entidade.condicaoPagamento.parcelas[i].percentual / 100;
+                    contaAReceber.formaPagamento = $scope.model.entidade.condicaoPagamento.parcelas[i].formaPagamento;
+                    contaAReceber.vencimento = new Date();
+                    contaAReceber.vencimento.setDate($scope.model.entidade.dataEmissao.getDate() + $scope.model.entidade.condicaoPagamento.parcelas[i].dias);
+
+                    $scope.model.entidade.contasAReceber.push(contaAReceber);
+                }
+            }
         }
 
         /**
@@ -345,14 +386,62 @@
          * @param entidade
          * @returns {boolean}
          */
-        $scope.validarProdutos = function (entidade) {
+        $scope.validarVenda = function (entidade) {
             for (var i = 0; entidade.itensVenda.length > i; i++) {
                 if (entidade.itensVenda[i].quantidade >  entidade.itensVenda[i].produto.quantidade){
-                    return false
+                    var toast = $mdToast.simple()
+                        .content('O produto "'+ entidade.itensVenda[i].produto +'" está com uma quantidade de venda maior do que a disponível em estoque')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    return false;
                 }
             }
 
-            return true;
+            var camposPreenchidos = true;
+
+            if (entidade.serie == "" || entidade.serie == null) {
+                camposPreenchidos = false;
+            }
+
+            if (entidade.modelo == "" || entidade.modelo == null) {
+                camposPreenchidos = false;
+            }
+
+            if (entidade.cliente == null) {
+                camposPreenchidos = false;
+            }
+
+            if (entidade.dataEmissao == null) {
+                camposPreenchidos = false;
+            }
+
+            if (entidade.dataChegada == null) {
+                camposPreenchidos = false;
+            }
+
+            if (camposPreenchidos == false){
+                $mdToast.showSimple("Preencha todos os campos obrigatórios");
+            }
+            return camposPreenchidos;
+        };
+
+        $scope.cancelarVenda = function(entidade) {
+            if (entidade.observacao == null || entidade.observacao.length == 0) {
+                $mdToast.showSimple("Preencha o campo de observação.");
+                return false;
+            }
+            lojaService.cancelarVenda(entidade, {
+                callback: function(result) {
+                    $state.go($scope.LIST_STATE);
+                },
+                errorHandler: function(message) {
+                    $mdToast.showSimple(message);
+                    $log.error(message);
+                }
+            })
         }
 
         /**
@@ -360,7 +449,7 @@
          * @param entidade
          */
         $scope.salvarVenda = function (entidade) {
-            if ($scope.validarProdutos(entidade)) {
+            if ($scope.validarVenda(entidade)) {
                 lojaService.insertVenda(entidade, {
                     callback: function (result) {
                         var toast = $mdToast.simple()
@@ -383,48 +472,6 @@
                             });
                         $log.error(message);
                     }
-                });
-            } else {
-                var toast = $mdToast.simple()
-                    .content('O percentual das parcelas devem totalizar em 100%!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
-                });
-            }
-        };
-
-        /**
-         *
-         * @param entidade
-         */
-        $scope.alterarVenda = function (entidade) {
-            return null;
-            if ($scope.validarProdutos(entidade)) {
-                lojaService.updateVenda(entidade, {
-                    callback: function (result) {
-                        var toast = $mdToast.simple()
-                            .content('Registro atualizado com sucesso!')
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right');
-                        $mdToast.show(toast).then(function () {
-                        });
-                        $state.go($scope.LIST_STATE);
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $log.error(message);
-                    }
-                });
-            } else {
-                var toast = $mdToast.simple()
-                    .content('O percentual das produtos devem totalizar em 100%!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
                 });
             }
         };
@@ -576,7 +623,7 @@
     /**
      * Controller da popup de Buscar Clientees
      */
-    function BuscaClienteDialogController($scope, $mdDialog, $importService, $mdToast, local) {
+    angular.module('sisvarejo').controller('BuscaClienteDialogController', function ($scope, $mdDialog, $importService, $mdToast, local) {
 
         $importService("lojaService");
 
@@ -694,7 +741,7 @@
          */
         $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
             $mdDialog.show({
-                    controller: BuscaClienteDialogController,
+                    controller: 'BuscaClienteDialogController',
                     templateUrl: './modules/sisvarejo/ui/estoque/cliente/popup/popup-cadastra-cliente.html',
                     hasBackdrop: true,
                     preserveScope: true,
@@ -710,7 +757,7 @@
                     $scope.model.clienteDialog.abrirPopupCliente(null, null);
                 });
         };
-    }
+    });
 
     /**
      * Controller da popup de Buscar Clientes

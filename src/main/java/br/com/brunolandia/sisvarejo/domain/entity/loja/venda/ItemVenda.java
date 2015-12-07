@@ -24,7 +24,7 @@ public class ItemVenda extends AbstractEntity
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9082033479670066564L;
+	private static final long serialVersionUID = 5513579265939867788L;
 
 	/**
 	 * 
@@ -36,20 +36,13 @@ public class ItemVenda extends AbstractEntity
 	/**
 	 * 
 	 */
-	@NotNull
-	@Column(nullable = false)
-	private BigDecimal precoVenda;
-
-	/**
-	 * 
-	 */
 	@ManyToOne
 	private Produto produto;
 
 	/**
 	 * 
 	 */
-	@Column
+	@Column(precision=10, scale=2)
 	private BigDecimal desconto;
 
 	/**
@@ -61,71 +54,15 @@ public class ItemVenda extends AbstractEntity
 	}
 
 	/**
-	 * 
 	 * @param quantidade
-	 * @param ncm
-	 * @param cst
-	 * @param unidade
 	 * @param produto
+	 * @param desconto
 	 */
-	public ItemVenda( Integer quantidade, BigDecimal precoVenda, Produto produto, BigDecimal desconto )
+	public ItemVenda( Integer quantidade, Produto produto, BigDecimal desconto )
 	{
 		super();
 		this.quantidade = quantidade;
-		this.precoVenda = precoVenda;
 		this.produto = produto;
-		this.desconto = desconto;
-	}
-
-	public Integer getQuantidade()
-	{
-		return quantidade;
-	}
-
-	public void setQuantidade( Integer quantidade )
-	{
-		this.quantidade = quantidade;
-	}
-
-	public Produto getProduto()
-	{
-		return produto;
-	}
-
-	public void setProduto( Produto produto )
-	{
-		this.produto = produto;
-	}
-
-	/**
-	 * @return the precoVenda
-	 */
-	public BigDecimal getPrecoVenda()
-	{
-		return precoVenda;
-	}
-
-	/**
-	 * @param precoVenda the precoVenda to set
-	 */
-	public void setPrecoVenda( BigDecimal precoVenda )
-	{
-		this.precoVenda = precoVenda;
-	}
-
-	/**
-	 * @return the desconto
-	 */
-	public BigDecimal getDesconto()
-	{
-		return desconto;
-	}
-
-	/**
-	 * @param desconto the desconto to set
-	 */
-	public void setDesconto( BigDecimal desconto )
-	{
 		this.desconto = desconto;
 	}
 
@@ -138,7 +75,6 @@ public class ItemVenda extends AbstractEntity
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ( ( desconto == null ) ? 0 : desconto.hashCode() );
-		result = prime * result + ( ( precoVenda == null ) ? 0 : precoVenda.hashCode() );
 		result = prime * result + ( ( produto == null ) ? 0 : produto.hashCode() );
 		result = prime * result + ( ( quantidade == null ) ? 0 : quantidade.hashCode() );
 		return result;
@@ -159,11 +95,6 @@ public class ItemVenda extends AbstractEntity
 			if ( other.desconto != null ) return false;
 		}
 		else if ( !desconto.equals( other.desconto ) ) return false;
-		if ( precoVenda == null )
-		{
-			if ( other.precoVenda != null ) return false;
-		}
-		else if ( !precoVenda.equals( other.precoVenda ) ) return false;
 		if ( produto == null )
 		{
 			if ( other.produto != null ) return false;
@@ -175,6 +106,54 @@ public class ItemVenda extends AbstractEntity
 		}
 		else if ( !quantidade.equals( other.quantidade ) ) return false;
 		return true;
+	}
+
+	/**
+	 * @return the quantidade
+	 */
+	public Integer getQuantidade()
+	{
+		return quantidade;
+	}
+
+	/**
+	 * @param quantidade the quantidade to set
+	 */
+	public void setQuantidade( Integer quantidade )
+	{
+		this.quantidade = quantidade;
+	}
+
+	/**
+	 * @return the produto
+	 */
+	public Produto getProduto()
+	{
+		return produto;
+	}
+
+	/**
+	 * @param produto the produto to set
+	 */
+	public void setProduto( Produto produto )
+	{
+		this.produto = produto;
+	}
+
+	/**
+	 * @return the desconto
+	 */
+	public BigDecimal getDesconto()
+	{
+		return desconto;
+	}
+
+	/**
+	 * @param desconto the desconto to set
+	 */
+	public void setDesconto( BigDecimal desconto )
+	{
+		this.desconto = desconto;
 	}
 
 

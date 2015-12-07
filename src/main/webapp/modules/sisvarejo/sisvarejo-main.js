@@ -150,11 +150,45 @@
             url: '/listar'
         }).state('venda.cadastrar',{
             url: '/cadastrar'
-        }).state('venda.alterar',{
-            url: '/alterar/:id'
+        }).state('venda.cancelar',{
+            url: '/cancelar/:id'
         }).state('venda.detalhe',{
             url: '/detalhe/:id'
         });
+
+		/**
+		 *
+		 */
+		$stateProvider.state('conta-receber',{
+			url : "/conta-receber",
+			controller : 'ContaReceberController',
+			templateUrl : "./modules/sisvarejo/ui/financeiro/conta-receber/conta-receber-view.jsp"
+		}).state('conta-receber.listar',{
+            url: '/listar'
+        }).state('conta-receber.cadastrar',{
+            url: '/cadastrar'
+        }).state('conta-receber.pagar',{
+            url: '/pagar/:id'
+        }).state('conta-receber.cancelar',{
+            url: '/cancelar/:id'
+        })
+        
+		/**
+		 *
+		 */
+		$stateProvider.state('conta-pagar',{
+			url : "/conta-pagar",
+			controller : 'ContaPagarController',
+			templateUrl : "./modules/sisvarejo/ui/financeiro/conta-pagar/conta-pagar-view.jsp"
+		}).state('conta-pagar.listar',{
+            url: '/listar'
+        }).state('conta-pagar.cadastrar',{
+            url: '/cadastrar'
+        }).state('conta-pagar.pagar',{
+            url: '/pagar/:id'
+        }).state('conta-pagar.cancelar',{
+            url: '/cancelar/:id'
+        })
 
 		/**
 		 *

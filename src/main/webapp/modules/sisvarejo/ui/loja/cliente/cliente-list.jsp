@@ -17,6 +17,28 @@
     </md-button>
 </md-toolbar>
 
+<md-content layout="row" layout-align="center center" layout-wrap>
+    <md-input-container>
+        <label>Nome</label>
+        <input type="text" ng-model="model.filtros.nome">
+    </md-input-container>
+    <md-input-container>
+        <label>Apelido</label>
+        <input type="text" ng-model="model.filtros.apelido">
+    </md-input-container>
+    <md-input-container>
+        <label>CPF/CNPJ</label>
+        <input type="text" ng-model="model.filtros.cpf">
+    </md-input-container>
+    <md-input-container>
+        <label>RG</label>
+        <input type="text" ng-model="model.filtros.rg">
+    </md-input-container>
+    <md-button ng-click="carregarLista()" class="md-icon-button">
+        <i class="md-icon md-icon-search"></i>
+    </md-button>
+</md-content>
+
 <md-data-table-container>
     <table md-data-table>
         <thead md-order="model.query.order" md-trim-column-names>
@@ -25,7 +47,6 @@
             <th order-by="email">Email</th>
             <th order-by="telefone">Telefone</th>
             <th order-by="cidade.nome">Cidade</th>
-            <th order-by="ativo">Status</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -35,22 +56,15 @@
             <td>{{::cliente.email}}</td>
             <td>{{::cliente.telefone}}</td>
             <td>{{::cliente.cidade.nome}}</td>
-            <td>{{::cliente.ativo ? 'Ativo' : 'Inativo'}}</td>
             <td layout="row">
-                <md-button ng-if="cliente.ativo != true" class="md-icon-button"
-                           ng-click="mudarStatusCliente(cliente, true)"><i class="md-icon md-icon-check"></i>
-                </md-button>
-                <md-button ng-if="cliente.ativo == true" class="md-icon-button"
-                           ng-click="mudarStatusCliente(cliente, false)"><i class="md-icon md-icon-clear"></i>
-                </md-button>
                 <md-button class="md-icon-button" ui-sref="cliente.alterar({id: cliente.id})"
                            aria-label="Alterar cliente">
                     <i class="md-icon md-icon-edit"></i>
                 </md-button>
-<!--                 <md-button class="md-icon-button" ng-click="excluirFornecedor($event, cliente)" -->
-<!--                            aria-label="Excluir cliente"> -->
-<!--                     <i class="md-icon md-icon-delete"></i> -->
-<!--                 </md-button> -->
+                 <md-button class="md-icon-button" ng-click="excluirCliente($event, cliente)"
+                            aria-label="Excluir cliente">
+                     <i class="md-icon md-icon-delete"></i>
+                 </md-button>
             </td>
         </tr>
         </tbody>

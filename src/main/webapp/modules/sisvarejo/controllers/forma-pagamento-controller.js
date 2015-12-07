@@ -86,7 +86,7 @@
          */
         $scope.abrirPopupNovaEntidade = function (ev) {
             $mdDialog.show({
-                controller: FormaPagamentoDialogController,
+                controller: 'FormaPagamentoDialogController',
                 templateUrl: './modules/sisvarejo/ui/financeiro/forma-pagamento/popup/popup-forma-pagamento.html',
                 targetEvent: ev,
                 hasBackdrop: true,
@@ -113,7 +113,7 @@
 
         $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
             $mdDialog.show({
-                controller: FormaPagamentoDialogController,
+                controller: 'FormaPagamentoDialogController',
                 templateUrl: './modules/sisvarejo/ui/financeiro/forma-pagamento/popup/popup-forma-pagamento.html',
                 targetEvent: ev,
                 hasBackdrop: true,
@@ -136,63 +136,6 @@
                     //tratar o "cancelar" da popup
                 });
         }
-
-        /**
-         *
-         * @param entidade
-         */
-        $scope.salvarPrincipioDiretriz = function (entidade) {
-            financeiroService.insertPrincipioDiretriz(entidade, {
-                callback: function (result) {
-                    $scope.model.content.push(result);
-                    var toast = $mdToast.simple()
-                        .content('Registro salvo com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    $mdToast.show($mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right'))
-                        .then(function () {
-                    });
-                    $log.error(message);
-                }
-            });
-        };
-
-        /**
-         *
-         * @param entidade
-         */
-        $scope.alterarPrincipioDiretriz = function (entidade) {
-            financeiroService.updatePrincipioDiretriz(entidade, {
-                callback: function (result) {
-                    var toast = $mdToast.simple()
-                        .content('Registro atualizado com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-
-                    var i = $scope.findByIdInArray($scope.model.content, result);
-                    $scope.model.content.splice(i, 1);
-                    $scope.model.content.push(result);
-
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    $log.error(message);
-                }
-            });
-        };
 
         /**
          *
@@ -276,7 +219,7 @@
     /**
      * Controller da popup de Princípio e Diretriz
      */
-    function FormaPagamentoDialogController($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+    angular.module('sisvarejo').controller('FormaPagamentoDialogController' ,function($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("financeiroService");
 
@@ -353,7 +296,7 @@
                 }
             }
         };
-    }
+    });
 
 
 } (window.angular));

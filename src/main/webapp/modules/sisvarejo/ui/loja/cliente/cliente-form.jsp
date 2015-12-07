@@ -18,109 +18,94 @@
                         <h3>Novo Cliente</h3>
                     </md-subheader>
 
-                    <md-input-container width="100%">
-                        <label>Nome</label>
-                        <input name="razaoSocial" type="text" ng-model="model.entidade.nome" required/>
-                    </md-input-container>
-
                     <div layout="row" width="100%">
-                        <md-input-container flex>
+                        <md-input-container>
+                            <label>Nome</label>
+                            <input name="nome" type="text" ng-model="model.entidade.nome" required/>
+                        </md-input-container>
+
+                        <md-input-container>
                             <label>Apelido</label>
                             <input name="apelido" type="text" ng-model="model.entidade.apelido"/>
                         </md-input-container>
 
-                        <md-input-container flex>
-                            <label>Sexo</label>
-                            <md-select ng-model="model.entidade.sexo">
-                                <md-option value="MASCULINO">Masculino</md-option>
-                                <md-option value="FEMININO">Feminino</md-option>
+                        <md-input-container>
+                            <label>Tipo de pessoa</label>
+                            <md-select ng-model="model.entidade.tipoPessoa" required>
+                                <md-option value="FISICA">Física</md-option>
+                                <md-option value="JURIDICA">Juríridca</md-option>
                             </md-select>
                         </md-input-container>
                     </div>
 
                     <div layout="row" width="100%">
-                        <md-input-container flex="70">
+                        <md-input-container width="100%">
+                            <label>CNPJ/CPF</label>
+                            <input name="cnpj" type="text" ng-model="model.entidade.cpf" required/>
+                        </md-input-container>
+
+                        <md-input-container width="100%">
+                            <label>RG</label>
+                            <input name="rg" type="text" ng-model="model.entidade.rg"
+                                   ng-disabled="model.entidade.tipoPessoa == 'JURIDICA'"/>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row" width="100%">
+                        <div layout="row" layout-align="center center">
+                            <md-input-container>
+                                <label>Cidade</label>
+                                <input type="text" ng-model="model.entidade.cidade.nome" disabled/>
+                            </md-input-container>
+
+                            <md-button class="md-icon-button" ng-click="abrirPopupCidade()">
+                                <i class="md-icon md-icon-search"></i>
+                            </md-button>
+                        </div>
+
+                        <md-input-container>
                             <label>Endereço</label>
                             <input name="endereco" type="text" ng-model="model.entidade.endereco"/>
                         </md-input-container>
 
-                        <md-input-container flex>
+                        <md-input-container>
                             <label>Numero</label>
                             <input name="numero" type="text" ng-model="model.entidade.numero"/>
                         </md-input-container>
                     </div>
 
                     <div layout="row" width="100%">
-                        <md-input-container flex>
-                            <label>Complemento</label>
-                            <input name="complemento" type="text" ng-model="model.entidade.complemento"/>
+                        <md-input-container width="100%">
+                            <label>Telefone</label>
+                            <input name="telefone" type="text" ng-model="model.entidade.telefone"/>
                         </md-input-container>
 
-                        <md-input-container flex>
-                            <label>Bairro</label>
-                            <input name="bairro" type="text" ng-model="model.entidade.bairro"/>
+                        <md-input-container width="100%">
+                            <label>Email</label>
+                            <input name="email" type="email" ng-model="model.entidade.email" required/>
                         </md-input-container>
                     </div>
-
-                    <md-input-container width="100%">
-                        <label>CEP</label>
-                        <input name="cep" type="text" ng-model="model.entidade.cep"/>
-                    </md-input-container>
-
                     <div layout="row" layout-align="center center">
 
+                        <input style="width: 40px;" type="text" ng-model="model.codigoCondicao"
+                               ng-change="buscaCondicaoByCodigo()">
+
                         <md-input-container>
-                            <label>Cidade</label>
-                            <input type="text" ng-model="model.entidade.cidade.nome" disabled/>
+                            <label>Condição de pagamento</label>
+                            <input type="text" name="condicao" ng-model="model.entidade.condicaoPagamento.descricao"
+                                   readonly/>
+
+                            <div ng-messages="compraForm.condicao.$error">
+                                <div ng-message="required">
+                                    Campo obrigatório.
+                                </div>
+                            </div>
                         </md-input-container>
 
-                        <md-button class="md-icon-button" ng-click="abrirPopupCidade()">
+                        <md-button class="md-icon-button" ng-click="abrirPopupBuscaCondicao($event)"
+                                   aria-label="Procurar condicao">
                             <i class="md-icon md-icon-search"></i>
                         </md-button>
-
-                    </div>
-
-                    </div>
-
-                    <md-input-container width="100%">
-                        <label>Data de nascimento</label>
-                        <input name="dataNascimento" type="date" ng-model="model.entidade.dataNascimento" required/>
-                    </md-input-container>
-
-                    <div class="errors" ng-messages="clienteForm.dataNascimento.$error" ng-if="clienteForm.$dirty">
-                        <div ng-message="required">
-                            Campo obrigatório
-                        </div>
-                    </div>
-
-                    <md-input-container width="100%">
-                        <label>Telefone</label>
-                        <input name="telefone" type="text" ng-model="model.entidade.telefone"/>
-                    </md-input-container>
-
-                    <md-input-container width="100%">
-                        <label>Email</label>
-                        <input name="email" type="email" ng-model="model.entidade.email" required/>
-                    </md-input-container>
-
-                    <md-input-container width="100%">
-                        <label>CPF</label>
-                        <input name="cnpj" type="text" ng-model="model.entidade.cpf" required/>
-                    </md-input-container>
-
-                    <md-input-container width="100%">
-                        <label>RG</label>
-                        <input name="rg" type="text" ng-model="model.entidade.rg" required/>
-                    </md-input-container>
-
-                    <div layout="column">
-                        <b>Condição de pagamento</b>
-                        <div layout="row" layout-align="center center">
-                            <span>{{model.entidade.condicao.descricao}}</span>
-                            <md-button class="md-icon-button" ng-click="abrirPopupBuscaCondicao($event)">
-                                <i class="md-icon md-icon-search"></i>
-                            </md-button>
-                        </div>
                     </div>
 
                 </md-content>

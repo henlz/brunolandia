@@ -24,10 +24,11 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 public class ItemCompra extends AbstractEntity
 {
 
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4448434488618600449L;
+	private static final long serialVersionUID = -2105758619724830013L;
 
 	/**
 	 * 
@@ -40,7 +41,7 @@ public class ItemCompra extends AbstractEntity
 	 * 
 	 */
 	@NotNull
-	@Column(nullable = false)
+	@Column(precision = 10, scale = 2, nullable = false)
 	private BigDecimal precoCompra;
 
 	/**

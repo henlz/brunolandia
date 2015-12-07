@@ -595,7 +595,7 @@
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
-        }
+        };
 
         $scope.buscaCidadeByCodigo = function() {
             localizacaoService.findCidadeByCodigo($scope.model.codigoCidade, {
@@ -609,7 +609,7 @@
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
-        }
+        };
 
         /**
          *
