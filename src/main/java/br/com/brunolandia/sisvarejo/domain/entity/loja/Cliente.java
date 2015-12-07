@@ -125,6 +125,14 @@ public class Cliente extends AbstractEntity
 	}
 
 	/**
+	 * 
+	 */
+	public Cliente( Long id )
+	{
+		super( id );
+	}
+
+	/**
 	 * @param nome
 	 * @param tipoPessoa
 	 * @param apelido

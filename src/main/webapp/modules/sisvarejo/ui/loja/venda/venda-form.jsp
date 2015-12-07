@@ -19,7 +19,7 @@
             <md-content layout="row" layout-margin ng-if="currentState == CANCEL_STATE">
                 <md-input-container class="md-block">
                     <label>Observação</label>
-                    <textarea width="400" name="observacao" ng-model="model.entidade.observacao" required></textarea>
+                    <textarea width="400" name="observacao" ng-model="model.entidade.observacao"></textarea>
 
                     <div ng-messages="vendaForm.observacao.$error">
                         <div ng-message="required">
@@ -187,7 +187,7 @@
                             {{:: itemVenda.produto.descricao}}
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.quantidade"
+                            <input style="width: 95px;" type="number" ng-model="itemVenda.quantidade" min="1"
                                    ng-change="gerarContasAReceber();" ng-if="currentState == INSERT_STATE">
                             <span ng-if="currentState == CANCEL_STATE">{{::itemVenda.quantidade}}</span>
                         </td>
@@ -197,7 +197,7 @@
                         </td>
 
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemVenda.desconto"
+                            <input style="width: 95px;" type="number" ng-model="itemVenda.desconto" min="0"
                                    ng-change="gerarContasAReceber();" ng-if="currentState == INSERT_STATE">
                             <span ng-if="currentState == CANCEL_STATE">{{itemVenda.desconto}}</span>
                         </td>

@@ -159,10 +159,10 @@
                             {{:: itemCompra.produto.descricao}}
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemCompra.quantidade" ng-change="calculaImpostos(); gerarContasPagar();">
+                            <input style="width: 95px;" type="number" ng-model="itemCompra.quantidade" ng-change="calculaImpostos(); gerarContasPagar();" min="1">
                         </td>
                         <td>
-                            <input style="width: 95px;" type="number" ng-model="itemCompra.precoCompra" ng-change="calculaImpostos(); gerarContasPagar();">
+                            <input style="width: 95px;" type="number" ng-model="itemCompra.precoCompra" ng-change="calculaImpostos(); gerarContasPagar();" min="1">
                         </td>
                         <td>
                             {{ itemCompra.precoCompra * itemCompra.quantidade | currency: 'R$ '}}
@@ -242,12 +242,12 @@
 
         <md-input-container>
             <label>Outras Despesas</label>
-            <input type="number" ng-model="model.entidade.outrasDespesas">
+            <input type="number" ng-model="model.entidade.outrasDespesas" min="0">
         </md-input-container>
 
         <md-input-container>
             <label>Frete</label>
-            <input name="frete" type="number" ng-model="model.entidade.valorFrete">
+            <input name="frete" type="number" ng-model="model.entidade.valorFrete" min="0">
         </md-input-container>
 
     </md-content>

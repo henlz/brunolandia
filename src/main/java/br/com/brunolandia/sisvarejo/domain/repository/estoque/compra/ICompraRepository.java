@@ -13,6 +13,25 @@ import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.Compra;
 public interface ICompraRepository extends JpaRepository<Compra, Long>
 {
 	
+	/**
+	 * 
+	 * @param numeroNfe
+	 * @return
+	 */
 	public List<Compra> findByNumeroNfe(String numeroNfe);
+	
+	/**
+	 * 
+	 * @param serie
+	 * @return
+	 */
+	public List<Compra> findBySerie( String serie );
+
+	/**
+	 * 
+	 * @param modelo
+	 * @return
+	 */
+	public List<Compra> findByModelo( String modelo );
 
 }

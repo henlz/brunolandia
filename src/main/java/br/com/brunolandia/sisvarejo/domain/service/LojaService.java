@@ -140,13 +140,13 @@ public class LojaService
 			produto.setQuantidade( produto.getQuantidade() - itemVenda.getQuantidade() );
 			this.estoqueService.updateProduto( produto );
 		}
-		
+
 		venda = this.vendaRepository.save( venda );
-		for (ContaReceber contaReceber: venda.getContasAReceber())
+		for ( ContaReceber contaReceber : venda.getContasAReceber() )
 		{
 			contaReceber.setVenda( venda );
 		}
-		
+
 		return this.vendaRepository.save( venda );
 	}
 
@@ -191,33 +191,33 @@ public class LojaService
 	{
 		return this.vendaRepository.findOne( vendaId );
 	}
-	
+
 	/**
 	 * 
 	 * @param venda
 	 * @return
 	 */
-	public Venda cancelarVenda(Venda venda)
+	public Venda cancelarVenda( Venda venda )
 	{
 		Venda vendaBanco = this.vendaRepository.findOne( venda.getId() );
-		
+
 		Assert.notNull( venda.getObservacao(), "A observação não pode estar vazia!" );
 		vendaBanco.setObservacao( venda.getObservacao() );
 		vendaBanco.setCancelada( true );
-		
-		for (ContaReceber contaReceber: venda.getContasAReceber())
+
+		for ( ContaReceber contaReceber : vendaBanco.getContasAReceber() )
 		{
 			Assert.isTrue( contaReceber.getStatusConta() != StatusConta.PAGA, "Não é possível cancelar a venda, pois há um pagamento registrado!" );
 			contaReceber.setStatusConta( StatusConta.CANCELADA );
 		}
-		
-		for (ItemVenda itemVenda: venda.getItensVenda())
+
+		for ( ItemVenda itemVenda : venda.getItensVenda() )
 		{
 			Produto produto = itemVenda.getProduto();
 			produto.setQuantidade( produto.getQuantidade() + itemVenda.getQuantidade() );
 			this.estoqueService.updateProduto( produto );
 		}
-		
+
 		venda = this.vendaRepository.save( vendaBanco );
 		return venda;
 	}
@@ -228,13 +228,39 @@ public class LojaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Boolean verificarNfe( String numeroNfe )
+	public Boolean verificarNfe( String numeroNfe, String serie, String modelo )
 	{
+		Boolean numeroFlag = false;
+		Boolean serieFlag = false;
+		Boolean modeloFlag = false;
+		
+		Assert.isTrue(numeroNfe != null && numeroNfe.length() > 0, "O numero não pode estar vazio!");
+		Assert.isTrue(serie != null && serie.length() > 0, "A série não pode estar vazia!");
+		Assert.isTrue(modelo != null && modelo.length() > 0, "O modelo não pode estar vazio!");
+		
 		List<Venda> vendas = this.vendaRepository.findByNumeroNfe( numeroNfe );
 		if ( vendas.size() > 0 )
 		{
+			numeroFlag = true;
+		}
+
+		vendas = this.vendaRepository.findBySerie( serie );
+		if ( vendas.size() > 0 )
+		{
+			serieFlag = true;
+		}
+
+		vendas = this.vendaRepository.findByModelo( modelo );
+		if ( vendas.size() > 0 )
+		{
+			modeloFlag = true;
+		}
+
+		if ( numeroFlag == true && serieFlag == true && modeloFlag == true )
+		{
 			return false;
 		}
+
 		return true;
 	}
 }

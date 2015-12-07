@@ -266,11 +266,35 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Boolean verificarNfe( String numeroNfe )
+	public Boolean verificarNfe( String numeroNfe, String serie, String modelo )
 	{
+		Boolean numeroFlag = false;
+		Boolean serieFlag = false;
+		Boolean modeloFlag = false;
+		
+		Assert.isTrue(numeroNfe != null && numeroNfe.length() > 0, "O numero não pode estar vazio!");
+		Assert.isTrue(serie != null && serie.length() > 0, "A série não pode estar vazia!");
+		Assert.isTrue(modelo != null && modelo.length() > 0, "O modelo não pode estar vazio!");
+		
 		List<Compra> compras = this.compraRepository.findByNumeroNfe( numeroNfe );
-
 		if ( compras.size() > 0 )
+		{
+			numeroFlag = true;
+		}
+
+		compras = this.compraRepository.findBySerie( serie );
+		if ( compras.size() > 0 )
+		{
+			serieFlag = true;
+		}
+
+		compras = this.compraRepository.findByModelo( modelo );
+		if ( compras.size() > 0 )
+		{
+			modeloFlag = true;
+		}
+
+		if ( numeroFlag == true && serieFlag == true && modeloFlag == true )
 		{
 			return false;
 		}

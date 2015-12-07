@@ -321,16 +321,21 @@
 
                     $scope.gerarContasAReceber();
                 }, function () {
-                    //tratar o "cancelar" da popup
-                });
+                //tratar o "cancelar" da popup
+            });
         };
 
         /**
          *
          * @param numero
          */
-        $scope.verificarNfe = function(numero) {
-            lojaService.verificarNfe(numero, {
+        $scope.verificarNfe = function(numero, serie, modelo) {
+
+            if (numero == null || numero.length <= 0) {
+
+            }
+
+            lojaService.verificarNfe(numero, serie, modelo, {
                 callback:function(result) {
                     if (result == false) {
                         $scope.model.invalidNfe = true;
@@ -429,10 +434,7 @@
         };
 
         $scope.cancelarVenda = function(entidade) {
-            if (entidade.observacao == null || entidade.observacao.length == 0) {
-                $mdToast.showSimple("Preencha o campo de observação.");
-                return false;
-            }
+
             lojaService.cancelarVenda(entidade, {
                 callback: function(result) {
                     $state.go($scope.LIST_STATE);

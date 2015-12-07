@@ -12,7 +12,25 @@ import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.Venda;
  */
 public interface IVendaRepository extends JpaRepository<Venda, Long>
 {
+	/**
+	 * 
+	 * @param numeroNfe
+	 * @return
+	 */
+	public List<Venda> findByNumeroNfe( String numeroNfe );
 
-	public List<Venda> findByNumeroNfe(String numeroNfe);
-	
+	/**
+	 * 
+	 * @param serie
+	 * @return
+	 */
+	public List<Venda> findBySerie( String serie );
+
+	/**
+	 * 
+	 * @param modelo
+	 * @return
+	 */
+	public List<Venda> findByModelo( String modelo );
+
 }
