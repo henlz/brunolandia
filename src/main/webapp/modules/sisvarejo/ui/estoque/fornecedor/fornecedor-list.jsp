@@ -17,27 +17,27 @@
     </md-button>
 </md-toolbar>
 
-<md-content layout="row" layout-align="center center" layout-wrap>
-    <md-input-container>
-        <label>Razão Social</label>
-        <input type="text" ng-model="model.filtros.razaoSocial">
-    </md-input-container>
-    <md-input-container>
-        <label>Nome Fantasia</label>
-        <input type="text" ng-model="model.filtros.nomeFantasia">
-    </md-input-container>
-    <md-input-container>
-        <label>Telefone</label>
-        <input type="text" ng-model="model.filtros.telefone">
-    </md-input-container>
-    <md-input-container>
-        <label>CNPJ</label>
-        <input type="text" ng-model="model.filtros.cnpj">
-    </md-input-container>
-    <md-button ng-click="carregarLista()" class="md-icon-button">
-        <i class="md-icon md-icon-search"></i>
-    </md-button>
-</md-content>
+<!--<md-content layout="row" layout-align="center center" layout-wrap>-->
+    <!--<md-input-container>-->
+        <!--<label>Razão Social</label>-->
+        <!--<input type="text" ng-model="model.filtros.razaoSocial">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+        <!--<label>Nome Fantasia</label>-->
+        <!--<input type="text" ng-model="model.filtros.nomeFantasia">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+        <!--<label>Telefone</label>-->
+        <!--<input type="text" ng-model="model.filtros.telefone">-->
+    <!--</md-input-container>-->
+    <!--<md-input-container>-->
+        <!--<label>CNPJ</label>-->
+        <!--<input type="text" ng-model="model.filtros.cnpj">-->
+    <!--</md-input-container>-->
+    <!--<md-button ng-click="carregarLista()" class="md-icon-button">-->
+        <!--<i class="md-icon md-icon-search"></i>-->
+    <!--</md-button>-->
+<!--</md-content>-->
 
 <md-data-table-container>
     <table md-data-table>

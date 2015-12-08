@@ -19,7 +19,7 @@
                 <div layout="row" width="100%">
                     <md-input-container>
                         <label>Código</label>
-                        <input name="codigo" type="text" ng-model="model.entidade.codigo" required/>
+                        <input name="codigo" type="text" maxlength="255" ng-model="model.entidade.codigo" required/>
 
                         <div ng-messages="fornecedorForm.codigo.$error">
                             <div ng-message="required">
@@ -30,7 +30,7 @@
 
                     <md-input-container>
                         <label>Fornecedor</label>
-                        <input name="razaoSocial" type="text" ng-model="model.entidade.razaoSocial" required/>
+                        <input name="razaoSocial" type="text" maxlength="255" ng-model="model.entidade.razaoSocial" required/>
                         <div ng-messages="fornecedorForm.razaoSocial.$error">
                             <div ng-message="required">
                                 Campo obrigatório.
@@ -54,7 +54,7 @@
 
                     <md-input-container width="100%">
                         <label>Nome Fantasia</label>
-                        <input name="nomeFantasia" type="text" ng-model="model.entidade.nomeFantasia"/>
+                        <input name="nomeFantasia" maxlength="255" type="text" ng-model="model.entidade.nomeFantasia"/>
                         <div ng-messages="fornecedorForm.nomeFantasia.$error">
                             <div ng-message="required">
                                 Campo obrigatório.
@@ -66,7 +66,7 @@
                 <div layout="row" width="100%" layout-align="space-between center">
                     <md-input-container>
                         <label>Endereço</label>
-                        <input name="endereco" type="text" ng-model="model.entidade.endereco" required/>
+                        <input name="endereco" type="text" maxlength="255" ng-model="model.entidade.endereco" required/>
 
                         <div ng-messages="fornecedorForm.endereco.$error">
                             <div ng-message="required">
@@ -77,7 +77,7 @@
 
                     <md-input-container flex>
                         <label>Numero</label>
-                        <input name="numero" type="number" ng-model="model.entidade.numero" required/>
+                        <input name="numero" type="number" min="1" ng-model="model.entidade.numero" required/>
 
                         <div ng-messages="fornecedorForm.numero.$error">
                             <div ng-message="required">
@@ -88,7 +88,7 @@
 
                     <md-input-container flex>
                         <label>Bairro</label>
-                        <input name="bairro" type="text" ng-model="model.entidade.bairro" required/>
+                        <input name="bairro" type="text" maxlength="255" ng-model="model.entidade.bairro" required/>
 
                         <div ng-messages="fornecedorForm.bairro.$error">
                             <div ng-message="required">
@@ -99,7 +99,7 @@
 
                     <md-input-container flex>
                         <label>Complemento</label>
-                        <input name="complemento" type="text" ng-model="model.entidade.complemento"/>
+                        <input name="complemento" type="text" maxlength="255" ng-model="model.entidade.complemento"/>
                     </md-input-container>
                 </div>
 
@@ -107,7 +107,7 @@
 
                     <md-input-container>
                         <label>CEP</label>
-                        <input name="cep" type="text" ng-model="model.entidade.cep" required/>
+                        <input name="cep" type="text" maxlength="255" ng-model="model.entidade.cep" required/>
 
                         <div ng-messages="fornecedorForm.cep.$error">
                             <div ng-message="required">
@@ -118,11 +118,11 @@
 
                     <div layout="row" layout-align="center center">
 
-                        <input style="width: 40px;" type="text" ng-model="model.codigoCidade" ng-change="buscaCidadeByCodigo()">
+                        <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCidade" ng-change="buscaCidadeByCodigo()">
 
                         <md-input-container>
                             <label>Cidade</label>
-                            <input type="text" name="cidade" ng-model="model.entidade.cidade.nome" disabled/>
+                            <input type="text" name="cidade" ng-model="model.entidade.cidade.nome" readonly/>
 
                             <div ng-messages="fornecedorForm.cidade.$error">
                                 <div ng-message="required">
@@ -138,7 +138,7 @@
 
                     <md-input-container>
                         <label>UF</label>
-                        <input name="uf" type="text" ng-model="model.entidade.uf" required/>
+                        <input name="uf" type="text" maxlength="255" ng-model="model.entidade.uf" required/>
 
                         <div ng-messages="fornecedorForm.uf.$error">
                             <div ng-message="required">
@@ -152,7 +152,7 @@
 
                     <md-input-container width="100%">
                         <label>Telefone</label>
-                        <input name="telefone" type="text" ng-model="model.entidade.telefone" required/>
+                        <input name="telefone" type="text" maxlength="255" ng-model="model.entidade.telefone" required/>
 
                         <div ng-messages="fornecedorForm.telefone.$error">
                             <div ng-message="required">
@@ -163,12 +163,12 @@
 
                     <md-input-container width="100%">
                         <label>Fax</label>
-                        <input name="fax" type="text" ng-model="model.entidade.fax"/>
+                        <input name="fax" type="text" maxlength="255" ng-model="model.entidade.fax"/>
                     </md-input-container>
 
                     <md-input-container width="100%">
                         <label>Email</label>
-                        <input name="email" type="email" ng-model="model.entidade.email"/>
+                        <input name="email" type="email" maxlength="255" ng-model="model.entidade.email"/>
                     </md-input-container>
                 </div>
 
@@ -176,7 +176,7 @@
 
                     <md-input-container>
                         <label>CPF/CNPJ</label>
-                        <input name="cnpj" type="text" ng-model="model.entidade.cnpj" required/>
+                        <input name="cnpj" type="text" maxlength="255" ng-model="model.entidade.cnpj" required/>
 
                         <div ng-messages="fornecedorForm.cnpj.$error">
                             <div ng-message="required">
@@ -187,7 +187,7 @@
 
                     <md-input-container>
                         <label>Inscrição Estadual</label>
-                        <input name="inscricaoEstadual" type="text" ng-model="model.entidade.inscricaoEstadual"/>
+                        <input name="inscricaoEstadual" type="text" maxlength="255" ng-model="model.entidade.inscricaoEstadual"/>
                     </md-input-container>
 
                     <md-input-container>

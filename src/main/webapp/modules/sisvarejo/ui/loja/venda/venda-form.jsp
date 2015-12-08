@@ -20,12 +20,6 @@
                 <md-input-container class="md-block">
                     <label>Observação</label>
                     <textarea width="400" name="observacao" ng-model="model.entidade.observacao"></textarea>
-
-                    <div ng-messages="vendaForm.observacao.$error">
-                        <div ng-message="required">
-                            Campo obrigatório.
-                        </div>
-                    </div>
                 </md-input-container>
 
                 <md-button class="md-primary md-fab" ng-click="cancelarVenda(model.entidade)">
@@ -37,8 +31,8 @@
 
                 <md-input-container>
                     <label>Número NFE</label>
-                    <input type="text" name="numero" ng-model="model.entidade.numeroNfe"
-                           ng-blur="verificarNfe(model.entidade.numeroNfe)" ng-readonly="currentState == CANCEL_STATE"
+                    <input type="text" maxlength="255" name="numero" ng-model="model.entidade.numeroNfe"
+                           ng-blur="verificarNfe(model.entidade.numeroNfe, model.entidade.serie, model.entidade.modelo)" ng-readonly="currentState == CANCEL_STATE"
                            required>
 
                     <div ng-messages="vendaForm.numero.$error" ng-if="currentState == INSERT_STATE">
@@ -50,7 +44,7 @@
 
                 <md-input-container>
                     <label>Série</label>
-                    <input name="serie" type="text" ng-model="model.entidade.serie" required
+                    <input name="serie" type="text" maxlength="255" ng-model="model.entidade.serie" required ng-blur="verificarNfe(model.entidade.numeroNfe, model.entidade.serie, model.entidade.modelo)"
                            ng-readonly="currentState == CANCEL_STATE">
 
                     <div ng-messages="vendaForm.serie.$error" ng-if="currentState == INSERT_STATE">
@@ -62,7 +56,7 @@
 
                 <md-input-container>
                     <label>Modelo</label>
-                    <input type="text" ng-model="model.entidade.modelo" required
+                    <input type="text" ng-model="model.entidade.modelo" maxlength="255" required ng-blur="verificarNfe(model.entidade.numeroNfe, model.entidade.serie, model.entidade.modelo)"
                            ng-readonly="currentState == CANCEL_STATE">
 
                     <div ng-messages="vendaForm.modelo.$error" ng-if="currentState == INSERT_STATE">
@@ -74,7 +68,7 @@
 
                 <div layout="row" layout-align="center center">
 
-                    <input style="width: 40px;" type="text" ng-model="model.codigoCliente"
+                    <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCliente"
                            ng-change="buscaClienteByCodigo()" ng-if="currentState == INSERT_STATE">
 
                     <md-input-container>
@@ -89,7 +83,7 @@
                     </md-input-container>
 
                     <md-button class="md-icon-button" ng-click="abrirPopupCliente($event, null, null)"
-                               aria-label="Procurar fornecedor" ng-if="currentState == INSERT_STATE">
+                               aria-label="Procurar cliente" ng-if="currentState == INSERT_STATE">
                         <i class="md-icon md-icon-search"></i>
                     </md-button>
                 </div>
@@ -124,7 +118,7 @@
 
         <div layout="row" layout-align="center center">
 
-            <input style="width: 40px;" type="text" ng-model="model.codigoCondicao" ng-change="buscaCondicaoByCodigo()"
+            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCondicao" ng-change="buscaCondicaoByCodigo()"
                    ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
@@ -192,8 +186,7 @@
                             <span ng-if="currentState == CANCEL_STATE">{{::itemVenda.quantidade}}</span>
                         </td>
                         <td>
-                            {{ itemVenda.produto.precoVenda * itemVenda.quantidade - itemVenda.desconto | currency: 'R$
-                            '}}
+                            {{ itemVenda.produto.precoVenda * itemVenda.quantidade - itemVenda.desconto | currency: 'R$'}}
                         </td>
 
                         <td>

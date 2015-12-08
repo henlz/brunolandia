@@ -13,6 +13,10 @@
 
         <md-content layout="row" layout-align="center center" layout-wrap>
             <md-input-container flex="50">
+                <label>Código</label>
+                <input type="text" ng-model="model.filtros.codigo">
+            </md-input-container>
+            <md-input-container flex="50">
                 <label>Gênero</label>
                 <input type="text" ng-model="model.filtros.genero">
             </md-input-container>
@@ -25,12 +29,14 @@
             <table md-data-table>
                 <thead md-order="model.query.order" md-trim-column-names>
                 <tr>
+                    <th order-by="codigo">Código</th>
                     <th order-by="genero">Gênero</th>
                     <th>Ação</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="genero in model.content | orderBy: model.query.order">
+                    <td>{{::genero.codigo}}</td>
                     <td>{{::genero.genero}}</td>
                     <td>
                         <md-button ng-click="escolherGenero(genero)" class="md-primary">

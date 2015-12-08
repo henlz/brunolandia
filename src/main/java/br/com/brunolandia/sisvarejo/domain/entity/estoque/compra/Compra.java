@@ -41,14 +41,14 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private BigDecimal valorFrete;
-	
+
 	/**
 	 * 
 	 */
 	@NotNull
 	@ManyToOne
 	private Condicao condicaoPagamento;
-	
+
 	/**
 	 * 
 	 */
@@ -73,7 +73,7 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private String numeroNfe;
-	
+
 	/**
 	 * 
 	 */
@@ -87,7 +87,7 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@Column(nullable = false)
 	private String modelo;
-	
+
 	/**
 	 * 
 	 */
@@ -113,7 +113,7 @@ public class Compra extends AbstractEntity
 	@NotNull
 	@ManyToOne
 	private Fornecedor fornecedor;
-	
+
 	/**
 	 * 
 	 */
@@ -125,7 +125,13 @@ public class Compra extends AbstractEntity
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ContaPagar> contasAPagar = new ArrayList<ContaPagar>();
-	
+
+	/**
+	 * 
+	 */
+	@Column
+	private Boolean cancelada;
+
 	/**
 	 * 
 	 */
@@ -150,7 +156,7 @@ public class Compra extends AbstractEntity
 	 * @param transportadora
 	 * @param contasAPagar
 	 */
-	public Compra( BigDecimal valorFrete, Condicao condicaoPagamento, String observacao, BigDecimal frete, BigDecimal outrasDespesas, String numeroNfe, String serie, String modelo, List<ItemCompra> itensCompra, Date dataChegada, Date dataEmissao, Fornecedor fornecedor, Fornecedor transportadora, List<ContaPagar> contasAPagar )
+	public Compra( BigDecimal valorFrete, Condicao condicaoPagamento, String observacao, BigDecimal frete, BigDecimal outrasDespesas, String numeroNfe, String serie, String modelo, List<ItemCompra> itensCompra, Date dataChegada, Date dataEmissao, Fornecedor fornecedor, Fornecedor transportadora, List<ContaPagar> contasAPagar, Boolean cancelada )
 	{
 		super();
 		this.valorFrete = valorFrete;
@@ -167,9 +173,11 @@ public class Compra extends AbstractEntity
 		this.fornecedor = fornecedor;
 		this.transportadora = transportadora;
 		this.contasAPagar = contasAPagar;
+		this.cancelada = cancelada;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -184,6 +192,7 @@ public class Compra extends AbstractEntity
 		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
 		result = prime * result + ( ( frete == null ) ? 0 : frete.hashCode() );
 		result = prime * result + ( ( itensCompra == null ) ? 0 : itensCompra.hashCode() );
+		result = prime * result + ( ( cancelada == null ) ? 0 : cancelada.hashCode() );
 		result = prime * result + ( ( modelo == null ) ? 0 : modelo.hashCode() );
 		result = prime * result + ( ( numeroNfe == null ) ? 0 : numeroNfe.hashCode() );
 		result = prime * result + ( ( observacao == null ) ? 0 : observacao.hashCode() );
@@ -194,7 +203,8 @@ public class Compra extends AbstractEntity
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -249,6 +259,11 @@ public class Compra extends AbstractEntity
 			if ( other.numeroNfe != null ) return false;
 		}
 		else if ( !numeroNfe.equals( other.numeroNfe ) ) return false;
+		if ( cancelada == null )
+		{
+			if ( other.cancelada != null ) return false;
+		}
+		else if ( !cancelada.equals( other.cancelada ) ) return false;
 		if ( observacao == null )
 		{
 			if ( other.observacao != null ) return false;
@@ -508,5 +523,21 @@ public class Compra extends AbstractEntity
 	{
 		return serialVersionUID;
 	}
-	
+
+	/**
+	 * @return the cancelada
+	 */
+	public Boolean getCancelada()
+	{
+		return cancelada;
+	}
+
+	/**
+	 * @param cancelada the cancelada to set
+	 */
+	public void setCancelada( Boolean cancelada )
+	{
+		this.cancelada = cancelada;
+	}
+
 }

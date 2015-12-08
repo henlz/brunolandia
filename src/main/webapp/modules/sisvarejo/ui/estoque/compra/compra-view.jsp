@@ -17,7 +17,7 @@
     <div ng-switch-when="compra.cadastrar">
         <div ng-include="'modules/sisvarejo/ui/estoque/compra/compra-form.jsp'"></div>
     </div>
-    <div ng-switch-when="compra.alterar">
+    <div ng-switch-when="compra.cancelar">
         <div ng-include="'modules/sisvarejo/ui/estoque/compra/compra-form.jsp'"></div>
     </div>
     <div ng-switch-default></div>

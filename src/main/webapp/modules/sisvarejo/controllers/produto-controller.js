@@ -6,6 +6,7 @@
 
         $importService("estoqueService");
         $importService("caracteristicaService");
+        $importService("fiscalService");
 
         /**
          * Injeta os métodos, atributos e seus estados herdados de AbstractCRUDController.
@@ -67,7 +68,10 @@
             entidade: {},
             query: {
                 order: 'codigo'
-            }
+            },
+            codigoFornecedor: null,
+            codigoICMS: null,
+            codigoNCM: null
         };
 
         /**
@@ -160,7 +164,6 @@
 
             $scope.carregarListaCores();
             $scope.carregarListaTamanhos();
-            $scope.carregarListaFornecedores();
 
             $scope.model.entidade = new Produto();
             $scope.currentState = $scope.INSERT_STATE;
@@ -191,7 +194,6 @@
                     $scope.model.entidade = result;
                     $scope.carregarListaCores();
                     $scope.carregarListaTamanhos();
-                    $scope.carregarListaFornecedores();
                     $scope.currentState = $scope.UPDATE_STATE;
                     $state.go($scope.UPDATE_STATE);
                     $scope.$apply();
@@ -271,27 +273,6 @@
             })
         }
 
-        /**
-         *
-         */
-        $scope.carregarListaFornecedores = function () {
-            estoqueService.listFornecedoresByStatus(true, {
-                callback: function (result) {
-                    $scope.model.fornecedores = result;
-                    $scope.$apply();
-                },
-                errorHandler: function (message, exception) {
-                    var toast = $mdToast.simple()
-                        .content(message)
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }
-            })
-        };
-
         $scope.abrirPopupIcms = function (ev) {
 
             $scope.fornecedorDialog = $mdDialog;
@@ -310,7 +291,7 @@
                     //tratar o "cancelar" da popup
                 });
         };
-        
+
         $scope.abrirPopupCson = function (ev) {
 
             $scope.fornecedorDialog = $mdDialog;
@@ -401,66 +382,13 @@
 
         /**
          *
-         * @param ev
-         */
-        $scope.abrirPopupNovaEntidade = function (ev) {
-            $mdDialog.show({
-                    controller: ProdutoDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
-                .then(function (result) {
-
-                    $scope.currentPage.push(result);
-
-                    var toast = $mdToast.simple()
-                        .content('Registro salvo com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-
-                }, function () {
-                    //tratar o "cancelar" da popup
-                });
-        }
-
-        $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
-            $mdDialog.show({
-                    controller: ProdutoDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-produto.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    bindToController: true,
-                    locals: {
-                        entidadeExterna: angular.copy(entidade)
-                    }
-                })
-                .then(function (result) {
-                    var i = $scope.findByIdInArray($scope.currentPage, result);
-                    $scope.currentPage[i] = result;
-                    var toast = $mdToast.simple()
-                        .content('Registro salvo com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-                }, function () {
-                    //tratar o "cancelar" da popup
-                });
-        }
-
-        /**
-         *
          * @param entidade
          */
         $scope.salvarProduto = function (entidade) {
+            if ($scope.validaForm() == false) {
+                return false;
+            }
+
             estoqueService.insertProduto(entidade, {
                 callback: function (result) {
                     $scope.model.content.push(result);
@@ -487,14 +415,94 @@
             });
         };
 
-        $scope.abrirPopupBuscarCor = function (ev) {
+        $scope.buscaFornecedorByCodigo = function () {
+            estoqueService.findFornecedorByCodigo($scope.model.codigoFornecedor, false, {
+                callback: function (result) {
+                    $scope.model.entidade.fornecedor = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
+
+        $scope.buscaCorByCodigo = function () {
+            caracteristicaService.findCorByCodigo($scope.model.codigoCor, {
+                callback: function (result) {
+                    $scope.model.entidade.cor = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar a cor");
+                }
+            })
+        };
+
+        $scope.buscaGeneroByCodigo = function () {
+            caracteristicaService.findGeneroByCodigo($scope.model.codigoGenero, {
+                callback: function (result) {
+                    $scope.model.entidade.genero = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar a cor");
+                }
+            })
+        };
+
+        $scope.buscaTamanhoByCodigo = function () {
+            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+                callback: function (result) {
+                    $scope.model.entidade.tamanho = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar a cor");
+                }
+            })
+        };
+
+        $scope.buscaNcmByCodigo = function () {
+            fiscalService.findNCMByCodigo($scope.model.codigoNCM, {
+                callback: function (result) {
+                    $scope.model.entidade.ncm = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar o NCM");
+                }
+            })
+        };
+
+        $scope.buscaIcmsByCodigo = function () {
+            fiscalService.findICMSByCodigo($scope.model.codigoICMS, {
+                callback: function (result) {
+                    $scope.model.entidade.icms = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $log.error(message);
+                    $mdToast.showSimple("Erro ao buscar o ICMS");
+                }
+            })
+        };
+
+        $scope.abrirPopupCor = function (ev) {
             $mdDialog.show({
-                    controller: CorDialogController,
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-buscar-cor.html',
+                    controller: 'BuscaCorDialogController',
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-busca-cor.html',
                     targetEvent: ev,
                     hasBackdrop: true,
                     locals: {
-                        entidadeExterna: null
+                        local: [$scope]
                     }
                 })
                 .then(function (result) {
@@ -504,33 +512,38 @@
                 }, function () {
                     //tratar o "cancelar" da popup
                 });
-        }
+        };
+
+        $scope.abrirPopupTamanho = function (ev) {
+            $mdDialog.show({
+                    controller: 'BuscaTamanhoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-busca-tamanho.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope]
+                    }
+                })
+                .then(function (result) {
+
+                    $scope.model.entidade.tamanho = result;
+
+                }, function () {
+                    //tratar o "cancelar" da popup
+                });
+        };
 
         /**
          *
-         * @param entidade
+         * @returns {boolean}
          */
-        $scope.alterarPrincipioDiretriz = function (entidade) {
-            estoqueService.updatePrincipioDiretriz(entidade, {
-                callback: function (result) {
-                    var toast = $mdToast.simple()
-                        .content('Registro atualizado com sucesso!')
-                        .action('Fechar')
-                        .highlightAction(false)
-                        .position('bottom left right');
-                    $mdToast.show(toast).then(function () {
-                    });
-
-                    var i = $scope.findByIdInArray($scope.currentPage, result);
-                    $scope.currentPage.splice(i, 1);
-                    $scope.currentPage.push(result);
-
-                    $scope.$apply();
-                },
-                errorHandler: function (message, error) {
-                    $log.error(message);
-                }
-            });
+        $scope.validaForm = function () {
+            if (!produtoForm.checkValidity()) {
+                $mdToast.showSimple('Preencha todos os campos obrigatórios!');
+                return false;
+            } else {
+                return true;
+            }
         };
 
         /**
@@ -599,86 +612,201 @@
     });
 
     /**
-     * Controller da popup de Princípio e Diretriz
+     *
      */
-    function ProdutoDialogController($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+    angular.module('sisvarejo').controller('BuscaCorDialogController', function ($scope, $importService, $mdToast, $mdDialog, local) {
+        $importService("estoqueService");
+
+        $scope.model = {
+            entidade: new Cor(),
+            corDialog: local[0],
+            filtros: {
+                cor: "",
+                codigo: ""
+            },
+            content: []
+        };
+
+        /**
+         *
+         */
+        $scope.listCoresByFilters = function () {
+            caracteristicaService.listCoresByFilters($scope.model.filtros.codigo, $scope.model.filtros.cor, {
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvarCor = function (entidade) {
+            caracteristicaService.insertCor(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param cliente
+         */
+        $scope.escolherCor = function (cor) {
+            $mdDialog.hide(cor);
+        }
+
+        /**
+         *
+         */
+        $scope.cancelar = function () {
+            $mdDialog.cancel();
+        }
+
+        /**
+         *
+         * @param ev
+         */
+        $scope.abrirPopupCadastrar = function (entidade) {
+            $mdDialog.show({
+                    controller: 'CorDialogController',
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: entidade
+                    }
+                })
+                .then(function (result) {
+                    $scope.model.corDialog.abrirPopupCor();
+                }, function () {
+                    $scope.model.corDialog.abrirPopupCor();
+                });
+        };
+    });
+
+    /**
+     *
+     */
+    angular.module('sisvarejo').controller('BuscaTamanhoDialogController', function ($scope, $importService, $mdToast, $mdDialog, local) {
 
         $importService("estoqueService");
 
-        if (entidadeExterna != null) {
-            $scope.model.entidade = entidadeExterna;
-            $scope.modoAlteracao = true;
-        } else {
-            $scope.model.entidade = {};
-            $scope.modoAlteracao = false;
+        $scope.model = {
+            entidade: new Tamanho(),
+            tamanhoDialog: local[0],
+            filtros: {
+                cor: "",
+                codigo: ""
+            },
+            content: []
+        };
+
+        /**
+         *
+         */
+        $scope.listTamanhosByFilters = function () {
+            caracteristicaService.listTamanhosByFilters($scope.model.filtros.codigo, $scope.model.filtros.tamanho, $scope.model.filtros.sigla, {
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.showSimple(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param entidade
+         */
+        $scope.salvarTamanho = function (entidade) {
+            caracteristicaService.insertTamanho(entidade, {
+                callback: function (result) {
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                    $mdDialog.hide(true);
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                    $log.error(message);
+                }
+            });
+        };
+
+        /**
+         *
+         * @param cliente
+         */
+        $scope.escolherTamanho = function (tamanho) {
+            $mdDialog.hide(tamanho);
         }
 
+        /**
+         *
+         */
         $scope.cancelar = function () {
             $mdDialog.cancel();
-        };
+        }
 
         /**
          *
-         * @returns {boolean}
+         * @param ev
          */
-        $scope.validaForm = function () {
-            if (!$scope.produtoForm.$valid) {
-                $mdToast.show($mdToast.simple()
-                    .content('Preencha todos os campos obrigatórios!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('top')).then(function () {
+        $scope.abrirPopupCadastrar = function (entidade) {
+            $mdDialog.show({
+                    controller: 'TamanhoDialogController',
+                    templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-tamanho.html',
+                    hasBackdrop: true,
+                    preserveScope: true,
+                    clickOutsideToClose: false,
+                    locals: {
+                        entidadeExterna: entidade
+                    }
+                })
+                .then(function () {
+                    $scope.model.tamanhoDialog.abrirPopupTamanho();
+                }, function () {
+                    $scope.model.tamanhoDialog.abrirPopupTamanho();
                 });
-                return false;
-            } else {
-                return true;
-            }
         };
-
-        /**
-         *
-         */
-        $scope.salvar = function () {
-            if ($scope.validaForm()) {
-
-                if (!$scope.modoAlteracao) {
-                    estoqueService.insertProduto($scope.model.entidade, {
-                        callback: function (result) {
-                            $mdDialog.hide(result);
-                            $scope.$apply();
-                        },
-                        errorHandler: function (message, error) {
-                            $mdToast.show($mdToast.simple()
-                                .content(message)
-                                .action('Fechar')
-                                .highlightAction(false)
-                                .position('bottom left right'))
-                                .then(function () {
-                                });
-                            $log.error(message);
-                        }
-                    });
-                } else {
-                    estoqueService.updateProduto($scope.model.entidade, {
-                        callback: function (result) {
-                            $mdDialog.hide(result);
-                            $scope.$apply();
-                        },
-                        errorHandler: function (message, error) {
-                            $mdToast.show($mdToast.simple()
-                                .content(message)
-                                .action('Fechar')
-                                .highlightAction(false)
-                                .position('bottom left right'))
-                                .then(function () {
-                                });
-                            $log.error(message);
-                        }
-                    });
-                }
-            }
-        };
-    }
+    });
 
     /**
      * Controller da popup de Buscar Clientes
@@ -829,8 +957,7 @@
         $scope.model = {
             entidade: new ICMS(),
             icmsDialog: local[0],
-            filtros: {
-            },
+            filtros: {},
             content: []
         };
 
@@ -978,14 +1105,14 @@
          */
         $scope.listCsonByFilters = function () {
             fiscalService.listCSONByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao, {
-                    callback: function (result) {
-                        $scope.model.content = result;
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $mdToast.showSimple(message);
-                    }
-                });
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.showSimple(message);
+                }
+            });
         };
 
         /**
@@ -1055,7 +1182,7 @@
                 });
         };
     }
-    
+
     /**
      * Controller da popup de Buscar NCM
      */
@@ -1175,10 +1302,8 @@
             entidade: new Genero(),
             generoDialog: local[0],
             filtros: {
-                nome: "",
-                apelido: "",
-                cpf: "",
-                rg: ""
+                codigo: "",
+                genero: ""
             },
             content: []
         };
@@ -1192,15 +1317,15 @@
          *
          */
         $scope.listGeneroByFilters = function () {
-            caracteristicaService.listGeneroByFilters($scope.model.filtros.genero, {
-                    callback: function (result) {
-                        $scope.model.content = result;
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $mdToast.showSimple(message);
-                    }
-                });
+            caracteristicaService.listGeneroByFilters($scope.model.filtros.genero, $scope.model.filtros.codigo, {
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.showSimple(message);
+                }
+            });
         };
 
         /**

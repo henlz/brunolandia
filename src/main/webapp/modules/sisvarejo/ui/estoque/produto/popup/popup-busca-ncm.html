@@ -42,7 +42,7 @@
                 <tr ng-repeat="ncm in model.content | orderBy: model.query.order">
                     <td>{{::ncm.codigo}}</td>
                     <td>{{::ncm.descricao}}</td>
-                    <td>{{::ncm.possuiIpi == true ? 'SIM' : 'NÃO'}}</td>
+                    <td>{{::ncm.IPI }}%</td>
                     <td>
                         <md-button ng-click="escolherNcm(ncm)" class="md-primary">
                             Escolher

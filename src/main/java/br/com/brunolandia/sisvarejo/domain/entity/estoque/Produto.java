@@ -14,7 +14,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Cor;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Genero;
 import br.com.brunolandia.sisvarejo.domain.entity.caracteristicas.Tamanho;
-import br.com.brunolandia.sisvarejo.domain.entity.fiscal.CSON;
 import br.com.brunolandia.sisvarejo.domain.entity.fiscal.ICMS;
 import br.com.brunolandia.sisvarejo.domain.entity.fiscal.NCM;
 import br.com.eits.common.domain.entity.AbstractEntity;
@@ -110,19 +109,6 @@ public class Produto extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column
-	private BigDecimal IPI;
-
-	/**
-	 * 
-	 */
-	@ManyToOne(cascade = CascadeType.DETACH)
-	@NotNull
-	private CSON cson;
-
-	/**
-	 * 
-	 */
 	@ManyToOne(cascade = CascadeType.DETACH)
 	@NotNull
 	private ICMS icms;
@@ -169,12 +155,10 @@ public class Produto extends AbstractEntity
 	 * @param tamanho
 	 * @param grupo
 	 * @param fornecedor
-	 * @param iPI
-	 * @param cson
 	 * @param icms
 	 * @param ncm
 	 */
-	public Produto( Long id, String descricao, String codigo, String codigoBarra, BigDecimal precoVenda, Integer quantidade, BigDecimal pesoLiquido, BigDecimal pesoBruto, Cor cor, Tamanho tamanho, Genero grupo, Fornecedor fornecedor, BigDecimal IPI, CSON cson, ICMS icms, NCM ncm, String unidade )
+	public Produto( Long id, String descricao, String codigo, String codigoBarra, BigDecimal precoVenda, Integer quantidade, BigDecimal pesoLiquido, BigDecimal pesoBruto, Cor cor, Tamanho tamanho, Genero grupo, Fornecedor fornecedor, ICMS icms, NCM ncm, String unidade )
 	{
 		super( id );
 		this.descricao = descricao;
@@ -188,8 +172,6 @@ public class Produto extends AbstractEntity
 		this.tamanho = tamanho;
 		this.genero = grupo;
 		this.fornecedor = fornecedor;
-		this.IPI = IPI;
-		this.cson = cson;
 		this.icms = icms;
 		this.ncm = ncm;
 		this.unidade = unidade;
@@ -316,38 +298,6 @@ public class Produto extends AbstractEntity
 	}
 
 	/**
-	 * @return the iPI
-	 */
-	public BigDecimal getIPI()
-	{
-		return IPI;
-	}
-
-	/**
-	 * @param iPI the iPI to set
-	 */
-	public void setIPI( BigDecimal iPI )
-	{
-		IPI = iPI;
-	}
-
-	/**
-	 * @return the cson
-	 */
-	public CSON getCson()
-	{
-		return cson;
-	}
-
-	/**
-	 * @param cson the cson to set
-	 */
-	public void setCson( CSON cson )
-	{
-		this.cson = cson;
-	}
-
-	/**
 	 * @return the icms
 	 */
 	public ICMS getIcms()
@@ -419,11 +369,9 @@ public class Produto extends AbstractEntity
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( IPI == null ) ? 0 : IPI.hashCode() );
 		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( codigoBarra == null ) ? 0 : codigoBarra.hashCode() );
 		result = prime * result + ( ( cor == null ) ? 0 : cor.hashCode() );
-		result = prime * result + ( ( cson == null ) ? 0 : cson.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
 		result = prime * result + ( ( fornecedor == null ) ? 0 : fornecedor.hashCode() );
 		result = prime * result + ( ( genero == null ) ? 0 : genero.hashCode() );
@@ -448,11 +396,6 @@ public class Produto extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		Produto other = ( Produto ) obj;
-		if ( IPI == null )
-		{
-			if ( other.IPI != null ) return false;
-		}
-		else if ( !IPI.equals( other.IPI ) ) return false;
 		if ( codigo == null )
 		{
 			if ( other.codigo != null ) return false;
@@ -468,11 +411,6 @@ public class Produto extends AbstractEntity
 			if ( other.cor != null ) return false;
 		}
 		else if ( !cor.equals( other.cor ) ) return false;
-		if ( cson == null )
-		{
-			if ( other.cson != null ) return false;
-		}
-		else if ( !cson.equals( other.cson ) ) return false;
 		if ( descricao == null )
 		{
 			if ( other.descricao != null ) return false;

@@ -15,6 +15,13 @@ import br.com.brunolandia.sisvarejo.domain.entity.fiscal.ICMS;
  */
 public interface IICMSRepository extends JpaRepository<ICMS, Long>
 {
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public ICMS findByCodigo(String codigo);
 
 	/**
 	 * 

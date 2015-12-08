@@ -16,18 +16,25 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 @DataTransferObject(javascript = "Genero")
 public class Genero extends AbstractEntity
 {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8224456146124131902L;
-	
+	private static final long serialVersionUID = -4563333329712815503L;
+
 	/**
 	 * 
 	 */
 	@NotNull
 	@Column(nullable = false)
 	private String genero;
+	
+	/**
+	 * 
+	 */
+	@NotNull
+	@Column(nullable = false)
+	private String codigo;
 
 	/**
 	 * 
@@ -47,10 +54,11 @@ public class Genero extends AbstractEntity
 	/**
 	 * @param genero
 	 */
-	public Genero( Long id, String genero )
+	public Genero( Long id, String genero, String codigo )
 	{
 		super( id );
 		this.genero = genero;
+		this.codigo = codigo;
 	}
 
 	/**
@@ -69,6 +77,22 @@ public class Genero extends AbstractEntity
 		this.genero = genero;
 	}
 
+	/**
+	 * @return the codigo
+	 */
+	public String getCodigo()
+	{
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo( String codigo )
+	{
+		this.codigo = codigo;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -79,6 +103,7 @@ public class Genero extends AbstractEntity
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ( ( genero == null ) ? 0 : genero.hashCode() );
+		result = prime * result + ( ( codigo == null ) ? 0 : genero.hashCode() );
 		return result;
 	}
 
@@ -98,6 +123,11 @@ public class Genero extends AbstractEntity
 			if ( other.genero != null ) return false;
 		}
 		else if ( !genero.equals( other.genero ) ) return false;
+		if ( codigo == null )
+		{
+			if ( other.codigo != null ) return false;
+		}
+		else if ( !codigo.equals( other.codigo ) ) return false;
 		return true;
 	}
 

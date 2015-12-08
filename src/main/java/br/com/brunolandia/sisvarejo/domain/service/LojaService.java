@@ -201,7 +201,6 @@ public class LojaService
 	{
 		Venda vendaBanco = this.vendaRepository.findOne( venda.getId() );
 
-		Assert.notNull( venda.getObservacao(), "A observação não pode estar vazia!" );
 		vendaBanco.setObservacao( venda.getObservacao() );
 		vendaBanco.setCancelada( true );
 

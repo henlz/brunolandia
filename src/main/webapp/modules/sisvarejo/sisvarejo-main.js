@@ -201,8 +201,8 @@
 			url: '/listar'
 		}).state('compra.cadastrar',{
 			url: '/cadastrar'
-		}).state('compra.alterar',{
-			url: '/alterar/:id'
+		}).state('compra.cancelar',{
+			url: '/cancelar/:id'
 		}).state('compra.detalhe',{
 			url: '/detalhe/:id'
 		});

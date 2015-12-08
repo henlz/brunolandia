@@ -22,24 +22,23 @@
     <table md-data-table>
         <thead md-order="model.query.order" md-trim-column-names>
         <tr>
+            <th>Número</th>
             <th>Data da compra</th>
             <th>Total</th>
-            <!--<th>Fornecedor</th>-->
+            <th>Fornecedor</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="compra in model.content | orderBy: model.query.order">
-            <td>{{::compra.dataCompra | date: 'HH:mm - dd/MM/yyyy'}}</td>
+            <td>{{::compra.numeroNfe}} {{:: compra.cancelada == true ? '(Cancelada)': ''}}</td>
+            <td>{{::compra.created | date: 'HH:mm - dd/MM/yyyy'}}</td>
             <td>{{::getCompraTotal(compra) | currency: 'R$ '}}</td>
-            <!--<td>{{::compra.fornecedor.nome}}</td>-->
+            <td>{{::compra.fornecedor.razaoSocial}}</td>
             <td layout="row">
-                <md-button class="md-icon-button" ui-sref="compra.alterar({id: compra.id})" aria-label="Alterar produto">
-                    <i class="md-icon md-icon-edit"></i>
+                <md-button class="md-icon-button" ui-sref="compra.cancelar({id: compra.id})" aria-label="Cancelar compra" ng-if="compra.cancelada != true">
+                    <i class="md-icon md-icon-cancel"></i>
                 </md-button>
-                <!--<md-button class="md-icon-button" ng-click="excluirCompra($event, compra)" aria-label="Excluir produto">-->
-                    <!--<i class="md-icon md-icon-delete"></i>-->
-                <!--</md-button>-->
             </td>
         </tr>
         </tbody>

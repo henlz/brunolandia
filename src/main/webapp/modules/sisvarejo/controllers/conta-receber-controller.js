@@ -100,10 +100,8 @@
          */
         $scope.initialize = function () {
             var pageRequest = new PageRequest();
-            pageRequest.size = 10;
 
             $scope.currentState = $state.current.name;
-
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
@@ -150,7 +148,6 @@
             $log.info("changeToList");
 
             var pageRequest = new PageRequest();
-            pageRequest.size = 10;
             $scope.pageRequest = pageRequest;
 
             $scope.carregarLista();

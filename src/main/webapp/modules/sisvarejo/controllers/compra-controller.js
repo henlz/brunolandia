@@ -41,7 +41,7 @@
          * Variável estática que representa
          * o estado para a edição de registros.
          */
-        $scope.UPDATE_STATE = "compra.alterar";
+        $scope.CANCEL_STATE = "compra.cancelar";
 
 
         /*-------------------------------------------------------------------
@@ -67,7 +67,13 @@
             query: {
                 order: 'descricao'
             },
-            fiscal: {}
+            fiscal: {},
+            invalidNfe: true,
+            codigoFornecedor: null,
+            codigoCondicao: null,
+            codigoTransportadora: null,
+            codigoCor: null,
+            codigoTamanho: null
         }
 
         /**
@@ -93,7 +99,6 @@
          */
         $scope.initialize = function () {
             var pageRequest = new PageRequest();
-            pageRequest.size = 10;
 
             $scope.currentState = $state.current.name;
 
@@ -115,9 +120,9 @@
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
+                case $scope.CANCEL_STATE:
                 {
-                    $scope.changeToUpdate($state.params.id);
+                    $scope.changeToCancel($state.params.id);
                 }
                     break;
                 default:
@@ -139,7 +144,6 @@
             $log.info("changeToList");
 
             var pageRequest = new PageRequest();
-            pageRequest.size = 10;
             $scope.pageRequest = pageRequest;
 
             $scope.carregarLista();
@@ -163,17 +167,12 @@
         };
 
         /**
-         * Realiza os procedimentos iniciais (prepara o estado)
-         * para a tela de edição e após isso, muda o estado para update.
-         * @see UPDATE_STATE
-         * @see $stateChangeSuccess
          *
-         * Para mudar para este estado, deve-se primeiro obter via id
-         * o registro pelo serviço de consulta e só então mudar o estado da tela.
+         * @param id
          */
-        $scope.changeToUpdate = function (id) {
+        $scope.changeToCancel = function (id) {
 
-            $log.info("changeToUpdate", id);
+            $log.info("changeToCancel", id);
 
             if (id == null || id == "" || id == 0) {
                 $scope.currentState = $scope.LIST_STATE;
@@ -183,10 +182,18 @@
 
             estoqueService.findCompraById(id, {
                 callback: function (result) {
-                    $scope.model.entidade = result;
 
-                    $scope.currentState = $scope.UPDATE_STATE;
-                    $state.go($scope.UPDATE_STATE);
+                    if (result == null) {
+                        $scope.currentState = $scope.LIST_STATE;
+                        $state.go($scope.LIST_STATE);
+                        return false;
+                    }
+
+                    $scope.model.entidade = result;
+                    $scope.calculaImpostos();
+
+                    $scope.currentState = $scope.CANCEL_STATE;
+                    $state.go($scope.CANCEL_STATE);
                     $scope.$apply();
                 },
                 errorHandler: function (message, exception) {
@@ -223,46 +230,92 @@
          * @param compra
          * @returns {number}
          */
-        $scope.getCompraTotal = function(compra) {
+        $scope.getCompraTotal = function (compra) {
             if (compra.itensCompra == null || compra.itensCompra.length == 0) {
                 return 0;
             }
             var total = 0;
-            for (var i = 0; compra.itensCompra.length > i; i++){
+            for (var i = 0; compra.itensCompra.length > i; i++) {
                 total += compra.itensCompra[i].quantidade * compra.itensCompra[i].precoCompra;
             }
+
+            total += compra.outrasDespesas;
+            total += compra.valorFrete;
+
             return total;
         };
 
-        $scope.buscaCondicaoByCodigo = function() {
+        $scope.buscaCondicaoByCodigo = function () {
             financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
-                callback: function(result) {
+                callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;
 
                     $scope.$apply();
                 },
-                errorHandler: function() {
+                errorHandler: function () {
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
         };
 
-        $scope.buscaFornecedorByCodigo = function(transportadora) {
+        $scope.buscaCorByCodigo = function () {
+            caracteristicaService.findCorByCodigo($scope.model.codigoCor, {
+                callback: function (result) {
+                    if (result != null)
+                        $scope.model.entidade.cor = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
+
+        $scope.buscaTamanhoByCodigo = function () {
+            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+                callback: function (result) {
+                    if (result != null)
+                        $scope.model.entidade.tamanho = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
+
+        $scope.buscaGeneroByCodigo = function () {
+            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+                callback: function (result) {
+                    if (result != null)
+                        $scope.model.entidade.tamanho = result;
+
+                    $scope.$apply();
+                },
+                errorHandler: function () {
+                    $mdToast.showSimple("Erro ao buscar a condição de pagamento");
+                }
+            })
+        };
+
+        $scope.buscaFornecedorByCodigo = function (transportadora) {
             estoqueService.findFornecedorByCodigo(transportadora == true ? $scope.model.codigoTransportadora : $scope.model.codigoFornecedor, transportadora, {
-                callback: function(result) {
+                callback: function (result) {
                     //if (result != null) {
-                        if (transportadora == true) {
-                            $scope.model.entidade.transportadora = result;
-                        } else {
-                            $scope.model.entidade.fornecedor = result;
-                            $scope.model.entidade.condicaoPagamento = result.condicaoPagamento;
-                        }
+                    if (transportadora == true) {
+                        $scope.model.entidade.transportadora = result;
+                    } else {
+                        $scope.model.entidade.fornecedor = result;
+                        $scope.model.entidade.condicaoPagamento = result.condicaoPagamento;
+                    }
                     //}
 
                     $scope.$apply();
                 },
-                errorHandler: function(message, error) {
+                errorHandler: function (message, error) {
                     $log.error(message);
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
@@ -284,14 +337,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                controller: BuscaFornecedorDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                locals: {
-                    local: [$scope, fornecedor, null, transportadora]
-                }
-            })
+                    controller: BuscaFornecedorDialogController,
+                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    locals: {
+                        local: [$scope, fornecedor, null, transportadora]
+                    }
+                })
                 .then(function (result) {
                     $scope.model.entidade.fornecedor = result;
                 }, function () {
@@ -328,11 +381,11 @@
          */
         $scope.abrirPopupProduto = function (ev) {
             $mdDialog.show({
-                controller: ProdutoDialogController,
-                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
-                targetEvent: ev,
-                hasBackdrop: true
-            })
+                    controller: ProdutoDialogController,
+                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
+                    targetEvent: ev,
+                    hasBackdrop: true
+                })
                 .then(function (result) {
 
                     var itemCompra = new ItemCompra();
@@ -347,10 +400,27 @@
                 });
         };
 
+        $scope.$watch('model.entidade.condicaoPagamento', function (newValue) {
+            if (newValue != null)
+                $scope.gerarContasPagar();
+        });
+
+        $scope.cancelarCompra = function (entidade) {
+            estoqueService.cancelarCompra(entidade, {
+                callback: function (result) {
+                    $state.go($scope.LIST_STATE);
+                },
+                errorHandler: function (message) {
+                    $mdToast.showSimple(message);
+                    $log.error(message);
+                }
+            })
+        }
+
         /**
          *
          */
-        $scope.calculaImpostos = function() {
+        $scope.calculaImpostos = function () {
             $scope.model.fiscal.baseCalculo = $scope.getCompraTotal($scope.model.entidade);
 
             if ($scope.model.entidade.itensCompra == null || $scope.model.entidade.itensCompra.length == 0) {
@@ -361,14 +431,14 @@
                 return 0;
             }
             var total = 0;
-            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++){
+            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++) {
                 total += $scope.model.entidade.itensCompra[i].precoCompra * $scope.model.entidade.itensCompra[i].produto.icms.porcentagem / 100;
             }
             $scope.model.fiscal.totalIcms = total;
 
             var totalIpi = 0;
-            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++){
-                totalIpi += $scope.model.entidade.itensCompra[i].precoCompra * $scope.model.entidade.itensCompra[i].produto.IPI / 100;
+            for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++) {
+                totalIpi += $scope.model.entidade.itensCompra[i].precoCompra * $scope.model.entidade.itensCompra[i].produto.ncm.IPI / 100;
             }
             $scope.model.fiscal.totalIpi = totalIpi;
             $scope.model.fiscal.totalProduto = $scope.model.fiscal.baseCalculo - total - totalIpi;
@@ -377,7 +447,7 @@
         /**
          *
          */
-         $scope.gerarContasPagar = function() {
+        $scope.gerarContasPagar = function () {
             if ($scope.model.entidade.condicaoPagamento != null && $scope.model.entidade.itensCompra != null && $scope.model.entidade.itensCompra.length > null) {
 
                 $scope.model.entidade.contasAPagar = [];
@@ -400,26 +470,81 @@
                     $scope.model.entidade.contasAPagar.push(contaAPagar);
                 }
             }
-        }
+        };
 
-         /**
+        /**
          *
-         * @param numero
+         * @returns {boolean}
          */
-        $scope.verificarNfe = function(numero) {
+        $scope.validaForm = function () {
 
-            estoqueService.verificarNfe(numero, {
-                callback:function(result) {
-                if (result == false) {
-                    $scope.model.invalidNfe = true;
-                }  else {
-                    $scope.model.invalidNfe = false;
+            if (!compraForm.checkValidity()) {
+                $mdToast.show($mdToast.simple()
+                    .content('Preencha todos os campos obrigatórios!')
+                    .action('Fechar')
+                    .highlightAction(false)
+                    .position('bottom left')).then(function () {
+                });
+                return false;
+            } else {
+
+                if ($scope.model.entidade.dataEmissao > new Date()) {
+                    $mdToast.showSimple("A data de emissão não pode ser maior que a data atual");
+                    return false;
                 }
 
+                if ($scope.model.entidade.itensCompra == null || $scope.model.entidade.itensCompra.length == 0) {
+                    $mdToast.showSimple("A compra deve possuir pelo menos um produto.");
+                    return false;
+                }
 
-            }, errorHandler: function(message, error){
-                $log.error(message);
-            }});
+                for (var i = 0; $scope.model.entidade.itensCompra.length > i; i++) {
+                    if ($scope.model.entidade.itensCompra[i].precoCompra == null || $scope.model.entidade.itensCompra[i].precoCompra == 0) {
+                        $mdToast.showSimple("Preencha todos os campos obrigatórios!");
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        };
+
+        /**
+         *
+         * @param numero
+         * @param serie
+         * @param modelo
+         */
+        $scope.verificarNfe = function (numero, serie, modelo) {
+
+            if (numero == null || numero.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
+            }
+
+            if (serie == null || serie.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
+            }
+
+            if (modelo == null || modelo.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
+            }
+
+            estoqueService.verificarNfe(numero, serie, modelo, {
+                callback: function (result) {
+                    if (result == false) {
+                        $scope.model.invalidNfe = true;
+                    } else {
+                        $scope.model.invalidNfe = false;
+                    }
+                    $scope.$apply();
+
+                }, errorHandler: function (message, error) {
+                    $log.error(message);
+                }
+            });
         }
 
         /**
@@ -429,16 +554,16 @@
          */
         $scope.abrirPopupAlterarProduto = function (ev, entidade) {
             $mdDialog.show({
-                controller: CompraDialogController,
-                templateUrl: './modules/sisvarejo/ui/estoque/compra/popup/popup-compra.html',
-                targetEvent: ev,
-                hasBackdrop: true,
-                bindToController: true,
-                locals: {
-                    entidadeExterna: angular.copy(entidade),
-                    isEditing: true
-                }
-            })
+                    controller: CompraDialogController,
+                    templateUrl: './modules/sisvarejo/ui/estoque/compra/popup/popup-compra.html',
+                    targetEvent: ev,
+                    hasBackdrop: true,
+                    bindToController: true,
+                    locals: {
+                        entidadeExterna: angular.copy(entidade),
+                        isEditing: true
+                    }
+                })
                 .then(function (result) {
 
                 }, function () {
@@ -462,6 +587,11 @@
          * @param entidade
          */
         $scope.salvarCompra = function (entidade) {
+
+            if (!$scope.validaForm()) {
+                return false;
+            }
+
             estoqueService.insertCompra(entidade, {
                 callback: function (result) {
                     var toast = $mdToast.simple()
@@ -487,109 +617,6 @@
             });
         };
 
-        /**
-         *
-         * @param entidade
-         */
-        $scope.alterarCompra = function (entidade) {
-            return null;
-            if ($scope.validarProdutos(entidade)) {
-                estoqueService.updateCompra(entidade, {
-                    callback: function (result) {
-                        var toast = $mdToast.simple()
-                            .content('Registro atualizado com sucesso!')
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right');
-                        $mdToast.show(toast).then(function () {
-                        });
-                        $state.go($scope.LIST_STATE);
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $log.error(message);
-                    }
-                });
-            } else {
-                var toast = $mdToast.simple()
-                    .content('O percentual das produtos devem totalizar em 100%!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
-                });
-            }
-        };
-
-        /**
-         *
-         * @param ev
-         * @param id
-         */
-        $scope.excluirCompra = function (ev, compra) {
-            return null;
-            var confirm = $mdDialog.confirm()
-                .title('Exclusão de Compra')
-                .content('Tem certeza que deseja excluir o(s) registros(s)? Esta operação não poderá ser desfeita.')
-                .ariaLabel('Exclusão de Compra')
-                .ok('Sim')
-                .cancel('Cancelar')
-                .targetEvent(ev);
-
-            $mdDialog.show(confirm).then(function () {
-                estoqueService.removeCondicoes([compra], {
-                    callback: function (result) {
-                        var toast = $mdToast.simple()
-                            .content('Registro(s) excluído(s) com sucesso!')
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right');
-                        $mdToast.show(toast).then(function () {
-                        });
-
-                        var i = $scope.findByIdInArray($scope.model.content, compra);
-                        $scope.model.content.splice(i, 1);
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, exception) {
-                        $log.error("Erro ao excluir registro(s)", message);
-                    }
-                })
-            }, function () {
-            });
-        }
-
-        /**
-         *
-         * @param selectedItens
-         */
-        $scope.selectionUpdate = function (selectedItens) {
-
-            if ($scope.data.itensExcluir.length == 0 && selectedItens.length > 0) {
-                $rootScope.$broadcast('showEitsBottomSheetEvent');
-            } else if ($scope.data.itensExcluir.length > 0 && selectedItens.length == 0) {
-                $rootScope.$broadcast('showEitsBottomSheetEvent');
-            }
-
-            $scope.data.itensExcluir = angular.copy(selectedItens);
-        }
-
-        /**
-         *
-         */
-        $scope.limparSelecao = function () {
-            $scope.data.itensExcluir = [];
-            table.clearSelection();
-            $rootScope.$broadcast('showEitsBottomSheetEvent');
-        }
-
-        /**
-         *
-         * @param item
-         */
-        $scope.itemClicked = function (item) {
-            $scope.abrirPopupAlterarEntidade(null, item);
-        }
     });
 
     /**
@@ -635,23 +662,6 @@
             })
         }
 
-        /**
-         *
-         * @returns {boolean}
-         */
-        $scope.validaForm = function () {
-            if (!$scope.produtoForm.$valid) {
-                $mdToast.show($mdToast.simple()
-                    .content('Preencha todos os campos obrigatórios!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('top')).then(function () {
-                });
-                return false;
-            } else {
-                return true;
-            }
-        };
 
         /**
          *
@@ -694,23 +704,23 @@
         if ($scope.model.transportadoraFlag == true) console.log("trnaspo")
 
         // Identifica se a popup foi aberta voltando da popup de cidade
-        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
+        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade : local[2];
 
         /**
          *
          */
-        $scope.listFornecedoresByFilters = function() {
+        $scope.listFornecedoresByFilters = function () {
 
             estoqueService.listFornecedoresByFilters($scope.model.filtros.razaoSocial, $scope.model.filtros.nomeFantasia,
                 $scope.model.filtros.telefone, $scope.model.filtros.cnpj, $scope.model.transportadoraFlag, {
-                callback: function(result) {
-                    $scope.model.content = result;
-                    $scope.$apply();
-                },
-                errorHandler: function(message, error) {
-                    $mdToast.showSimple(message);
-                }
-            });
+                    callback: function (result) {
+                        $scope.model.content = result;
+                        $scope.$apply();
+                    },
+                    errorHandler: function (message, error) {
+                        $mdToast.showSimple(message);
+                    }
+                });
         };
 
         /**
@@ -746,14 +756,14 @@
          *
          * @param cliente
          */
-        $scope.escolherFornecedor = function(fornecedor) {
+        $scope.escolherFornecedor = function (fornecedor) {
             $mdDialog.hide(fornecedor);
         }
 
         /**
          *
          */
-        $scope.cancelar = function() {
+        $scope.cancelar = function () {
             $mdDialog.cancel();
         }
 
@@ -780,7 +790,7 @@
 
                 }, function () {
                     $scope.abrirPopupCadastrar($scope.model.entidade, null, false);
-            });
+                });
         };
 
         /**

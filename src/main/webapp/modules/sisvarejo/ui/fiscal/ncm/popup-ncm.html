@@ -29,17 +29,14 @@
             </md-input-container>
 
             <md-input-container>
-                <label>Possui IPI?</label>
-                <md-select ng-model="entidade.possuiIpi">
-                    <md-option ng-value="true">Sim</md-option>
-                    <md-option ng-value="false">Não</md-option>
-                </md-select>
+                <label>IPI</label>
+                <input name="IPI" ng-model="entidade.IPI" min="1" required/>
 
-                <!--<div ng-messages="ncmForm.possuiIpi.$error">-->
-                    <!--<div ng-message="required">-->
-                        <!--Campo obrigatório.-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div ng-messages="ncmForm.IPI.$error">
+                    <div ng-message="required">
+                        Campo obrigatório.
+                    </div>
+                </div>
             </md-input-container>
             <br>
         </form>

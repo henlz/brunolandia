@@ -93,6 +93,16 @@ public class FiscalService
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public ICMS findICMSByCodigo(String codigo)
+	{
+		return this.icmsRepository.findByCodigo( codigo );
+	}
+	
+	/**
+	 * 
 	 * @param cson
 	 * @return
 	 */
@@ -181,13 +191,23 @@ public class FiscalService
 	/**
 	 * 
 	 * @param codigo
+	 * @return
+	 */
+	public NCM findNCMByCodigo(String codigo)
+	{
+		return this.ncmRepository.findByCodigo( codigo );
+	}
+	
+	/**
+	 * 
+	 * @param codigo
 	 * @param descricao
 	 * @param possuiIpi
 	 * @return
 	 */
-	public List<NCM> listNCMByFilters(String codigo, String descricao, Boolean possuiIpi)
+	public List<NCM> listNCMByFilters(String codigo, String descricao, BigDecimal IPI)
 	{
-		return this.ncmRepository.listByFilters( codigo, descricao, possuiIpi );
+		return this.ncmRepository.listByFilters( codigo, descricao, IPI );
 	}
 	
 }

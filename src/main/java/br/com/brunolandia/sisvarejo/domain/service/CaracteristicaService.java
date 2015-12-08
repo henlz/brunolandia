@@ -26,27 +26,27 @@ public class CaracteristicaService
 	 */
 	@Autowired
 	private ICorRepository corRepository;
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
 	private ITamanhoRepository tamanhoRepository;
-	
+
 	/**
 	 * 
 	 */
 	@Autowired
-	private IGeneroRepository generoRepository;	
+	private IGeneroRepository generoRepository;
 
 	/**
 	 * 
 	 * @param cor
 	 * @return
 	 */
-	public Cor insertCor(Cor cor)
+	public Cor insertCor( Cor cor )
 	{
-		return this.corRepository.save(cor);
+		return this.corRepository.save( cor );
 	}
 
 	/**
@@ -54,9 +54,9 @@ public class CaracteristicaService
 	 * @param cor
 	 * @return
 	 */
-	public Cor updateCor(Cor cor)
+	public Cor updateCor( Cor cor )
 	{
-		return this.corRepository.save(cor);
+		return this.corRepository.save( cor );
 	}
 
 	/**
@@ -71,11 +71,32 @@ public class CaracteristicaService
 
 	/**
 	 * 
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public List<Cor> listCoresByFilters( String codigo, String cor )
+	{
+		return this.corRepository.listByFilters( codigo, cor );
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Cor findCorByCodigo( String codigo )
+	{
+		return this.corRepository.findByCodigo( codigo );
+	}
+
+	/**
+	 * 
 	 * @param cor
 	 */
-	public void removeCores(List<Cor> cor)
+	public void removeCores( List<Cor> cor )
 	{
-		this.corRepository.delete(cor);
+		this.corRepository.delete( cor );
 	}
 
 	/**
@@ -83,33 +104,33 @@ public class CaracteristicaService
 	 * @param id
 	 * @return
 	 */
-	public Cor findCorById(Long id)
+	public Cor findCorById( Long id )
 	{
-		final Cor cor = this.corRepository.findOne(id);
-		Assert.notNull(cor, "Não foi possível achar a cor com o ID " + id);
+		final Cor cor = this.corRepository.findOne( id );
+		Assert.notNull( cor, "Não foi possível achar a cor com o ID " + id );
 		return cor;
 	}
-	
+
 	/**
 	 * 
 	 * @param tamanho
 	 * @return
 	 */
-	public Tamanho insertTamanho(Tamanho tamanho)
+	public Tamanho insertTamanho( Tamanho tamanho )
 	{
-		return this.tamanhoRepository.save(tamanho);
+		return this.tamanhoRepository.save( tamanho );
 	}
-	
+
 	/**
 	 * 
 	 * @param tamanho
 	 * @return
 	 */
-	public Tamanho updateTamanho(Tamanho tamanho)
+	public Tamanho updateTamanho( Tamanho tamanho )
 	{
-		return this.tamanhoRepository.save(tamanho);
+		return this.tamanhoRepository.save( tamanho );
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -122,61 +143,95 @@ public class CaracteristicaService
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @param tamanho
+	 * @param sigla
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public List<Tamanho> listTamanhosByFilters(String codigo, String tamanho, String sigla)
+	{
+		return this.tamanhoRepository.listByFilters( codigo, tamanho, sigla );
+	}
+
+	/**
+	 * 
 	 * @param tamanho
 	 */
-	public void removeTamanhos(List<Tamanho> tamanho)
+	public void removeTamanhos( List<Tamanho> tamanho )
 	{
-		this.tamanhoRepository.delete(tamanho);
+		this.tamanhoRepository.delete( tamanho );
 	}
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Tamanho findTamanhoById(Long id)
+	public Tamanho findTamanhoById( Long id )
 	{
-		final Tamanho tamanho = this.tamanhoRepository.findOne(id);
-		Assert.notNull(tamanho, "Não foi possível achar o tamanho com o ID " + id);
+		final Tamanho tamanho = this.tamanhoRepository.findOne( id );
+		Assert.notNull( tamanho, "Não foi possível achar o tamanho com o ID " + id );
 		return tamanho;
 	}
-	
+
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Tamanho findTamanhoByCodigo( String codigo )
+	{
+		return this.tamanhoRepository.findByCodigo( codigo );
+	}
+
 	/**
 	 * 
 	 * @param genero
 	 * @return
 	 */
-	public Genero insertGenero(Genero genero)
+	public Genero insertGenero( Genero genero )
 	{
 		return this.generoRepository.save( genero );
 	}
-	
+
 	/**
 	 * 
 	 * @param genero
 	 * @return
 	 */
-	public Genero updateGenero(Genero genero)
+	public Genero updateGenero( Genero genero )
 	{
 		return this.generoRepository.save( genero );
 	}
-	
+
 	/**
 	 * 
 	 * @param genero
 	 */
-	public void removeGenero(Genero genero)
+	public void removeGenero( Genero genero )
 	{
 		this.generoRepository.delete( genero );
 	}
-	
+
 	/**
 	 * 
 	 * @param genero
 	 * @return
 	 */
-	public List<Genero> listGeneroByFilters(String genero)
+	public List<Genero> listGeneroByFilters( String genero, String codigo )
 	{
-		return this.generoRepository.listByFilters( genero );
+		return this.generoRepository.listByFilters( genero, codigo );
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public Genero findGeneroByCodigo(String codigo)
+	{
+		return this.generoRepository.findByCodigo( codigo );
 	}
 }

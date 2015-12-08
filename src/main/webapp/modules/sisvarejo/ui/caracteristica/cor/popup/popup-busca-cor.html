@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="Buscar cor">
 
     <md-toolbar>
         <div class="md-toolbar-tools">
@@ -8,102 +8,53 @@
                 </span>
             </h2>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="cadastrarCidade()"
-                       ng-show="model.currentState == 'buscar-cidade'">
+            <md-button class="md-icon-button" ng-click="abrirPopupCadastrar()">
                 <i class="md-icon md-icon-add"></i>
             </md-button>
         </div>
     </md-toolbar>
 
-    <md-dialog-content layot="row" ng-init="listCoresByFilter()">
+    <md-dialog-content layot="row" ng-init="listCoresByFilters()">
 
         <!--CIDADE-->
 
-        <div ng-switch on="model.currentState">
-            <div ng-switch-when="buscar-cor">
-                <md-content layout="row" layout-align="center center">
-                    <md-input-container flex="70">
-                        <label>Buscar por nome</label>
-                        <input type="text" ng-model="model.nameFilter">
-                    </md-input-container>
-                    <md-select name="estado" placeholder="Estado" ng-model="model.estadoFilter" flex>
-                        <md-option ng-value="null">Nenhum</md-option>
-                        <md-option ng-value="estado" ng-repeat="estado in estados">{{::estado.nome}}</md-option>
-                    </md-select>
-                    <md-button class="md-icon-button md-accent" ng-click="listCidadesByFilter()"><i
-                            class="md-icon md-icon-search"></i></md-button>
-                </md-content>
-                <md-divider/>
-                <md-data-table-container>
-                    <table md-data-table>
-                        <thead md-order="model.query.order" md-trim-column-names>
-                        <tr>
-                            <th order-by="id">Código</th>
-                            <th order-by="nome">Nome</th>
-                            <th order-by="estado.nome">Estado</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="cidade in model.content | orderBy: model.query.order">
-                            <td>{{::cidade.id}}</td>
-                            <td>{{::cidade.nome}}</td>
-                            <td>{{::cidade.estado.nome}}</td>
-                            <td>
-                                <md-button ng-click="escolherCidade(cidade)" class="md-primary">
-                                    Escolher
-                                </md-button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </md-data-table-container>
-                <md-content layout="row" layout-align="">
-                    <md-button ng-click="cancelar()">Cancelar</md-button>
-                </md-content>
-            </div>
-            <div ng-switch-when="cadastrar-cor">
-                <form name="cidadeForm" novalidate="true">
-                    <md-input-container>
-                        <label>Nome</label>
-                        <input name="nome" ng-model="entidade.nome" required maxlength=255>
-
-                        <div class="errors" ng-messages="cidadeForm.nome.$error" ng-if="cidadeForm.$dirty">
-                            <div ng-message="required">
-                                Campo obrigatório
-                            </div>
-                        </div>
-                    </md-input-container>
-
-                    <div layout="row" layout-align="center center">
-                        <md-select name="estado" placeholder="Estado" ng-model="entidade.estado" required>
-                            <md-option ng-value="estado" ng-repeat="estado in estados"
-                                       ng-selected="estado.id == model.entidade.estado.id">{{::estado.nome}}
-                            </md-option>
-                        </md-select>
-
-                        <md-button class="md-icon-button" ng-click="cadastrarEstado()"
-                                   ng-show="model.currentState == 'cadastrar-cidade'">
-                            <i class="md-icon md-icon-add"></i>
+        <md-content layout="row" layout-align="center center">
+            <md-input-container flex="70">
+                <label>Código</label>
+                <input type="text" ng-model="model.filtros.codigo">
+            </md-input-container>
+            <md-input-container flex="70">
+                <label>Cor</label>
+                <input type="text" ng-model="model.filtros.cor">
+            </md-input-container>
+            <md-button class="md-icon-button md-accent" ng-click="listCoresByFilters()"><i
+                    class="md-icon md-icon-search"></i></md-button>
+        </md-content>
+        <md-divider/>
+        <md-data-table-container>
+            <table md-data-table>
+                <thead md-order="model.query.order" md-trim-column-names>
+                <tr>
+                    <th order-by="codigo">Código</th>
+                    <th order-by="nome">Nome</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="cor in model.content | orderBy: model.query.order">
+                    <td>{{::cor.codigo}}</td>
+                    <td>{{::cor.nome}}</td>
+                    <td>
+                        <md-button ng-click="escolherCor(cor)" class="md-primary">
+                            Escolher
                         </md-button>
-                    </div>
-                    <!--            <div class="errors" ng-messages="estadoForm.pais.$error" ng-if="estadoForm.$dirty">
-                                    <div ng-message="required">Campo obrigatório</div>
-                                </div>-->
-
-                    <br>
-
-                    <div class="md-actions" layout="row">
-                        <md-button ng-click="model.currentState = 'buscar-cidade'">
-                            Cancelar
-                        </md-button>
-                        <md-button ng-click="salvarEBuscar()" class="md-primary">
-                            Salvar
-                        </md-button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <md-content layout="row" layout-align="">
+            <md-button ng-click="cancelar()">Cancelar</md-button>
+        </md-content>
 
 
     </md-dialog-content>

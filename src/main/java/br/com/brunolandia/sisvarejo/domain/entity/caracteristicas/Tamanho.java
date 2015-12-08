@@ -58,6 +58,7 @@ public class Tamanho extends AbstractEntity
 		super(id);
 		this.nome = nome;
 		this.sigla = sigla;
+		this.codigo = codigo;
 	}
 
 	/**

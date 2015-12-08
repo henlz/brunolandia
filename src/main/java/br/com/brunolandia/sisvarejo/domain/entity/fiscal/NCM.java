@@ -1,5 +1,7 @@
 package br.com.brunolandia.sisvarejo.domain.entity.fiscal;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -42,7 +44,7 @@ public class NCM extends AbstractEntity
 	 */
 	@Column(nullable = false)
 	@NotNull
-	private Boolean possuiIpi;
+	private BigDecimal IPI;
 
 	/**
 	 * @return the codigo
@@ -79,17 +81,17 @@ public class NCM extends AbstractEntity
 	/**
 	 * @return the possuiIpi
 	 */
-	public Boolean getPossuiIpi()
+	public BigDecimal getIPI()
 	{
-		return possuiIpi;
+		return IPI;
 	}
 
 	/**
 	 * @param possuiIpi the possuiIpi to set
 	 */
-	public void setPossuiIpi( Boolean possuiIpi )
+	public void setIPI( BigDecimal possuiIpi )
 	{
-		this.possuiIpi = possuiIpi;
+		this.IPI = possuiIpi;
 	}
 
 	/**
@@ -105,12 +107,12 @@ public class NCM extends AbstractEntity
 	 * @param descricao
 	 * @param possuiIpi
 	 */
-	public NCM( Long id, String codigo, String descricao, Boolean possuiIpi )
+	public NCM( Long id, String codigo, String descricao, BigDecimal IPI )
 	{
 		super( id );
 		this.codigo = codigo;
 		this.descricao = descricao;
-		this.possuiIpi = possuiIpi;
+		this.IPI = IPI;
 	}
 
 	/*
@@ -124,7 +126,7 @@ public class NCM extends AbstractEntity
 		int result = super.hashCode();
 		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
-		result = prime * result + ( ( possuiIpi == null ) ? 0 : possuiIpi.hashCode() );
+		result = prime * result + ( ( IPI == null ) ? 0 : IPI.hashCode() );
 		return result;
 	}
 
@@ -149,11 +151,11 @@ public class NCM extends AbstractEntity
 			if ( other.descricao != null ) return false;
 		}
 		else if ( !descricao.equals( other.descricao ) ) return false;
-		if ( possuiIpi == null )
+		if ( IPI == null )
 		{
-			if ( other.possuiIpi != null ) return false;
+			if ( other.IPI != null ) return false;
 		}
-		else if ( !possuiIpi.equals( other.possuiIpi ) ) return false;
+		else if ( !IPI.equals( other.IPI ) ) return false;
 		return true;
 	}
 }

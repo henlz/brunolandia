@@ -1,3 +1,7 @@
+md-toast {
+    position: fixed;
+}
+
 .md-toolbar-nav-top {
     font-size: 16px;
     min-height: 20px;

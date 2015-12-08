@@ -161,18 +161,9 @@
             $scope.currentState = $scope.INSERT_STATE;
         };
 
-        /**
-         * Realiza os procedimentos iniciais (prepara o estado)
-         * para a tela de edição e após isso, muda o estado para update.
-         * @see UPDATE_STATE
-         * @see $stateChangeSuccess
-         *
-         * Para mudar para este estado, deve-se primeiro obter via id
-         * o registro pelo serviço de consulta e só então mudar o estado da tela.
-         */
         $scope.changeToCancel = function (id) {
 
-            $log.info("changeToUpdate", id);
+            $log.info("changeToCancel", id);
 
             if (id == null || id == "" || id == 0) {
                 $scope.currentState = $scope.LIST_STATE;
@@ -328,11 +319,24 @@
         /**
          *
          * @param numero
+         * @param serie
+         * @param modelo
          */
         $scope.verificarNfe = function(numero, serie, modelo) {
 
             if (numero == null || numero.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
+            }
 
+            if (serie == null || serie.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
+            }
+
+            if (modelo == null || modelo.length <= 0) {
+                $scope.model.invalidNfe = true;
+                return false;
             }
 
             lojaService.verificarNfe(numero, serie, modelo, {

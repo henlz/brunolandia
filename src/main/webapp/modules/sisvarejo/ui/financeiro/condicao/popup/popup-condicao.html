@@ -8,11 +8,6 @@
                 <label>Número da Parcela</label>
                 <input name="numeroDaParcela" ng-model="entidade.numeroDaParcela" type="text" disabled>
 
-                <!--<div ng-messages="parcelaForm.numeroDaParcela.$error">-->
-                    <!--<div ng-message="required">-->
-                        <!--Campo obrigatório.-->
-                    <!--</div>-->
-                <!--</div>-->
             </md-input-container>
 
             <md-input-container>
@@ -28,7 +23,7 @@
 
             <md-input-container>
                 <label>Percentual</label>
-                <input name="percentual" ng-model="entidade.percentual" required type="text">
+                <input name="percentual" ng-model="entidade.percentual" required type="number">
 
                 <div ng-messages="parcelaForm.percentual.$error">
                     <div ng-message="required">

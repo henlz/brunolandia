@@ -15,6 +15,7 @@ import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.Compra;
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.ItemCompra;
 import br.com.brunolandia.sisvarejo.domain.entity.financeiro.ContaPagar;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.StatusConta;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IFornecedorRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.IProdutoRepository;
 import br.com.brunolandia.sisvarejo.domain.repository.estoque.compra.ICompraRepository;
@@ -258,6 +259,35 @@ public class EstoqueService
 	public Compra findCompraById( final Long id )
 	{
 		return this.compraRepository.findOne( id );
+	}
+	
+	/**
+	 * 
+	 * @param 
+	 * @return
+	 */
+	public Compra cancelarCompra( Compra compra )
+	{
+		Compra compraBanco = this.compraRepository.findOne( compra.getId() );
+
+		compraBanco.setObservacao( compra.getObservacao() );
+		compraBanco.setCancelada( true );
+
+		for ( ContaPagar contaPagar : compraBanco.getContasAPagar() )
+		{
+			Assert.isTrue( contaPagar.getStatusConta() != StatusConta.PAGA, "Não é possível cancelar a compra, pois há um pagamento registrado!" );
+			contaPagar.setStatusConta( StatusConta.CANCELADA );
+		}
+
+		for ( ItemCompra itemCompra : compra.getItensCompra() )
+		{
+			Produto produto = itemCompra.getProduto();
+			produto.setQuantidade( produto.getQuantidade() - itemCompra.getQuantidade() );
+			this.updateProduto( produto );
+		}
+
+		compra = this.compraRepository.save( compraBanco );
+		return compra;
 	}
 
 	/**

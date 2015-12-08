@@ -22,9 +22,10 @@
     <table md-data-table>
         <thead md-order="model.query.order" md-trim-column-names>
         <tr>
+            <th>Número</th>
             <th style="width: 5px;">Número da parcela</th>
-            <th width="30">Status</th>
-            <th width="100">Cliente</th>
+            <th>Status</th>
+            <th>Fornecedor</th>
             <th>Descrição</th>
             <th width="70">Valor</th>
             <th style="width: 20px;">Ações</th>
@@ -32,9 +33,10 @@
         </thead>
         <tbody>
         <tr ng-repeat="contaPagar in model.content | orderBy: model.query.order">
+            <td>{{::contaPagar.numeroNota}}</td>
             <td>{{::contaPagar.numeroParcela}}</td>
             <td>{{::contaPagar.statusConta | capitalize}}</td>
-            <td>{{::contaPagar.cliente.nome}}</td>
+            <td>{{::contaPagar.fornecedor.razaoSocial}}</td>
             <td>{{::contaPagar.descricao }}</td>
             <td>{{::contaPagar.valor | currency: 'R$ '}}</td>
             <td layout="row">

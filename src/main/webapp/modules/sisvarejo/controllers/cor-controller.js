@@ -70,7 +70,7 @@
 
         $scope.abrirPopupNovaEntidade = function (ev) {
             $mdDialog.show({
-                controller: CorDialogController,
+                controller: 'CorDialogController',
                 templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html',
                 targetEvent: ev,
                 hasBackdrop: true,
@@ -230,7 +230,7 @@
     /**
      * Controller da popup de Cor
      */
-    function CorDialogController($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+    angular.module('sisvarejo').controller('CorDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("caracteristicaService");
 
@@ -324,7 +324,7 @@
                 return false;
             }
         });
-    }
+    });
 
 
 }(window.angular));

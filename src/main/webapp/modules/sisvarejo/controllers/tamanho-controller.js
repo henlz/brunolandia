@@ -204,7 +204,7 @@
     /**
      * Controller da popup de Princípio e Diretriz
      */
-    function TamanhoDialogController($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+    angular.module('sisvarejo').controller('TamanhoDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("caracteristicaService");
 
@@ -282,16 +282,7 @@
             }
         };
 
-
-        /**
-         *
-         */
-        $('html').bind('keypress', function (e) {
-            if (e.keyCode == 13) {
-                return false;
-            }
-        });
-    }
+    });
 
 
 }(window.angular));
