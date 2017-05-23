@@ -4,13 +4,11 @@ import org.directwebremoting.annotations.DataTransferObject;
 
 /**
  * @author Henrique
- *
  */
-@DataTransferObject(type="enum")
-public enum TipoPessoa
-{
+@DataTransferObject(type = "enum")
+public enum TipoPessoa {
 
-	FISICA, //0
-	JURIDICA; //1
-	
+    FISICA, //0
+    JURIDICA; //1
+
 }
