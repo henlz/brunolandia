@@ -1,19 +1,26 @@
 package br.com.brunolandia.sisvarejo;
 
 import org.directwebremoting.spring.DwrSpringServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-//import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import javax.sql.DataSource;
 
 /**
  * @author Henrique Lobato Zago
@@ -24,27 +31,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         "classpath:/config/mail.properties",
         "classpath:/config/logging.properties",})
 @ImportResource("classpath:/META-INF/spring/sisvarejo-context.xml")
-public class Application {
+public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    /**
-     *
-     */
-    public static final String AUDIT_SCHEMA = "auditoria";
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
 
 	/*-------------------------------------------------------------------
-	 * 		 					CONSTRUCTORS
+     * 		 					CONSTRUCTORS
 	 *-------------------------------------------------------------------*/
-
-    /**
-     * @param args
-     */
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(Application.class);
-//    }
 
     /**
      * @return

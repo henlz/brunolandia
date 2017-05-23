@@ -50,7 +50,7 @@ public class LojaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Cliente> listClientes()
+	public Iterable<Cliente> listClientes()
 	{
 		return this.clienteRepository.findAll();
 	}
@@ -176,7 +176,7 @@ public class LojaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Venda> listVendas( PageRequest pageRequest )
+	public Iterable<Venda> listVendas( PageRequest pageRequest )
 	{
 		return this.vendaRepository.findAll();
 	}

@@ -1,17 +1,17 @@
 /**
- * 
+ *
  */
 package br.com.brunolandia.sisvarejo.domain.repository.loja.venda;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import br.com.brunolandia.sisvarejo.domain.entity.loja.venda.ItemVenda;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Henrique
- *
  */
-public interface IItemVendaRepository extends JpaRepository<ItemVenda, Long>
-{
+@Repository
+public interface IItemVendaRepository extends CrudRepository<ItemVenda, Long> {
 
 }

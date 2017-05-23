@@ -1,18 +1,17 @@
 package br.com.brunolandia.sisvarejo.domain.repository.estoque;
 
+import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
-import br.com.brunolandia.sisvarejo.domain.entity.estoque.Produto;
 
 /**
  * @author Henrique
  *
  */
-public interface IProdutoRepository extends JpaRepository<Produto, Long>
+public interface IProdutoRepository extends CrudRepository<Produto, Long>
 {
 
 	/**

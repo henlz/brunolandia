@@ -7,14 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class NavigationController {
 
-	/**
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/")
-	public ModelAndView home()
-	{
-		return new ModelAndView( "modules/sisvarejo/ui/index.jsp" );
-	}
-	
+    /**
+     * @return
+     */
+    @RequestMapping("/")
+    public ModelAndView home() {
+        return new ModelAndView("modules/sisvarejo/ui/index.jsp");
+    }
+
 }

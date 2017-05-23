@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.directwebremoting.annotations.DataTransferObject;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
@@ -92,7 +94,8 @@ public class Compra extends AbstractEntity
 	 * 
 	 */
 	@NotEmpty
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ItemCompra> itensCompra;
 
 	/**
@@ -123,7 +126,8 @@ public class Compra extends AbstractEntity
 	/**
 	 * 
 	 */
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ContaPagar> contasAPagar = new ArrayList<ContaPagar>();
 
 	/**

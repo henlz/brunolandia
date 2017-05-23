@@ -25,16 +25,16 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr/spring-dwr-3.0.xsd"
 	default-autowire="byName">
-	
+
 	<!-- ============================ APPLICATION ================================= -->
-	<!-- 
+	<!--
 		DWR
 	-->
 	<!-- DWR will scan all Spring managed beans containing @RemoteProxy or @RemoteMethod annotations and register Creator proxies for them.
   		This will NOT scan any classes not managed by Spring.-->
 	<dwr:annotation-config/>
-	
-	<!-- DWR will scan the classpath and search classes containing @RemoteProxy or @RemoteMethod annotations. 
+
+	<!-- DWR will scan the classpath and search classes containing @RemoteProxy or @RemoteMethod annotations.
 		This will register the beans and Creator proxies for these classes.-->
  	<dwr:annotation-scan base-package="br.com.brunolandia.sisvarejo.domain.entity"
  		scanDataTransferObject="true" scanRemoteProxy="false"/>
@@ -43,7 +43,7 @@
 	<dwr:configuration>
 		<dwr:convert type="bean" class="java.lang.StackTraceElement"/>
 		<dwr:convert type="exception" class="java.lang.Exception"/>
-		
+
 		<dwr:convert type="bean" class="org.springframework.data.domain.PageImpl" javascript="PageImpl"/>
 		<dwr:convert type="bean" class="org.springframework.data.domain.PageRequest" javascript="PageRequest"/>
 		<dwr:convert type="bean" class="org.springframework.data.domain.Sort" javascript="Sort"/>
@@ -51,28 +51,28 @@
 		<dwr:convert type="enum" class="org.springframework.data.domain.Sort$NullHandling"/>
 		<dwr:convert type="bean" class="org.springframework.data.domain.Sort$Order" javascript="Order"/>
 	</dwr:configuration>
-	
+
 	<!--
-		ASPECTS 
+		ASPECTS
 	-->
 <!-- 	<aop:aspectj-autoproxy/> -->
-	
-	<!-- Exception Handler --> 
+
+	<!-- Exception Handler -->
 <!-- 	<bean id="exceptionHandlerAspect"  -->
 <!-- 		class="br.mil.mar.dabm.pdti.application.aspect.ExceptionHandlerAspect"/> -->
-		
+
 	<!--
-		OTHERS 
+		OTHERS
 	 -->
 	<!-- Validation -->
 <!-- 	<bean id="validator"  -->
 <!-- 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/> -->
-		
+
 	<!-- ============================ INFRASTRUCTURE ============================= -->
-	<!--  
+	<!--
 		DATA SOURCE
 		Global DataSource Configuration with a Proxy for a target DataSource,
-		fetching actual JDBC Connections lazily 
+		fetching actual JDBC Connections lazily
 	-->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
@@ -85,6 +85,6 @@
 				<property name="maximumPoolSize" value="20"/>
 			</bean>
 		</property>
-	</bean>	
-    
+	</bean>
+
 </beans>

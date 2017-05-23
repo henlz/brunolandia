@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import org.directwebremoting.annotations.DataTransferObject;
 
 import br.com.eits.common.domain.entity.AbstractEntity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Henrique
@@ -46,6 +48,7 @@ public class Condicao extends AbstractEntity
 	 * 
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Parcela> parcelas = new ArrayList<Parcela>();
 
 	/**

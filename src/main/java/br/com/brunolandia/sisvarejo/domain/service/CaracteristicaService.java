@@ -64,7 +64,7 @@ public class CaracteristicaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Cor> listCores()
+	public Iterable<Cor> listCores()
 	{
 		return this.corRepository.findAll();
 	}
@@ -136,7 +136,7 @@ public class CaracteristicaService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Tamanho> listTamanhos()
+	public Iterable<Tamanho> listTamanhos()
 	{
 		return this.tamanhoRepository.findAll();
 	}

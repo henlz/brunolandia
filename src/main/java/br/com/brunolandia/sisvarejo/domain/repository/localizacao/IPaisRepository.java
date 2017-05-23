@@ -2,17 +2,17 @@ package br.com.brunolandia.sisvarejo.domain.repository.localizacao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import br.com.brunolandia.sisvarejo.domain.entity.localizacao.Pais;
+import org.springframework.stereotype.Repository;
 
 /**
  * 
  * @author Henrique
  *
  */
-
-public interface IPaisRepository extends JpaRepository<Pais, Long>
+public interface IPaisRepository extends CrudRepository<Pais, Long>
 {
 
 	/**

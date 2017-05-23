@@ -207,7 +207,7 @@ public class FinanceiroService
 	 * @param contaPagar
 	 * @return
 	 */
-	public List<ContaPagar> listContasPagar()
+	public Iterable<ContaPagar> listContasPagar()
 	{
 		return this.contaPagarRepository.findAll();
 	}
@@ -344,7 +344,7 @@ public class FinanceiroService
 	 * @param contaReceber
 	 * @return
 	 */
-	public List<ContaReceber> listContasReceber()
+	public Iterable<ContaReceber> listContasReceber()
 	{
 		return this.contaReceberRepository.findAll();
 	}

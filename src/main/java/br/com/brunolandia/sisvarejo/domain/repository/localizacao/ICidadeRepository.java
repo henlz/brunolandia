@@ -2,20 +2,20 @@ package br.com.brunolandia.sisvarejo.domain.repository.localizacao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.brunolandia.sisvarejo.domain.entity.localizacao.Cidade;
 import br.com.brunolandia.sisvarejo.domain.entity.localizacao.Estado;
+import org.springframework.stereotype.Repository;
 
 /**
  * 
  * @author Henrique
  *
  */
-
-public interface ICidadeRepository extends JpaRepository<Cidade, Long>
+public interface ICidadeRepository extends CrudRepository<Cidade, Long>
 {
 
 	/**

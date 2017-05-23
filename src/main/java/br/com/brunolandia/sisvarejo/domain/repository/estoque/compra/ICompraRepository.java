@@ -1,16 +1,15 @@
 package br.com.brunolandia.sisvarejo.domain.repository.estoque.compra;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import br.com.brunolandia.sisvarejo.domain.entity.estoque.compra.Compra;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 /**
  * @author Henrique Lobato Zago
  *
  */
-public interface ICompraRepository extends JpaRepository<Compra, Long>
+public interface ICompraRepository extends CrudRepository<Compra, Long>
 {
 	
 	/**

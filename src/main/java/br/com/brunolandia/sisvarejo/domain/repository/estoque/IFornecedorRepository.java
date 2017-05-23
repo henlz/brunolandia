@@ -1,14 +1,13 @@
 package br.com.brunolandia.sisvarejo.domain.repository.estoque;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import br.com.brunolandia.sisvarejo.domain.entity.estoque.Fornecedor;
+import java.util.List;
 
-public interface IFornecedorRepository extends JpaRepository<Fornecedor, Long>
+public interface IFornecedorRepository extends CrudRepository<Fornecedor, Long>
 {
 
 	/**

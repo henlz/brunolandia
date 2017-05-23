@@ -74,7 +74,7 @@ public class FiscalService
 	 * 
 	 * @return
 	 */
-	public List<ICMS> listICMS()
+	public Iterable<ICMS> listICMS()
 	{
 		return this.icmsRepository.findAll();
 	}
@@ -134,7 +134,7 @@ public class FiscalService
 	 * 
 	 * @return
 	 */
-	public List<CSON> listCSON()
+	public Iterable<CSON> listCSON()
 	{
 		return this.csonRepository.findAll();
 	}
@@ -183,7 +183,7 @@ public class FiscalService
 	 * 
 	 * @return
 	 */
-	public List<NCM> listNCM()
+	public Iterable<NCM> listNCM()
 	{
 		return this.ncmRepository.findAll();
 	}

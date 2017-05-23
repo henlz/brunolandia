@@ -43,9 +43,9 @@ public class LocalizacaoService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Pais> listPaises()
+	public Iterable<Pais> listPaises()
 	{
-		final List<Pais> paises = this.paisRepository.findAll();
+		final Iterable<Pais> paises = this.paisRepository.findAll();
 		return paises;
 	}
 
@@ -113,7 +113,7 @@ public class LocalizacaoService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Estado> listEstados()
+	public Iterable<Estado> listEstados()
 	{
 		return this.estadoRepository.findAll();
 	}
@@ -151,7 +151,7 @@ public class LocalizacaoService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Cidade> listCidades()
+	public Iterable<Cidade> listCidades()
 	{
 		return this.cidadeRepository.findAll();
 	}

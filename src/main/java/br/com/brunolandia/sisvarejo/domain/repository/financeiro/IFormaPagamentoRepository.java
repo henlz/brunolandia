@@ -1,14 +1,13 @@
 package br.com.brunolandia.sisvarejo.domain.repository.financeiro;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.brunolandia.sisvarejo.domain.entity.financeiro.FormaPagamento;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import br.com.brunolandia.sisvarejo.domain.entity.financeiro.FormaPagamento;
+import java.util.List;
 
-public interface IFormaPagamentoRepository extends JpaRepository<FormaPagamento, Long>
+public interface IFormaPagamentoRepository extends CrudRepository<FormaPagamento, Long>
 {
 
 	/**

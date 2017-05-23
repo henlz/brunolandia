@@ -60,7 +60,7 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public List<Produto> listProdutos()
+	public Iterable<Produto> listProdutos()
 	{
 		return this.produtoRepository.findAll();
 	}
@@ -196,7 +196,7 @@ public class EstoqueService
 	 * 
 	 */
 	@Transactional(readOnly = true)
-	public List<Compra> listCompras()
+	public Iterable<Compra> listCompras()
 	{
 		return this.compraRepository.findAll();
 	}

@@ -5,7 +5,7 @@
 	<groupId>br.com.brunolandia</groupId>
 	<artifactId>sisvarejo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>sisvarejo</name>
 	<url>http://maven.apache.org</url>
@@ -13,7 +13,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.4.RELEASE</version>
+		<version>1.4.1.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -23,12 +23,11 @@
 		<java.version>1.8</java.version>
 
 		<!-- Spring Boot Overrides -->
-		<spring-loaded.version>1.2.1.RELEASE</spring-loaded.version>
+		<spring-loaded.version>1.2.5.RELEASE</spring-loaded.version>
 		<hikaricp.version>2.3.6</hikaricp.version>
 		<flyway.version>3.2.1</flyway.version>
 
 		<!-- Others -->
-		<postgresql.version>9.4-1201-jdbc41</postgresql.version>
 		<dwr.version>3.0.2-RELEASE</dwr.version>
 		<eits-java-common.version>1.0.1-RELEASE</eits-java-common.version>
 		<apache.common.io.version>2.1</apache.common.io.version>
@@ -75,9 +74,9 @@
 			<id>distribution</id>
 			<properties>
 				<!-- Database -->
-				<mvn.jdbc.jdbcUrl>jdbc:postgresql://devdb:5434/pdti</mvn.jdbc.jdbcUrl>
-				<mvn.jdbc.username>pdti</mvn.jdbc.username>
-				<mvn.jdbc.password>pdti</mvn.jdbc.password>
+				<mvn.jdbc.jdbcUrl>{env.DATABASE_URL}</mvn.jdbc.jdbcUrl>
+				<mvn.jdbc.username>brunolandia</mvn.jdbc.username>
+				<mvn.jdbc.password>brunolandia</mvn.jdbc.password>
 
 				<!-- Hibernate -->
 				<mvn.hibernate.hbm2ddl>update</mvn.hibernate.hbm2ddl>
@@ -158,31 +157,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Web Container -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
 
-		<!-- Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-		</dependency>
-
 		<!-- Mail -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
-		</dependency>
+            <version>1.7</version>
+        </dependency>
 
 		<!-- DataSource -->
 		<dependency>
@@ -192,7 +184,6 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>${postgresql.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
