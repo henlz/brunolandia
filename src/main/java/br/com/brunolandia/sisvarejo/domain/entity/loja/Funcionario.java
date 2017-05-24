@@ -8,13 +8,10 @@ import br.com.eits.common.domain.entity.AbstractEntity;
 
 /**
  * @author Henrique
- *
  */
 @Entity
 @DataTransferObject
-public class Funcionario extends AbstractEntity
-{
-	
-	
+public class Funcionario extends AbstractEntity {
+
 
 }

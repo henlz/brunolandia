@@ -9,29 +9,18 @@ import org.springframework.data.repository.query.Param;
 
 /**
  * @author Henrique
- *
  */
-public interface IProdutoRepository extends CrudRepository<Produto, Long>
-{
+public interface IProdutoRepository extends CrudRepository<Produto, Long> {
 
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	public Produto findByCodigo( String codigo );
-
-	/**
-	 * 
-	 * @param codigo
-	 * @param descricao
-	 * @param pageable
-	 * @return
-	 */
-	@Query("SELECT new Produto (produto.id, produto.descricao, produto.codigo, produto.codigoBarra, "
-			+ "produto.precoVenda, produto.quantidade, produto.pesoLiquido, produto.pesoBruto, produto.cor, "
-			+ "produto.tamanho, produto.genero, produto.fornecedor, produto.icms, produto.ncm, produto.unidade) " 
-	 + "FROM Produto produto " 
-	 	+ "WHERE ( FILTER(produto.codigo, :codigo) = TRUE " + "AND FILTER(produto.descricao, :descricao) = TRUE )")
-	public Page<Produto> listByFilters( @Param("codigo" ) String codigo, @Param("descricao") String descricao, Pageable pageable);
+    /**
+     * @param descricao
+     * @param pageable
+     * @return
+     */
+    @Query("SELECT new Produto (produto.id, produto.descricao, produto.codigoBarra, "
+            + "produto.precoVenda, produto.quantidade, produto.pesoLiquido, produto.pesoBruto, produto.cor, "
+            + "produto.tamanho, produto.genero, produto.fornecedor, produto.icms, produto.ncm, produto.unidade) "
+            + "FROM Produto produto "
+            + "WHERE ( FILTER(produto.id, :id) = TRUE " + "AND FILTER(produto.descricao, :descricao) = TRUE )")
+    public Page<Produto> listByFilters(@Param("id") Long id, @Param("descricao") String descricao, Pageable pageable);
 }

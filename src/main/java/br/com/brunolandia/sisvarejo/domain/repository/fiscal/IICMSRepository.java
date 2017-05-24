@@ -12,30 +12,19 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Henrique
- *
  */
-public interface IICMSRepository extends CrudRepository<ICMS, Long>
-{
-	
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	public ICMS findByCodigo(String codigo);
+public interface IICMSRepository extends CrudRepository<ICMS, Long> {
 
-	/**
-	 * 
-	 * @param codigo
-	 * @param descricao
-	 * @param Porcentagem
-	 * @return
-	 */
-	@Query("SELECT new ICMS( icms.id, icms.codigo, icms.descricao, icms.porcentagem ) "
-			+ "FROM ICMS icms "
-				+ "WHERE FILTER(icms.codigo, :codigo) = TRUE "
-					+ "AND FILTER(icms.descricao, :descricao) = TRUE "
-					+ "AND FILTER(icms.porcentagem, :porcentagem) = TRUE")
-	public List<ICMS> listByFilters(@Param("codigo") String codigo, @Param("descricao") String descricao, @Param("porcentagem") BigDecimal porcentagem);
+    /**
+     * @param descricao
+     * @param Porcentagem
+     * @return
+     */
+    @Query("SELECT new ICMS( icms.id, icms.descricao, icms.porcentagem ) "
+            + "FROM ICMS icms "
+            + "WHERE FILTER(icms.id, :id) = TRUE "
+            + "AND FILTER(icms.descricao, :descricao) = TRUE "
+            + "AND FILTER(icms.porcentagem, :porcentagem) = TRUE")
+    public List<ICMS> listByFilters(@Param("id") Long id, @Param("descricao") String descricao, @Param("porcentagem") BigDecimal porcentagem);
 
 }

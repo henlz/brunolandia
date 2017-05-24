@@ -11,19 +11,13 @@ public interface ICorRepository extends CrudRepository<Cor, Long> {
 
     /**
      * @param codigo
-     * @return
-     */
-    public Cor findByCodigo(String codigo);
-
-    /**
-     * @param codigo
      * @param cor
      * @return
      */
-    @Query("SELECT new Cor(cor.id, cor.nome, cor.codigo) "
+    @Query("SELECT new Cor(cor.id, cor.nome) "
             + "FROM Cor cor "
             + "WHERE FILTER(cor.nome, :cor) = TRUE "
-            + "AND FILTER(cor.codigo, :codigo) = TRUE ")
-    public List<Cor> listByFilters(@Param("codigo") String codigo, @Param("cor") String cor);
+            + "AND FILTER(cor.id, :id) = TRUE ")
+    public List<Cor> listByFilters(@Param("id") Long id, @Param("cor") String cor);
 
 }

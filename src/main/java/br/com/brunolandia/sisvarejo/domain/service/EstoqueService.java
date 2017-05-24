@@ -70,19 +70,9 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Page<Produto> listProdutosByFilters( final String codigo, final String descricao, PageRequest pageRequest )
+	public Page<Produto> listProdutosByFilters( final Long id, final String descricao, PageRequest pageRequest )
 	{
-		return this.produtoRepository.listByFilters( codigo, descricao, pageRequest );
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Produto findProdutoByCodigo( final String codigo )
-	{
-		return this.produtoRepository.findByCodigo( codigo );
+		return this.produtoRepository.listByFilters( id, descricao, pageRequest );
 	}
 
 	/**
@@ -187,9 +177,9 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Fornecedor findFornecedorByCodigo( final String codigo, Boolean transportadora )
+	public Fornecedor findFornecedorByCodigo( final Long id, final Boolean transportadora )
 	{
-		return this.fornecedorRepository.findByCodigoTransportadora( codigo, transportadora );
+		return this.fornecedorRepository.findByIdTransportadora( id, transportadora );
 	}
 
 	/**

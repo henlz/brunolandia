@@ -23,13 +23,6 @@ public class Tamanho extends AbstractEntity {
      */
     @NotNull
     @Column
-    private String codigo;
-
-    /**
-     *
-     */
-    @NotNull
-    @Column
     private String sigla;
 
     /**
@@ -43,18 +36,16 @@ public class Tamanho extends AbstractEntity {
      *
      */
     public Tamanho() {
-
     }
 
     /**
      * @param id
      * @param nome
      */
-    public Tamanho(Long id, String nome, String sigla, String codigo) {
+    public Tamanho(Long id, String nome, String sigla) {
         super(id);
         this.nome = nome;
         this.sigla = sigla;
-        this.codigo = codigo;
     }
 
     /**
@@ -85,20 +76,6 @@ public class Tamanho extends AbstractEntity {
         this.sigla = sigla;
     }
 
-    /**
-     * @return the codigo
-     */
-    public String getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
@@ -106,7 +83,6 @@ public class Tamanho extends AbstractEntity {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
         return result;
@@ -121,9 +97,6 @@ public class Tamanho extends AbstractEntity {
         if (!super.equals(obj)) return false;
         if (getClass() != obj.getClass()) return false;
         Tamanho other = (Tamanho) obj;
-        if (codigo == null) {
-            if (other.codigo != null) return false;
-        } else if (!codigo.equals(other.codigo)) return false;
         if (nome == null) {
             if (other.nome != null) return false;
         } else if (!nome.equals(other.nome)) return false;

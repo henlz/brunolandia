@@ -22,13 +22,6 @@ public class Cor extends AbstractEntity {
      */
     @NotEmpty
     @Column
-    private String codigo;
-
-    /**
-     *
-     */
-    @NotEmpty
-    @Column
     private String nome;
 
     /**
@@ -42,10 +35,9 @@ public class Cor extends AbstractEntity {
      * @param id
      * @param nome
      */
-    public Cor(Long id, String nome, String codigo) {
-        super();
+    public Cor(Long id, String nome) {
+        super(id);
         this.nome = nome;
-        this.codigo = codigo;
     }
 
 
@@ -63,20 +55,6 @@ public class Cor extends AbstractEntity {
         this.nome = nome;
     }
 
-    /**
-     * @return the codigo
-     */
-    public String getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
@@ -84,7 +62,6 @@ public class Cor extends AbstractEntity {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         return result;
     }
@@ -98,9 +75,6 @@ public class Cor extends AbstractEntity {
         if (!super.equals(obj)) return false;
         if (getClass() != obj.getClass()) return false;
         Cor other = (Cor) obj;
-        if (codigo == null) {
-            if (other.codigo != null) return false;
-        } else if (!codigo.equals(other.codigo)) return false;
         if (nome == null) {
             if (other.nome != null) return false;
         } else if (!nome.equals(other.nome)) return false;

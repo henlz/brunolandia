@@ -18,220 +18,163 @@ import br.com.brunolandia.sisvarejo.domain.repository.caracteristicas.ITamanhoRe
 @Service
 @Transactional
 @RemoteProxy(name = "caracteristicaService")
-public class CaracteristicaService
-{
+public class CaracteristicaService {
 
-	/**
-	 * 
-	 */
-	@Autowired
-	private ICorRepository corRepository;
+    /**
+     *
+     */
+    @Autowired
+    private ICorRepository corRepository;
 
-	/**
-	 * 
-	 */
-	@Autowired
-	private ITamanhoRepository tamanhoRepository;
+    /**
+     *
+     */
+    @Autowired
+    private ITamanhoRepository tamanhoRepository;
 
-	/**
-	 * 
-	 */
-	@Autowired
-	private IGeneroRepository generoRepository;
+    /**
+     *
+     */
+    @Autowired
+    private IGeneroRepository generoRepository;
 
-	/**
-	 * 
-	 * @param cor
-	 * @return
-	 */
-	public Cor insertCor( Cor cor )
-	{
-		return this.corRepository.save( cor );
-	}
+    /**
+     * @param cor
+     * @return
+     */
+    public Cor insertCor(Cor cor) {
+        return this.corRepository.save(cor);
+    }
 
-	/**
-	 * 
-	 * @param cor
-	 * @return
-	 */
-	public Cor updateCor( Cor cor )
-	{
-		return this.corRepository.save( cor );
-	}
+    /**
+     * @param cor
+     * @return
+     */
+    public Cor updateCor(Cor cor) {
+        return this.corRepository.save(cor);
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<Cor> listCores()
-	{
-		return this.corRepository.findAll();
-	}
+    /**
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Iterable<Cor> listCores() {
+        return this.corRepository.findAll();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public List<Cor> listCoresByFilters( String codigo, String cor )
-	{
-		return this.corRepository.listByFilters( codigo, cor );
-	}
+    /**
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<Cor> listCoresByFilters(Long id, String cor) {
+        return this.corRepository.listByFilters(id, cor);
+    }
 
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Cor findCorByCodigo( String codigo )
-	{
-		return this.corRepository.findByCodigo( codigo );
-	}
+    /**
+     * @param cor
+     */
+    public void removeCores(List<Cor> cor) {
+        this.corRepository.delete(cor);
+    }
 
-	/**
-	 * 
-	 * @param cor
-	 */
-	public void removeCores( List<Cor> cor )
-	{
-		this.corRepository.delete( cor );
-	}
+    /**
+     * @param id
+     * @return
+     */
+    public Cor findCorById(Long id) {
+        final Cor cor = this.corRepository.findOne(id);
+        Assert.notNull(cor, "Não foi possível achar a cor com o ID " + id);
+        return cor;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Cor findCorById( Long id )
-	{
-		final Cor cor = this.corRepository.findOne( id );
-		Assert.notNull( cor, "Não foi possível achar a cor com o ID " + id );
-		return cor;
-	}
+    /**
+     * @param tamanho
+     * @return
+     */
+    public Tamanho insertTamanho(Tamanho tamanho) {
+        return this.tamanhoRepository.save(tamanho);
+    }
 
-	/**
-	 * 
-	 * @param tamanho
-	 * @return
-	 */
-	public Tamanho insertTamanho( Tamanho tamanho )
-	{
-		return this.tamanhoRepository.save( tamanho );
-	}
+    /**
+     * @param tamanho
+     * @return
+     */
+    public Tamanho updateTamanho(Tamanho tamanho) {
+        return this.tamanhoRepository.save(tamanho);
+    }
 
-	/**
-	 * 
-	 * @param tamanho
-	 * @return
-	 */
-	public Tamanho updateTamanho( Tamanho tamanho )
-	{
-		return this.tamanhoRepository.save( tamanho );
-	}
+    /**
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public Iterable<Tamanho> listTamanhos() {
+        return this.tamanhoRepository.findAll();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<Tamanho> listTamanhos()
-	{
-		return this.tamanhoRepository.findAll();
-	}
-	
-	/**
-	 * 
-	 * @param codigo
-	 * @param tamanho
-	 * @param sigla
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public List<Tamanho> listTamanhosByFilters(String codigo, String tamanho, String sigla)
-	{
-		return this.tamanhoRepository.listByFilters( codigo, tamanho, sigla );
-	}
+    /**
+     * @param id
+     * @param tamanho
+     * @param sigla
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<Tamanho> listTamanhosByFilters(Long id, String tamanho, String sigla) {
+        return this.tamanhoRepository.listByFilters(id, tamanho, sigla);
+    }
 
-	/**
-	 * 
-	 * @param tamanho
-	 */
-	public void removeTamanhos( List<Tamanho> tamanho )
-	{
-		this.tamanhoRepository.delete( tamanho );
-	}
+    /**
+     * @param tamanho
+     */
+    public void removeTamanhos(List<Tamanho> tamanho) {
+        this.tamanhoRepository.delete(tamanho);
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Tamanho findTamanhoById( Long id )
-	{
-		final Tamanho tamanho = this.tamanhoRepository.findOne( id );
-		Assert.notNull( tamanho, "Não foi possível achar o tamanho com o ID " + id );
-		return tamanho;
-	}
+    /**
+     * @param id
+     * @return
+     */
+    public Tamanho findTamanhoById(Long id) {
+        final Tamanho tamanho = this.tamanhoRepository.findOne(id);
+        Assert.notNull(tamanho, "Não foi possível achar o tamanho com o ID " + id);
+        return tamanho;
+    }
 
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Tamanho findTamanhoByCodigo( String codigo )
-	{
-		return this.tamanhoRepository.findByCodigo( codigo );
-	}
+    /**
+     * @param genero
+     * @return
+     */
+    public Genero insertGenero(Genero genero) {
+        return this.generoRepository.save(genero);
+    }
 
-	/**
-	 * 
-	 * @param genero
-	 * @return
-	 */
-	public Genero insertGenero( Genero genero )
-	{
-		return this.generoRepository.save( genero );
-	}
+    /**
+     * @param genero
+     * @return
+     */
+    public Genero updateGenero(Genero genero) {
+        return this.generoRepository.save(genero);
+    }
 
-	/**
-	 * 
-	 * @param genero
-	 * @return
-	 */
-	public Genero updateGenero( Genero genero )
-	{
-		return this.generoRepository.save( genero );
-	}
+    /**
+     * @param genero
+     */
+    public void removeGenero(Genero genero) {
+        this.generoRepository.delete(genero);
+    }
 
-	/**
-	 * 
-	 * @param genero
-	 */
-	public void removeGenero( Genero genero )
-	{
-		this.generoRepository.delete( genero );
-	}
+    /**
+     * @param genero
+     * @return
+     */
+    public List<Genero> listGeneroByFilters(String genero, Long id) {
+        return this.generoRepository.listByFilters(genero, id);
+    }
 
-	/**
-	 * 
-	 * @param genero
-	 * @return
-	 */
-	public List<Genero> listGeneroByFilters( String genero, String codigo )
-	{
-		return this.generoRepository.listByFilters( genero, codigo );
-	}
-	
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	public Genero findGeneroByCodigo(String codigo)
-	{
-		return this.generoRepository.findByCodigo( codigo );
-	}
+    /**
+     * @param id
+     * @return
+     */
+    public Genero findGeneroById(Long id) {
+        return this.generoRepository.findOne(id);
+    }
 }

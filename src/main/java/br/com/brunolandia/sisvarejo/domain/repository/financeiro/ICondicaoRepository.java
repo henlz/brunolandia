@@ -13,16 +13,10 @@ import java.util.List;
 public interface ICondicaoRepository extends CrudRepository<Condicao, Long> {
 
     /**
-     * @param codigo
-     * @return
-     */
-    public Condicao findByCodigo(String codigo);
-
-    /**
      * @param descricao
      * @return
      */
-    @Query("SELECT new Condicao(condicao.id, condicao.descricao, condicao.codigo) "
+    @Query("SELECT new Condicao(condicao.id, condicao.descricao) "
             + "FROM Condicao condicao "
             + "WHERE FILTER(condicao.descricao, :descricao) = TRUE")
     public List<Condicao> listByFilters(@Param("descricao") String descricao);

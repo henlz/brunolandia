@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package br.com.brunolandia.sisvarejo.domain.repository.estoque.compra;
 
@@ -8,9 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author Henrique
- *
  */
-public interface IItemCompraRepository extends CrudRepository<ItemCompra, Long>
-{
+public interface IItemCompraRepository extends CrudRepository<ItemCompra, Long> {
 
 }

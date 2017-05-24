@@ -12,30 +12,19 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Henrique
- *
  */
-public interface INCMRepository extends CrudRepository<NCM, Long>
-{
+public interface INCMRepository extends CrudRepository<NCM, Long> {
 
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
-	public NCM findByCodigo(String codigo);
-	
-	/**
-	 * 
-	 * @param codigo
-	 * @param descricao
-	 * @param Porcentagem
-	 * @return
-	 */
-	@Query("SELECT new NCM( ncm.id, ncm.codigo, ncm.descricao, ncm.IPI ) "
-			+ "FROM NCM ncm "
-				+ "WHERE FILTER(ncm.codigo, :codigo) = TRUE "
-					+ "AND FILTER(ncm.descricao, :descricao) = TRUE "
-					+ "AND FILTER(ncm.IPI, :IPI) = TRUE")
-	public List<NCM> listByFilters(@Param("codigo") String codigo, @Param("descricao") String descricao, @Param("IPI") BigDecimal IPI);
-	
+    /**
+     * @param descricao
+     * @param Porcentagem
+     * @return
+     */
+    @Query("SELECT new NCM( ncm.id, ncm.descricao, ncm.IPI ) "
+            + "FROM NCM ncm "
+            + "WHERE FILTER(ncm.id, :id) = TRUE "
+            + "AND FILTER(ncm.descricao, :descricao) = TRUE "
+            + "AND FILTER(ncm.IPI, :IPI) = TRUE")
+    public List<NCM> listByFilters(@Param("id") Long id, @Param("descricao") String descricao, @Param("IPI") BigDecimal IPI);
+
 }

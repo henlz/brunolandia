@@ -28,13 +28,6 @@ public class ICMS extends AbstractEntity
 	/**
 	 * 
 	 */
-	@Column(nullable = false, unique = true)
-	@NotEmpty
-	private String codigo;
-
-	/**
-	 * 
-	 */
 	@Column(nullable = false)
 	@NotEmpty
 	private String descricao;
@@ -45,22 +38,6 @@ public class ICMS extends AbstractEntity
 	@Column(nullable = false)
 	@NotNull
 	private BigDecimal porcentagem;
-
-	/**
-	 * @return the codigo
-	 */
-	public String getCodigo()
-	{
-		return codigo;
-	}
-
-	/**
-	 * @param codigo the codigo to set
-	 */
-	public void setCodigo( String codigo )
-	{
-		this.codigo = codigo;
-	}
 
 	/**
 	 * @return the descricao
@@ -103,14 +80,12 @@ public class ICMS extends AbstractEntity
 	}
 
 	/**
-	 * @param codigo
 	 * @param descricao
 	 * @param porcentagem
 	 */
-	public ICMS( Long id, String codigo, String descricao, BigDecimal porcentagem )
+	public ICMS( Long id, String descricao, BigDecimal porcentagem )
 	{
 		super( id );
-		this.codigo = codigo;
 		this.descricao = descricao;
 		this.porcentagem = porcentagem;
 	}
@@ -124,7 +99,6 @@ public class ICMS extends AbstractEntity
 	{
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ( ( codigo == null ) ? 0 : codigo.hashCode() );
 		result = prime * result + ( ( descricao == null ) ? 0 : descricao.hashCode() );
 		result = prime * result + ( ( porcentagem == null ) ? 0 : porcentagem.hashCode() );
 		return result;
@@ -141,11 +115,6 @@ public class ICMS extends AbstractEntity
 		if ( !super.equals( obj ) ) return false;
 		if ( getClass() != obj.getClass() ) return false;
 		ICMS other = ( ICMS ) obj;
-		if ( codigo == null )
-		{
-			if ( other.codigo != null ) return false;
-		}
-		else if ( !codigo.equals( other.codigo ) ) return false;
 		if ( descricao == null )
 		{
 			if ( other.descricao != null ) return false;
