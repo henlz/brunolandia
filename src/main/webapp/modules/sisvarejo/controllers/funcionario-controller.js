@@ -105,28 +105,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
-                {
+                case $scope.UPDATE_STATE: {
                     $scope.changeToUpdate($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -258,13 +253,13 @@
          *
          * @param pais
          */
-        $scope.paisChanged = function() {
+        $scope.paisChanged = function () {
             localizacaoService.listEstadosByPais($scope.model.pais, {
-                callback: function(result) {
+                callback: function (result) {
                     $scope.model.estados = result;
                     $scope.$apply();
                 },
-                errorHandler: function(message, error){
+                errorHandler: function (message, error) {
                     var toast = $mdToast.simple()
                         .content(message)
                         .action('Fechar')
@@ -280,13 +275,13 @@
          *
          * @param estado
          */
-        $scope.estadoChanged = function() {
+        $scope.estadoChanged = function () {
             localizacaoService.listCidadesByEstado($scope.model.estado, {
-                callback: function(result) {
+                callback: function (result) {
                     $scope.model.cidades = result;
                     $scope.$apply();
                 },
-                errorHandler: function(message, error){
+                errorHandler: function (message, error) {
                     var toast = $mdToast.simple()
                         .content(message)
                         .action('Fechar')

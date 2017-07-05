@@ -51,7 +51,6 @@
         $scope.PAY_STATE = "conta-pagar.pagar";
 
 
-
         /*-------------------------------------------------------------------
          * 		 				 	ATTRIBUTES
          *-------------------------------------------------------------------*/
@@ -106,32 +105,26 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.CANCEL_STATE:
-                {
+                case $scope.CANCEL_STATE: {
                     $scope.changeToCancel($state.params.id);
                 }
-                case $scope.PAY_STATE:
-                {
+                case $scope.PAY_STATE: {
                     $scope.changeToPayment($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -268,7 +261,7 @@
             })
         };
 
-        $scope.salvarContaPagar = function(entidade) {
+        $scope.salvarContaPagar = function (entidade) {
             financeiroService.insertContaPagar(entidade, {
                 callback: function (result) {
                     $state.go($scope.LIST_STATE);
@@ -288,7 +281,7 @@
                 callback: function () {
                     $state.go($scope.LIST_STATE);
                 },
-                errorHandler: function(message, error) {
+                errorHandler: function (message, error) {
                     $mdToast.showSimple(message);
                     $log.error(error);
                 }
@@ -303,20 +296,20 @@
                 callback: function () {
                     $state.go($scope.LIST_STATE);
                 },
-                errorHandler: function(message, error) {
+                errorHandler: function (message, error) {
                     $mdToast.showSimple(message);
                     $log.error(error);
                 }
             })
         };
 
-        $scope.buscaFornecedorByCodigo = function() {
+        $scope.buscaFornecedorByCodigo = function () {
             estoqueService.findFornecedorByCodigo($scope.model.codigoFornecedor, false, {
-                callback: function(result) {
+                callback: function (result) {
                     $scope.model.entidade.fornecedor = result;
                     $scope.$apply();
                 },
-                errorHandler: function(message, error) {
+                errorHandler: function (message, error) {
                     $log.error(message);
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
@@ -355,14 +348,14 @@
 
             $scope.clienteDialog = $mdDialog;
             $scope.clienteDialog.show({
-                    controller: 'BuscaClienteDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope, cliente]
-                    }
-                })
+                controller: 'BuscaClienteDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope, cliente]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.cliente = result;
                 }, function () {
@@ -378,14 +371,14 @@
 
             $scope.clienteDialog = $mdDialog;
             $scope.clienteDialog.show({
-                    controller: 'BuscaFormaPagamentoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/financeiro/conta-pagar/popup/popup-busca-forma-pagamento.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: 'BuscaFormaPagamentoDialogController',
+                templateUrl: './modules/sisvarejo/ui/financeiro/conta-pagar/popup/popup-busca-forma-pagamento.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.formaPagamento = result;
                 }, function () {
@@ -498,14 +491,14 @@
 
         $scope.abrirPopupCadastrar = function (ev) {
             $mdDialog.show({
-                    controller: 'FormaPagamentoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/financeiro/forma-pagamento/popup/popup-forma-pagamento.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'FormaPagamentoDialogController',
+                templateUrl: './modules/sisvarejo/ui/financeiro/forma-pagamento/popup/popup-forma-pagamento.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.formaPagamentoDialog.abrirPopupFormaPagamento(null);

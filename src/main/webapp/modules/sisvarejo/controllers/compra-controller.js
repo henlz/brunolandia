@@ -105,28 +105,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.CANCEL_STATE:
-                {
+                case $scope.CANCEL_STATE: {
                     $scope.changeToCancel($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -337,14 +332,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                    controller: BuscaFornecedorDialogController,
-                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope, fornecedor, null, transportadora]
-                    }
-                })
+                controller: BuscaFornecedorDialogController,
+                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope, fornecedor, null, transportadora]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.fornecedor = result;
                 }, function () {
@@ -358,14 +353,14 @@
          */
         $scope.abrirPopupCondicao = function (ev) {
             $mdDialog.show({
-                    controller: 'BuscaCondicaoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'BuscaCondicaoDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.entidade.condicaoPagamento = result;
@@ -381,11 +376,11 @@
          */
         $scope.abrirPopupProduto = function (ev) {
             $mdDialog.show({
-                    controller: ProdutoDialogController,
-                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
-                    targetEvent: ev,
-                    hasBackdrop: true
-                })
+                controller: ProdutoDialogController,
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
+                targetEvent: ev,
+                hasBackdrop: true
+            })
                 .then(function (result) {
 
                     var itemCompra = new ItemCompra();
@@ -554,16 +549,16 @@
          */
         $scope.abrirPopupAlterarProduto = function (ev, entidade) {
             $mdDialog.show({
-                    controller: CompraDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/compra/popup/popup-compra.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    bindToController: true,
-                    locals: {
-                        entidadeExterna: angular.copy(entidade),
-                        isEditing: true
-                    }
-                })
+                controller: CompraDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/compra/popup/popup-compra.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                bindToController: true,
+                locals: {
+                    entidadeExterna: angular.copy(entidade),
+                    isEditing: true
+                }
+            })
                 .then(function (result) {
 
                 }, function () {
@@ -774,16 +769,16 @@
         $scope.abrirPopupCidade = function (ev) {
             $scope.model.flag = false;
             $mdDialog.show({
-                    controller: 'CidadeDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CidadeDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
@@ -799,15 +794,15 @@
          */
         $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
             $mdDialog.show({
-                    controller: BuscaFornecedorDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.fornecedorDialog, entidade, cidade, $scope.model.transportadoraFlag]
-                    }
-                })
+                controller: BuscaFornecedorDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.fornecedorDialog, entidade, cidade, $scope.model.transportadoraFlag]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);

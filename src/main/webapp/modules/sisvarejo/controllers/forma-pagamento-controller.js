@@ -10,7 +10,7 @@
          * Injeta os métodos, atributos e seus estados herdados de AbstractCRUDController.
          * @see AbstractCRUDController
          */
-        $injector.invoke(AbstractCRUDController, this, { $scope: $scope });
+        $injector.invoke(AbstractCRUDController, this, {$scope: $scope});
 
         /*-------------------------------------------------------------------
          * 		 				 	EVENT HANDLER
@@ -21,7 +21,7 @@
          *-------------------------------------------------------------------*/
 
         /**
-         * 
+         *
          */
         $scope.data = {
             content: [],
@@ -96,17 +96,17 @@
             })
                 .then(function (result) {
 
-                $scope.model.content.push(result);
+                    $scope.model.content.push(result);
 
-                var toast = $mdToast.simple()
-                    .content('Registro salvo com sucesso!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
-                });
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
 
-            }, function () {
+                }, function () {
                     //tratar o "cancelar" da popup
                 });
         }
@@ -123,16 +123,16 @@
                 }
             })
                 .then(function (result) {
-                var i = $scope.findByIdInArray($scope.model.content, result);
-                $scope.model.content[i] = result;
-                var toast = $mdToast.simple()
-                    .content('Registro salvo com sucesso!')
-                    .action('Fechar')
-                    .highlightAction(false)
-                    .position('bottom left right');
-                $mdToast.show(toast).then(function () {
-                });
-            }, function () {
+                    var i = $scope.findByIdInArray($scope.model.content, result);
+                    $scope.model.content[i] = result;
+                    var toast = $mdToast.simple()
+                        .content('Registro salvo com sucesso!')
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right');
+                    $mdToast.show(toast).then(function () {
+                    });
+                }, function () {
                     //tratar o "cancelar" da popup
                 });
         }
@@ -176,7 +176,7 @@
                     }
                 })
             }, function () {
-                });
+            });
         }
 
         /**
@@ -215,11 +215,11 @@
             $scope.abrirPopupAlterarEntidade(ev, item);
         }
     });
-    
+
     /**
      * Controller da popup de Princípio e Diretriz
      */
-    angular.module('sisvarejo').controller('FormaPagamentoDialogController' ,function($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
+    angular.module('sisvarejo').controller('FormaPagamentoDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("financeiroService");
 
@@ -272,7 +272,7 @@
                                 .highlightAction(false)
                                 .position('bottom left right'))
                                 .then(function () {
-                            });
+                                });
                             $log.error(message);
                         }
                     });
@@ -289,7 +289,7 @@
                                 .highlightAction(false)
                                 .position('bottom left right'))
                                 .then(function () {
-                            });
+                                });
                             $log.error(message);
                         }
                     });
@@ -299,4 +299,4 @@
     });
 
 
-} (window.angular));
+}(window.angular));

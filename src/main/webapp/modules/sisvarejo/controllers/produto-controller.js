@@ -105,28 +105,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
-                {
+                case $scope.UPDATE_STATE: {
                     $scope.changeToUpdate($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -277,14 +272,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                    controller: BuscaIcmsDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-icms.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: BuscaIcmsDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-icms.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.icms = result;
                 }, function () {
@@ -296,14 +291,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                    controller: BuscaCsonDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-cson.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: BuscaCsonDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-cson.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.cson = result;
                 }, function () {
@@ -315,14 +310,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                    controller: BuscaNcmDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-ncm.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: BuscaNcmDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-ncm.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.ncm = result;
                 }, function () {
@@ -334,14 +329,14 @@
 
             $scope.generoDialog = $mdDialog;
             $scope.generoDialog.show({
-                    controller: BuscaGeneroDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-genero.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: BuscaGeneroDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/produto/popup/popup-busca-genero.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.genero = result;
                 }, function () {
@@ -365,14 +360,14 @@
 
             $scope.fornecedorDialog = $mdDialog;
             $scope.fornecedorDialog.show({
-                    controller: BuscaFornecedorDialogController,
-                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope, fornecedor]
-                    }
-                })
+                controller: BuscaFornecedorDialogController,
+                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-fornecedor.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope, fornecedor]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.fornecedor = result;
                 }, function () {
@@ -497,14 +492,14 @@
 
         $scope.abrirPopupCor = function (ev) {
             $mdDialog.show({
-                    controller: 'BuscaCorDialogController',
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-busca-cor.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: 'BuscaCorDialogController',
+                templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-busca-cor.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.entidade.cor = result;
@@ -516,14 +511,14 @@
 
         $scope.abrirPopupTamanho = function (ev) {
             $mdDialog.show({
-                    controller: 'BuscaTamanhoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-busca-tamanho.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope]
-                    }
-                })
+                controller: 'BuscaTamanhoDialogController',
+                templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-busca-tamanho.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope]
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.entidade.tamanho = result;
@@ -632,14 +627,14 @@
          */
         $scope.listCoresByFilters = function () {
             caracteristicaService.listCoresByFilters($scope.model.filtros.codigo, $scope.model.filtros.cor, {
-                    callback: function (result) {
-                        $scope.model.content = result;
-                        $scope.$apply();
-                    },
-                    errorHandler: function (message, error) {
-                        $mdToast.showSimple(message);
-                    }
-                });
+                callback: function (result) {
+                    $scope.model.content = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, error) {
+                    $mdToast.showSimple(message);
+                }
+            });
         };
 
         /**
@@ -692,15 +687,15 @@
          */
         $scope.abrirPopupCadastrar = function (entidade) {
             $mdDialog.show({
-                    controller: 'CorDialogController',
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: entidade
-                    }
-                })
+                controller: 'CorDialogController',
+                templateUrl: './modules/sisvarejo/ui/caracteristica/cor/popup/popup-cor.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: entidade
+                }
+            })
                 .then(function (result) {
                     $scope.model.corDialog.abrirPopupCor();
                 }, function () {
@@ -791,15 +786,15 @@
          */
         $scope.abrirPopupCadastrar = function (entidade) {
             $mdDialog.show({
-                    controller: 'TamanhoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-tamanho.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: entidade
-                    }
-                })
+                controller: 'TamanhoDialogController',
+                templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-tamanho.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: entidade
+                }
+            })
                 .then(function () {
                     $scope.model.tamanhoDialog.abrirPopupTamanho();
                 }, function () {
@@ -904,16 +899,16 @@
         $scope.abrirPopupCidade = function (ev) {
             $scope.model.flag = false;
             $mdDialog.show({
-                    controller: 'CidadeDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CidadeDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
@@ -929,15 +924,15 @@
          */
         $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
             $mdDialog.show({
-                    controller: BuscaFornecedorDialogController,
-                    templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.fornecedorDialog, entidade, cidade]
-                    }
-                })
+                controller: BuscaFornecedorDialogController,
+                templateUrl: './modules/sisvarejo/ui/estoque/fornecedor/popup/popup-cadastra-fornecedor.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.fornecedorDialog, entidade, cidade]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.fornecedorDialog.abrirPopupFornecedor(null, null);
@@ -1033,16 +1028,16 @@
         $scope.abrirPopupCidade = function (ev) {
             $scope.model.flag = false;
             $mdDialog.show({
-                    controller: 'CidadeDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CidadeDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
@@ -1058,15 +1053,15 @@
          */
         $scope.abrirPopupCadastrar = function () {
             $mdDialog.show({
-                    controller: BuscaIcmsDialogController,
-                    templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.icmsDialog]
-                    }
-                })
+                controller: BuscaIcmsDialogController,
+                templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.icmsDialog]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.icmsDialog.abrirPopupIcms(null, null);
@@ -1165,15 +1160,15 @@
          */
         $scope.abrirPopupCadastrar = function () {
             $mdDialog.show({
-                    controller: BuscaCsonDialogController,
-                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.csonDialog]
-                    }
-                })
+                controller: BuscaCsonDialogController,
+                templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.csonDialog]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.csonDialog.abrirPopupCson(null, null);
@@ -1273,15 +1268,15 @@
          */
         $scope.abrirPopupCadastrar = function () {
             $mdDialog.show({
-                    controller: BuscaNcmDialogController,
-                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.ncmDialog]
-                    }
-                })
+                controller: BuscaNcmDialogController,
+                templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.ncmDialog]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.ncmDialog.abrirPopupNcm(null, null);
@@ -1378,15 +1373,15 @@
          */
         $scope.abrirPopupCadastrar = function () {
             $mdDialog.show({
-                    controller: BuscaGeneroDialogController,
-                    templateUrl: './modules/sisvarejo/ui/caracteristica/genero/popup-genero.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.generoDialog]
-                    }
-                })
+                controller: BuscaGeneroDialogController,
+                templateUrl: './modules/sisvarejo/ui/caracteristica/genero/popup-genero.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.generoDialog]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.generoDialog.abrirPopupGenero(null, null);

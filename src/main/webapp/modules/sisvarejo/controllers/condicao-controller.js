@@ -96,28 +96,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
-                {
+                case $scope.UPDATE_STATE: {
                     $scope.changeToUpdate($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }

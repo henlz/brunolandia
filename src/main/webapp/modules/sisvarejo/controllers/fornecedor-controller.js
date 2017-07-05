@@ -112,28 +112,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
-                {
+                case $scope.UPDATE_STATE: {
                     $scope.changeToUpdate($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -489,7 +484,7 @@
         $scope.excluirFornecedor = function (ev, fornecedor) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Fornecedor')
-                .content('Tem certeza que deseja excluir o fornecedor "'+fornecedor.razaoSocial+'"? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o fornecedor "' + fornecedor.razaoSocial + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Fornecedor')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -583,29 +578,29 @@
                 });
         }
 
-        $scope.buscaCondicaoByCodigo = function() {
+        $scope.buscaCondicaoByCodigo = function () {
             financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
-                callback: function(result) {
+                callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;
 
                     $scope.$apply();
                 },
-                errorHandler: function() {
+                errorHandler: function () {
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
         };
 
-        $scope.buscaCidadeByCodigo = function() {
+        $scope.buscaCidadeByCodigo = function () {
             localizacaoService.findCidadeByCodigo($scope.model.codigoCidade, {
-                callback: function(result) {
+                callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.cidade = result;
 
                     $scope.$apply();
                 },
-                errorHandler: function() {
+                errorHandler: function () {
                     $mdToast.showSimple("Erro ao buscar a condição de pagamento");
                 }
             })
@@ -686,14 +681,14 @@
          */
         $scope.abrirPopupCondicao = function (ev) {
             $mdDialog.show({
-                    controller: 'BuscaCondicaoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'BuscaCondicaoDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.entidade.condicaoPagamento = result;
@@ -791,7 +786,8 @@
             // center the popup window
             var left = screen.width / 2 - 200
                 , top = screen.height / 2 - 250
-                , popup = $window.open('/#/fornecedor/cadastrar', '', "top=" + top + ",left=" + left + ",width=400,height=500")
+                ,
+                popup = $window.open('/#/fornecedor/cadastrar', '', "top=" + top + ",left=" + left + ",width=400,height=500")
                 , interval = 1000;
 
             // create an ever increasing interval to check a certain global value getting assigned in the popup

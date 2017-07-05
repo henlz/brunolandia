@@ -156,7 +156,7 @@
         $scope.excluirCor = function (ev, cor) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Cor')
-                .content('Tem certeza que deseja excluir a cor "'+ cor.nome +'"? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir a cor "' + cor.nome + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Cor')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -312,7 +312,7 @@
             }
         };
 
-        $scope.cadastrarCor = function() {
+        $scope.cadastrarCor = function () {
             $scope.model.entidade = new Cor();
         };
 

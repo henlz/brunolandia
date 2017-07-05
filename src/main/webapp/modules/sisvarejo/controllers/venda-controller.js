@@ -99,28 +99,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.CANCEL_STATE:
-                {
+                case $scope.CANCEL_STATE: {
                     $scope.changeToCancel($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -218,7 +213,7 @@
         $scope.buscaClienteByCodigo = function () {
             lojaService.findClienteByCodigo($scope.model.codigoCliente, {
                 callback: function (result) {
-                    if (result != null){
+                    if (result != null) {
                         $scope.model.entidade.cliente = result;
                         $scope.model.entidade.condicaoPagamento = result.condicaoPagamento;
 
@@ -250,12 +245,12 @@
          * @param venda
          * @returns {number}
          */
-        $scope.getVendaTotal = function(venda) {
+        $scope.getVendaTotal = function (venda) {
             if (venda.itensVenda == null || venda.itensVenda.length == 0) {
                 return 0;
             }
             var total = 0;
-            for (var i = 0; venda.itensVenda.length > i; i++){
+            for (var i = 0; venda.itensVenda.length > i; i++) {
                 total += venda.itensVenda[i].quantidade * venda.itensVenda[i].produto.precoVenda - venda.itensVenda[i].desconto;
             }
             return total;
@@ -276,14 +271,14 @@
 
             $scope.clienteDialog = $mdDialog;
             $scope.clienteDialog.show({
-                    controller: 'BuscaClienteDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        local: [$scope, cliente]
-                    }
-                })
+                controller: 'BuscaClienteDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cliente.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    local: [$scope, cliente]
+                }
+            })
                 .then(function (result) {
                     $scope.model.entidade.cliente = result;
                     $scope.model.condicaoPagamento = result.condicaoPagamento;
@@ -298,11 +293,11 @@
          */
         $scope.abrirPopupProduto = function (ev) {
             $mdDialog.show({
-                    controller: ProdutoDialogController,
-                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
-                    targetEvent: ev,
-                    hasBackdrop: true
-                })
+                controller: ProdutoDialogController,
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-produto.html',
+                targetEvent: ev,
+                hasBackdrop: true
+            })
                 .then(function (result) {
 
                     var itemVenda = new ItemVenda();
@@ -312,8 +307,8 @@
 
                     $scope.gerarContasAReceber();
                 }, function () {
-                //tratar o "cancelar" da popup
-            });
+                    //tratar o "cancelar" da popup
+                });
         };
 
         /**
@@ -322,7 +317,7 @@
          * @param serie
          * @param modelo
          */
-        $scope.verificarNfe = function(numero, serie, modelo) {
+        $scope.verificarNfe = function (numero, serie, modelo) {
 
             if (numero == null || numero.length <= 0) {
                 $scope.model.invalidNfe = true;
@@ -340,23 +335,24 @@
             }
 
             lojaService.verificarNfe(numero, serie, modelo, {
-                callback:function(result) {
+                callback: function (result) {
                     if (result == false) {
                         $scope.model.invalidNfe = true;
-                    }  else {
+                    } else {
                         $scope.model.invalidNfe = false;
                     }
                     $scope.$apply();
 
-                }, errorHandler: function(message, error){
+                }, errorHandler: function (message, error) {
                     $log.error(message);
-                }});
+                }
+            });
         }
 
         /**
          *
          */
-        $scope.gerarContasAReceber = function() {
+        $scope.gerarContasAReceber = function () {
             if ($scope.model.entidade.condicaoPagamento != null && $scope.model.entidade.itensVenda != null && $scope.model.entidade.itensVenda.length > null) {
 
                 $scope.model.entidade.contasAReceber = [];
@@ -397,9 +393,9 @@
          */
         $scope.validarVenda = function (entidade) {
             for (var i = 0; entidade.itensVenda.length > i; i++) {
-                if (entidade.itensVenda[i].quantidade >  entidade.itensVenda[i].produto.quantidade){
+                if (entidade.itensVenda[i].quantidade > entidade.itensVenda[i].produto.quantidade) {
                     var toast = $mdToast.simple()
-                        .content('O produto "'+ entidade.itensVenda[i].produto +'" está com uma quantidade de venda maior do que a disponível em estoque')
+                        .content('O produto "' + entidade.itensVenda[i].produto + '" está com uma quantidade de venda maior do que a disponível em estoque')
                         .action('Fechar')
                         .highlightAction(false)
                         .position('bottom left right');
@@ -431,19 +427,19 @@
                 camposPreenchidos = false;
             }
 
-            if (camposPreenchidos == false){
+            if (camposPreenchidos == false) {
                 $mdToast.showSimple("Preencha todos os campos obrigatórios");
             }
             return camposPreenchidos;
         };
 
-        $scope.cancelarVenda = function(entidade) {
+        $scope.cancelarVenda = function (entidade) {
 
             lojaService.cancelarVenda(entidade, {
-                callback: function(result) {
+                callback: function (result) {
                     $state.go($scope.LIST_STATE);
                 },
-                errorHandler: function(message) {
+                errorHandler: function (message) {
                     $mdToast.showSimple(message);
                     $log.error(message);
                 }
@@ -652,20 +648,20 @@
         }
 
         // Identifica se a popup foi aberta voltando da popup de cidade
-        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade: local[2];
+        $scope.model.entidade.cidade = local[2] == null ? $scope.model.entidade.cidade : local[2];
 
         /**
          *
          */
-        $scope.listClientesByFilters = function() {
+        $scope.listClientesByFilters = function () {
 
             lojaService.listClientesByFilters($scope.model.filtros.nome, $scope.model.filtros.apelido,
                 $scope.model.filtros.telefone, $scope.model.filtros.cpf, {
-                    callback: function(result) {
+                    callback: function (result) {
                         $scope.model.content = result;
                         $scope.$apply();
                     },
-                    errorHandler: function(message, error) {
+                    errorHandler: function (message, error) {
                         $mdToast.showSimple(message);
                     }
                 });
@@ -704,14 +700,14 @@
          *
          * @param cliente
          */
-        $scope.escolherCliente = function(cliente) {
+        $scope.escolherCliente = function (cliente) {
             $mdDialog.hide(cliente);
         }
 
         /**
          *
          */
-        $scope.cancelar = function() {
+        $scope.cancelar = function () {
             $mdDialog.cancel();
         }
 
@@ -722,16 +718,16 @@
         $scope.abrirPopupCidade = function (ev) {
             $scope.model.flag = false;
             $mdDialog.show({
-                    controller: 'CidadeDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cidade.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CidadeDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/venda/popup/popup-busca-cidade.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.abrirPopupCadastrar($scope.model.entidade, result, false);
@@ -747,15 +743,15 @@
          */
         $scope.abrirPopupCadastrar = function (entidade, cidade, flag) {
             $mdDialog.show({
-                    controller: 'BuscaClienteDialogController',
-                    templateUrl: './modules/sisvarejo/ui/estoque/cliente/popup/popup-cadastra-cliente.html',
-                    hasBackdrop: true,
-                    preserveScope: true,
-                    clickOutsideToClose: false,
-                    locals: {
-                        local: [$scope.model.clienteDialog, entidade, cidade]
-                    }
-                })
+                controller: 'BuscaClienteDialogController',
+                templateUrl: './modules/sisvarejo/ui/estoque/cliente/popup/popup-cadastra-cliente.html',
+                hasBackdrop: true,
+                preserveScope: true,
+                clickOutsideToClose: false,
+                locals: {
+                    local: [$scope.model.clienteDialog, entidade, cidade]
+                }
+            })
                 .then(function (result) {
                     if (result == true)
                         $scope.model.clienteDialog.abrirPopupCliente(null, null);

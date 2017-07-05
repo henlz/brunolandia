@@ -186,7 +186,7 @@
         $scope.excluirPais = function (ev, pais) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de País')
-                .content('Tem certeza que deseja excluir o país "'+ pais.nome +'"? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o país "' + pais.nome + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de País')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -235,8 +235,8 @@
             $scope.model.itensExcluir = angular.copy(selectedItens);
         }
 
-        $scope.$watchCollection('model.selected', function(newValue){
-            if (newValue != null &&newValue != undefined) $scope.selectionUpdate(newValue);
+        $scope.$watchCollection('model.selected', function (newValue) {
+            if (newValue != null && newValue != undefined) $scope.selectionUpdate(newValue);
         })
 
         /**
@@ -263,16 +263,16 @@
     angular.module('sisvarejo').controller('PaisDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("localizacaoService");
-        
+
         /**
-         * 
+         *
          */
         $scope.model = {
-    		nameFilter: '',
-    		paisesList: [],
-    		query: {
-    			order: 'nome'
-    		}
+            nameFilter: '',
+            paisesList: [],
+            query: {
+                order: 'nome'
+            }
         }
 
         if (entidadeExterna != null) {
@@ -348,26 +348,26 @@
                 }
             }
         };
-        
+
         /**
-         * 
+         *
          */
-        $scope.lisPaisesByFilter = function(filter) {
-        	localizacaoService.lisPaisesByFilter(filter, {
-        		callback: function(result){
-        			$scope.model.paisesList = result;    			
-        			$scope.$apply();
-        		},
-        		errorHandler: function(message, errorHandler) {
-        			$mdToast.show($mdToast.simple()
-                            .content(message)
-                            .action('Fechar')
-                            .highlightAction(false)
-                            .position('bottom left right'))
-                            .then(function () {
-                            });
-        		} 		
-        	});
+        $scope.lisPaisesByFilter = function (filter) {
+            localizacaoService.lisPaisesByFilter(filter, {
+                callback: function (result) {
+                    $scope.model.paisesList = result;
+                    $scope.$apply();
+                },
+                errorHandler: function (message, errorHandler) {
+                    $mdToast.show($mdToast.simple()
+                        .content(message)
+                        .action('Fechar')
+                        .highlightAction(false)
+                        .position('bottom left right'))
+                        .then(function () {
+                        });
+                }
+            });
         };
     });
 

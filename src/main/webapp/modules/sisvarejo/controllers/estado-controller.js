@@ -129,7 +129,7 @@
         $scope.excluirEstado = function (ev, estado) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Estado')
-                .content('Tem certeza que deseja excluir o estado "'+ estado.nome +'"? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir o estado "' + estado.nome + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Estado')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -176,8 +176,8 @@
             $scope.model.itensExcluir = angular.copy(selectedItens);
         }
 
-        $scope.$watchCollection('model.selected', function(newValue){
-            if (newValue != null &&newValue != undefined) $scope.selectionUpdate(newValue);
+        $scope.$watchCollection('model.selected', function (newValue) {
+            if (newValue != null && newValue != undefined) $scope.selectionUpdate(newValue);
         })
 
         /**

@@ -134,7 +134,7 @@
         $scope.excluirCidade = function (ev, cidade) {
             var confirm = $mdDialog.confirm()
                 .title('Exclusão de Cidade')
-                .content('Tem certeza que deseja excluir a cidade "'+ cidade.nome +'"? Esta operação não poderá ser desfeita.')
+                .content('Tem certeza que deseja excluir a cidade "' + cidade.nome + '"? Esta operação não poderá ser desfeita.')
                 .ariaLabel('Exclusão de Cidade')
                 .ok('Sim')
                 .cancel('Cancelar')
@@ -264,7 +264,7 @@
         /**
          *
          */
-        $scope.listPaises = function(){
+        $scope.listPaises = function () {
             localizacaoService.listPaises({
                 callback: function (result) {
                     $scope.paises = result;
@@ -366,12 +366,12 @@
 
         $scope.salvarEstado = function () {
 
-            if ($scope.model.estado.nome.length == 0 ) {
+            if ($scope.model.estado.nome.length == 0) {
                 $mdToast.simpleSimple("Preencha os nomes.");
                 return false;
             }
 
-            if ($scope.model.estado.pais == null ) {
+            if ($scope.model.estado.pais == null) {
                 $mdToast.simpleSimple("Escolha um país.");
                 return false;
             }
@@ -397,7 +397,7 @@
 
         $scope.salvarPais = function () {
 
-            if ($scope.model.pais.nome.length == 0 ) {
+            if ($scope.model.pais.nome.length == 0) {
                 $mdToast.simpleSimple("Preencha os nomes.");
                 return false;
             }
@@ -472,7 +472,7 @@
          *
          * @param estado
          */
-        $scope.escolherEstado = function(estado) {
+        $scope.escolherEstado = function (estado) {
             $scope.model.entidade.estado = estado;
             if ($scope.estados.indexOf(estado) == -1) {
                 $scope.estados.push(estado);
@@ -484,7 +484,7 @@
          *
          * @param pais
          */
-        $scope.escolherPais = function(pais) {
+        $scope.escolherPais = function (pais) {
             $scope.model.estado.pais = pais;
             if ($scope.paises.indexOf(pais) == -1) {
                 $scope.paises.push(pais);

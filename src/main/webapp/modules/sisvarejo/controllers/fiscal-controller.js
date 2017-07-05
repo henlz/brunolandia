@@ -137,14 +137,14 @@
 
         $scope.abrirPopupAlterarIcms = function (ev, item) {
             $mdDialog.show({
-                    controller: 'IcmsDialogController',
-                    templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: item
-                    }
-                })
+                controller: 'IcmsDialogController',
+                templateUrl: './modules/sisvarejo/ui/fiscal/icms/popup-icms.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: item
+                }
+            })
                 .then(function (result) {
 
                     $scope.carregarListaIcms(null, $scope.pageRequest);
@@ -164,14 +164,14 @@
 
         $scope.abrirPopupNovoNCM = function (ev) {
             $mdDialog.show({
-                    controller: 'NcmDialogController',
-                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'NcmDialogController',
+                templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.content.push(result);
@@ -191,14 +191,14 @@
 
         $scope.abrirPopupAlterarNCM = function (ev, item) {
             $mdDialog.show({
-                    controller: 'NcmDialogController',
-                    templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: item
-                    }
-                })
+                controller: 'NcmDialogController',
+                templateUrl: './modules/sisvarejo/ui/fiscal/ncm/popup-ncm.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: item
+                }
+            })
                 .then(function (result) {
 
                     $scope.carregarListaNCM(null, $scope.pageRequest);
@@ -218,14 +218,14 @@
 
         $scope.abrirPopupNovoCSON = function (ev) {
             $mdDialog.show({
-                    controller: 'CsonDialogController',
-                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CsonDialogController',
+                templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.carregarListaCSON(null, $scope.pageRequest);
@@ -245,14 +245,14 @@
 
         $scope.abrirPopupAlterarCSON = function (ev, item) {
             $mdDialog.show({
-                    controller: 'CsonDialogController',
-                    templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: item
-                    }
-                })
+                controller: 'CsonDialogController',
+                templateUrl: './modules/sisvarejo/ui/fiscal/cson/popup-cson.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: item
+                }
+            })
                 .then(function (result) {
 
                     $scope.carregarListaCSON(null, $scope.pageRequest);
@@ -391,8 +391,8 @@
             $scope.model.itensExcluir = angular.copy(selectedItens);
         }
 
-        $scope.$watchCollection('model.selected', function(newValue){
-            if (newValue != null &&newValue != undefined) $scope.selectionUpdate(newValue);
+        $scope.$watchCollection('model.selected', function (newValue) {
+            if (newValue != null && newValue != undefined) $scope.selectionUpdate(newValue);
         })
 
         /**
@@ -419,16 +419,16 @@
     angular.module('sisvarejo').controller('IcmsDialogController', function ($scope, $mdDialog, $importService, $mdToast, entidadeExterna) {
 
         $importService("fiscalService");
-        
+
         /**
-         * 
+         *
          */
         $scope.model = {
-    		nameFilter: '',
-    		paisesList: [],
-    		query: {
-    			order: 'nome'
-    		}
+            nameFilter: '',
+            paisesList: [],
+            query: {
+                order: 'nome'
+            }
         }
 
         if (entidadeExterna != null) {

@@ -106,28 +106,23 @@
             $scope.pageRequest = pageRequest;
 
             switch ($scope.currentState) {
-                case $scope.LIST_STATE:
-                {
+                case $scope.LIST_STATE: {
                     $scope.changeToList();
                 }
                     break;
-                case $scope.DETAIL_STATE:
-                {
+                case $scope.DETAIL_STATE: {
                     $scope.changeToDetail($state.params.id);
                 }
                     break;
-                case $scope.INSERT_STATE:
-                {
+                case $scope.INSERT_STATE: {
                     $scope.changeToInsert();
                 }
                     break;
-                case $scope.UPDATE_STATE:
-                {
+                case $scope.UPDATE_STATE: {
                     $scope.changeToUpdate($state.params.id);
                 }
                     break;
-                default:
-                {
+                default: {
                     $state.go($scope.LIST_STATE);
                 }
             }
@@ -230,14 +225,14 @@
          */
         $scope.abrirPopupBuscaCondicao = function (ev) {
             $mdDialog.show({
-                    controller: 'BuscaCondicaoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'BuscaCondicaoDialogController',
+                templateUrl: './modules/sisvarejo/ui/loja/cliente/popup/popup-busca-condicao.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.entidade.condicaoPagamento = result;
@@ -390,14 +385,14 @@
          */
         $scope.abrirPopupNovoPais = function (ev) {
             $mdDialog.show({
-                    controller: 'PaisDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'PaisDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/pais/popup/popup-pais.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.paises.push(result);
@@ -423,14 +418,14 @@
          */
         $scope.abrirPopupNovoEstado = function (ev) {
             $mdDialog.show({
-                    controller: 'EstadoDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'EstadoDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/estado/popup/popup-estado.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     $scope.model.estados.push(result);
@@ -457,14 +452,14 @@
          */
         $scope.abrirPopupCidade = function (ev) {
             $mdDialog.show({
-                    controller: 'CidadeDialogController',
-                    templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
-                    targetEvent: ev,
-                    hasBackdrop: true,
-                    locals: {
-                        entidadeExterna: null
-                    }
-                })
+                controller: 'CidadeDialogController',
+                templateUrl: './modules/sisvarejo/ui/localizacao/cidade/popup/popup-busca-cidade.html',
+                targetEvent: ev,
+                hasBackdrop: true,
+                locals: {
+                    entidadeExterna: null
+                }
+            })
                 .then(function (result) {
 
                     //$scope.model.cidades.push(result);
