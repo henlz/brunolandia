@@ -5,17 +5,6 @@
 
         <form name="tamanhoForm" novalidate="true">
             <md-input-container>
-                <label>Código</label>
-                <input name="codigo" ng-model="entidade.codigo" required maxlength=255>
-
-                <div ng-messages="tamanhoForm.codigo.$error">
-                    <div ng-message="required">
-                        Campo obrigatório.
-                    </div>
-                </div>
-            </md-input-container>
-
-            <md-input-container>
                 <label>Sigla</label>
                 <input name="sigla" ng-model="entidade.sigla" required maxlength=255>
 

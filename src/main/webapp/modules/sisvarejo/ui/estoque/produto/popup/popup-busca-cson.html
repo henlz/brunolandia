@@ -14,7 +14,7 @@
         <md-content layout="row" layout-align="center center" layout-wrap>
             <md-input-container flex="50">
                 <label>Código</label>
-                <input type="text" ng-model="model.filtros.codigo">
+                <input type="text" ng-model="model.filtros.id">
             </md-input-container>
             <md-input-container flex="50">
                 <label>Descrição</label>
@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="cson in model.content | orderBy: model.query.order">
-                    <td>{{::cson.codigo}}</td>
+                    <td>{{::cson.id}}</td>
                     <td>{{::cson.descricao}}</td>
                     <td>
                         <md-button ng-click="escolherCson(cson)" class="md-primary">

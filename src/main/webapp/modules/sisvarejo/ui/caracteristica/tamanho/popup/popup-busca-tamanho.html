@@ -19,7 +19,7 @@
         <md-content layout="row" layout-align="center center">
             <md-input-container flex="70">
                 <label>Código</label>
-                <input type="text" ng-model="model.filtros.codigo">
+                <input type="text" ng-model="model.filtros.id">
             </md-input-container>
             <md-input-container flex="70">
                 <label>Tamanho</label>
@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="tamanho in model.content | orderBy: model.query.order">
-                    <td>{{::tamanho.codigo}}</td>
+                    <td>{{::tamanho.id}}</td>
                     <td>{{::tamanho.nome}}</td>
                     <td>{{::tamanho.sigla}}</td>
                     <td>

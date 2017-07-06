@@ -410,8 +410,8 @@
             });
         };
 
-        $scope.buscaFornecedorByCodigo = function () {
-            estoqueService.findFornecedorByCodigo($scope.model.codigoFornecedor, false, {
+        $scope.buscaFornecedorById = function () {
+            estoqueService.findFornecedorById($scope.model.codigoFornecedor, false, {
                 callback: function (result) {
                     $scope.model.entidade.fornecedor = result;
 
@@ -424,8 +424,8 @@
             })
         };
 
-        $scope.buscaCorByCodigo = function () {
-            caracteristicaService.findCorByCodigo($scope.model.codigoCor, {
+        $scope.buscaCorById = function () {
+            caracteristicaService.findCorById($scope.model.codigoCor, {
                 callback: function (result) {
                     $scope.model.entidade.cor = result;
                     $scope.$apply();
@@ -437,8 +437,8 @@
             })
         };
 
-        $scope.buscaGeneroByCodigo = function () {
-            caracteristicaService.findGeneroByCodigo($scope.model.codigoGenero, {
+        $scope.buscaGeneroById = function () {
+            caracteristicaService.findGeneroById($scope.model.codigoGenero, {
                 callback: function (result) {
                     $scope.model.entidade.genero = result;
                     $scope.$apply();
@@ -450,8 +450,8 @@
             })
         };
 
-        $scope.buscaTamanhoByCodigo = function () {
-            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+        $scope.buscaTamanhoById = function () {
+            caracteristicaService.findTamanhoById($scope.model.codigoTamanho, {
                 callback: function (result) {
                     $scope.model.entidade.tamanho = result;
 
@@ -464,8 +464,8 @@
             })
         };
 
-        $scope.buscaNcmByCodigo = function () {
-            fiscalService.findNCMByCodigo($scope.model.codigoNCM, {
+        $scope.buscaNcmById = function () {
+            fiscalService.findNCMById($scope.model.codigoNCM, {
                 callback: function (result) {
                     $scope.model.entidade.ncm = result;
                     $scope.$apply();
@@ -477,8 +477,8 @@
             })
         };
 
-        $scope.buscaIcmsByCodigo = function () {
-            fiscalService.findICMSByCodigo($scope.model.codigoICMS, {
+        $scope.buscaIcmsById = function () {
+            fiscalService.findICMSById($scope.model.codigoICMS, {
                 callback: function (result) {
                     $scope.model.entidade.icms = result;
                     $scope.$apply();
@@ -626,7 +626,7 @@
          *
          */
         $scope.listCoresByFilters = function () {
-            caracteristicaService.listCoresByFilters($scope.model.filtros.codigo, $scope.model.filtros.cor, {
+            caracteristicaService.listCoresByFilters($scope.model.filtros.id, $scope.model.filtros.cor, {
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -725,7 +725,7 @@
          *
          */
         $scope.listTamanhosByFilters = function () {
-            caracteristicaService.listTamanhosByFilters($scope.model.filtros.codigo, $scope.model.filtros.tamanho, $scope.model.filtros.sigla, {
+            caracteristicaService.listTamanhosByFilters($scope.model.filtros.id, $scope.model.filtros.tamanho, $scope.model.filtros.sigla, {
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -965,7 +965,7 @@
          *
          */
         $scope.listIcmsByFilters = function () {
-            fiscalService.listICMSByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao,
+            fiscalService.listICMSByFilters($scope.model.filtros.id, $scope.model.filtros.descricao,
                 $scope.model.filtros.porcentagem, {
                     callback: function (result) {
                         $scope.model.content = result;
@@ -1099,7 +1099,7 @@
          *
          */
         $scope.listCsonByFilters = function () {
-            fiscalService.listCSONByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao, {
+            fiscalService.listCSONByFilters($scope.model.filtros.id, $scope.model.filtros.descricao, {
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();
@@ -1206,7 +1206,7 @@
          *
          */
         $scope.listNcmByFilters = function () {
-            fiscalService.listNCMByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao,
+            fiscalService.listNCMByFilters($scope.model.filtros.id, $scope.model.filtros.descricao,
                 $scope.model.filtros.possuiIpi, {
                     callback: function (result) {
                         $scope.model.content = result;
@@ -1312,7 +1312,7 @@
          *
          */
         $scope.listGeneroByFilters = function () {
-            caracteristicaService.listGeneroByFilters($scope.model.filtros.genero, $scope.model.filtros.codigo, {
+            caracteristicaService.listGeneroByFilters($scope.model.filtros.genero, $scope.model.filtros.id, {
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();

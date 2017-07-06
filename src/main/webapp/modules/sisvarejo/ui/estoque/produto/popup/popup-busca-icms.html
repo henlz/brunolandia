@@ -14,7 +14,7 @@
         <md-content layout="row" layout-align="center center" layout-wrap>
             <md-input-container flex="50">
                 <label>Código</label>
-                <input type="text" ng-model="model.filtros.codigo">
+                <input type="text" ng-model="model.filtros.id">
             </md-input-container>
             <md-input-container flex="50">
                 <label>Descrição</label>
@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="icms in model.content | orderBy: model.query.order">
-                    <td>{{::icms.codigo}}</td>
+                    <td>{{::icms.id}}</td>
                     <td>{{::icms.descricao}}</td>
                     <td>{{::icms.porcentagem}}</td>
                     <td>

@@ -71,7 +71,7 @@
 
         $scope.abrirPopupNovaEntidade = function (ev) {
             $mdDialog.show({
-                controller: TamanhoDialogController,
+                controller: 'TamanhoDialogController',
                 templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-tamanho.html',
                 targetEvent: ev,
                 hasBackdrop: true,
@@ -98,7 +98,7 @@
 
         $scope.abrirPopupAlterarEntidade = function (ev, entidade) {
             $mdDialog.show({
-                controller: TamanhoDialogController,
+                controller: 'TamanhoDialogController',
                 templateUrl: './modules/sisvarejo/ui/caracteristica/tamanho/popup/popup-tamanho.html',
                 targetEvent: ev,
                 hasBackdrop: true,

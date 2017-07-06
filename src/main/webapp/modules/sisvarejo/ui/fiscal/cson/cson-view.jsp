@@ -27,7 +27,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="cson in model.content | orderBy: model.query.order" ng-click="abrirPopupAlterarCSON($event, cson)">
-                <td>{{::cson.codigo}}</td>
+                <td>{{::cson.id}}</td>
                 <td>{{::cson.descricao}}</td>
             </tr>
             </tbody>

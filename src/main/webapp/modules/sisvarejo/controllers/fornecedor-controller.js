@@ -578,8 +578,8 @@
                 });
         }
 
-        $scope.buscaCondicaoByCodigo = function () {
-            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+        $scope.buscaCondicaoById = function () {
+            financeiroService.findCondicaoById($scope.model.codigoCondicao, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;
@@ -592,8 +592,8 @@
             })
         };
 
-        $scope.buscaCidadeByCodigo = function () {
-            localizacaoService.findCidadeByCodigo($scope.model.codigoCidade, {
+        $scope.buscaCidadeById = function () {
+            localizacaoService.findCidadeById($scope.model.codigoCidade, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.cidade = result;

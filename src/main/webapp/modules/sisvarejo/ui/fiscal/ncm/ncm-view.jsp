@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="ncm in model.content | orderBy: model.query.order" ng-click="abrirPopupAlterarNCM($event, ncm)">
-                <td>{{::ncm.codigo}}</td>
+                <td>{{::ncm.id}}</td>
                 <td>{{::ncm.descricao}}</td>
                 <td>{{::ncm.possuiIpi == true ? 'SIM' : 'NÃO'}}</td>
             </tr>

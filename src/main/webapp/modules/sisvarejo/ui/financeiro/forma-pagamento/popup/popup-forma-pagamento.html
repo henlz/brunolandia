@@ -9,16 +9,6 @@
     <md-dialog-content layot="row">
         <form name="formaPagamentoForm" novalidate="true">
             <md-input-container>
-                <label>Código</label>
-                <input name="codigo" ng-model="entidade.codigo" required maxlength=255>
-
-                <div ng-messages="formaPagamentoForm.tipo.$error">
-                    <div ng-message="required">
-                        Campo obrigatório.
-                    </div>
-                </div>
-            </md-input-container>
-            <md-input-container>
                 <label>Forma de pagamento</label>
                 <input name="tipo" ng-model="entidade.tipo" required maxlength=255>
 

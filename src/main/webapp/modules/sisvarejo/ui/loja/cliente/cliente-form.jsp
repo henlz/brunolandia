@@ -88,7 +88,7 @@
                     <div layout="row" layout-align="center center">
 
                         <input style="width: 40px;" type="text" ng-model="model.codigoCondicao"
-                               ng-change="buscaCondicaoByCodigo()">
+                               ng-change="buscaCondicaoById()">
 
                         <md-input-container>
                             <label>Condição de pagamento</label>

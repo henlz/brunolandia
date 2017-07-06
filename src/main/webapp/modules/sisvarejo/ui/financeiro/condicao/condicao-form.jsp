@@ -16,18 +16,6 @@
                 <md-subheader>
                     <h3>Nova Condição de Pagamento</h3>
                 </md-subheader>
-
-                <md-input-container width="100%">
-                    <label>Código</label>
-                    <input name="codigo" ng-model="model.entidade.codigo" required type="text">
-
-                    <div ng-messages="condicaoForm.codigo.$error">
-                        <div ng-message="required">
-                            Campo obrigatório.
-                        </div>
-                    </div>
-                </md-input-container>
-
                 <md-input-container width="100%">
                     <label>Condição</label>
                     <input name="descricao" ng-model="model.entidade.descricao" required type="text">

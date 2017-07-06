@@ -67,7 +67,7 @@
                 <div layout="row" layout-align="center center">
 
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoFornecedor" ng-if="currentState == INSERT_STATE"
-                           ng-change="buscaFornecedorByCodigo(false)">
+                           ng-change="buscaFornecedorById(false)">
 
                     <md-input-container>
                         <label>Fornecedor</label>
@@ -114,7 +114,7 @@
 
         <div layout="row" layout-align="center center">
 
-            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCondicao" ng-change="buscaCondicaoByCodigo()" ng-if="currentState == INSERT_STATE">
+            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCondicao" ng-change="buscaCondicaoById()" ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
                 <label>Condição de pagamento</label>
@@ -171,7 +171,7 @@
                     <tbody>
                     <tr ng-repeat="itemCompra in model.entidade.itensCompra | orderBy: 'codigo'">
                         <td>
-                            {{:: itemCompra.produto.codigo}}
+                            {{:: itemCompra.produto.id}}
                         </td>
                         <td>
                             {{:: itemCompra.produto.descricao}}
@@ -247,7 +247,7 @@
 
         <div layout="row" layout-align="center center">
 
-            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoTransportadora" ng-change="buscaFornecedorByCodigo(true)" ng-if="currentState == INSERT_STATE">
+            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoTransportadora" ng-change="buscaFornecedorById(true)" ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
                 <label>Transportadora</label>

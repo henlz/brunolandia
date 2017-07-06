@@ -177,7 +177,7 @@ public class EstoqueService
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Fornecedor findFornecedorByCodigo( final Long id, final Boolean transportadora )
+	public Fornecedor findFornecedorById( final Long id, final Boolean transportadora )
 	{
 		return this.fornecedorRepository.findByIdTransportadora( id, transportadora );
 	}

@@ -8,9 +8,9 @@
         <form name="generoForm" novalidate="true">
             <md-input-container>
                 <label>Gênero</label>
-                <input name="codigo" ng-model="entidade.codigo" required maxlength=255>
+                <input name="codigo" ng-model="entidade.id" required maxlength=255>
 
-                <div ng-messages="generoForm.codigo.$error">
+                <div ng-messages="generoForm.id.$error">
                     <div ng-message="required">
                         Campo obrigatório.
                     </div>

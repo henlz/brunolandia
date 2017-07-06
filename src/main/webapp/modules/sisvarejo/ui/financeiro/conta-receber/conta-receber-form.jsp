@@ -79,7 +79,7 @@
                 <div layout="row" layout-align="center center">
 
                     <input style="width: 40px;" type="text" ng-model="model.codigoCliente"
-                           ng-change="buscaClienteByCodigo()" ng-if="currentState == INSERT_STATE">
+                           ng-change="buscaClienteById()" ng-if="currentState == INSERT_STATE">
 
                     <md-input-container>
                         <label>Cliente</label>
@@ -181,7 +181,7 @@
         <div layout="row" layout-align="center center">
 
             <input style="width: 40px;" type="text" ng-model="model.codigoFormaPagamento"
-                   ng-change="buscaFormaPagamentoByCodigo()" ng-if="currentState == INSERT_STATE">
+                   ng-change="buscaFormaPagamentoById()" ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
                 <label>Forma de pagamento</label>

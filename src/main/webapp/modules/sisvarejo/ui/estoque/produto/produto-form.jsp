@@ -19,17 +19,6 @@
                 </md-subheader>
 
                 <md-input-container width="100%">
-                    <label>Código</label>
-                    <input name="codigo" type="text" maxlength="255" ng-model="model.entidade.codigo" required/>
-
-                    <div ng-messages="produtoForm.codigo.$error">
-                        <div ng-message="required">
-                            Campo obrigatório.
-                        </div>
-                    </div>
-                </md-input-container>
-
-                <md-input-container width="100%">
                     <label>Código de Barras</label>
                     <input name="codigoBarra" type="number" ng-model="model.entidade.codigoBarra"/>
                 </md-input-container>
@@ -76,7 +65,7 @@
                         <label>Preço venda</label>
                         <input name="precoVenda" type="number" ng-model="model.entidade.precoVenda" required/>
 
-                        <div ng-messages="produtoForm.codigo.$error">
+                        <div ng-messages="produtoForm.id.$error">
                             <div ng-message="required">
                                 Campo obrigatório.
                             </div>
@@ -91,7 +80,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoGenero"
-                           ng-change="buscaGeneroByCodigo()">
+                           ng-change="buscaGeneroById()">
 
                     <md-input-container>
                         <label>Gênero</label>
@@ -111,7 +100,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCor"
-                           ng-change="buscaCorByCodigo()">
+                           ng-change="buscaCorById()">
 
                     <md-input-container>
                         <label>Cor</label>
@@ -131,7 +120,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoTamanho"
-                           ng-change="buscaTamanhoByCodigo()">
+                           ng-change="buscaTamanhoById()">
 
                     <md-input-container>
                         <label>Tamanho</label>
@@ -151,7 +140,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoICMS"
-                           ng-change="buscaIcmsByCodigo(false)">
+                           ng-change="buscaIcmsById(false)">
 
                     <md-input-container>
                         <label>ICMS</label>
@@ -171,7 +160,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoNCM"
-                           ng-change="buscaNcmByCodigo(false)">
+                           ng-change="buscaNcmById(false)">
 
                     <md-input-container>
                         <label>NCM</label>
@@ -191,7 +180,7 @@
 
                 <md-content layout="row" layout-align="center center">
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoFornecedor"
-                           ng-change="buscaFornecedorByCodigo(false)">
+                           ng-change="buscaFornecedorById(false)">
 
                     <md-input-container>
                         <label>Fornecedor</label>

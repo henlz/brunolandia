@@ -240,8 +240,8 @@
             return total;
         };
 
-        $scope.buscaCondicaoByCodigo = function () {
-            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+        $scope.buscaCondicaoById = function () {
+            financeiroService.findCondicaoById($scope.model.codigoCondicao, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;
@@ -254,8 +254,8 @@
             })
         };
 
-        $scope.buscaCorByCodigo = function () {
-            caracteristicaService.findCorByCodigo($scope.model.codigoCor, {
+        $scope.buscaCorById = function () {
+            caracteristicaService.findCorById($scope.model.codigoCor, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.cor = result;
@@ -268,8 +268,8 @@
             })
         };
 
-        $scope.buscaTamanhoByCodigo = function () {
-            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+        $scope.buscaTamanhoById = function () {
+            caracteristicaService.findTamanhoById($scope.model.codigoTamanho, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.tamanho = result;
@@ -282,8 +282,8 @@
             })
         };
 
-        $scope.buscaGeneroByCodigo = function () {
-            caracteristicaService.findTamanhoByCodigo($scope.model.codigoTamanho, {
+        $scope.buscaGeneroById = function () {
+            caracteristicaService.findTamanhoById($scope.model.codigoTamanho, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.tamanho = result;
@@ -296,8 +296,8 @@
             })
         };
 
-        $scope.buscaFornecedorByCodigo = function (transportadora) {
-            estoqueService.findFornecedorByCodigo(transportadora == true ? $scope.model.codigoTransportadora : $scope.model.codigoFornecedor, transportadora, {
+        $scope.buscaFornecedorById = function (transportadora) {
+            estoqueService.findFornecedorById(transportadora == true ? $scope.model.codigoTransportadora : $scope.model.codigoFornecedor, transportadora, {
                 callback: function (result) {
                     //if (result != null) {
                     if (transportadora == true) {
@@ -839,7 +839,7 @@
                     {direction: 'ASC', property: 'id'}
                 ]
             }
-            estoqueService.listProdutosByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao, pageRequest, {
+            estoqueService.listProdutosByFilters($scope.model.filtros.id, $scope.model.filtros.descricao, pageRequest, {
                 //estoqueService.listProdutos({
                 callback: function (result) {
                     $scope.model.page = result;

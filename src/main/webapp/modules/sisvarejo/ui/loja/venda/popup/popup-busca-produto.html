@@ -11,7 +11,7 @@
         <md-content layout="row" layout-align="center center" layout-wrap>
             <md-input-container flex="50">
                 <label>Código</label>
-                <input type="text" ng-model="model.filtros.codigo">
+                <input type="text" ng-model="model.filtros.id">
             </md-input-container>
             <md-input-container flex="50">
                 <label>Descrição</label>
@@ -35,7 +35,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="produto in model.page.content | orderBy: model.query.order">
-                    <td>{{::produto.codigo}}</td>
+                    <td>{{::produto.id}}</td>
                     <td>{{::produto.descricao}}</td>
                     <td>{{::produto.quantidade}}</td>
                     <td>{{::produto.precoVenda | currency: 'R$ '}}</td>

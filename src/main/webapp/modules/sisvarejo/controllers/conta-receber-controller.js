@@ -305,8 +305,8 @@
         /**
          *
          */
-        $scope.buscaClienteByCodigo = function () {
-            lojaService.findClienteByCodigo($scope.model.codigoCliente, {
+        $scope.buscaClienteById = function () {
+            lojaService.findClienteById($scope.model.codigoCliente, {
                 callback: function (result) {
                     if (result != null) {
                         $scope.model.entidade.cliente = result;
@@ -322,8 +322,8 @@
         /**
          *
          */
-        $scope.buscaFormaPagamentoByCodigo = function () {
-            financeiroService.findFormaPagamentoByCodigo($scope.model.codigoFormaPagamento, {
+        $scope.buscaFormaPagamentoById = function () {
+            financeiroService.findFormaPagamentoById($scope.model.codigoFormaPagamento, {
                 callback: function (result) {
                     if (result != null) {
                         $scope.model.entidade.formaPagamento = result;
@@ -437,7 +437,7 @@
          *
          */
         $scope.listFormaPagamentoByFilters = function () {
-            financeiroService.listFormasPagamentoByFilters($scope.model.filtros.codigo, $scope.model.filtros.tipo, {
+            financeiroService.listFormasPagamentoByFilters($scope.model.filtros.id, $scope.model.filtros.tipo, {
                 callback: function (result) {
                     $scope.model.content = result;
                     $scope.$apply();

@@ -242,8 +242,8 @@
                 });
         }
 
-        $scope.buscaCondicaoByCodigo = function () {
-            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+        $scope.buscaCondicaoById = function () {
+            financeiroService.findCondicaoById($scope.model.codigoCondicao, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;

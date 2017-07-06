@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="icms in model.content | orderBy: model.query.order" ng-click="abrirPopupAlterarIcms($event, icms)">
-            <td>{{::icms.codigo}}</td>
+            <td>{{::icms.id}}</td>
             <td>{{::icms.descricao}}</td>
             <td>{{::icms.porcentagem }} %</td>
         </tr>

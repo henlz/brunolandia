@@ -96,7 +96,7 @@ public class Venda extends AbstractEntity
 	 */
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<ContaReceber> contasAReceber = new ArrayList<>();
+	private List<ContaReceber> contasAReceber = new ArrayList<ContaReceber>();
 
 	/**
 	 * 

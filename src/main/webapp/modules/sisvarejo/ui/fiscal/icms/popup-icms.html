@@ -7,17 +7,6 @@
     <md-dialog-content layot="row">
         <form name="icmsForm" novalidate="true">
             <md-input-container>
-                <label>Código</label>
-                <input name="nome" ng-model="entidade.codigo" required maxlength=255 md-autofocus>
-
-                <div ng-messages="icmsForm.nome.$error">
-                    <div ng-message="required">
-                        Campo obrigatório.
-                    </div>
-                </div>
-            </md-input-container>
-
-            <md-input-container>
                 <label>Descrição</label>
                 <input name="descricao" ng-model="entidade.descricao" required maxlength=255>
 

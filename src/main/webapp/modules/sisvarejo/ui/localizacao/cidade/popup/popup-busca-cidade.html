@@ -31,7 +31,7 @@
                 <md-content layout="row" layout-align="center center">
                     <md-input-container flex>
                         <label>Código</label>
-                        <input type="text" ng-model="model.filtros.codigo">
+                        <input type="text" ng-model="model.filtros.id">
                     </md-input-container>
                     <md-input-container flex>
                         <label>Cidade</label>
@@ -56,7 +56,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="cidade in model.content | orderBy: model.query.order">
-                            <td>{{::cidade.codigo}}</td>
+                            <td>{{::cidade.id}}</td>
                             <td>{{::cidade.nome}}</td>
                             <td>{{::cidade.estado.nome}}</td>
                             <td>
@@ -76,9 +76,9 @@
                 <form name="cidadeForm" novalidate="true">
                     <md-input-container>
                         <label>Código</label>
-                        <input name="codigo" ng-model="entidade.codigo" required maxlength=255 required>
+                        <input name="codigo" ng-model="entidade.id" required maxlength=255 required>
 
-                        <div class="errors" ng-messages="cidadeForm.codigo.$error">
+                        <div class="errors" ng-messages="cidadeForm.id.$error">
                             <div ng-message="required">
                                 Campo obrigatório
                             </div>

@@ -53,7 +53,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="fornecedor in model.content | orderBy: model.query.order">
-            <td>{{::fornecedor.codigo}}</td>
+            <td>{{::fornecedor.id}}</td>
             <td>{{::fornecedor.razaoSocial}}</td>
             <td>{{::fornecedor.tipoPessoa | capitalize}}</td>
             <td>{{::fornecedor.telefone}}</td>

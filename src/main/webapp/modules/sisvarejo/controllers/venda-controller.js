@@ -210,8 +210,8 @@
             })
         };
 
-        $scope.buscaClienteByCodigo = function () {
-            lojaService.findClienteByCodigo($scope.model.codigoCliente, {
+        $scope.buscaClienteById = function () {
+            lojaService.findClienteById($scope.model.codigoCliente, {
                 callback: function (result) {
                     if (result != null) {
                         $scope.model.entidade.cliente = result;
@@ -226,8 +226,8 @@
             })
         };
 
-        $scope.buscaCondicaoByCodigo = function () {
-            financeiroService.findCondicaoByCodigo($scope.model.codigoCondicao, {
+        $scope.buscaCondicaoById = function () {
+            financeiroService.findCondicaoById($scope.model.codigoCondicao, {
                 callback: function (result) {
                     if (result != null)
                         $scope.model.entidade.condicaoPagamento = result;
@@ -347,7 +347,7 @@
                     $log.error(message);
                 }
             });
-        }
+        };
 
         /**
          *
@@ -364,6 +364,7 @@
                     contaAReceber.numeroParcela = i + 1;
                     contaAReceber.cliente = $scope.model.entidade.cliente;
                     contaAReceber.numeroNota = $scope.model.entidade.numeroNfe;
+                    contaAReceber.modelo = $scope.model.entidade.modelo;
                     contaAReceber.serie = $scope.model.entidade.serie;
                     contaAReceber.percentual = $scope.model.entidade.condicaoPagamento.parcelas[i].percentual;
                     contaAReceber.valor = $scope.getVendaTotal($scope.model.entidade) * $scope.model.entidade.condicaoPagamento.parcelas[i].percentual / 100;
@@ -788,7 +789,7 @@
                     {direction: 'ASC', property: 'id'}
                 ]
             }
-            estoqueService.listProdutosByFilters($scope.model.filtros.codigo, $scope.model.filtros.descricao, pageRequest, {
+            estoqueService.listProdutosByFilters($scope.model.filtros.id, $scope.model.filtros.descricao, pageRequest, {
                 //estoqueService.listProdutos({
                 callback: function (result) {
                     $scope.model.page = result;

@@ -18,17 +18,6 @@
 
                 <div layout="row" width="100%">
                     <md-input-container>
-                        <label>Código</label>
-                        <input name="codigo" type="text" maxlength="255" ng-model="model.entidade.codigo" required/>
-
-                        <div ng-messages="fornecedorForm.codigo.$error">
-                            <div ng-message="required">
-                                Campo obrigatório.
-                            </div>
-                        </div>
-                    </md-input-container>
-
-                    <md-input-container>
                         <label>Fornecedor</label>
                         <input name="razaoSocial" type="text" maxlength="255" ng-model="model.entidade.razaoSocial" required/>
                         <div ng-messages="fornecedorForm.razaoSocial.$error">
@@ -118,7 +107,7 @@
 
                     <div layout="row" layout-align="center center">
 
-                        <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCidade" ng-change="buscaCidadeByCodigo()">
+                        <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCidade" ng-change="buscaCidadeById()">
 
                         <md-input-container>
                             <label>Cidade</label>
@@ -207,7 +196,7 @@
 
                 <div layout="row" layout-align="center center">
 
-                    <input style="width: 40px;" type="text" ng-model="model.codigoCondicao" ng-change="buscaCondicaoByCodigo()">
+                    <input style="width: 40px;" type="text" ng-model="model.codigoCondicao" ng-change="buscaCondicaoById()">
 
                     <md-input-container>
                         <label>Condição de pagamento</label>

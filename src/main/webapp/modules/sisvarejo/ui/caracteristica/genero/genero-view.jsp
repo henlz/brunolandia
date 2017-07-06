@@ -9,7 +9,7 @@
 
 <md-toolbar class="md-tall md-toolbar-main">
     <h2 class="md-toolbar-tools" style="padding-left: 133px;">
-        <span>Cor</span>
+        <span>Gênero</span>
     </h2>
 
     <md-button class="md-fab md-primary md-hue-2 grid-add-button" aria-label="Adicionar" ng-click="abrirPopupNovaEntidade($event)">
@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="cor in model.content | orderBy: model.query.order" ng-click="itemClicked($event, cor)" md-auto-select>
+        <tr ng-repeat="genero in model.content | orderBy: model.query.order" ng-click="itemClicked($event, genero)" md-auto-select>
             <td>{{::genero.genero}}</td>
         </tr>
         </tbody>
@@ -39,7 +39,7 @@
             <div class="limpar-selecao" ng-click="limparSelecao()">Limpar seleção</div>
         </div>
         <div class="right-content">
-            <md-button class="md-raised" aria-label="Excluir" ng-click="excluirCores($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
+            <md-button class="md-raised" aria-label="Excluir" ng-click="excluirGeneros($event, model.itensExcluir)"><i class="md-icon-delete md-icon-lg"></i></md-button>
         </div>
     </div>
 </bottomsheet>

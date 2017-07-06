@@ -19,7 +19,7 @@
     <properties>
         <!-- General -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <start-class>br.com.brunolandia.Application</start-class>
+        <start-class>br.com.brunolandia.sisvarejo.Application</start-class>
         <java.version>1.8</java.version>
 
         <!-- Spring Boot Overrides -->

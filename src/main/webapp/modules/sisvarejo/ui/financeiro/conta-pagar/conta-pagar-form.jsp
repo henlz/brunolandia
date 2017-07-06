@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" lang="pt">
 
@@ -29,10 +29,12 @@
                     </div>
                 </md-input-container>
 
-                <md-button class="md-primary md-fab" ng-click="cancelarContaPagar(model.entidade)" ng-if="currentState == CANCEL_STATE">
+                <md-button class="md-primary md-fab" ng-click="cancelarContaPagar(model.entidade)"
+                           ng-if="currentState == CANCEL_STATE">
                     <i class="md-icon md-icon-cancel"></i>
                 </md-button>
-                <md-button class="md-primary md-fab" ng-click="pagarContaPagar(model.entidade)" ng-if="currentState == PAY_STATE">
+                <md-button class="md-primary md-fab" ng-click="pagarContaPagar(model.entidade)"
+                           ng-if="currentState == PAY_STATE">
                     <i class="md-icon md-icon-attach-money"></i>
                 </md-button>
             </md-content>
@@ -42,7 +44,8 @@
                 <md-input-container>
                     <label>Número NFE</label>
                     <input type="text" name="numeroNota" ng-model="model.entidade.numeroNota"
-                           ng-blur="verificarNfe(model.entidade.numeroNota)" ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE"
+                           ng-blur="verificarNfe(model.entidade.numeroNota)"
+                           ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE"
                            required>
 
                     <div ng-messages="contaPagarForm.numero.$error" ng-if="currentState == INSERT_STATE">
@@ -78,8 +81,11 @@
 
                 <div layout="row" layout-align="center center">
 
-                    <input style="width: 40px;" type="text" ng-model="model.codigoFornecedor"
-                           ng-change="buscaFornecedorByCodigo()" ng-if="currentState == INSERT_STATE">
+                    <input style="width: 40px;"
+                           type="text"
+                           ng-model="model.codigoFornecedor"
+                           ng-change="buscaFornecedorById()"
+                           ng-if="currentState == INSERT_STATE">
 
                     <md-input-container>
                         <label>Fornecedor</label>
@@ -92,7 +98,8 @@
                         </div>
                     </md-input-container>
 
-                    <md-button class="md-icon-button" ng-click="abrirPopupFornecedor($event, null, null, false)" ng-if="currentState == INSERT_STATE"
+                    <md-button class="md-icon-button" ng-click="abrirPopupFornecedor($event, null, null, false)"
+                               ng-if="currentState == INSERT_STATE"
                                aria-label="Procurar fornecedor">
                         <i class="md-icon md-icon-search"></i>
                     </md-button>
@@ -116,7 +123,8 @@
 
         <md-input-container>
             <label>Valor</label>
-            <input name="valor" type="text" ng-model="model.entidade.valor" required ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
+            <input name="valor" type="text" ng-model="model.entidade.valor" required
+                   ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
 
             <div ng-messages="contaPagarForm.valor.$error" ng-if="currentState == INSERT_STATE">
                 <div ng-message="required">
@@ -140,7 +148,8 @@
 
         <md-input-container>
             <label>Data de pagamento</label>
-            <input type="date" ng-model="model.entidade.dataPagamento" name="dataPagamento" ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
+            <input type="date" ng-model="model.entidade.dataPagamento" name="dataPagamento"
+                   ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
         </md-input-container>
 
         <md-input-container>
@@ -167,7 +176,8 @@
 
         <md-input-container>
             <label>Descrição</label>
-            <input name="descricao" type="text" ng-model="model.entidade.descricao" required ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
+            <input name="descricao" type="text" ng-model="model.entidade.descricao" required
+                   ng-readonly="currentState == CANCEL_STATE || currentState == PAY_STATE">
 
             <div ng-messages="contaPagarForm.descricao.$error" ng-if="currentState == INSERT_STATE">
                 <div ng-message="required">
@@ -179,11 +189,12 @@
         <div layout="row" layout-align="center center">
 
             <input style="width: 40px;" type="text" ng-model="model.codigoFormaPagamento"
-                   ng-change="buscaFormaPagamentoByCodigo()" ng-if="currentState == INSERT_STATE">
+                   ng-change="buscaFormaPagamentoById()" ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
                 <label>Forma de pagamento</label>
-                <input type="text" name="formaPagamento" ng-model="model.entidade.formaPagamento.tipo" readonly required/>
+                <input type="text" name="formaPagamento" ng-model="model.entidade.formaPagamento.tipo" readonly
+                       required/>
 
                 <div ng-messages="contaPagarForm.formaPagamento.$error" ng-if="currentState == INSERT_STATE">
                     <div ng-message="required">

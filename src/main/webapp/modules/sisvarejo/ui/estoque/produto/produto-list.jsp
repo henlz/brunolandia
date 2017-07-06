@@ -30,7 +30,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="produto in model.content | orderBy: model.query.order">
-                <td>{{::produto.codigo}}</td>
+                <td>{{::produto.id}}</td>
                 <td>{{::produto.descricao}}</td>
                 <td>
                     {{:: produto.genero.genero}}

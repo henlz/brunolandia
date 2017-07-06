@@ -69,7 +69,7 @@
                 <div layout="row" layout-align="center center">
 
                     <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCliente"
-                           ng-change="buscaClienteByCodigo()" ng-if="currentState == INSERT_STATE">
+                           ng-change="buscaClienteById()" ng-if="currentState == INSERT_STATE">
 
                     <md-input-container>
                         <label>Cliente</label>
@@ -118,7 +118,7 @@
 
         <div layout="row" layout-align="center center">
 
-            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCondicao" ng-change="buscaCondicaoByCodigo()"
+            <input style="width: 40px;" type="text" maxlength="255" ng-model="model.codigoCondicao" ng-change="buscaCondicaoById()"
                    ng-if="currentState == INSERT_STATE">
 
             <md-input-container>
@@ -173,9 +173,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="itemVenda in model.entidade.itensVenda | orderBy: 'codigo'">
+                    <tr ng-repeat="itemVenda in model.entidade.itensVenda | orderBy: 'id'">
                         <td>
-                            {{:: itemVenda.produto.codigo}}
+                            {{:: itemVenda.produto.id}}
                         </td>
                         <td>
                             {{:: itemVenda.produto.descricao}}
